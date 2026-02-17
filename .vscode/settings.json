@@ -1,0 +1,12 @@
+{
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.diagnostics.globals": [
+        "module",
+        "setfenv",
+        "getfenv"
+    ],
+    "Lua.diagnostics.disable": [
+        "duplicate-set-field",
+        "duplicate-doc-field"
+    ],
+}

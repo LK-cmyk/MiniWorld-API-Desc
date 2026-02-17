@@ -1,0 +1,60 @@
+{
+  "Create an empty Lua script": {
+    "prefix": "local Script = {}",
+    "body": [
+      "local Script = {}",
+      "",
+      "return Script"
+    ],
+    "description": "创建一个空的Lua脚本"
+  },
+  "Open Function Config": {
+    "prefix": "Script.openFnArgs = {...}",
+    "body": [
+      "-- 开放函数配置",
+      "Script.openFnArgs = {",
+      "",
+      "}"
+    ],
+    "description": "开放函数配置"
+  },
+  "Attribute Definition": {
+    "prefix": "Script.propertys = {...}",
+    "body": [
+      "-- 属性定义",
+      "Script.propertys = {",
+      "",
+      "}"
+    ],
+    "description": "属性定义"
+  },
+  "Called on component startup": {
+    "prefix": "function Script:OnStart()",
+    "body": [
+      "-- 组件启动时调用",
+      "function Script:OnStart()",
+      "",
+      "end"
+    ],
+    "description": "组件启动时调用"
+  },
+  "Called when the component is deleted": {
+    "prefix": "function Script:OnDestroy()",
+    "body": [
+      "-- 组件删除时调用",
+      "function Script:OnDestroy()",
+      "",
+      "end"
+    ],
+    "description": "组件删除时调用"
+  },
+  "Step update":{
+    "prefix": "function Script:OnTick(dt)",
+    "body": [
+      "-- 步进更新",
+      "function Script:OnTick(dt)",
+      "end"
+    ],
+    "description": "步进更新"
+  }
+}
