@@ -17,7 +17,7 @@ function CustomUI:SetText(playerId, uiId, elementId, text, animId, time, mode)
 end
 
 ---设置元件图案纹理
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -27,7 +27,7 @@ function CustomUI:SetTexture(playerId, uiId, elementId, url)
 end
 
 ---设置元件大小
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -38,7 +38,7 @@ function CustomUI:SetSize(playerId, uiId, elementId, width, heigth)
 end
 
 ---设置文本元件字体大小
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -48,7 +48,7 @@ function CustomUI:SetFontSize(playerId, uiId, elementId, size)
 end
 
 ---设置元件颜色
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -58,7 +58,7 @@ function CustomUI:SetColor(playerId, uiId, elementId, color)
 end
 
 ---显示元件
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -69,7 +69,7 @@ function CustomUI:ShowElement(playerId, uiId, elementId, effectid, time)
 end
 
 ---隐藏元件
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -80,7 +80,7 @@ function CustomUI:HideElement(playerId, uiId, elementId, effectid, time)
 end
 
 ---旋转元件
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -90,7 +90,7 @@ function CustomUI:RotateElement(playerId, uiId, elementId, rotate)
 end
 
 ---设置元件透明度
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -100,7 +100,7 @@ function CustomUI:SetAlpha(playerId, uiId, elementId, alpha)
 end
 
 ---设置状态
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -112,7 +112,7 @@ function CustomUI:SetState(playerId, uiId, elementId, pageIndex, easeType, time)
 end
 
 ---设置元件位置
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
@@ -123,7 +123,7 @@ function CustomUI:SetPosition(playerId, uiId, elementId, x, y)
 end
 
 ---设置模型装载器的模型缩放
----@return boolean
+---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
