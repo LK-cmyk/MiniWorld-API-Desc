@@ -1,0 +1,647 @@
+# UGC.md
+
+- 如果不确定API名称、常量名等，请使用官方常用接口，不要编造不存在的函数、常量等信息
+- 迷你世界 UGC 3.0
+- `触发器` 指 `UGC 3.0` 的图形化编程
+- `云服` 指 官方给UGC内容分配的服务器
+
+## 开头结尾
+
+- 脚本开头必须写:
+
+```lua
+local 任意合法标识符 = {}
+```
+
+- 脚本结尾必须写:
+
+```lua
+return 你开头定义的表
+```
+
+## 脚本入口
+
+```lua
+function 你的表名:OnStart()
+end
+```
+
+- OnStart函数是 **最先启动** 的 -> OnStart 是 **主入口**
+
+## 事件注册/删除
+
+- 此函数只在 `UI` 与 `世界组件` 生效
+
+### 事件注册
+
+#### 注册方法1
+
+- 参数:
+    1. 事件类型: string
+    2. 回调函数: function
+    3. 过滤参数1 (可不传): number / string
+    4. 过滤参数2 (可不传): number / string
+- 返回:
+    1. 无返回
+
+```lua
+self:AddTriggerEvent(事件枚举常量, self.事件对应的函数, 过滤参数1, 过滤参数2)
+```
+
+#### 注册方法2
+
+- 参数:
+    1. 事件类型: string
+    2. 回调函数: function
+    3. 事件触发的优先级 (可不传): number
+    4. 过滤参数1 (可不传): number / string
+    5. 过滤参数2 (可不传): number / string
+- 返回:
+    1. 无返回
+
+```lua
+self:AddEvent(事件枚举常量 或 自定义消息(广播), self.事件对应的函数, 优先级, 过滤参数1, 过滤参数2)
+```
+
+- PS: 可监听官方的事件，也可监听自定义消息(广播)
+
+### 事件删除
+
+#### 删除方法1
+
+- 参数:
+    1. 事件类型: string
+- 返回:
+    1. 无返回
+
+```lua
+self:RemoveTriggerEvent(事件枚举常量)
+```
+
+#### 删除方法2
+
+- 参数:
+    1. 事件类型: string
+- 返回:
+    1. 无返回
+
+```lua
+self:RemoveEvent(事件枚举常量 或 自定义消息(广播))
+```
+
+### 事件枚举
+
+- 事件枚举参考: `MNDeclaration.d.lua` 中的:
+
+    | 名称 |
+    | :-: |
+    | TriggerEvent |
+    | CurEventParam |
+    | ObjectEvent |
+
+## 发送/添加/监听/移除监听消息(广播)
+
+- `消息ID`: 需要在触发器界面先定义消息(广播), 获取由系统生成的ID
+- `参数类型` & `参数数量`: 需要跟触发器定义$的消息(广播)对应上
+
+### 普通异步消息
+
+- 参数:
+    1. 消息ID: string
+    2. N个参数
+- 返回:
+    1. 无返回
+
+```lua
+self:PushCustomEvent(消息ID, ...)
+```
+
+### 普通同步消息
+
+- 参数:
+    1. 消息ID: string
+    2. N个参数
+- 返回:
+    1. 无返回
+
+```lua
+self:PushCustomEventSync(消息ID, ...)
+```
+
+### 添加监听消息
+
+- 参数:
+    1. 事件类型: string
+    2. 回调函数: function
+    3. 事件触发的优先级 (可不传): number
+    4. 过滤参数1 (可不传): number / string
+    5. 过滤参数2 (可不传): number / string
+- 返回:
+    1. 无返回
+
+```lua
+self:AddEvent(事件枚举常量 或 自定义消息(广播), self.事件对应的函数, 优先级, 过滤参数1, 过滤参数2)
+```
+
+- PS: 可监听官方的事件，也可监听自定义消息(广播)
+
+### 移除监听消息
+
+- 参数:
+    1. 事件类型: string
+- 返回:
+    1. 无返回
+
+```lua
+self:RemoveEvent(事件枚举常量 或 自定义消息(广播))
+```
+
+- PS: 可移除监听官方的事件，也可移除监听自定义消息(广播)
+
+### 云服异步消息
+
+- 参数:
+    1. 消息ID: string
+    2. N个参数
+- 返回:
+    1. 无返回
+
+```lua
+self:PushCloudServerMsg(消息ID, ...)
+```
+
+- PS: 只有同个对象上监听的组件才能收到事件
+
+### 添加监听云服消息
+
+- 参数:
+    1. 事件类型: string
+    2. 回调函数: function
+- 返回:
+    1. 无返回
+
+```lua
+self:AddCloudSeverEvent(事件枚举常量 或 自定义云服消息(广播), self.事件对应的函数)
+```
+
+### 移除监听云服消息
+
+- 参数:
+    1. 事件类型: string
+- 返回:
+    1. 无返回
+
+```lua
+self:RemoveCloudSeverEvent(事件枚举常量 或 自定义消息(广播))
+```
+
+## 开放函数
+
+### 开放函数存储
+
+你定义的表名.openFnArgs = {}
+
+### 开放函数信息
+
+- 例示:
+
+```lua
+local Script = {}
+
+Script.openFnArgs = {
+    Add = {
+        returnType = Mini.Number,   -- 返回值
+        displayName = "函数别名",   -- 触发器上显示的别名
+        params = {Mini.Number, Mini.Number},-- 参数列表类型
+    },
+
+    -- 如果只想让其他的脚本组件访问的话，可以这样配置
+    func = true
+}
+
+local function Script:Add(a, b)
+    return a + b
+end
+
+local function Script:func()
+    return 114514
+end
+
+return Script
+```
+
+### 开放的作用
+
+1. 其他组件可以访问
+2. 触发器可以访问
+
+## 组件的互操作
+
+- 组件A:
+
+    ```lua
+        -- 组件A
+        local Script = {}
+        Script.openFnArgs = {
+            Add = {
+                returnType = Mini.Number，
+                displayName = "别名",
+                params = {Mini.Number, Mini.Number},
+            }
+        }
+
+        -- 函数定义示例
+        function Script:Add(a, b)
+            if a and b then
+                return a + b
+            end
+        end
+
+        -- 组件启动时调用
+        function Script:OnStart()
+            -- 调用自己定义的函数示例
+            -- PS:调用本组件的函数不需要任何配置
+            local result = self:Add(1, 2)
+            print("result", result)
+        end
+
+
+        return Script
+    ```
+
+- 组件B:
+
+    ```lua
+        -- 组件B
+        local Script = {} -- 定义组件表
+
+        -- 组件启动时调用
+        function Script:OnStart()
+            -- 同对象下操作
+
+            -- 获取对象上组件A
+            local cmpA = self:GetComponent("组件id")
+
+            -- 调用组件A的函数
+            local result = cmpA:Add(1, 2)
+            print("result", result)
+
+            -- 跨对象操作
+
+            -- 获取一般对象
+            local obj = GameObject:FindObject("对象id")
+            -- 世界对象的获取方式
+            local world = GetWorld()
+
+            -- 获取对象上组件A
+            local cmpA = world:GetComponent("组件id")
+
+            -- 调用组件A的函数
+            local result = cmpA:Add(1, 2)
+            print("result", result)
+        
+            local age = cmpA.age -- 获取cmpA组件的age属性
+            cmpA.age = 123 -- 设置cmpA的age属性值为123
+        end 
+
+        return Script -- 返回组件定义的表
+    ```
+
+## 等待
+
+1. 方法1:
+
+    ```lua
+    self:ThreadWait(等待时间)
+    ```
+
+2. 方法2:
+
+    ```lua
+    threadpool:wait(等待时间)
+    ```
+
+- PS: 默认一帧，0s也为一帧
+
+## 启动新协程
+
+```lua
+self:ThreadWork(function()
+    print("线程启动")
+end)
+```
+
+## UI
+
+- `UI` 指 `UGCS` 中创建的 `UI`
+- `UI元件` 指 `UI` 中的`按钮`、`图片`等
+- `UI元件` 类型: `图片`、`按钮`、`滑动容器`、`输入框`、`进度条`、`3D模型加载框`
+- `UI元件` 有 `父元件` 与 `子元件` 的概念，当你删除 `父元件` 对应的 `子元件` 也会被删除
+
+### UI的ID
+
+UI的ID为 `一串数字`
+
+- 例如: "7618879811305562243-64940"
+
+### 元件的ID
+
+元件的ID为 `UI的ID + _序号`
+
+- 例如: "7618879811305562243-64940_2"
+
+- 当你删除ID为 "7618879811305562243-64940_2" 的元件，再重新创建将不会是这个ID，而是 "7618879811305562243-64940_3"
+
+### 元件克隆
+
+元件克隆需要使用 `CustomUI` API 中的函数: `CloneElement`
+
+- 详情查看 `MNDeclaration.d.lua` 文件
+
+克隆元件的ID为 `被克隆元件的ID + #clone + 次数`
+
+- 例如: "7618879811305562243-64940_2#clone1"
+
+- 当克隆的元件为 `父元件` 时，对应 `子元件` 也会被克隆
+
+- 例如:
+  - 克隆前:
+    - 父元件: "7618879811305562243-64940_2"
+    - 子元件: "7618879811305562243-64940_3"
+  - 克隆后:
+    - 父元件: "7618879811305562243-64940_2#clone1"
+    - 子元件: "7618879811305562243-64940_3#clone1"
+
+### 元件创建
+
+元件克隆需要使用 `CustomUI` API 中的函数: `CreateElement`
+
+- 详情查看 `MNDeclaration.d.lua` 文件
+
+创建元件的ID为 `UI的ID + _new + 次数`
+
+- 例如: "7618879811305562243-64940_new1"
+
+修改父元件需要使用 `CustomUI` API 中的函数: `ChangeParent`
+
+- 详情查看 `MNDeclaration.d.lua` 文件
+
+## 日志输出
+
+- 日志的输出使用 `print()` 或 `printError()` 即可
+
+## Lua脚本的变量与触发器的变量
+
+- 在Lua中如果要创建玩家私有变量需要自行实现（玩家数据管理器），如果在触发器中创建则不需要
+
+### Lua中读取触发器的变量
+
+- 在触发器中有三种变量类别:
+
+    | 名称 | 说明 |
+    | :-: | :-: |
+    | 公共变量 | 所有玩家共享这个变量 |
+    | 私有变量 | 与玩家关联的、独立存储的个人数据 |
+    | 组件变量 | 组件自带的可配置参数 |
+
+- 读取触发器变量需要使用 `Data` / `Array` / `Table` / `Map` API
+- 具体接口请查看 `MNDeclaration.d.lua`
+- 获取触发器变量的ID: 在触发器界面获取
+
+### 排行榜 & K/V 数据
+
+#### K/V 数据
+
+- 为一般普通的数据存储，其如同一张表，而表里面可以存任何类型的数据，并且可以存储多个不同关键字（`Key`）的表
+
+- 存储中的每个 `值`  ( `Value` ) 都由一个 `键` ( `key` ) 索引，可以往里面添加任意值。一个 `Key` 只能对应一个 `Value`，`Value` 类型可以是数值，可以是 `字符串` / `JSON字符串` 等。例如玩家相关数据可如下所示存取:
+
+    | KEY | VALUE |
+    | :-: | :-: |
+    | level | `50` |
+    | attr | `{ "flowers": 100, "level": 6, "vip": 3,"played_count": 13, "label": "超神"}` |
+    | coin | `78000` |
+
+> 通过相同的数据集名称和键（ `Key` ），就可以针对数据进行存/取操作
+
+#### 排行榜数据
+
+> 为有序数据集合，其数据存储的类型为数值类型，系统会按照数值自动进行排序，故我们把它简称为排行榜数据，其可以存储多个维度的数据进行自动排序
+
+1. 排行榜可以实现地图排名前1000位玩家的数据，实现全图排行榜功能
+2. 排行榜默认排序方式为升序，使用Get数据时，正数代表升序，负数代表降序
+3. 排行榜只能存正整数，存入的小数会进行取整数部分
+
+- 排行榜基本格式如下：
+
+    | KEY (playerUin) | VALUE |
+    | :-: | :-: |
+    | 100001 | 114514 |
+    | 100002 | 1919810 |
+    | 100003 | 123 |
+
+```mermaid
+graph LR
+    GameMap["游戏 / 地图"] --> RawData["普通数据集 (表)"]
+    GameMap --> OrderedData["有序数据集 (排行榜)"]
+
+    RawData --> D1["玩家等级整数集"]
+    RawData --> D2["玩家属性字符串数据"]
+    RawData --> More1["..."]
+    
+    OrderedData --> D3["玩家游戏金币排行榜"]
+    OrderedData --> D4["玩家战力排行榜"]
+    OrderedData --> More2["..."]
+```
+
+#### 数据保存的生命周期
+
+1. 地图审核通过且状态属于有效中，其所存储的数据即处于有效中
+2. 地图取消上传，数据将会继续保留30天，如果30天内未重新上传，数据将会彻底清除，无法恢复
+3. 地图开发者主动调取删除接口，或者地图删除，则数据将会彻底清除，无法恢复
+
+- PS: 在联机或单机情况下，该功能只能实现当前地图，当前房间数据的临时存储，房间关闭后数据就会丢失
+
+- PPS: 验证数据存储的正确性，必须在 **云服环境下（确保在云服房间内）** 才可正确的获取到所存储的数据，在单机或者联机下将无法获取到云服下的全部数据
+
+#### 如何开启 `K/V存储` 和 `排行榜`
+
+- 流程:
+
+    ```mermaid
+    graph LR
+        A["开发者工具"] --> B["触发器"] --> C["变量库"] --> D["全局变量"]
+    ```
+
+- 类型:
+
+    | 类型 |
+    | :-: |
+    | 排行榜 |
+    | K/V 表 |
+
+- 针对排行榜及表进行 `I/O` 操作，请参考 `Map` API
+
+#### 存储限制
+
+> 每个游戏内的请求服务器的上限，系统会根据同时 **在线的玩家数量** 来 **动态调配**，允许一定数量的数据 `I/O` 请求，更多的玩家意味有更高的配额更多的数据
+
+- 具体的如下表 (PS:`numPlayers` 为 `玩家数量`):
+
+    | 请求类型 | 函数 | 每分钟请求上限 | PS |
+    | :-: | :-: | :-: | :-: |
+    | Set | `SetValueAndCallBack(...)` / `SetValueAndBlock(...)` / `RemoveValueAndCallBack(...)` / `RemoveValueAndBlock(...)` / `UpdateValueAndCallback(...)` | 30 + numPlayers × 10 | 每分钟该函数允许被请求的次数，超过上限将会被限制请求 |
+    | Get | `GetValueAndCallBack(...)` / `GetValueAndBlock(...)` | 30 + numPlayers × 10 | 每分钟这些函数被请求的次数之和不能超过上限，否则请求将会被限制 |
+    | 有序数据集 | `GetIndexValueAndBlock(...)` / `GetNumValuesAndCallback(...)` / `GetRangeValuesAndCallback(...)` / `ClearData(...)` | 5 + numPlayers × 2 | 每分钟这些函数被请求的次数之和不能超过上限，否则请求将会被限制 |
+
+#### 数据长度限制
+
+> 除了请求频率，数据存储同时也会限制每个条目可使用的数据量。其中 `键` & `名称` & `数据` 都需要在一定的字符长度内，存储的数据量也有限制
+
+- 具体限制:
+
+    | 组成 | 最大字符量 | PS |
+    | :-: | :-: | :-: |
+    | 键 | `50` | 建议控制在 `50字符` 以内 |
+    | 名称 | `50` | 建议控制在 `50字符` 以内 |
+    | 数据 | `2,000,000` | 建议控制在 `2,000,000字符` 以内 |
+
+> 由于 `键` & `名称` 是字符串，因此可以使用 `string.len()` 检查它们的长度。数据也保存为数据存储中的字符串，不管其初始类型如何，我们都可以使用 `Lua` 数据转换为序列化 `JSON表` 的 `JSONEncode()` 函数检查数据的大小
+
+#### 全局KV数据并发读写
+
+**全局 `K/V数据` 并发读写，主要保证了多个玩家同时对一个 `KEY` 进行 `I/O` 操作时的唯一性，确保读写成功，并且获取最新值**
+
+- 应用场景:
+    **包括但不仅限于 `宗门系统` / `拍卖行系统` / `抢购系统` 等，开发者可根据自己的业务需要，选择使用**
+
+> 普通的 `SetValueAndBlock` & `SetValueAndCallBack` 接口已经满足 `K/V数据` 的 **绝大多数** `I/O` 需求，但是当需要实现 **全服共同** 宗门系统 (全局属性，例：`总人数` & `贡献值` 等)、全服共同拍卖行（售卖物品的剩余数量）等大型跨游戏房间功能的时候，容易出现数据的彼此覆盖，**没法保证全局唯一性**
+
+- 为保证全局唯一性:
+
+> `UGC系统` 特意设计了全新的 `UpdateValueAndCallback(...)` 接口。使用该接口，开发者仅需自己处理一个 **回调函数**，在函数中处理自己的数据的逻辑。接口底层会自动重试，**直至数据修改成功**
+
+- **PS: 此接口只在云服有效，不要单机或联机测试这个接口!**
+
+> 若遇到 **冲突**、**失败** 的情况，接口会自动回传最新的数据值，并调用开发者的回调函数，按照开发者自己设定的逻辑进行更新数据，**确保了数据不出错**，**不会被其他玩家覆盖**
+
+##### callback函数示例说明
+
+- UpdateValueAndCallback(...)
+
+  - 参数及类型:
+
+    | 参数名 | 类型 | PS |
+    | :-: | :-: | :-: |
+    | varId | string | K/V表变量ID |
+    | playerId | number | 玩家Uin |
+    | key | string | 键值 (数值会转换为字符串) |
+    | value | string/number/boolean | 具体值 |
+
+  - 返回值:
+    - 类型:boolean
+    - PS:是否成功
+
+  - 该方法的主要作用:
+    - 安全更新表中某个 `key` 下的值，并发存取数据，确保 `Key` 下的值 **唯一性**
+
+  - 案例:
+
+    ```lua
+    -- ret只有 0 & 2 两种值
+    -- callback至少会调用两次，首次调用ret必然为0，用于设置数值
+    -- 第2次或第2次以上调用callback时，如果设置失败会再次调用callback，此时ret为0；如果设置成功则ret为ErrorCode.OK，不会再次设置
+    local function GlobalKVCallback(code,key,value)
+        Chat:SendChat(table.concat({"UpdateValueAndCallback code = ",tostring(code), "key = ",tostring(key), "value = ",tostring(value)}, " "))
+        value = json.decode(value) or value
+        print("code", code , "key", key, "value", value)
+
+        if code == ErrorCode.KV_UPDATE_SET then  -- 需要返回更新设置的最终值
+            value = value or {} 
+            value.updatevalue = 999
+            return json.encode(value) -- 需要返回更新设置的最终值 并且序列化结构
+        elseif code == ErrorCode.KV_UPDATE_GET then
+            print("获取到的当前最新的值:", value)
+        elseif code == ErrorCode.OK then
+            print("更新完成")
+        else 
+            print("更新失败")
+        end
+    end
+
+    local result = Data.Map:UpdateValueAndCallback(GlobalKV, nil, "GlobalKV_Key2", GlobalKVCallback)
+
+    if result then
+        print("调用成功")
+    else
+        print("调用失败")
+    end
+    ```
+
+#### 普通KV存储 VS 全局KV数据并发读写
+
+- 普通:
+    > `普通KV` 存储 `Set` 操作时，执行速度 **更快一些**。直接保存 `Key` 对应的数据，只会有写入时的每分钟请求次数限制。但是在 **多服同时** 对 **同一个** `Key` 进行写数据的时候 **容易造成数据不一致**
+
+- 全局:
+    > `全局KV` 数据并发读写 ( `UpdateValueAndCallback(...)` ) 执行更慢，因为修改之前会读取 **最新** 的值，然后尝试写入。因为该接口同时受到 `I/O` 的每分钟请求次数 **限制**。另外，它 **第一次操作** 某个 `Key` 时，因为数据 **不存在** 会返回 **空值**，此时依然是在 **callback里面处理**，并提交首次有效数据给底层
+
+#### 注意事项
+
+1. `UpdateValueAndCallback(...)` 接口 **无需** 事先设置 `Key` 对应的数据，因为数据 **都在 `callback` 里面提交**，从无到有的第一次数据也是这里提交。这样才能避免同时对同一个 `Key` 的数据操作时，彼此冲突覆盖问题
+2. 非必要慎用 `UpdateValueAndCallback(...)` 接口，**性能降低**。只有业务场景，必须要对同一个 `Key` 的数据进行写操作时，**保证 `唯一性` & `正确性` 的场景和功能时，才推荐使用该接口**
+3. 使用 `UpdateValueAndCallback(...)` 修改过的数据，**请勿使用普通 `SetValueAndBlock` 接口去设置新值**，因为会直接覆盖掉原来数据，**没法保证 `唯一性` & `正确性`，而且有可能导致其它问题**
+4. 对同一个Key，**禁止混用普通 `SetValueAndBlock` & `UpdateValueAndCallback(...)` 去存数据**
+5. 此接口只在云服有效，不要单机或联机测试这个接口
+6. 每个 `Key` 只能设置 **一个** 回调，设置后 **不能随意修改**
+7. Update接口操作的数据，其 `Set操作` **只能** 在 `callback` 里面，并采用返回最新 `Value` 进行修改，**千万别基于自己调用Get拿到的数据进行操作，容易导致数据覆盖/出错**
+
+#### Q&A
+
+- Q: 执行Set操作，出现请求失败
+- A：
+    1. 避免出现服务器 **CD限制**，相同 `Key` 的 `Set操作` **需要** 间隔 `>=6s`，避免同一秒多次 `Set` 相同 `Key` 的情况，导致数据没有保存成功
+    2. 避免 **无变化** 的数据，仍不停去执行 `Set` 操作。给需要保存的数据设置needSave之类的布尔值标签，数据变化了设置为 `true`，定时保存中根据 `needSave` 为 `true`时候发送 `Set请求` 保存，否则没必要发送到服务器
+    3. 避免绑定玩家 行走/碰撞等 高频行为而触发实时读写操作，否则一个玩家有可能一秒内触发数 **百个** 数据读写请求
+    4. 避免触发每分钟请求数 `QPM限制`
+    5. 妥善处理 `Set` 或 `Get` 返回失败的情况，可以创建请求失败列，合理安排时机重试几次，一旦成功就从失败列表移除
+
+- Q: 一个游戏设置多个排行榜
+- A:
+    1. 一个游戏 **可以** 包括多个维度的排行榜，如：`得分排行榜` / `击杀Boss次数排行榜` / `速度排行榜` / `时长排行榜` / `技能点数排行榜` 等
+    2. 如果游戏里有多个排行榜，每个榜的刷新时间 **要错开**
+
+- Q: 排行榜最多可以设置多少位排名？
+- A:
+    1. 单个排行榜最多可存储1万名
+    2. 建议排行榜展示名次最好不要超过 `TOP30`，**最多** 展示前 `100` 名。展示的名次越多，参与排行的人数越多，越 **影响性能**，导致响应变慢；设计的时候需要做合理的取舍
+
+- Q: 如何合理的进行 `Set` / `Get` 操作?
+- A:
+    1. **避免** 零值 (或初始值) 参与排行榜，会出现所有玩家都进行 `Set` 操作了一次
+    2. 避免低于排行榜最后一名的数据也 `Set` 操作。假设你的排行榜展示前50名，如果第50名已经有100分了，那么对于分数低于100分的玩家就无需添加到排行榜里面去
+    3. 参与排行的数值，例: `经验` / `等级` / `杀怪数量` 等，这几个数值可以序列化成 `JSON字符串` 保存在一个 `K/V` 中，避免多次拉取数据的情况
+    4. 假设某游戏有 `经验` / `等级` / `杀怪数` 3个排行榜，那么可以一个玩家一个 `JSON` 保存在 `K/V表` 里面，`Key` 为 `玩家Uin` / `Value` 为 `JSON`:
+
+        ```lua
+        {"exp": 888999,"lvl": 7,"kmonster": 39}
+        ```
+
+    5. 区分游戏商店购买、任务、成就等模块的配置和需要 **持久化** 的状态数据
+
+- Q: 配置文件建议不设置到数据储存中
+- A:
+  - 通用配置可以放 `脚本` / 一个 `全局表` 里，没有必要存储在 `K/V表` 里
+  - 例:
+
+    ```lua
+    "FindMaHongJun_5":{"questName":"FindMaHongJun_5","questProg":0,"questProgAll":1,"questSta":"no"}
+    ```
+
+  - 这种可以简化，假设TaskID:10086表示该任务，那么:
+
+    ```lua
+    "10086":[0,1,0]
+    ```
+
+    - 数组 `第1个元素` 表示 `questProg`，`第2个元素` 表示 `questProgAll`，`第3个元素` 表示 `questSta`
