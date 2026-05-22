@@ -4,19 +4,20 @@ import io
 import os
 import re
 from bs4 import BeautifulSoup, Tag
-from typing import Optional, Dict, List, Any
 
 ENUM_LIB_URL: str = "https://dev-wiki.mini1.cn/ugc-wiki/apis/global.html"
 ENUM_LIB_FILE_PATH: str = os.getcwd() + r"\multiple\MNEnumLib.d.lua"
-CLASS_RE = r'--- @class'
-FIELD_RE = r'--- @field'
+CLASS_RE = r"--- @class"
+FIELD_RE = r"--- @field"
+
 
 def init() -> None:
     """初始化
     Returns:
         None: 无返回值
     """
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
 
 def analyze_file(path: str) -> dict[str, list[str]]:
     """分析文件
@@ -26,22 +27,23 @@ def analyze_file(path: str) -> dict[str, list[str]]:
         dict[str, list[str]]: 分析结果
     """
     out_dict: dict[str, list[str]] = {}
-    class_name: Optional[str] = None
-    with open(path, 'r', encoding='utf-8') as file:
+    class_name: str | None = None
+    with open(path, "r", encoding="utf-8") as file:
         for line in file:
             if re.match(CLASS_RE, line):
-                match = re.search(r'--- @class (\w+)', line)
+                match = re.search(r"--- @class (\w+)", line)
                 if match:
                     current_class_name = match.group(1)
                     class_name = current_class_name
                     out_dict[current_class_name] = []
             elif re.match(FIELD_RE, line):
-                match = re.search(r'--- @field (\w+)', line)
+                match = re.search(r"--- @field (\w+)", line)
                 if match and class_name and class_name in out_dict:
                     field_name = match.group(1)
                     out_dict[class_name].append(field_name)
 
     return out_dict
+
 
 def analyze_web(url: str) -> dict[str, list[str]]:
     """分析网页内容
@@ -52,9 +54,9 @@ def analyze_web(url: str) -> dict[str, list[str]]:
     """
     out_dict: dict[str, list[str]] = {}
     response: requests.Response = requests.get(url, timeout=10)
-    response.encoding = 'utf-8'
-    soup: BeautifulSoup = BeautifulSoup(response.text, 'html.parser')
-    all_enums: list[Tag] = soup.find_all('table', attrs={'tabindex': '0'})
+    response.encoding = "utf-8"
+    soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
+    all_enums: list[Tag] = soup.find_all("table", attrs={"tabindex": "0"})
     if all_enums:
         all_enums.pop(0)  # 移除第一个表格
     current_class: str = ""
@@ -72,28 +74,30 @@ def analyze_web(url: str) -> dict[str, list[str]]:
             continue
 
         first_text = first_cell.text.strip()
-        if '.' not in first_text:
+        if "." not in first_text:
             continue
 
-        class_name = first_text.split('.', 1)[0]
+        class_name = first_text.split(".", 1)[0]
         if class_name != current_class:
             current_class = class_name
             current_fields: list[str] = []
-            for field in tbody.find_all('tr'):
+            for field in tbody.find_all("tr"):
                 field_cell = field.td
                 if not field_cell or not field_cell.text:
                     continue
 
                 field_text = field_cell.text.strip()
-                if '.' not in field_text:
+                if "." not in field_text:
                     continue
 
-                current_fields.append(field_text.split('.', 1)[1])
+                current_fields.append(field_text.split(".", 1)[1])
             out_dict[current_class] = current_fields
     return out_dict
 
 
-def compare_enums(local_enums: dict[str, list[str]], web_enums: dict[str, list[str]]) -> list[str]:
+def compare_enums(
+    local_enums: dict[str, list[str]], web_enums: dict[str, list[str]]
+) -> list[str]:
     """比较本地枚举定义和网页枚举定义之间的差异
     Args:
         local_enums (dict[str, list[str]]): 本地文件中的枚举定义
@@ -107,19 +111,19 @@ def compare_enums(local_enums: dict[str, list[str]], web_enums: dict[str, list[s
         local_fields = set(local_enums.get(class_name, []))
         web_fields = set(web_enums.get(class_name, []))
         if class_name not in local_enums:
-            diff_lines.append(f'此class只在网页: {class_name}')
+            diff_lines.append(f"此class只在网页: {class_name}")
             continue
         if class_name not in web_enums:
-            diff_lines.append(f'此class只在本地: {class_name}')
+            diff_lines.append(f"此class只在本地: {class_name}")
             continue
         only_local = sorted(local_fields - web_fields)
         only_web = sorted(web_fields - local_fields)
         if only_local or only_web:
-            diff_lines.append(f'Class: {class_name}')
+            diff_lines.append(f"Class: {class_name}")
             for field in only_local:
-                diff_lines.append(f'  此field只在本地: {field}')
+                diff_lines.append(f"  此field只在本地: {field}")
             for field in only_web:
-                diff_lines.append(f'  此field只在网页: {field}')
+                diff_lines.append(f"  此field只在网页: {field}")
     return diff_lines
 
 
@@ -134,12 +138,13 @@ def main() -> None:
     diff_lines = compare_enums(local_enums, web_enums)
 
     if not diff_lines:
-        print('没有不同之处，枚举定义完全一致')
+        print("没有不同之处，枚举定义完全一致")
         return
 
-    print('Differences found:')
+    print("Differences found:")
     for line in diff_lines:
         print(line)
+
 
 if __name__ == "__main__":
     main()
