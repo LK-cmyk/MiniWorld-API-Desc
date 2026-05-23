@@ -22,7 +22,7 @@ def get_ordered_files(folder_path: str) -> List[str]:
         "MNGameObject",  # 游戏对象
         "MNActor",  # 角色
         "MNPlayer",  # 玩家
-        "MNMosnter",  # 怪物
+        "MNMonster",  # 怪物
         "MNArea",  # 区域
         "MNBuff",  # Buff
         "MNItem",  # 物品

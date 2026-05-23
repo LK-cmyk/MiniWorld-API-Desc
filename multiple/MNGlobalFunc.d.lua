@@ -59,10 +59,10 @@ _G.Class = Class
 --- 创建类实例
 --- @param className string @类名
 --- @return table @对象实例
-local instance = function(className)
+local Instance = function(className)
     return {}
 end
-_G.instance = instance
+_G.Instance = Instance
 
 --- 获取类单例
 --- @param className string @类名

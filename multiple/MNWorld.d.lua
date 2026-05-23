@@ -169,12 +169,6 @@ function World:CanMobSpawnOnPosXZ(x, y, z)
     return 0
 end
 
---- 获取当前地图的mapid
---- @return number @地图ID
-function World:GetCurMapId()
-    return 0
-end
-
 --- 生成投掷物
 --- @param uin number @玩家uin
 --- @param itemid number|string @道具类型
@@ -553,4 +547,19 @@ end
 --- @return boolean @是否加载了区块
 function World:IsChunkLoaded(x, z, worldId)
     return true
+end
+
+--- 增加重力
+--- @param value number @重力值
+--- @return boolean @操作是否成功
+function World:AddGravity(value)
+    return true
+end
+
+--- 转换时间戳为时间单位
+--- @param number number @时间戳
+--- @param enum number @时间单位枚举 (EventDate)
+--- @return number @转换后的时间
+function World:GetDateFromTime(number, enum)
+    return 0
 end

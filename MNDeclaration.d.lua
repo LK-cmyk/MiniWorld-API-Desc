@@ -59,10 +59,10 @@ _G.Class = Class
 --- 创建类实例
 --- @param className string @类名
 --- @return table @对象实例
-local instance = function(className)
+local Instance = function(className)
     return {}
 end
-_G.instance = instance
+_G.Instance = Instance
 
 --- 获取类单例
 --- @param className string @类名
@@ -2607,12 +2607,6 @@ function World:CanMobSpawnOnPosXZ(x, y, z)
     return 0
 end
 
---- 获取当前地图的mapid
---- @return number @地图ID
-function World:GetCurMapId()
-    return 0
-end
-
 --- 生成投掷物
 --- @param uin number @玩家uin
 --- @param itemid number|string @道具类型
@@ -2991,6 +2985,21 @@ end
 --- @return boolean @是否加载了区块
 function World:IsChunkLoaded(x, z, worldId)
     return true
+end
+
+--- 增加重力
+--- @param value number @重力值
+--- @return boolean @操作是否成功
+function World:AddGravity(value)
+    return true
+end
+
+--- 转换时间戳为时间单位
+--- @param number number @时间戳
+--- @param enum number @时间单位枚举 (EventDate)
+--- @return number @转换后的时间
+function World:GetDateFromTime(number, enum)
+    return 0
 end
 
 --- 回调设置kv数据
@@ -4116,6 +4125,7 @@ function Actor:IsPlayer(objId)
     return true
 end
 
+
 --- @class Player
 --- 玩家模块管理接口 Player
 local Player = {}
@@ -4232,9 +4242,9 @@ end
 
 --- 玩家旋转摄像机角度朝向actor
 --- @param uin number @玩家uin
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @return boolean @操作是否成功
-function Player:RotateCameraToActor(uin, objid)
+function Player:RotateCameraToActor(uin, objId)
     return true
 end
 
@@ -4263,16 +4273,16 @@ function Player:GetAimPos(uin)
 end
 
 --- 获取玩家准心方向
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @return table @单位方向向量
-function Player:GetAimDir(objid)
+function Player:GetAimDir(objId)
     return {}
 end
 
 --- 获取玩家射线检测起点位置
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @return number,number,number @x,y,z方块坐标
-function Player:GetRayOriginPos(objid)
+function Player:GetRayOriginPos(objId)
     return 0, 0, 0
 end
 
@@ -4332,51 +4342,51 @@ function Player:GetClientInfo(uin)
 end
 
 --- 获取玩家昵称
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @return string @玩家昵称
-function Player:GetNickname(objid)
+function Player:GetNickname(objId)
     return ""
 end
 
 --- 打开开发者商店商品购买弹框(开发者账号和自定义按钮点击事件可用)
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @param devGoodsId string @开发者商品ID
 --- @param customDesc string @自定义商品描述
 --- @return number @操作结果代码
-function Player:OpenDevGoodsBuyDialog(objid, devGoodsId, customDesc)
+function Player:OpenDevGoodsBuyDialog(objId, devGoodsId, customDesc)
     return 0
 end
 
 --- 打开开发者商店商品详情页
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @param devGoodsId string @开发者商品ID
 --- @return number @操作结果代码
-function Player:OpenDevGoodsBuyDetailedDialog(objid, devGoodsId)
+function Player:OpenDevGoodsBuyDetailedDialog(objId, devGoodsId)
     return 0
 end
 
 --- 玩家打开开发者商店(仅开发者可用)
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @return any @操作结果
-function Player:OpenDevStore(objid)
+function Player:OpenDevStore(objId)
     return nil
 end
 
 --- 打开开发者商品二级分类
---- @param objid number @对象ID
+--- @param objId number @对象ID
 --- @param page number @分类页码
 --- @param name string @分类名称
 --- @return any @操作结果
-function Player:OpenDevStoreTab(objid, page, name)
+function Player:OpenDevStoreTab(objId, page, name)
     return nil
 end
 
 --- 打开开发者商店一级页面
---- @param playerid number @玩家ID
+--- @param playerId number @玩家ID
 --- @param pagetype number @页面类型
 --- @param pagetitle string @页面标题
 --- @return any @操作结果
-function Player:OpenDevGoodsPage(playerid, pagetype, pagetitle)
+function Player:OpenDevGoodsPage(playerId, pagetype, pagetitle)
     return nil
 end
 
@@ -4426,12 +4436,12 @@ function Player:GetScreenSpacePos(uin, x, y, z)
 end
 
 --- 根据玩家uin,3D坐标获取玩家屏幕2D坐标(V2版本)
---- @param playerid number @玩家ID
+--- @param playerId number @玩家ID
 --- @param x number @坐标x
 --- @param y number @坐标y
 --- @param z number @坐标z
 --- @return number @屏幕x坐标
-function Player:GetScreenSpacePosV2(playerid, x, y, z)
+function Player:GetScreenSpacePosV2(playerId, x, y, z)
     return 0
 end
 
@@ -4667,13 +4677,6 @@ function Player:GetRentCloudServerOwner()
 end
 
 --- 将玩家移出本局游戏
---- @param objid number @对象ID
---- @return boolean @操作是否成功
-function Player:RemovePlayer(objid)
-    return true
-end
-
---- 将玩家移出本局游戏
 --- @param objId number @对象ID
 --- @return boolean @操作是否成功
 function Player:RemovePlayer(objId)
@@ -4716,100 +4719,6 @@ end
 function Player:RotateMainModel(playerId, yaw, pitch)
     return true
 end
-
---- @class Monster
---- 生物模块管理接口 Monster
-local Monster = {}
-_G.Monster = Monster
-
---- 获取生物类型ID
---- @param objid number @对象ID
---- @return number @生物类型ID
-function Monster:GetActorID(objid)
-    return 0
-end
-
---- 获取生物类型名称
---- @param objId number @对象ID
---- @return string @生物类型名称
-function Monster:GetActorName(objId)
-    return ""
-end
-
---- 替换生物
---- @param objId number @原生物对象ID
---- @param newActorId number @新生物类型ID
---- @return number @新生物对象ID
-function Monster:ReplaceActor(objId, newActorId)
-    return 0
-end
-
---- 获取生物击杀掉落经验
---- @param actorId number @生物类型ID
---- @return number @击杀掉落经验值
-function Monster:GetMonsterDefLevelExp(actorId)
-    return 0
-end
-
---- 设置生物击杀掉落经验
---- @param actorId number @生物类型ID
---- @param exp number @经验值
---- @return boolean @操作是否成功
-function Monster:SetMonsterDefLevelExp(actorId, exp)
-    return true
-end
-
---- 切换Ai行为树
---- @param objid number @生物对象ID
---- @param treeid number|string @行为树ID
---- @return boolean @操作是否成功
-function Monster:ChangeAI(objid, treeid)
-    return true
-end
-
---- 怪物对目标是否可见
---- @param objId number @怪物对象ID
---- @param targetUin number @目标玩家uin
---- @return boolean @是否可见
-function Monster:CanSee(objId, targetUin)
-    return true
-end
-
---- 获取生物的掉落物信息
---- @param actorId number @生物类型ID
---- @return table @掉落物信息表，包含道具ID、数量、概率
-function Monster:GetDropItemInfo(actorId)
-    return {}
-end
-
---- 设置生物A被玩家驯服
---- @param objId number @生物对象ID
---- @param playerUin number @玩家uin
---- @return boolean @操作是否成功
-function Monster:SetTameTarget(objId, playerUin)
-    return true
-end
-
---- 随机获取一个生物类型ID
---- @return number @随机生物类型ID
-function Monster:RandomActorID()
-    return 0
-end
-
---- 获取驯养主ID
---- @param objId number @生物对象ID
---- @return number @驯养主ID
-function Monster:GetTamedOwnerID(objId)
-    return 0
-end
-
---- 获取生物类型外观
---- @param monsterid number|string @生物定义ID或生物预制ID
---- @return any @生物外观模型信息
-function Monster:GetFacade(monsterid)
-    return nil
-end
-
 
 --- @class Area
 --- 区域模块管理接口 Area
@@ -5433,6 +5342,7 @@ end
 function Item:GetTags(itemId)
     return {}
 end
+
 
 --- @class Backpack
 --- 背包模块管理接口 Backpack
@@ -6336,9 +6246,9 @@ function CustomUI:SetFloatDamageTxt(playerId, elementId, objId, text, color, off
 end
 
 ---获取客机屏幕分辨率
----@return table @返回屏幕大小:{w, h}
+---@return number, number @返回屏幕大小(width, height)
 function CustomUI:GetScreenSize(playerId)
-    return {}
+    return 0, 0
 end
 
 ---删除UI元件
@@ -6785,4 +6695,97 @@ end
 --- @return boolean @操作是否成功
 function Graphics:RemoveGraphicsByGraphicsID(objId)
     return true
+end
+
+--- @class Monster
+--- 生物模块管理接口 Monster
+local Monster = {}
+_G.Monster = Monster
+
+--- 获取生物类型ID
+--- @param objid number @对象ID
+--- @return number @生物类型ID
+function Monster:GetActorID(objid)
+    return 0
+end
+
+--- 获取生物类型名称
+--- @param objId number @对象ID
+--- @return string @生物类型名称
+function Monster:GetActorName(objId)
+    return ""
+end
+
+--- 替换生物
+--- @param objId number @原生物对象ID
+--- @param newActorId number @新生物类型ID
+--- @return number @新生物对象ID
+function Monster:ReplaceActor(objId, newActorId)
+    return 0
+end
+
+--- 获取生物击杀掉落经验
+--- @param actorId number @生物类型ID
+--- @return number @击杀掉落经验值
+function Monster:GetMonsterDefLevelExp(actorId)
+    return 0
+end
+
+--- 设置生物击杀掉落经验
+--- @param actorId number @生物类型ID
+--- @param exp number @经验值
+--- @return boolean @操作是否成功
+function Monster:SetMonsterDefLevelExp(actorId, exp)
+    return true
+end
+
+--- 切换Ai行为树
+--- @param objid number @生物对象ID
+--- @param treeid number|string @行为树ID
+--- @return boolean @操作是否成功
+function Monster:ChangeAI(objid, treeid)
+    return true
+end
+
+--- 怪物对目标是否可见
+--- @param objId number @怪物对象ID
+--- @param targetUin number @目标玩家uin
+--- @return boolean @是否可见
+function Monster:CanSee(objId, targetUin)
+    return true
+end
+
+--- 获取生物的掉落物信息
+--- @param actorId number @生物类型ID
+--- @return table @掉落物信息表，包含道具ID、数量、概率
+function Monster:GetDropItemInfo(actorId)
+    return {}
+end
+
+--- 设置生物A被玩家驯服
+--- @param objId number @生物对象ID
+--- @param playerUin number @玩家uin
+--- @return boolean @操作是否成功
+function Monster:SetTameTarget(objId, playerUin)
+    return true
+end
+
+--- 随机获取一个生物类型ID
+--- @return number @随机生物类型ID
+function Monster:RandomActorID()
+    return 0
+end
+
+--- 获取驯养主ID
+--- @param objId number @生物对象ID
+--- @return number @驯养主ID
+function Monster:GetTamedOwnerID(objId)
+    return 0
+end
+
+--- 获取生物类型外观
+--- @param monsterid number|string @生物定义ID或生物预制ID
+--- @return any @生物外观模型信息
+function Monster:GetFacade(monsterid)
+    return nil
 end
