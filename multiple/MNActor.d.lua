@@ -78,13 +78,6 @@ function Actor:GetCurMapId(objId)
     return 0
 end
 
---- 检查对象是否为玩家
---- @param objId number @对象ID
---- @return boolean @是否为玩家
-function Actor:IsPlayer(objId)
-    return false
-end
-
 --- 在指定角色身上播放音效
 --- @param objid number @对象ID
 --- @param soundId number @音效ID

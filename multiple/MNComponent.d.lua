@@ -5,7 +5,7 @@ _G.Component = Component
 
 --- 获取该组件挂载的对象实例
 --- @return nil @挂载对象
-function Component:GetGameObject()    
+function Component:GetGameObject() 
     return nil
 end
 
@@ -114,6 +114,11 @@ function Component:RemoveEvent(eventType)
 end
 
 --- 启动定时器在指定时间执行任务
+--- ```lua
+--- task:Pause() -- 暂停定时器
+--- task:Resume() -- 恢复定时器
+--- task:Cancel() -- 取消定时器
+--- ```
 --- @param callback function @回调函数
 --- @param delay number @时间间隔(秒)
 --- @return nil @定时器任务对象
@@ -122,6 +127,11 @@ function Component:DoTaskInTime(callback, delay)
 end
 
 --- 启动定时器周期性执行任务
+--- ```lua
+--- task:Pause() -- 暂停定时器
+--- task:Resume() -- 恢复定时器
+--- task:Cancel() -- 取消定时器
+--- ```
 --- @param callback function @回调函数
 --- @param interval number @间隔时间(秒)
 --- @param delay number @延迟开始第一次执行时间(默认0)
@@ -152,7 +162,7 @@ function Component:ThreadWork(callback)
     return nil
 end
 
---- 线程等待
+--- 协程等待
 --- @param delay number @等待时间(默认一帧)
 --- @return nil
 function Component:ThreadWait(delay)

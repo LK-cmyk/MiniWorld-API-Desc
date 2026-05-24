@@ -1820,6 +1820,11 @@ function Component:RemoveEvent(eventType)
 end
 
 --- 启动定时器在指定时间执行任务
+--- ```lua
+--- task:Pause() -- 暂停定时器
+--- task:Resume() -- 恢复定时器
+--- task:Cancel() -- 取消定时器
+--- ```
 --- @param callback function @回调函数
 --- @param delay number @时间间隔(秒)
 --- @return nil @定时器任务对象
@@ -1828,6 +1833,11 @@ function Component:DoTaskInTime(callback, delay)
 end
 
 --- 启动定时器周期性执行任务
+--- ```lua
+--- task:Pause() -- 暂停定时器
+--- task:Resume() -- 恢复定时器
+--- task:Cancel() -- 取消定时器
+--- ```
 --- @param callback function @回调函数
 --- @param interval number @间隔时间(秒)
 --- @param delay number @延迟开始第一次执行时间(默认0)
@@ -1858,7 +1868,7 @@ function Component:ThreadWork(callback)
     return nil
 end
 
---- 线程等待
+--- 协程等待
 --- @param delay number @等待时间(默认一帧)
 --- @return nil
 function Component:ThreadWait(delay)
@@ -3619,13 +3629,6 @@ end
 --- @return number @地图ID
 function Actor:GetCurMapId(objId)
     return 0
-end
-
---- 检查对象是否为玩家
---- @param objId number @对象ID
---- @return boolean @是否为玩家
-function Actor:IsPlayer(objId)
-    return false
 end
 
 --- 在指定角色身上播放音效
