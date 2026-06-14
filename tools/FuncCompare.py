@@ -85,7 +85,7 @@ def analyze_web(url: str) -> set[str]:
         text: str = heading.get_text(strip=True)
         if not text:
             continue
-        text = re.sub(r"[\u200b\u200c\u200d\ufeff]+", "", text)
+        text: str = re.sub(r"[\u200b\u200c\u200d\ufeff]+", "", text)
         if not text:
             continue
         if re.fullmatch(r"[A-Za-z_]\w*", text) and text not in {"World", "GameObject"}:
@@ -94,7 +94,7 @@ def analyze_web(url: str) -> set[str]:
     if not out_funcs:
         page_text: str = soup.get_text(separator="\n")
         for line in page_text.splitlines():
-            line = line.strip()
+            line: str = line.strip()
             if not line.startswith("|"):
                 continue
             parts: list[str] = [part.strip() for part in line.split("|")]
@@ -105,9 +105,7 @@ def analyze_web(url: str) -> set[str]:
     return out_funcs
 
 
-def compare_funcs(
-    local_funcs: set[str], web_funcs: set[str], module_name: str
-) -> list[str]:
+def compare_funcs(local_funcs: set[str], web_funcs: set[str], module_name: str) -> list[str]:
     """比较本地和网页函数名，并返回差异行
     Args:
         local_funcs (set[str]): 本地函数名集合
@@ -123,9 +121,7 @@ def compare_funcs(
     if not local_funcs:
         diff_lines.append(f"[{module_name}] 本地文件未解析到函数或本地文件缺失。")
     if not web_funcs:
-        diff_lines.append(
-            f"[{module_name}] 网页未解析到函数，请检查文档页面或解析规则。"
-        )
+        diff_lines.append(f"[{module_name}] 网页未解析到函数，请检查文档页面或解析规则。")
     only_local: list[str] = sorted(local_funcs - web_funcs)
     only_web: list[str] = sorted(web_funcs - local_funcs)
     if only_local:

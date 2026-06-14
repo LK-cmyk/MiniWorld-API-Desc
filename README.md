@@ -1,13 +1,13 @@
 # MiniWorld-API-Desc
 
-- 游戏版本: `v1.56`
+- 游戏版本: `v1.56+`
 - `Lua` 版本: `v5.1+`
 - `UGC` 开发套件: `v3.0`
-- 项目工具需使用 `Python3.9`
+- 项目工具需使用 `Python3.10`
 
 [![GitHub stars](https://img.shields.io/github/stars/LK-cmyk/MiniWorld-API-Desc?style=flat-square)](https://github.com/LK-cmyk/MiniWorld-API-Desc)
 ![License](https://img.shields.io/github/license/LK-cmyk/MiniWorld-API-Desc)
-![Python](https://img.shields.io/badge/python-3.9%2B-yellow)
+![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
 
 ## 项目简介
 
@@ -80,6 +80,47 @@ sequenceDiagram
 ## AI 使用提示
 
 - 可将 `MNDeclaration.d.lua` 与 `AiDesc/` 中的内容一起输入 AI，以获得更准确的代码建议。
+
+## 工具使用提示
+
+- 进入仓库根目录，并确保已安装 Python 3.10+。
+- 对比工具依赖外部库，可通过 `pyproject.toml` 安装：
+
+    ```bash
+    pip install -e .
+    ```
+
+- 合并声明文件：
+
+    ```bash
+    python tools/Merge.py
+    ```
+
+  该脚本会将 `multiple/` 中的 `.d.lua` 文件按预定义顺序合并为根目录下的 `merged.lua`。
+
+- 枚举比较：
+
+    ```bash
+    python tools/EnumLibCompare.py
+    ```
+
+  将本地 `multiple/MNEnumLib.d.lua` 与在线枚举文档对比，并输出差异。
+
+- 事件比较：
+
+    ```bash
+    python tools/EventCompare.py
+    ```
+
+  将本地 `multiple/MNEvent.d.lua` 与在线事件文档对比，并输出差异。
+
+- 函数比较：
+
+    ```bash
+    python tools/FuncCompare.py
+    ```
+
+  将本地 `multiple` 中的声明函数与在线函数文档对比，并输出差异。
 
 ## 注意事项
 

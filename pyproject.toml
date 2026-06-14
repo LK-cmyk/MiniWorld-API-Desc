@@ -1,9 +1,9 @@
 [project]
 name = "miniworld-api-desc"
-version = "0.3.3"
+version = "0.3.4"
 description = "MiniWorld API Desc"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 
 dependencies = [
