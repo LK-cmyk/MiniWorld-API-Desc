@@ -83,7 +83,7 @@ sequenceDiagram
 
 ## 工具使用提示
 
-- 进入仓库根目录，并确保已安装 Python 3.10+。
+- 进入仓库根目录，并确保已安装 **Python 3.10+**。
 - 对比工具依赖外部库，可通过 `pyproject.toml` 安装：
 
     ```bash

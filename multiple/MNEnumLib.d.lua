@@ -1213,3 +1213,17 @@ _G.GameSetting = GameSetting
 --- @field Rectangle number @矩形限制
 local BeaconClampType = {}
 _G.BeaconClampType = BeaconClampType
+
+--- @class AreaCloneType @区域复制类型
+--- @field IncludeAir number @复制 (含空气)
+--- @field ExcludeAir number @复制 (不含空气)
+--- @field IncludeAirAndMove number @移动 (含空气)
+--- @field ExcludeAirAndMove number @移动 (不含空气)
+local AreaCloneType = {}
+_G.AreaCloneType = AreaCloneType
+
+--- @class RolePickupType @角色举起类型
+--- @field Carrying number @被举起
+--- @field Carried number @被举起着
+local RolePickupType = {}
+_G.RolePickupType = RolePickupType
