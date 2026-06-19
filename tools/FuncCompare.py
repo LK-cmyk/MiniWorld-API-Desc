@@ -162,12 +162,12 @@ def main() -> None:
     init()  # 初始化环境
     all_diff: list[str] = []
     for url in FUNC_URL:
-        module_name: str = module_name_from_url(url)
-        local_path: str = local_file_for_module(module_name)
-        web_funcs: set[str] = analyze_web(url)
-        local_funcs: set[str] = set()
-        if os.path.exists(local_path):
-            local_funcs: set[str] = analyze_file(local_path)
+        module_name: str = module_name_from_url(url)  # 从 URL 推断模块名称
+        local_path: str = local_file_for_module(module_name)  # 生成本地声明文件路径
+        web_funcs: set[str] = analyze_web(url)  # 从网页提取函数名
+        local_funcs: set[str] = set()  # 从本地声明文件提取函数名
+        if os.path.exists(local_path):  # 检查本地文件是否存在
+            local_funcs: set[str] = analyze_file(local_path)  # 从本地声明文件提取函数名
         else:
             all_diff.append(f"[{module_name}] 本地文件不存在: {local_path}")
         diff: list[str] = compare_funcs(local_funcs, web_funcs, module_name)

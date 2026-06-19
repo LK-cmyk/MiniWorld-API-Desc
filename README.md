@@ -90,40 +90,15 @@ sequenceDiagram
     pip install -e .
     ```
 
-- 合并声明文件：
-
-    ```bash
-    python tools/Merge.py
-    ```
-
-  该脚本会将 `multiple/` 中的 `.d.lua` 文件按预定义顺序合并为根目录下的 `merged.lua`。
-
-- 枚举比较：
-
-    ```bash
-    python tools/EnumLibCompare.py
-    ```
-
-  将本地 `multiple/MNEnumLib.d.lua` 与在线枚举文档对比，并输出差异。
-
-- 事件比较：
-
-    ```bash
-    python tools/EventCompare.py
-    ```
-
-  将本地 `multiple/MNEvent.d.lua` 与在线事件文档对比，并输出差异。
-
-- 函数比较：
-
-    ```bash
-    python tools/FuncCompare.py
-    ```
-
-  将本地 `multiple` 中的声明函数与在线函数文档对比，并输出差异。
+| 命令 | 说明 |
+| :-- | :-: |
+| `python tools/Merge.py` | 将 `multiple/` 中的 `.d.lua` 文件按预定义顺序合并为根目录下的 `merged.lua` |
+| `python tools/EnumLibCompare.py` | 将本地 `multiple/MNEnumLib.d.lua` 与在线枚举文档对比，并输出差异 |
+| `python tools/EventCompare.py` | 将本地 `multiple/MNEvent.d.lua` 与在线事件文档对比，并输出差异 |
+| `python tools/FuncCompare.py` | 将本地 `multiple` 中的声明函数与在线函数文档对比，并输出差异 |
 
 ## 注意事项
 
 - 本仓库声明文件与模板仅支持UGC **3.0**。
 - 部分接口可能与实际游戏版本存在差异，请以游戏实际行为为准。
-- 发现问题欢迎提交 Issues 或 Fork 后发起 Pull Request。
+- 发现问题欢迎提交 Issues 或 Fork 后发起 PR。
