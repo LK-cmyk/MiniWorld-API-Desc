@@ -19,9 +19,9 @@ end
 
 --- 替换生物
 --- @param objId number @原生物对象ID
---- @param newActorId number @新生物类型ID
+--- @param newactorId number @新生物类型ID
 --- @return number @新生物对象ID
-function Monster:ReplaceActor(objId, newActorId)
+function Monster:ReplaceActor(objId, newactorId)
     return 0
 end
 
@@ -85,8 +85,22 @@ function Monster:GetTamedOwnerID(objId)
 end
 
 --- 获取生物类型外观
---- @param monsterid number|string @生物定义ID或生物预制ID
+--- @param monsterId number|string @生物定义ID或生物预制ID
 --- @return any @生物外观模型信息
-function Monster:GetFacade(monsterid)
+function Monster:GetFacade(monsterId)
     return nil
+end
+
+--- 获取生物定义中的标签组
+--- @param actorId number|string @生物类型ID
+--- @return table|nil @标签组信息
+function Monster:GetTags(actorId)
+    return {}
+end
+
+--- 获取生物名称
+--- @param actorId number|string @生物类型ID
+--- @return string|nil @生物名称
+function Monster:GetMonsterDefName(actorId)
+    return ""
 end
