@@ -1,5 +1,5 @@
 {
-  "Create an empty Lua script": {
+  "创建一个空的 Lua 脚本": {
     "prefix": "local Script = {}",
     "body": [
       "local Script = {}",
@@ -8,7 +8,7 @@
     ],
     "description": "创建一个空的Lua脚本"
   },
-  "Open Function Config": {
+  "打开功能配置": {
     "prefix": "Script.openFnArgs = {...}",
     "body": [
       "-- 开放函数配置",
@@ -18,7 +18,7 @@
     ],
     "description": "开放函数配置"
   },
-  "Attribute Definition": {
+  "属性定义": {
     "prefix": "Script.propertys = {...}",
     "body": [
       "-- 属性定义",
@@ -28,7 +28,7 @@
     ],
     "description": "属性定义"
   },
-  "Called on component startup": {
+  "在组件启动时调用": {
     "prefix": "function Script:OnStart()",
     "body": [
       "-- 组件启动时调用",
@@ -38,7 +38,7 @@
     ],
     "description": "组件启动时调用"
   },
-  "Called when the component is deleted": {
+  "删除组件时调用": {
     "prefix": "function Script:OnDestroy()",
     "body": [
       "-- 组件删除时调用",
@@ -48,11 +48,12 @@
     ],
     "description": "组件删除时调用"
   },
-  "Step update":{
+  "步进更新":{
     "prefix": "function Script:OnTick(dt)",
     "body": [
       "-- 步进更新",
       "function Script:OnTick(dt)",
+      "",
       "end"
     ],
     "description": "步进更新"
