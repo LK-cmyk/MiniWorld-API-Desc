@@ -16,8 +16,8 @@ end
 --- 设置指定位置的特效偏移旋转缩放
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
 --- @param particleIdArg number|table @特效ID或ID数组
---- @param offset table @偏移量(缺省参数)
---- @param rot table @旋转角度(缺省参数)
+--- @param offset? table @偏移量(缺省参数)
+--- @param rot? table @旋转角度(缺省参数)
 --- @param scale table @缩放比例
 --- @return boolean @操作是否成功
 function World:SetParticleTransform(pos, particleIdArg, offset, rot, scale)
@@ -28,7 +28,7 @@ end
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
 --- @param particleIdArg number|table @特效ID或ID数组
 --- @param ptimeArg number @播放时长(秒)
---- @param scale table @缩放比例(缺省参数)
+--- @param scale? table @缩放比例(缺省参数)
 --- @return boolean @操作是否成功
 function World:PlayParticle(pos, particleIdArg, ptimeArg, scale)
     return true
@@ -38,7 +38,7 @@ end
 --- @param x number @位置坐标x
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
---- @param worldId? number @星球ID(可选)
+--- @param worldId? number @星球ID
 --- @return number @光照强度(0~16)，失败为-1
 function World:GetLightByPos(x, y, z, worldId)
     return 0
@@ -49,8 +49,8 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @param actorid number|string @生物类型ID
---- @param num number @生成数量(默认1)
---- @param trigger boolean @是否触发事件(默认true)
+--- @param num? number @生成数量(默认1)
+--- @param trigger? boolean @是否触发事件(默认true)
 --- @return table @生成的生物对象ID数组
 function World:SpawnCreature(x, y, z, actorid, num, trigger)
     return {}
@@ -88,7 +88,7 @@ end
 --- @param centerY number @中心位置y
 --- @param centerZ number @中心位置z
 --- @param radius number @搜索半径
---- @param includeCenterPos boolean @是否包含中心位置(默认true)
+--- @param includeCenterPos? boolean @是否包含中心位置(默认true)
 --- @return table @位置坐标表数组
 function World:FindCanSpawnMobPosList(centerX, centerY, centerZ, radius, includeCenterPos)
     return {}
@@ -98,7 +98,7 @@ end
 --- @param x number @位置坐标x
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
---- @param worldId number @世界ID(默认米拉星)
+--- @param worldId? number @世界ID
 --- @return number @最近的玩家ID
 function World:FindNearestPlayerByPos(x, y, z, worldId)
     return 0
@@ -589,7 +589,7 @@ end
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
 --- @param value number @光照强度(0~15)
---- @param worldId? number @星球ID(可选)
+--- @param worldId? number @星球ID
 --- @return boolean @是否设置成功
 function World:SetLightByPos(x, y, z, value, worldId)
     return true

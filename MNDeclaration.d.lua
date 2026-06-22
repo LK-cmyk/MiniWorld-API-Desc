@@ -2292,8 +2292,9 @@ _G.WorldContainer = WorldContainer
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @是否是储物箱
-function WorldContainer:CheckStorage(x, y, z)
+function WorldContainer:CheckStorage(x, y, z, worldId)
     return true
 end
 
@@ -2301,8 +2302,9 @@ end
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:ClearStorageBox(x, y, z)
+function WorldContainer:ClearStorageBox(x, y, z, worldId)
     return true
 end
 
@@ -2310,9 +2312,10 @@ end
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
---- @param itemid number|string @道具类型ID
+--- @param itemId number|string @道具类型ID
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @是否有空余格子
-function WorldContainer:CheckStorageEmptyGrid(x, y, z, itemid)
+function WorldContainer:CheckStorageEmptyGrid(x, y, z, itemId, worldId)
     return true
 end
 
@@ -2321,10 +2324,11 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @param offset number @仓库格子索引(从1开始)
---- @param itemid number|string @道具类型ID
+--- @param itemId number|string @道具类型ID
 --- @param num number @道具数量
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:SetStorageItem(x, y, z, offset, itemid, num)
+function WorldContainer:SetStorageItem(x, y, z, offset, itemId, num, worldId)
     return true
 end
 
@@ -2333,19 +2337,21 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @param offset number @仓库格子索引(从1开始)
---- @return number,number @道具类型ID,道具数量
-function WorldContainer:GetStorageItem(x, y, z, offset)
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
+--- @return number|string|nil, number|string|nil @道具类型ID,道具数量
+function WorldContainer:GetStorageItem(x, y, z, offset, worldId)
     return 0, 0
 end
 
---- 给储物箱添加道具
+--- 向储物箱按堆叠规则添加道具，返回实际加入的数量
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
---- @param itemid number|string @道具类型ID
+--- @param itemId number|string @道具类型ID
 --- @param num number @道具数量
---- @return number @成功添加数量
-function WorldContainer:AddStorageItem(x, y, z, itemid, num)
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
+--- @return number|boolean|nil @成功添加数量
+function WorldContainer:AddStorageItem(x, y, z, itemId, num, worldId)
     return 0
 end
 
@@ -2353,10 +2359,11 @@ end
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
---- @param itemid number|string @道具类型ID
+--- @param itemId number|string @道具类型ID
 --- @param num number @道具数量
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:RemoveStorageItemByID(x, y, z, itemid, num)
+function WorldContainer:RemoveStorageItemByID(x, y, z, itemId, num, worldId)
     return true
 end
 
@@ -2366,8 +2373,9 @@ end
 --- @param z number @方块坐标z
 --- @param offset number @储物箱格子索引(从1开始)
 --- @param num number @道具数量
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:RemoveStorageItemByIndex(x, y, z, offset, num)
+function WorldContainer:RemoveStorageItemByIndex(x, y, z, offset, num, worldId)
     return true
 end
 
@@ -2377,8 +2385,9 @@ end
 --- @param z number @方块坐标z
 --- @param itemid number|string @道具类型ID
 --- @param num number @道具数量
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number @成功添加数量
-function WorldContainer:AddItemToContainer(x, y, z, itemid, num)
+function WorldContainer:AddItemToContainer(x, y, z, itemid, num, worldId)
     return 0
 end
 
@@ -2388,8 +2397,9 @@ end
 --- @param z number @方块坐标z
 --- @param itemid number|string @道具类型ID
 --- @param num number @道具数量
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:RemoveContainerItemByID(x, y, z, itemid, num)
+function WorldContainer:RemoveContainerItemByID(x, y, z, itemid, num, worldId)
     return true
 end
 
@@ -2397,8 +2407,9 @@ end
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:ClearContainer(x, y, z)
+function WorldContainer:ClearContainer(x, y, z, worldId)
     return true
 end
 
@@ -2406,9 +2417,10 @@ end
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
---- @param itemids table @道具数组(成员需含有itemId itemNum)
+--- @param itemIds table @道具数组({itemId itemNum}...)
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number @成功添加数量
-function WorldContainer:AddWorldStorageItems(x, y, z, itemids)
+function WorldContainer:AddWorldStorageItems(x, y, z, itemIds, worldId)
     return 0
 end
 
@@ -2417,8 +2429,9 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @param offset number @仓库格子索引(从1开始)
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return string @道具实例ID
-function WorldContainer:GetStorageItemInstanceId(x, y, z, offset)
+function WorldContainer:GetStorageItemInstanceId(x, y, z, offset, worldId)
     return ""
 end
 
@@ -2426,8 +2439,9 @@ end
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return table @道具实例ID数组
-function WorldContainer:GetAllStorageItemInstanceIds(x, y, z)
+function WorldContainer:GetAllStorageItemInstanceIds(x, y, z, worldId)
     return {}
 end
 
@@ -2438,8 +2452,9 @@ end
 --- @param grid number @Container格子索引(从1开始)
 --- @param uin number @玩家uin
 --- @param grid2 number @玩家格子索引
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:SwapContainerItem(x, y, z, grid, uin, grid2)
+function WorldContainer:SwapContainerItem(x, y, z, grid, uin, grid2, worldId)
     return true
 end
 
@@ -2449,8 +2464,9 @@ end
 --- @param z number @方块坐标z
 --- @param offset number @格子索引
 --- @param attrType number @属性类型
+--- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number @属性值
-function WorldContainer:GetGridAttr(x, y, z, offset, attrType)
+function WorldContainer:GetGridAttr(x, y, z, offset, attrType, worldId)
     return 0
 end
 --- @class World
@@ -2471,8 +2487,8 @@ end
 --- 设置指定位置的特效偏移旋转缩放
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
 --- @param particleIdArg number|table @特效ID或ID数组
---- @param offset table @偏移量(缺省参数)
---- @param rot table @旋转角度(缺省参数)
+--- @param offset? table @偏移量(缺省参数)
+--- @param rot? table @旋转角度(缺省参数)
 --- @param scale table @缩放比例
 --- @return boolean @操作是否成功
 function World:SetParticleTransform(pos, particleIdArg, offset, rot, scale)
@@ -2483,7 +2499,7 @@ end
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
 --- @param particleIdArg number|table @特效ID或ID数组
 --- @param ptimeArg number @播放时长(秒)
---- @param scale table @缩放比例(缺省参数)
+--- @param scale? table @缩放比例(缺省参数)
 --- @return boolean @操作是否成功
 function World:PlayParticle(pos, particleIdArg, ptimeArg, scale)
     return true
@@ -2493,7 +2509,7 @@ end
 --- @param x number @位置坐标x
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
---- @param worldId? number @星球ID(可选)
+--- @param worldId? number @星球ID
 --- @return number @光照强度(0~16)，失败为-1
 function World:GetLightByPos(x, y, z, worldId)
     return 0
@@ -2504,8 +2520,8 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @param actorid number|string @生物类型ID
---- @param num number @生成数量(默认1)
---- @param trigger boolean @是否触发事件(默认true)
+--- @param num? number @生成数量(默认1)
+--- @param trigger? boolean @是否触发事件(默认true)
 --- @return table @生成的生物对象ID数组
 function World:SpawnCreature(x, y, z, actorid, num, trigger)
     return {}
@@ -2543,7 +2559,7 @@ end
 --- @param centerY number @中心位置y
 --- @param centerZ number @中心位置z
 --- @param radius number @搜索半径
---- @param includeCenterPos boolean @是否包含中心位置(默认true)
+--- @param includeCenterPos? boolean @是否包含中心位置(默认true)
 --- @return table @位置坐标表数组
 function World:FindCanSpawnMobPosList(centerX, centerY, centerZ, radius, includeCenterPos)
     return {}
@@ -2553,7 +2569,7 @@ end
 --- @param x number @位置坐标x
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
---- @param worldId number @世界ID(默认米拉星)
+--- @param worldId? number @世界ID
 --- @return number @最近的玩家ID
 function World:FindNearestPlayerByPos(x, y, z, worldId)
     return 0
@@ -3044,7 +3060,7 @@ end
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
 --- @param value number @光照强度(0~15)
---- @param worldId? number @星球ID(可选)
+--- @param worldId? number @星球ID
 --- @return boolean @是否设置成功
 function World:SetLightByPos(x, y, z, value, worldId)
     return true
