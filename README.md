@@ -50,9 +50,9 @@ sequenceDiagram
     U->>V: 打开 .vscode/settings.json
 
     alt 使用单文件声明
-        U->>V: 添加 "./MNDeclaration.d.lua" 到 lua.workspace.library
+        U->>V: 添加 "./MNDeclaration.d.lua" 到 .vscode/settings.json
     else 使用多文件声明
-        U->>V: 添加 "./multiple" 到 lua.workspace.library
+        U->>V: 添加 "./multiple" 到 .vscode/settings.json
     end
 
     U->>V: 保存 settings.json
