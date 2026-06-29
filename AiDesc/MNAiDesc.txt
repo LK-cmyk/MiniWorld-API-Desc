@@ -1,0 +1,5874 @@
+--- json
+local json = {
+  --- 解码Json字符串
+  --- table 解码后的Table数据
+  --- data string Json字符串
+  decode = function(data)
+    return {}
+  end,
+
+  --- 编码Table数据
+  --- string 编码后的Json字符串
+  --- data table Table数据
+  encode = function(data)
+    return ""
+  end
+}
+_G.json = json
+
+--- threadpool
+local threadpool = {
+  --- 等待时间
+  --- nil
+  --- time number 等待时间（秒）
+  wait = function(self, time)
+    return nil
+  end
+}
+_G.threadpool = threadpool
+
+--- 获取当前世界对象
+--- table 世界对象
+local GetWorld = function()
+  return {}
+end
+_G.GetWorld = GetWorld
+
+--- 打印信息
+--- message any 要打印的信息
+local print = function(message)
+  return nil
+end
+_G.print = print
+
+--- 打印错误信息
+--- message any 要打印的错误信息
+local printError = function(message)
+  return nil
+end
+_G.printError = printError
+
+--- 定义类对象
+--- className string 类名
+--- super table|string 父类原表|父类名
+local Class = function(className, super, isSingle)
+  return {}
+end
+_G.Class = Class
+
+--- 创建类实例
+--- className string 类名
+--- table 对象实例
+local Instance = function(className)
+  return {}
+end
+_G.Instance = Instance
+
+--- 获取类单例
+--- className string 类名
+--- table 类单例
+local GetInst = function(className)
+  return {}
+end
+_G.GetInst = GetInst
+
+os = os
+
+--- 获取当前时间（ms）
+--- number 当前时间（ms）
+function os.timeMs()
+  return 0
+end
+--- Mini 组件属性
+--- Number number 数值
+--- String number 字符串
+--- Bool number 布尔值
+--- Color number 颜色
+--- Vec3 number 位置
+--- MobType number 生物类型
+--- Block number 方块类型
+--- Item number 物品类型
+--- Effect number 特效类型
+--- Picture number 图片
+--- Buff number 状态
+--- Sound number 音效
+--- Model number 外观
+local Mini = {}
+_G.Mini = Mini
+
+--- WorldType 游戏模式
+--- Single number 单人模式
+--- Create number 多人创造模式
+--- Extremity number 极限模式
+--- CreateToRungame number 由创造模式转的生存
+--- Gamemaker number 自制玩法的编辑模式
+--- GamemakerRun number 自制玩法的运行模式
+--- Freemode number 冒险模式之自由模式
+--- Record number 录像模式
+local WorldType = {}
+_G.WorldType = WorldType
+
+--- MobType 生物类型
+--- Hostile number 怪物
+--- Passive number 动物
+--- Rare number 稀有生物
+--- Water number 水生物
+--- Fly number 飞行生物
+--- Trixenie number 三栖生物
+local MobType = {}
+_G.MobType = MobType
+
+--- TerrainType 游戏地形
+--- Flat number 平坦地形
+--- Normal number 随机地形
+local TerrainType = {}
+_G.TerrainType = TerrainType
+
+--- CameraEditState 自定义视角编辑状态
+--- Null number 空
+--- Edit number 编辑
+--- Test number 测试
+local CameraEditState = {}
+_G.CameraEditState = CameraEditState
+
+--- EquipSlotType 装备部位类型
+--- Head number 头部
+--- Breast number 身体
+--- Legging number 腿部
+--- Shoe number 脚部
+--- Pifeng number 披风
+--- Weapon number 武器
+--- Custom1 number 自定义1
+--- Custom2 number 自定义2
+--- Custom3 number 自定义3
+--- MaxSlots number 最大装备栏 **(用于判断有效性)**
+local EquipSlotType = {}
+_G.EquipSlotType = EquipSlotType
+
+--- TeamResults 游戏战斗结果
+--- None number 胜负未定
+--- Win number 胜利
+--- Lose number 失败
+--- Dogfall number 平局
+local TeamResults = {}
+_G.TeamResults = TeamResults
+
+--- BackpackType 背包类型
+--- Shortcut number 快捷栏
+--- Inventory number 存储栏
+--- Equip number 装备栏
+--- Extend number 扩展背包
+local BackpackType = {}
+_G.BackpackType = BackpackType
+
+--- BackpackBeginIndex 背包起始索引
+--- Shortcut number 快捷栏起始索引
+--- Inventory number 存储栏起始索引
+--- Equip number 装备栏起始索引
+--- ExtBackpack number 扩展背包起始索引
+local BackpackBeginIndex = {}
+_G.BackpackBeginIndex = BackpackBeginIndex
+
+--- FaceDir 朝向
+--- NegX number X反方向 - 西
+--- PosX number X正方向 - 东
+--- NegZ number Z反方向 - 南
+--- PosZ number Z正方向 - 北
+--- NegY number Y反方向 - 下
+--- PosY number Y正方向 - 上
+--- None number 未指定
+local FaceDir = {}
+_G.FaceDir = FaceDir
+
+--- FaceType 朝向类型
+--- Yaw number 面朝方向
+--- Pitch number 面仰角
+local FaceType = {}
+_G.FaceType = FaceType
+
+--- CreatureAttr 生物属性枚举
+--- MaxHp number 最大生命值
+--- CurHp number 当前生命值
+--- HpRecover number 生命恢复
+--- MaxHunger number 最大饥饿值
+--- CurHunger number 当前饥饿值
+--- CurOxygen number 当前氧气值
+--- WalkSpeed number 移动速度
+--- SwinSpeed number 游泳速度
+--- JumpPower number 跳跃力
+--- Dodge number 闪避率
+--- AtkMelee number 近战攻击
+--- AtkRemote number 远程攻击
+--- DefMelee number 近战防御
+--- DefRemote number 远程防御
+--- Dimension number 模型大小
+--- Level number 等级
+--- DefChaos number 混乱防御
+--- PackSize number 背包空间
+--- ViewDistance number 视野距离
+--- BodyLerpSpeed number 转身速度
+--- AtkPhysical number 物理攻击
+--- AtkMagic number 元素攻击
+--- DefPhysical number 物理防御
+--- DefMagic number 元素防御
+--- ExtraHp number 临时生命值
+--- Toughness number 韧性值
+--- FlySpeed number 飞行速度
+--- ViewDis number 视野范围
+--- AttackDis number 攻击距离
+--- Atk number 攻击力
+--- EnableMove number 可移动
+--- EnableAttack number 可攻击
+--- EnableBeattacked number 可被攻击
+--- EnableBekilled number 可被杀死
+--- EnablePickup number 可拾取道具
+--- EnableDeathdropitem number 死亡掉落
+local CreatureAttr = {}
+_G.CreatureAttr = CreatureAttr
+
+--- RoleAttr 生物/玩家属性枚举
+--- MaxHp number 最大生命值
+--- CurHp number 当前生命值
+--- HpRecover number 生命恢复
+--- MaxHunger number 饥饿度
+--- CurHunger number 饥饿度
+--- MaxOxygen number 最大氧气值
+--- CurOxygen number 当前氧气值
+--- WalkSpeed number 移动速度
+--- RunSpeed number 奔跑速度
+--- SwinSpeed number 游泳速度
+--- JumpPower number 跳跃力
+--- Gravity number 重力值
+--- PunchArmor number 近战防御
+--- RangeArmor number 远程防御
+--- LevelExp number 星星经验
+--- StarNum number 星星数量
+--- CurStrength number 当前体力值
+--- MaxStrength number 当前最大体力值
+--- FlySpeed number 飞行速度
+--- AttackDis number 攻击距离
+--- ViewDis number 视野距离
+--- Atk number 攻击力
+local RoleAttr = {}
+_G.RoleAttr = RoleAttr
+
+--- ItemAbility 道具设置枚举
+--- Throw number 道具不可丢弃
+--- Drop number 道具不可掉落
+local ItemAbility = {}
+_G.ItemAbility = ItemAbility
+
+--- CreatureMotion 生物行为枚举
+--- Idle number 空闲
+--- Standby number 待机
+--- Stroll number 闲逛
+--- AtkMelee number 近战攻击
+--- AtkRemote number 远程攻击
+--- Follow number 跟随
+--- Swim number 游泳
+--- RunAway number 逃跑
+--- SelfBomb number 自爆
+--- Beattracted number 被吸引
+--- Copulation number 交配
+local CreatureMotion = {}
+_G.CreatureMotion = CreatureMotion
+
+--- PlayerMotion 玩家行为枚举
+--- Static number 静止
+--- Walk number 行走
+--- Run number 奔跑
+--- Jump number 跳跃
+--- JumpTwice number 二段跳
+--- Sneak number 潜行
+--- FallGround number 落地
+--- Swim number 游泳
+local PlayerMotion = {}
+_G.PlayerMotion = PlayerMotion
+
+--- RoleMotion 角色行为枚举
+--- Stand number 站立
+--- Walk number 行走
+--- Run number 奔跑
+--- Jump number 跳跃
+--- Sneak number 潜行
+--- FallGround number 落地
+--- Swim number 游泳
+local RoleMotion = {}
+_G.RoleMotion = RoleMotion
+
+--- HurtType 伤害类型枚举
+--- All number 所有伤害（只设置免疫伤害接口有效）
+--- Melee number 近战伤害 attack_punch
+--- Remote number 远程伤害 attack_range
+--- Bomb number 爆炸伤害 attack_explode
+--- Burning number 燃烧伤害 attack_fire
+--- Toxin number 毒素伤害 attack_poison
+--- Wither number 凋零伤害 attack_wither
+--- Flash number 电元素伤害 attack_flash
+--- Sun number 日晒 attack_sun
+--- Fall number 跌落伤害 attack_falling
+--- Anvil number 被砸中伤害 attack_anvil
+--- Cactus number 仙人掌伤害 attack_cactus
+--- Asphyxia number 窒息伤害 attack_wall
+--- Drown number 溺水伤害 attack_drown
+--- Suffocate number 水下生物在空气中窒息伤害 attack_suffocate
+--- Antiinjury number 反伤 attack_antiinjury
+--- Laser number 被激光伤害 attack_block_laser
+--- Ice number 冰元素伤害 attack_ice
+--- Fixed number 固定伤害 attack_fixed
+local HurtType = {}
+_G.HurtType = HurtType
+
+--- TeamAttr 队伍属性枚举
+--- PlayerNum number 玩家数量
+--- Score number 分数
+local TeamAttr = {}
+_G.TeamAttr = TeamAttr
+
+--- BlockAttr 方块属性枚举
+--- ExplodeResistance number 爆炸抗性
+--- Hardness number 硬度
+--- Glissade number 滑行惯性
+--- BurningSpeed number 燃烧速度
+--- BurningProbability number 燃烧几率
+--- Lightness number 亮度
+local BlockAttr = {}
+_G.BlockAttr = BlockAttr
+
+--- BlockLimits 方块权限
+--- EnableDestroyed number 可破坏
+--- EnableBeoperated number 可操作
+--- EnableBepushed number 可被推动
+--- EnableDropItem number 可掉落道具
+--- BepushedDropItem number 被推动掉落
+local BlockLimits = {}
+_G.BlockLimits = BlockLimits
+
+--- BlockStatus 方块状态
+--- Active number 活跃 **(被激活)**
+--- Inactive number 不活跃 **(未被激活)**
+local BlockStatus = {}
+_G.BlockStatus = BlockStatus
+
+--- GroupWeatherType 天气状态枚举,局部天气
+--- ShineAndRain number 晴雨交替
+--- Shine number 晴天
+--- Rain number 雨天
+--- Thunder number 雷暴
+--- Bad number 恶劣天气
+--- Snow number 雪天
+--- Sandduststorm number 沙尘暴
+--- Tempest number 暴风雨
+--- Blizzard number 暴风雪
+local GroupWeatherType = {}
+_G.GroupWeatherType = GroupWeatherType
+
+--- WeatherGroup 地形组枚举值
+--- Global number 全局对象
+--- Common number 常见组
+--- Ocean number 海洋组
+--- Desert number 沙漠组
+--- Frigidzone number 普通寒带组
+--- Coldzone number 高峰寒带组
+--- Volcano number 火山组
+--- Nunja number 湿地组
+--- Plain number 平坦组
+--- AirIsland number 空岛组
+local WeatherGroup = {}
+_G.WeatherGroup = WeatherGroup
+
+--- ViewPortType 视口方向
+--- Main number 主视角
+--- Back number 背视角
+--- Front number 正视角
+--- Back2 number 背视角2
+--- Top number 俯视角
+--- Custom number 自定义视角
+local ViewPortType = {}
+_G.ViewPortType = ViewPortType
+
+--- VarType 变量类型
+--- Pos number 位置
+--- Areains number 区域
+--- Number number 数值
+--- String number 字符串
+--- Boolean number 布尔值
+--- Player number 玩家
+--- PlayerGroup number 玩家组
+--- BlockType number 方块类型
+--- ItemType number 道具类型
+--- Creature number 生物
+--- CreatureType number 生物类型
+--- CreatureGroup number 生物组
+--- Timer number 定时器
+--- EffectType number 特效类型
+--- PosGroup number 位置组
+--- AreaGroup number 区域组
+--- NumberGroup number 数值组
+--- StringGroup number 字符串组
+--- BooleanGroup number 布尔值组
+--- BlockTypeGroup number 方块类型组
+--- ItemTypeGroup number 道具类型组
+--- CreatureTypeGroup number 生物类型组
+--- TimerGroup number 计时器组
+--- EffectTypeGroup number 特效类型组
+--- SortedData number 有序列表
+--- ListData number 无需列表
+--- Map number kv map表
+--- Table number 二维表
+--- Blueprint number 蓝图
+--- Object number 对象
+--- ObjectGroup number 对象组
+--- Projectile number 投射物
+--- ProjectileGroup number 投射物组
+--- DropItem number 掉落物
+--- DropItemGroup number 掉落物组
+--- Element number 元件
+--- ElementGroup number 元件组
+--- Texture number 纹理
+--- TextureGroup number 纹理组
+--- Role number 角色
+--- RoleGroup number 角色组
+--- BuffType number buff类型
+--- BuffTypeGroup number buff类型组
+--- Sound number 声音
+--- SoundGroup number 声音组
+--- Model number 模型
+--- ModelGroup number 模型组
+--- Entity number 实体
+--- EntityGroup number 实体组
+--- EntityType number 实体类型
+--- EntityTypeGroup number 实体类型组
+local VarType = {}
+_G.VarType = VarType
+
+--- WorkeStage 强制打开工作台枚举
+--- Craft number 工具箱
+--- Repair number 修理台
+--- Enchant number 附魔台
+local WorkeStage = {}
+_G.WorkeStage = WorkeStage
+
+--- GraphicsType 图文信息枚举
+--- Hornbook number 文字板
+--- Suspendbook number 漂浮文字
+--- Progress number 进度条
+--- ArrowPos number 箭头-指向位置
+--- ArrowActor number 箭头-指向生物
+--- LinePos number 线-指向位置
+--- LineActor number 线-指向生物
+--- SurfacePos number 面-指向界面
+--- SurfaceActor number 面-指向生物
+--- Image number 图片
+--- Brush number 笔刷
+--- NavPathPos number 寻路引导线-指向位置
+local GraphicsType = {}
+_G.GraphicsType = GraphicsType
+
+--- SortType 排序方式
+--- Up number 升序,
+--- Down number 降序,
+local SortType = {}
+_G.SortType = SortType
+
+--- MoveType 移动方式
+--- Walking number 行走,
+--- Flying number 飞行,
+--- Swimming number 游泳,
+--- Auto number 自动调整
+local MoveType = {}
+_G.MoveType = MoveType
+
+--- ViedoPlayMode 显示板视频播放模式
+--- Repeat number 循环播放
+--- Once number 单次播放
+local ViedoPlayMode = {}
+_G.ViedoPlayMode = ViedoPlayMode
+
+--- EventDate 时间值枚举
+--- Year number 年
+--- Month number 月
+--- Day number 日
+--- Hour number 时
+--- Minute number 分
+--- Second number 秒
+--- Timestamp number 时间戳
+--- Dayofweek number 星期几
+local EventDate = {}
+_G.EventDate = EventDate
+
+--- ItemAttr 道具属性
+--- Attack number 攻击力
+--- Stackmax number 叠加数
+--- ShortDefense number 近战防御
+--- LongDefense number 远程防御
+--- ExplodeDefense number 爆炸防御
+--- FireDefense number 燃烧防御
+--- PoisonDefense number 毒素防御
+--- WitherDefense number 混乱防御
+--- Duration number 耐久度
+--- FireInterval number 射击间隔
+--- Magazines number 弹夹量
+--- Quality number 品质
+--- ItemType number 道具类型
+local ItemAttr = {}
+_G.ItemAttr = ItemAttr
+
+--- DropMode 掉落物掉落方式
+--- DiscardItem number 丢弃道具
+--- DestroyBox number 箱子被破坏掉落
+--- DefeatMob number 生物被击败掉落
+--- DestroyBlock number 方块被破坏掉落
+--- SpawnItem number 触发器创建
+--- ChangePlayMode number 掉落物对象转玩法创建
+local DropMode = {}
+_G.DropMode = DropMode
+
+--- AnimMode 动作播放方式
+--- Loop number 循环播放
+--- Once number 播放一次
+--- OnceStop number 播放一次完毕,停在末尾
+--- Default number 表格默认值播放
+local AnimMode = {}
+_G.AnimMode = AnimMode
+
+--- Easing 线性变换
+--- None number 无动画
+--- Linear number 直线变换
+--- QuadIn number 平方曲线1渐入
+--- QuadOut number 平方曲线2渐出
+--- QuadInOut number 平方曲线3进出
+--- ExpoIn number 指数曲线1渐入
+--- ExpoOut number 指数曲线2渐出
+--- ExpoInOut number 指数曲线3进出
+--- CircIn number 圆曲线1渐入
+--- CircOut number 圆曲线2渐出
+--- CircInOut number 圆曲线3进出
+--- ElasticIn number 弹簧曲线1渐入
+--- ElasticOut number 弹簧曲线2渐出
+--- ElasticInOut number 弹簧曲线3进出
+--- BackIn number 回退曲线1渐入
+--- BackOut number 回退曲线2渐出
+--- BackInOut number 回退曲线3进出
+--- BounceIn number 弹跳曲线1渐入
+--- BounceOut number 弹跳曲线1渐出
+--- BounceInOut number 弹跳曲线1进出
+local Easing = {}
+_G.Easing = Easing
+
+--- SkyboxMap 天空盒贴图
+--- Sky number 天空贴图
+--- Sun number 太阳贴图
+--- Moon number 月亮贴图
+local SkyboxMap = {}
+_G.SkyboxMap = SkyboxMap
+
+--- SkyboxColor 天空盒颜色
+--- Top number 天空顶部颜色
+--- Middle number 天空腰部颜色
+--- Bottom number 天空底部颜色
+--- Light number 天空光照颜色
+--- Env number 环境光颜色
+--- Sun number 太阳颜色
+--- Moon number 月亮颜色
+--- Cloud number 云颜色
+--- Fog number 雾颜色
+--- AmbientLight number 太阳光颜色
+--- DirectionalLight number 环境光颜色
+--- Water number 水颜色
+local SkyboxColor = {}
+_G.SkyboxColor = SkyboxColor
+
+--- SkyboxAttr 天空盒参数
+--- SunScale number 太阳大小
+--- MoonScale number 月亮大小
+--- StarDensity number 星星密度
+--- CloudSpeed number 云的运动速度
+--- CloudDensity number 云的密度
+--- CloudHigh number 云的高度
+--- FogreMinDis number 雾的最近距离
+--- FogreMaxDis number 雾的最远距离
+--- Template number 模板
+--- WaterTransparency number 水透明度
+--- WaterMirrorness number 风速
+--- DirectionalLightIntensity number 太阳光强度
+--- AmbientLightIntensity number 环境光强度
+--- WindStrength number 风速
+local SkyboxAttr = {}
+_G.SkyboxAttr = SkyboxAttr
+
+--- SkyboxAttrNoTime 天空盒参数
+--- Metallic number 整体金属度
+--- Roughness number 整体粗糙度
+local SkyboxAttrNoTime = {}
+_G.SkyboxAttrNoTime = SkyboxAttrNoTime
+
+--- SkyboxParticle 天空盒环境粒子参数
+--- Strength number 强度
+--- Range number 范围
+--- Speed number 速度
+--- Randomness number 运动不规则度
+local SkyboxParticle = {}
+_G.SkyboxParticle = SkyboxParticle
+
+--- SkyboxFilter 天空盒滤镜参数
+--- Contrast number 对比度
+--- Saturation number 饱和度
+--- Flood number 泛光强度
+--- Exposure number 曝光强度
+--- Volumelight number 体积光强度
+--- Gamma number 伽马强度
+--- Dof number 景深强度-暂时没用到
+--- Color number 滤镜颜色
+--- Lut number 色彩校正
+--- Template number 滤镜模板
+--- Bloomthreshold number Bloom阀值
+local SkyboxFilter = {}
+_G.SkyboxFilter = SkyboxFilter
+
+--- SkyboxSwitch 天空盒开关
+--- Fogenable number 雾开关
+local SkyboxSwitch = {}
+_G.SkyboxSwitch = SkyboxSwitch
+
+--- CameraModel 摄像机属性
+--- MoveFollow number 跟随角色移动
+--- RotateFollow number 跟随角色旋转
+--- Autoindent number 阻挡后自动缩进
+--- RelativeRotate number 相对人物旋转
+--- RoleTranslucent number 角色半透
+local CameraModel = {}
+_G.CameraModel = CameraModel
+
+--- CameraRotate 摄像机旋转模式
+--- AllDir number 全方向
+--- OnlyYaw number 仅左右
+--- OnlyPitch number 仅上下
+--- NoTurn number 无法转动
+local CameraRotate = {}
+_G.CameraRotate = CameraRotate
+
+--- AbsoluteCampType 绝对阵营
+--- Noteam number 无队伍
+--- Team1 number 队伍1
+--- Team2 number 队伍2
+--- Team3 number 队伍3
+--- Team4 number 队伍4
+--- Team5 number 队伍5
+--- Team6 number 队伍6
+--- TeamNpc1 number 绝对阵营-npc队伍1
+--- TeamNpc2 number 绝对阵营-npc队伍2
+--- TeamNpc3 number 绝对阵营-npc队伍3
+--- Enemy number 中立敌对
+--- Passive number 中立被动
+local AbsoluteCampType = {}
+_G.AbsoluteCampType = AbsoluteCampType
+
+--- RelativeCampType 相对阵营
+--- Friendly number 友方
+--- Enemy number 敌方
+--- Neutral number 中立
+--- Any number 任意
+local RelativeCampType = {}
+_G.RelativeCampType = RelativeCampType
+
+--- InnerPopUpview 游戏内弹窗界面类型
+--- CollectMaps number 收藏地图界面
+--- EvaluateMaps number 评价地图界面
+--- InviteFriend number 邀请好友界面
+--- StorageBox number 储物箱界面
+--- ItemTips number 道具提示界面
+--- BuffStatus number 状态界面
+--- Specialty number 特长界面
+--- ItemProcessing number 道具加工界面
+--- BackPackTask number 背包任务界面
+--- BackPackEra number 背包科技界面
+--- BackPackRole number 背包角色界面
+--- AnimView number 动作列表界面
+--- MiniMap number 小地图
+--- MiniShop number 官方商城界面
+local InnerPopUpview = {}
+_G.InnerPopUpview = InnerPopUpview
+
+--- MiniCurrency 货币类型
+--- MiniBean number 迷你豆
+--- MiniCoin number 迷你币
+--- MiniPoint number 迷你点
+local MiniCurrency = {}
+_G.MiniCurrency = MiniCurrency
+
+--- MiniShopPage 开发者商店页面类型
+--- Item number 道具购买
+--- Skin number 皮肤
+--- Convert number 兑换
+--- Welfare number 福利
+--- MiniVip number 大会员
+--- WareHouse number 打开仓库
+--- CustomCoin number 打开自定义货币界面
+local MiniShopPage = {}
+_G.MiniShopPage = MiniShopPage
+
+--- PixelUnits 像素单位
+--- Percentage number 百分比
+--- Value number 绝对值
+local PixelUnits = {}
+_G.PixelUnits = PixelUnits
+
+--- HorizontalOffset 水平偏移
+--- Left number 居左
+--- Centered number 居中
+--- Right number 居右
+local HorizontalOffset = {}
+_G.HorizontalOffset = HorizontalOffset
+
+--- VerticalOffset 垂直偏移
+--- Top number 居上
+--- Centered number 居中
+--- Bottom number 居下
+local VerticalOffset = {}
+_G.VerticalOffset = VerticalOffset
+
+--- ElementType 元件类型
+--- Texture number 图片
+--- Button number 按钮
+--- Text number 文本
+--- InputText number 输入框
+--- Loader3D number 3d装载器
+--- SlidingContainer number 滑动容器
+local ElementType = {}
+_G.ElementType = ElementType
+
+--- CustomModType 插件类型
+--- Block number 方块插件 预制
+--- Monster number 生物插件
+--- Item number 道具插件
+--- Recipe number 配方插件
+--- Furnace number 熔炼插件
+--- Status number 状态插件
+--- Biome number 地形插件
+--- Actor number 实体
+--- UI number UI
+--- Rule number 世界规则
+local CustomModType = {}
+_G.CustomModType = CustomModType
+
+--- WeatherType 天气类型
+--- None number 无天气
+--- Sunshine number 晴天
+--- Rain number 雨天
+--- Sandstorm number 沙尘暴
+--- Snow number 雪天
+--- UnderWater number 暴雨
+--- Volcano number 火山
+--- Custom number 自定义
+local WeatherType = {}
+_G.WeatherType = WeatherType
+
+--- KeyCode 按键枚举
+--- A number 按键A
+--- D number 按键D
+--- W number 按键W
+--- K number 按键K
+--- I number 按键I
+--- J number 按键J
+--- L number 按键L
+--- N number 按键N
+--- Q number 按键Q
+--- E number 按键E
+--- U number 按键U
+--- V number 按键V
+--- F number 按键F
+--- Z number 按键Z
+--- Y number 按键Y
+--- X number 按键X
+--- G number 按键G
+--- T number 按键T
+--- B number 按键B
+--- R number 按键R
+--- P number 按键P
+--- O number 按键O
+--- C number 按键C
+--- S number 按键S
+--- M number 按键M
+--- H number 按键H
+--- Space number 按键空格
+--- Shift number 按键Shift
+--- Number0 number 按键0
+--- Number1 number 按键1
+--- Number2 number 按键2
+--- Number3 number 按键3
+--- Number4 number 按键4
+--- Number5 number 按键5
+--- Number6 number 按键6
+--- Number7 number 按键7
+--- Number8 number 按键8
+--- Number9 number 按键9
+local KeyCode = {}
+_G.KeyCode = KeyCode
+
+--- ProgressImg 进度图案
+--- Background number 进度背景
+--- Progress number 进度值
+local ProgressImg = {}
+_G.ProgressImg = ProgressImg
+
+--- RayDetectType 射线检测返回类型
+--- Block number 方块类型
+--- Player number 玩家
+--- Actor number 生物
+--- ActorType number 生物类型
+--- LiquidBlock number 液体方块类型
+local RayDetectType = {}
+_G.RayDetectType = RayDetectType
+
+--- PlayerBodyUIHight 获取玩家内部控件高度
+--- Nick number 昵称
+--- Title number 称号
+--- EffEct number 头部动效
+--- HpBar number 血条
+local PlayerBodyUIHight = {}
+_G.PlayerBodyUIHight = PlayerBodyUIHight
+
+--- UIScollDir UI滑动方向
+--- Horizontal number 水平滑动
+--- Vertical number 垂直滑动
+--- Both number 自由滑动
+local UIScollDir = {}
+_G.UIScollDir = UIScollDir
+
+--- TurnFaceDir 角度朝向
+--- Yaw number 水平朝向
+--- Pitch number 垂直朝向
+local TurnFaceDir = {}
+_G.TurnFaceDir = TurnFaceDir
+
+--- ProgressVal 进度值类型
+--- Min number 最小值
+--- Max number 最大值
+--- Current number 当前值
+--- CurAndMax number 当前值和最大值
+local ProgressVal = {}
+_G.ProgressVal = ProgressVal
+
+--- SkyboxTime 天空盒时间
+--- Current number 当前时间
+--- Time0 number 天空盒0点
+--- Time4 number 天空盒4点
+--- Time6 number 天空盒6点
+--- Time8 number 天空盒8点
+--- Time12 number 天空盒12点
+--- Time16 number 天空盒16点
+--- Time18 number 天空盒18点
+--- Time20 number 天空盒20点
+--- TimeAll number 所有时间段
+local SkyboxTime = {}
+_G.SkyboxTime = SkyboxTime
+
+--- GunState 枪械状态
+--- Entry number 进入
+--- Exit number 离开
+local GunState = {}
+_G.GunState = GunState
+
+--- GunAction 枪械触发事件类型
+--- Equip number 举枪
+--- Idle number 腰射待机
+--- Fire number 腰射开火
+--- Load number 腰射手动上膛
+--- Run number 持枪冲刺
+--- Aim number 瞄准待机
+--- AimFire number 瞄准开火
+--- AimLoad number 瞄准手动上膛
+--- Reload number 腰射换弹
+--- ReloadEmpty number 腰射空仓换弹
+--- Inspect number 检视
+local GunAction = {}
+_G.GunAction = GunAction
+
+--- GunActionBan 枪械禁用类型
+--- Equip number 举枪
+--- Fire number 腰射开火
+--- Load number 腰射手动上膛
+--- Run number 持枪冲刺
+--- Aim number 瞄准待机
+--- AimFire number 瞄准开火
+--- AimLoad number 瞄准手动上膛
+--- Reload number 腰射换弹
+--- ReloadEmpty number 腰射空仓换弹
+--- Inspect number 检视
+local GunActionBan = {}
+_G.GunActionBan = GunActionBan
+
+--- Ability 动作总开关
+--- Movement number 移动能力总开关
+--- Walking number 行走
+--- Flying number 飞行
+--- Swimming number 游泳
+--- Sneaking number 潜行
+--- Sprinting number 疾跑
+--- Jumping number 跳跃
+--- Cube number 方块能力总开关
+--- Interaction number 交互方块
+--- Place number 摆放方块
+--- Break number 破坏方块
+--- Item number 道具能力总开关
+--- Use number 使用道具
+--- Pick number 拾取道具
+--- Drop number 丢弃道具
+--- Attack number 普通攻击
+--- CanBePickup number 可被举起
+--- CanUseItemWhenBePickup number 被举起时可否使用道具
+--- EnableBeattacked number 可受伤
+--- EnableBekilled number 可被杀死
+--- EnableDeathdropitem number 杀死有掉落物
+--- EnableSwitchShortcut number 可切换快捷栏
+--- EnableRotatingCamera number 可旋转摄像机
+--- EnableInputRotate number 玩家输入旋转(玩家生效)
+local Ability = {}
+_G.Ability = Ability
+
+--- LogLevel 输出日志等级
+--- Print number 普通输出
+--- Warn number 警告输出
+--- Error number 错误输出
+local LogLevel = {}
+_G.LogLevel = LogLevel
+
+--- ErrorCode 错误码
+--- OK number 成功
+--- FAILED number 失败
+--- KV_UPDATE_GET number 表安全更新拉取的返回码
+--- KV_UPDATE_SET number 表安全更新设置的返回码
+--- KV_OP_CD_LMT number 表设置CD超限
+--- KV_OP_QPM_LMT number 表设置QPS/QPM超限
+--- KV_OP_NO_VAL number 获取Key不存在
+--- KV_OP_INVALID_VAL number 获取Key类型不匹配
+local ErrorCode = {}
+_G.ErrorCode = ErrorCode
+
+--- PickupActionType 举起动作类型
+--- Pickup number 拾取
+--- Drop number 放下
+--- Throw number 投掷
+--- Unbind number 解绑
+local PickupActionType = {}
+_G.PickupActionType = PickupActionType
+
+--- AreaFillType 区域填充类型
+--- Delete number 删除
+--- Destroy number 摧毁
+local AreaFillType = {}
+_G.AreaFillType = AreaFillType
+
+--- PlayerNameType 玩家内置UI类型
+--- Nick number 昵称
+--- Title number 称号
+--- EffEct number 头部特效
+local PlayerNameType = {}
+_G.PlayerNameType = PlayerNameType
+
+--- GunFireType 开火类型
+--- Auto number 全自动
+--- SemiAuto number 半自动
+--- Manual number 手动
+local GunFireType = {}
+_G.GunFireType = GunFireType
+
+--- GunDamageType 伤害类型
+--- Physics number 物理伤害
+--- Fire number 燃烧伤害
+--- Poison number 毒素伤害
+--- Ice number 冰冻伤害
+local GunDamageType = {}
+_G.GunDamageType = GunDamageType
+
+--- GunSpreadType 散布形状
+--- RightUp number 右上
+--- Circle number 圆
+--- NoRightDown number 无右下
+local GunSpreadType = {}
+_G.GunSpreadType = GunSpreadType
+
+--- GunAttr 枪械属性
+--- BaseDamage string 基础伤害
+--- RepelDistance string 击退距离
+--- BulletShrapnel string 弹片数量
+--- BulletConsume string 消耗子弹数
+--- Penetration string 穿透率
+--- HeadDamage string 头部倍率
+--- BodyDamage string 躯干倍率
+--- MaxAmmo string 弹容量
+--- Rpm string 射速(每分钟子弹数)
+--- ReloadPhase2Time string 换弹行为时间
+--- ReloadPhase2TimeEmpty string 空仓换弹行为时间
+--- GunLevel string 枪械等级 历史遗留的字段,对于游戏本体只用于显示角标
+--- AdsXFunction string 瞄准镜准星功能
+--- AdsXScale string 瞄准镜准星底图缩放值
+--- ScopeXPic string 瞄准镜准星贴图
+--- AdsOffsetX string 瞄准偏移值
+--- AdsOffsetY string 瞄准偏移值
+--- AdsOffsetZ string 瞄准偏移值
+--- FireType string 开火类型
+--- DamageType string 伤害类型
+--- TouReduce string 削刃值
+--- HittedCameraAngle string 被击中抬头反馈
+--- Range string 射程
+--- DecayStart string 衰减起始距离
+--- DecayFinish string 衰减结束距离
+--- DecayMin string 衰减最小值
+--- DecayLiquid string 液体衰减系数
+--- HipSpreadMin string 腰射散布最小值
+--- HipSpreadStep string 腰射散布步长
+--- HipSpreadMax string 腰射散布最大值
+--- HipSpreadType string 腰射散布类型
+--- AdsSpreadMin string 瞄准散布最小值
+--- AdsSpreadStep string 瞄准散布步长
+--- AdsSpreadMax string 瞄准散布最大值
+--- AdsSpreadType string 瞄准散布类型
+--- MoveSpreadBonus string 移动散布倍率
+--- RunSpreadBonus string 疾跑散布倍率
+--- ShiftSpreadBonus string 潜行散布倍率
+--- ShiftMoveSpreadBonus string 潜行移动散布倍率
+--- JumpSpreadBonus string 跳跃散布倍率
+--- SpreadStepSpeed string 每发增加速度
+--- SpreadResetSpeed string 重置速度
+--- SpreadBonusResetSpeed string 重置速度
+--- EquipTime string 切换枪械行为时间
+--- AdsSwitchTime string 瞄准时间
+--- ScopeMagnification string 瞄准倍率
+--- ControlValue string 操控速度(仅取值)
+--- HipAccValue string 腰射射击精度(仅取值)
+--- RecoilValue string 后坐力控制(仅取值)
+--- BaseDamageBonus string 基础伤害倍率
+--- ReloadTimeBonus string 换弹时间倍率
+--- RecoilBonus string 后坐力倍率
+--- RecoilPitchBonus string 垂直后坐力倍率
+--- RecoilYawBonus string 水平后坐力倍率
+--- SpreadBonus string 散布倍率
+--- SpreadHipBonus string 腰射散布倍率
+--- SpreadAdsBonus string 瞄准散布倍率
+--- HipMoveSpeedBonus string 腰射移动速度倍率
+--- AdsMoveSpeedBonus string 瞄准移动速度倍率
+--- AdsSwitchTimeBonus string 瞄准时间倍率
+--- RpmBonus string 射速倍率
+--- RangeBonus string 射程倍率
+--- BulletId string 子弹ID(仅获取预制属性)
+local GunAttr = {}
+_G.GunAttr = GunAttr
+
+--- BiomeType 怪物刷新地形枚举
+--- Sea number 迷拉星浅海
+--- GrassLand number 迷拉星草原
+--- Desert number 迷拉星沙漠
+--- Forest number 迷拉星森林
+--- Cliff number 迷拉星峭壁
+--- Swamp number 迷拉星沼泽
+--- ConiferousForest number 迷拉星针叶林
+--- Jungle number 迷拉星丛林
+--- IceSheet number 迷拉星冰原
+--- FrozenSea number 迷拉星冻洋
+--- FrozenRiver number 迷拉星冻河
+--- RedSoil number 迷拉星红土
+--- RedSoilShore number 迷拉星红土海岸
+--- DesertHills number 迷拉星沙漠山丘
+--- ForestHills number 迷拉星森林山丘
+--- ConiferousForestHills number 迷拉星针叶林山丘
+--- IceMountains number 迷拉星冰山
+--- JungleHills number 迷拉星丛林山丘
+--- River number 迷拉星河流
+--- Beach number 迷拉星沙滩
+--- CliffEdge number 迷拉星峭壁边缘
+--- Earthcore number 烈焰星熔岩之地
+--- Airland number 迷拉星空岛
+--- Basin number 迷拉星盆地
+--- BasinEdge number 迷拉星盆地边缘
+--- BasinBamboo number 迷拉星竹林盆地
+--- BasinPeach number 迷拉星桃树盆地
+--- EyedStarGround number 萌眼星地表
+--- EyedStarGroundHills number 萌眼星山丘
+--- EyedStarGroundPlain number 萌眼星祭坛平原
+--- EyedStarGroundMountain number 萌眼星高山
+--- EyedStarGroundHills2 number 萌眼星山丘2
+--- EyedStarAirlands number 萌眼星空岛
+--- EyedStarAirlandsSub1 number 萌眼星子空岛1
+--- EyedStarAirlandsSub2 number 萌眼星子空岛2
+--- EyedStarAirlandsSub3 number 萌眼星子空岛3
+--- EyedStarAirlandsSub4 number 萌眼星子空岛4
+--- EyedStarAirlandsEdge number 萌眼星空岛边缘
+--- RainForest number 迷拉星雨林
+--- AirlandGround number 迷拉星空岛地上
+--- AirlandAir number 迷拉星空岛空中
+--- Volcano number 迷拉星火山主峰
+--- VolcanoPlain number 迷拉星火山平原
+--- VolcanoMountain number 迷拉星火山山脉
+--- VolcanoRiver number 迷拉星火山岩浆河
+--- VolcanoCore number 迷拉星火山口
+--- DesertOasis number 迷拉星沙漠绿洲
+--- DesertLake number 迷拉星沙漠湖泊
+--- DeepSea number 迷拉星深海
+--- IslandShoreDesert number 迷拉星荒岛海岸
+--- IslandLandDesert number 迷拉星荒岛岛心
+--- IslandShoreRedsoil number 迷拉星红土岛海岸
+--- IslandLandRedsoil number 迷拉星红土岛心
+--- IslandShoreReef number 迷拉星珊瑚岛海岸
+--- IslandLandReef number 迷拉星珊瑚岛岛心
+--- IceSheetConiferousForest number 迷拉星覆雪针叶林
+--- IceSheetHighestPeak number 迷拉星雪山主峰
+--- IceSheetSecondPeak number 迷拉星雪山副峰
+--- IceSheetMountain number 迷拉星雪山山脉
+--- IceSheetMountainSide number 迷拉星雪山中部
+--- IceSheetPeakPlain number 迷拉星雪山底部
+--- IceSheetSecondMountainSide number 迷拉星雪山副峰中部
+--- IceSheetFrizebLake number 迷拉星雪山冻湖
+--- Canyon number 迷拉星峡谷
+--- CanyonEage number 迷拉星峡谷边缘
+--- GrassLandArid number 迷拉星干旱草原
+--- GrassLandDandelion number 迷拉星草原蒲公英花海
+--- GrassLandRapeseed number 迷拉星草原油菜花海
+--- ForestLavender number 迷拉星森林薰衣草花海
+--- ForestFoxtail number 迷拉星森林狗尾草海
+--- ForestChrysanth number 迷拉星森林菊花花海
+--- BasinRice number 迷拉星盆地稻田
+--- SwampRiverSide number 迷拉星沼泽河畔
+--- AirlandShine number 迷拉星粉蝶花空岛
+--- CliffPlum number 迷拉星三角梅峭壁
+--- IslandLandTulip number 迷拉星郁金香岛心
+--- IslandShoreTulip number 迷拉星郁金香海岸
+--- City number 迷拉星末日城镇
+--- DesertPopulusEuphratica number 迷拉星沙漠胡杨林
+--- JungleBlueJacaranda number 迷拉星丛林蓝花楹树林
+--- CliffMaple number 迷拉星峭壁枫叶林
+--- CliffGinkgo number 迷拉星峭壁银杏林
+--- PlainsLake number 迷拉星草原湖泊
+--- BasinLake number 迷拉星盆地湖泊
+--- ForestLake number 迷拉星森林湖泊
+--- ConiferousForestLake number 迷拉星针叶林湖泊
+--- RainForestLake number 迷拉星雨林湖泊
+--- AirShipPlain number 铁穹平原
+--- AirShipFleet number 铁穹舰队
+local BiomeType = {}
+_G.BiomeType = BiomeType
+
+--- GridAttr ItemId
+--- ItemNum number 道具数量
+--- Durable number 耐久度
+--- Toughness number 韧性
+local GridAttr = {}
+_G.GridAttr = GridAttr
+
+--- VDistanceRange 视野距离
+--- Near number 近
+--- Middle number 中
+--- Far number 远
+--- Further number 更远
+--- Farthest number 最远
+local VDistanceRange = {}
+_G.VDistanceRange = VDistanceRange
+
+--- ObjType 对象类型
+--- Entity number 实体
+--- Mob number 生物
+--- Player number 玩家
+--- World number 世界
+--- Block number 方块
+--- UI number UI编辑界面
+--- Area number 区域
+--- Projectile number 投掷物对象
+--- Pos number 位置
+--- DropItem number 掉落物
+local ObjType = {}
+_G.ObjType = ObjType
+
+--- CmpProPermission 组件属性访问权限
+--- Public number 公开
+--- Private number 私有
+--- Read number 只读
+local CmpProPermission = {}
+_G.CmpProPermission = CmpProPermission
+
+--- CmpUIPermission 组件属性预制面板显示控制
+--- Hide number 隐藏
+--- Show number 显示
+local CmpUIPermission = {}
+_G.CmpUIPermission = CmpUIPermission
+
+--- DeviceType 设备类型
+--- PC number PC端
+--- Android number 安卓
+--- IOS number 苹果
+--- Other number 其他
+local DeviceType = {}
+_G.DeviceType = DeviceType
+
+--- MatchMode 标签匹配方式
+--- All number 全部匹配
+--- Any number 部分匹配
+local MatchMode = {}
+_G.MatchMode = MatchMode
+
+--- AvtPart 皮肤数据类型
+--- Body number 身体
+--- Head number 头部
+--- Face number 脸
+--- FaceOrnament number 脸装饰
+--- Jacket number 夹克
+--- HandOrnament number 手装饰
+--- Trousers number 裤子
+--- Shoe number 鞋子
+--- BackOrnament number 背装饰
+--- Footprint number 脚印
+--- Skin number 皮肤
+--- RightHand number 右手特效
+--- RightShoe number 右脚特效
+--- HeadEffect number 头部特效
+--- FaceEffect number 脸特效
+--- WholeBodyEffect number 全身特效
+--- HandEffect number 手特效
+--- TrailingEffect number 拖尾特效
+--- BgEffect number 背景特效
+--- WingEffect number 翅膀特效
+--- EquipHead number 装备头部
+--- EquipBreast number 装备胸部
+--- EquipLegging number 装备腿部
+--- EquipShoe number 装备鞋子
+--- EquipPifeng number 装备披风
+--- EquipWeapon number 装备武器
+--- EquipCustom1 number 装备扩展1
+--- EquipCustom2 number 装备扩展2
+--- EquipCustom3 number 装备扩展3
+--- Max number 最大值
+local AvtPart = {}
+_G.AvtPart = AvtPart
+
+--- ElementAttr 元件属性
+--- Name number 名称
+--- Color number 颜色
+--- Text number 文本
+--- Transparency number 透明度
+--- Angle number 角度
+--- Visibility number 显示/隐藏状态
+--- Position number 位置
+--- Size number 尺寸
+--- ScrollPosition number 滚动容器位置
+--- GlobalPos number 绝对位置
+local ElementAttr = {}
+_G.ElementAttr = ElementAttr
+
+--- UIAttr 界面属性
+--- Name number 名称
+--- Visibility number 显示/隐藏状态
+local UIAttr = {}
+_G.UIAttr = UIAttr
+
+--- MiniShopData 皮肤数据类型
+--- Skin number 皮肤
+--- Avt number 所有AVT
+--- Mount number 所有坐骑
+--- AllMountLevel number 所有坐骑的等级总和
+local MiniShopData = {}
+_G.MiniShopData = MiniShopData
+
+--- BeaconMapType
+--- Position number 坐标
+--- Object number 对象
+local BeaconMapType = {}
+_G.BeaconMapType = BeaconMapType
+
+--- MiniMapMarkType 小地图图标类型
+--- DevMark number 使用接口创建的图标
+--- Player number 玩家图标
+local MiniMapMarkType = {}
+_G.MiniMapMarkType = MiniMapMarkType
+
+--- GameSetting
+--- ScopeMode number 准星模式
+--- CameraShake number 镜头晃动
+--- AutoJump number 自动跳跃
+--- FixedMap number 固定小地图
+local GameSetting = {}
+_G.GameSetting = GameSetting
+
+--- BeaconClampType 自定义UI信标限制类型
+--- None number 无限制
+--- Circle number 圆形限制
+--- Rectangle number 矩形限制
+local BeaconClampType = {}
+_G.BeaconClampType = BeaconClampType
+
+--- AreaCloneType 区域复制类型
+--- IncludeAir number 复制 (含空气)
+--- ExcludeAir number 复制 (不含空气)
+--- IncludeAirAndMove number 移动 (含空气)
+--- ExcludeAirAndMove number 移动 (不含空气)
+local AreaCloneType = {}
+_G.AreaCloneType = AreaCloneType
+
+--- RolePickupType 角色举起类型
+--- Carrying number 被举起
+--- Carried number 被举起着
+local RolePickupType = {}
+_G.RolePickupType = RolePickupType
+--- Data
+--- 普通变量数据管理接口 - Data
+local Data = {
+    Array = {}, ---  数组变量数据管理接口 - Array
+    Table = {}, ---  二维表变量数据管理接口 - Table
+    Map = {}, ---  一维表 (KV表) 变量数据管理接口 - Map
+}
+_G.Data = Data
+
+--- 获取变量值
+--- **1.全局变量playerId传nil**
+--- boolean 成功返回True，失败返回False
+--- varId string 变量ID
+--- playerId number 玩家ID
+--- value any 默认值
+function Data:SetValue(varId, playerId, value) return true end
+
+--- 获取变量值
+--- **1.全局变量playerId传nil**
+--- any
+--- varId string 变量ID
+--- playerId number 玩家ID
+function Data:GetValue(varId, playerId) return nil end
+
+--- 数值变量增加值
+--- **1.全局变量playerId传nil**
+--- any
+--- varId string 变量ID
+--- playerId number 玩家ID
+--- value number 增加值
+function Data:IncreasesValue(varId, playerId, value) return nil end
+--- 更新整个表的数据信息
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- value table 表内的值
+--- boolean 是否成功
+function Data.Table:UpdateAllValue(varId, playerId, value)
+    return true
+end
+
+--- 清理表格数据
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- boolean 是否成功
+function Data.Table:Clear(varId, playerId)
+    return true
+end
+
+--- 在末尾插入一行数据
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- ... any 按照列顺序编写的值(中间值不能传nil)
+--- boolean 是否成功
+function Data.Table:InsertValue(varId, playerId, ...)
+    return true
+end
+
+--- 在某行插入一行数据
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- data table 插入的数据表{[列索引] = 值, ...} or {[列名] = 值, ...}
+--- rowIndex? number|nil 行索引(可选，默认插入到最后)
+--- boolean 是否成功
+function Data.Table:InsertValueByRow(varId, playerId, data, rowIndex)
+    return true
+end
+
+--- 获取表格数据
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- row number 行索引
+--- col number|string 列索引或列名
+--- any 返回的值
+function Data.Table:GetValue(varId, playerId, row, col)
+    return nil
+end
+
+--- 获取表格所有数据
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- table 返回的表格数据
+function Data.Table:GetAllValue(varId, playerId)
+    return {}
+end
+
+--- 设置表格数据
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- row number|table 行索引或行索引数组
+--- col number|string 列索引或列名
+--- value any 设置的值
+--- boolean 是否成功
+function Data.Table:SetValue(varId, playerId, row, col, value)
+    return true
+end
+
+--- 删除序列号的值
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- row number|table 行索引或行索引数组
+--- boolean 是否成功
+function Data.Table:RemoveRow(varId, playerId, row)
+    return true
+end
+
+--- 获取某列的所有值
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- col number|string 列索引或列名
+--- table 列值数组
+function Data.Table:GetValuesByCol(varId, playerId, col)
+    return {}
+end
+
+--- 获取行数
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- number 行数
+function Data.Table:GetRows(varId, playerId)
+    return 0
+end
+
+--- 获取列数
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- number 列数
+function Data.Table:GetCols(varId, playerId)
+    return 0
+end
+
+--- 获取列索引
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- colName string 列名
+--- number 列索引
+function Data.Table:GetColIndex(varId, playerId, colName)
+    return 0
+end
+
+--- 获取指定列和值的行索引(默认判断值相等)
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- col number|string 列索引或列名
+--- value any 查询的值
+--- cmp? function|nil 筛选函数(可选, function(actionvalue) return a == value end)
+--- number 行索引
+function Data.Table:GetRowIndex(varId, playerId, col, value, cmp)
+    return 0
+end
+
+--- 获取指定列和值的所有行索引(默认判断值相等)
+--- varId string 变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- col number|string 列索引或列名
+--- value any 查询的值
+--- cmp? function|nil 筛选函数(可选, function(actionvalue) return a == value end)
+--- table 行索引数组
+function Data.Table:GetRowIndexs(varId, playerId, col, value, cmp)
+    return {}
+end
+
+--- 获取表格列的key
+--- varId string 变量ID
+--- table 列键名数组
+function Data.Table:GetTableColKeys(varId)
+    return {}
+end
+--- 设置组对应索引的值
+--- **1.索引值不允许大于数组当前大小**
+--- **2.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value any 设置的值
+--- index number 索引值
+--- boolean 是否成功
+function Data.Array:SetValue(varId, playerId, value, index)
+    return true
+end
+
+--- 插入数据到数组
+--- **1.如果index为空就加到最后**
+--- **2.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value any 插入的值
+--- index? number 索引值 **(为空则加到最后)**
+--- boolean 是否成功
+function Data.Array:InsertValue(varId, playerId, value, index)
+    return true
+end
+
+--- 替换组中的值
+--- 将数值组的全部 **{oldValue}** 替换为 **{newValue}**
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- newValue any 新值
+--- oldValue any 旧值
+--- boolean 是否成功
+function Data.Array:ReplaceValue(varId, playerId, newValue, oldValue)
+    return true
+end
+
+--- 获取对应索引数据
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- index number 索引值
+function Data.Array:GetValue(varId, playerId, index)
+    return nil
+end
+
+--- 获取数据对应索引
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value any 值
+function Data.Array:GetIndexByValue(varId, playerId, value)
+    return 0
+end
+
+--- 删除数组中全部的 **{value}**
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value any 值
+function Data.Array:RemoveByValue(varId, playerId, value)
+    return true
+end
+
+--- 删除索引的值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- index number 索引值
+function Data.Array:Remove(varId, playerId, index)
+    return true
+end
+
+--- 清理数组数据
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- boolean 是否成功
+function Data.Array:Clear(varId, playerId)
+    return true
+end
+
+--- 数组排序
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- isUp number 排序方式枚举(SortType)
+--- boolean 是否成功
+function Data.Array:Sort(varId, playerId, isUp)
+    return true
+end
+
+--- 获取数组长度
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- number 数组长度
+function Data.Array:GetSize(varId, playerId)
+    return 0
+end
+
+--- 获取数组所有数据
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- table 数组所有数据
+function Data.Array:GetAllValue(varId, playerId)
+    return {}
+end
+
+--- 获取数组最大值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- number 数组最大值
+function Data.Array:GetMax(varId, playerId)
+    return 0
+end
+
+--- 获取数组最小值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- number 数组最小值
+function Data.Array:GetMin(varId, playerId)
+    return 0
+end
+
+--- 获取数组随机值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- number 数组随机值
+function Data.Array:RandomValue(varId, playerId)
+    return 0
+end
+
+--- 组是否有指定值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value any 值
+--- boolean 是否有指定值
+function Data.Array:HasValue(varId, playerId, value)
+    return true
+end
+
+--- 任意组索引是否有任意值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- index number 索引值
+--- boolean 是否有指定值
+function Data.Array:HasValueByNo(varId, playerId, index)
+    return true
+end
+
+--- 在指定索引位置插入组
+--- **1.全局变量playerId传nil**
+--- **2.全局变量playerId2传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- index number 索引值(插入位置)
+--- varId2 string 表ID2
+--- playerId2 number 玩家ID2
+--- boolean 是否成功
+function Data.Array:InsertValues(varId, playerId, index, varId2, playerId2)
+    return true
+end
+
+--- 删除 **{var}** 中 **{var2}** 含有的值
+--- **1.全局变量playerId传nil**
+--- **2.全局变量playerId2传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- varId2 string 表ID2
+--- playerId2 number 玩家ID2
+--- boolean 是否成功
+function Data.Array:RemoveByValues(varId, playerId, varId2, playerId2)
+    return true
+end
+
+--- 获取任意组种任意值的数量
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value any 值
+--- number 数量
+function Data.Array:GetCountByValue(varId, playerId, value)
+    return 0
+end
+
+--- 数值组指定索引值增加指定值
+--- **1.全局变量playerId传nil**
+--- varId string 表ID
+--- playerId number 玩家ID
+--- value number 增加值
+--- index number 索引值
+function Data.Array:IncreasesValue(varId, playerId, value, index)
+    return true
+end
+--- Component
+--- 组件管理接口 Component
+local Component = {}
+_G.Component = Component
+
+--- 获取该组件挂载的对象实例
+--- nil 挂载对象
+function Component:GetGameObject() 
+    return nil
+end
+
+--- 获取组件挂载的对象实例id
+--- number 对象实例id
+function Component:GetGameObjectId() return 0 end
+
+--- 获取组件是否有效
+--- boolean 是否有效
+function Component:IsValid() return true end
+
+--- 在组件所在的对象上添加指定组件
+--- componentId string 组件ID
+--- nil 组件对象
+function Component:AddComponent(componentId) return nil end
+
+--- 删除在组件所在的对象上的指定组件
+--- componentId string 组件ID
+--- nil
+function Component:RemoveComponent(componentId)
+end
+
+--- 获取组件所在对象上的指定组件
+--- componentId string 组件ID
+--- nil 组件对象
+function Component:GetComponent(componentId) return nil end
+
+--- 发送自定义消息(异步)
+--- eventId string 消息ID
+--- ... any 消息参数
+--- nil
+function Component:PushCustomEvent(eventId, ...)
+end
+
+--- 发送自定义消息(同步)
+--- eventId string 消息ID
+--- ... any 消息参数
+--- nil
+function Component:PushCustomEventSync(eventId, ...)
+end
+
+--- 监听自定义消息(广播)
+--- eventId string 消息ID
+--- callback function 回调函数
+--- nil
+function Component:AddCustomEvent(eventId, callback)
+end
+
+--- 移除自定义事件监听
+--- eventId string 消息ID
+--- nil
+function Component:RemoveCustomEvent(eventId)
+end
+
+--- 添加触发事件(该函数只在UI跟世界类型组件有效)
+--- eventType number 事件类型
+--- callback function 回调函数
+--- filterParam1? any 过滤参数1(缺省参数)
+--- filterParam2? any 过滤参数2(缺省参数)
+--- nil
+function Component:AddTriggerEvent(eventType, callback, filterParam1, filterParam2)
+end
+
+--- 移除触发事件监听
+--- eventType number 事件类型
+--- nil
+function Component:RemoveTriggerEvent(eventType)
+end
+
+--- 发送对象事件(异步)，只有同个对象上监听的组件才能收到事件
+--- eventType string 自定义事件类型
+--- ... any 事件内容
+--- nil
+function Component:PushEvent(eventType, ...)
+end
+
+--- 发送对象事件(同步)，只有同个对象上监听的组件才能收到事件
+--- eventType string 自定义事件类型
+--- ... any 消息内容
+--- nil
+function Component:PushEventSync(eventType, ...) return nil end
+
+--- 监听对象事件(可以监听自定义的，也能监听官方内置对象事件)
+--- eventType string|number 事件类型
+--- callback function 回调函数
+--- nil
+function Component:AddEvent(eventType, callback) return nil end
+
+--- 移除对象的事件监听
+--- eventType string|number 事件类型
+--- nil
+function Component:RemoveEvent(eventType) return nil end
+
+--- 启动定时器在指定时间执行任务
+--- ```lua
+--- task:Pause() -- 暂停定时器
+--- task:Resume() -- 恢复定时器
+--- task:Cancel() -- 取消定时器
+--- ```
+--- callback function 回调函数
+--- delay number 时间间隔(秒)
+--- nil 定时器任务对象
+function Component:DoTaskInTime(callback, delay) return nil end
+
+--- 启动定时器周期性执行任务
+--- ```lua
+--- task:Pause() -- 暂停定时器
+--- task:Resume() -- 恢复定时器
+--- task:Cancel() -- 取消定时器
+--- ```
+--- callback function 回调函数
+--- interval number 间隔时间(秒)
+--- delay? number 延迟开始第一次执行时间(默认0)
+--- count? number 执行次数(默认无限次)
+--- nil 定时器任务对象
+function Component:DoPeriodicTask(callback, interval, delay, count) return nil end
+
+--- 清除所有定时器任务
+--- nil
+function Component:ClearAllTask() return nil end
+
+--- 设置是否启用事件
+--- callback function 事件回调函数
+--- enable boolean 是否启用
+--- nil
+function Component:SetEventIsEnable(callback, enable) return nil end
+
+--- 启动新协程
+--- callback function 协程函数
+--- nil
+function Component:ThreadWork(callback) return nil end
+
+--- 协程等待
+--- delay number 等待时间(默认一帧)
+--- nil
+function Component:ThreadWait(delay) return nil end
+
+--- 发送云服广播消息(异步)
+--- eventType string 自定义事件类型
+--- ... any 事件内容
+--- nil
+function Component:PushCloudServerMsg(eventType, ...) return nil end
+
+--- 接收云服事件
+--- eventType string 消息类型
+--- callback function 回调函数
+--- nil
+function Component:AddCloudSeverEvent(eventType, callback) return nil end
+
+--- 移除云服消息监听
+--- eventType string 消息类型
+--- nil
+function Component:RemoveCloudSeverEvent(eventType) return nil end
+
+--- Component self
+--- TriggerEvent 触发器事件枚举
+--- GroupWeatherChanged any 当地形组的天气改变 {weathergroupid:事件中的天气组}
+--- GameStart any 游戏创建 {}
+--- GameHour any 游戏时间 {hour:小时, second:分钟, ticks:游戏刻}
+--- MinitimerChange any 任意计时器改变 {}
+--- CraftEnd any 配方合成完毕 {craftid:事件中的配方ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- FurnaceBegin any 当熔炼开始 {furanceid:事件中的熔炼ID, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- FurnaceEnd any 当熔炼结束 {furanceid:事件中的熔炼ID, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- PlayerRevive any 玩家复活 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerMoveOneBlockSize any 玩家移动 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerSelectShortcut any 玩家选中快捷栏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerInvateFriend any 玩家邀请好友 {eventobjid:触发事件的对象, x,y,z:事件中的位置, toobjid:事件中的目标对象, eventworldid:事件中的星球}
+--- GameAnyPlayerEnterGame any 当玩家进入游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- GameAnyPlayerLeaveGame any 当玩家离开游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中的星球}
+--- GameAnyPlayerVictory any 当玩家游戏胜利 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- GameAnyPlayerDefeat any 当玩家游戏失败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerClickBlock any 当玩家点击任意方块 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- PlayerClickPlayer any 当玩家点击任意玩家 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickMob any 当玩家点击任意生物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickProjectile any 当玩家点击任意投掷物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickDropItem any 当玩家点击任意掉落物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickEntity any 当玩家点击任意实体 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerInputKeyClick any 当任意玩家点击按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerInputKeyDown any 当任意玩家按下按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerInputKeyUp any 当任意玩家抬起按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerInputKeyOnPress any 当任意玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerNewInputContent any 玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerGunAction any 当玩家持枪状态改变时 {eventobjid:触发事件的对象, gunAction:枪械动作, gunState:枪械状态, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerMotionStateChange any 当玩家进入运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- PlayerMotionStateChangeEnd any 当玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- PlayerAddItem any 当玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerUseItem any 当玩家开始使用道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerChargeItemBegin any 当玩家开始蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerConsumeItem any 当玩家消耗道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerPickUpItem any 当玩家拾取道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerDiscardItem any 当玩家丢弃道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerChargeItemEnd any 当玩家结束蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerShortcutChange any 当玩家的快捷栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerShortcutAddItem any 当玩家的快捷栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerShortcutRemItem any 当玩家的快捷栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerBackPackChange any 当玩家的背包栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerBackPackAddItem any 当玩家的背包栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerBackPackRemItem any 当玩家的背包栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerEquipChange any 当玩家的装备栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerEquipAddItem any 当玩家的装备栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerEquipRemItem any 当玩家的装备栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerEquipOn any 当玩家穿上装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerEquipOff any 当玩家脱下装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- BlockAdd any 方块被创建 {blockid:事件中的方块类型, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockRemove any 当方块被破坏 {blockid:事件中的方块类型, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockDigBegin any 当方块被挖掘 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockDigEnd any 当方块被挖掘完毕 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockDigCancel any 当方块被挖掘中断 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockTrigger any 当方块开关状态发生改变 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockChangeColor any 当方块颜色发生改变 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockChangeDir any 当方块方向发生改变 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockContainerChange any 当储存容器内发生改变 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockContainerPutIn any 当储存容器内放入道具 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- BlockContainerTakeOut any 当储存容器内取出道具 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- UILostFocus any 玩家在界面输入字符串 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UISpineComplete any 当前界面的元件动画装载器播放完毕 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIShow any 当前界面被打开 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIHide any 当前界面被关闭 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIButtonClick any 当前界面的元件被点击 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIButtonTouchBegin any 当前界面的元件被按下 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIButtonTouchEnd any 当前界面的元件被抬起 {CustomUI:事件中的界面, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIButtonLongPress any 当前界面的元件被长按 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIGLoader3DTouchClick any 当前界面的元件被点击 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIGLoader3DTouchBegin any 当前界面的元件被按下 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIGLoader3DTouchEnd any 当前界面的元件被抬起 {CustomUI:事件中的界面, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIGLoader3DLongPress any 当前界面的元件被长按 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIScrollPaneTouchBegin any 滑动容器触摸开始 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIScrollPaneTouchEnd any 滑动容器触摸结束 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- UIScrollPaneScrollEnd any 滑动容器滚动结束 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- ParticlePosOnCreate any 当特效创建在任意位置 {effectid:事件中的特效, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- ParticleObjectOnCreate any 当特效创建在任意对象 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ParticlePlayerOnCreate any 当特效创建在任意玩家 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ParticleMobOnCreate any 当特效创建在任意生物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ParticleProjectileOnCreate any 当特效创建在任意投掷物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ParticleItemOnCreate any 当特效创建在任意掉落物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ParticleEntityOnCreate any 当特效创建在任意实体 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- DeveloperBuyItem any 任意玩家购买或提取开发者商店道具 {itemid:事件中的道具类型, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- PlayerCollideToPlayer any 当任意玩家和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerCollideToMob any 当任意玩家和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerCollideToMissile any 当任意玩家和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerCollideToDropItem any 当任意玩家和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerCollideToEntity any 当任意玩家和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerCollideToAreaObj any 当任意玩家和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobCollideToPlayer any 当任意生物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobCollideToMob any 当任意生物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobCollideToMissile any 当任意生物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobCollideToDropItem any 当任意生物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobCollideToEntity any 当任意生物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobCollideToAreaObj any 当任意生物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCollideToPlayer any 当任意投掷物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCollideToMob any 当任意投掷物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCollideToMissile any 当任意投掷物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCollideToDropItem any 当任意投掷物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCollideToEntity any 当任意投掷物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCollideToAreaObj any 当任意投掷物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- DropItemCollideToPlayer any 当任意掉落物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- DropItemCollideToMob any 当任意掉落物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- DropItemCollideToMissile any 当任意掉落物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- DropItemCollideToDropItem any 当任意掉落物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- DropItemCollideToEntity any 当任意掉落物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- DropItemCollideToAreaObj any 当任意掉落物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- EntityCollideToPlayer any 当任意实体和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- EntityCollideToMob any 当任意实体和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- EntityCollideToMissile any 当任意实体和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- EntityCollideToDropItem any 当任意实体和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- EntityCollideToEntity any 当任意实体和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- EntityCollideToAreaObj any 当任意实体和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- AreaObjCollideToPlayer any 当任意区域和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- AreaObjCollideToMob any 当任意区域和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- AreaObjCollideToMissile any 当任意区域和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- AreaObjCollideToDropItem any 当任意区域和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- AreaObjCollideToEntity any 当任意区域和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- AreaObjCollideToAreaObj any 当任意区域和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerAreaIn any 当任意玩家进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerAreaOut any 当任意玩家离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobAreaIn any 当任意生物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobAreaOut any 当任意生物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MissileAreaIn any 当任意投掷物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MissileAreaOut any 当任意投掷物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- DropItemAreaIn any 当任意掉落物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- DropItemAreaOut any 当任意掉落物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- EntityAreaIn any 当任意实体进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- EntityAreaOut any 当任意实体离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- AreaObjAreaIn any 当任意区域进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- AreaObjAreaOut any 当任意区域离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobCreate any 当任意生物被创建 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- EntityCreate any 当任意实体被创建 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- AreaObjCreate any 当任意区域被创建 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerBeHurt any 当任意玩家受到伤害 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerDie any 当任意玩家被击败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobBeHurt any 当任意生物受到伤害 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobDie any 当任意生物被击败 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerAttack any 当任意玩家开始攻击 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerAttackHit any 当任意玩家攻击命中 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerDefeatActor any 当任意玩家击败目标 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerDamageActor any 当任意玩家造成伤害 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobAttack any 当任意生物开始攻击 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobAttackHit any 当任意生物攻击命中 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobBeat any 当任意生物击败目标 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobDamage any 当任意生物造成伤害 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerAddBuff any 当任意玩家获得状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerRemoveBuff any 当任意玩家失去状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobAddBuff any 当任意生物获得状态 {actorid:触发事件的生物类型, buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobRemoveBuff any 当任意生物失去状态 {actorid:触发事件的生物类型, buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerChangeAttr any 当任意玩家的属性改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playerattr:玩家属性, playerattrval:玩家属性值, eventworldid:事件中星球}
+--- MobChangeAttr any 当任意生物的属性改变 {actorattr:生物属性, actorattrval:生物属性值, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ActorPickupActor any 当角色举起角色 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, pickupType:举起或放下类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerAttrStateChange any 当任意玩家权限发生改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- MobAttrStateChange any 当任意生物权限发生改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerMountActor any 当任意玩家骑乘坐骑/载具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobMountActor any 当任意生物骑乘坐骑/载具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerDismountActor any 当任意玩家取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MobDismountActor any 当任意生物取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- MissileCreate any 投掷物创建 {eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ProjectileHitBlock any 当投掷物击中任意方块 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ProjectileHitPlayer any 当投掷物击中任意玩家 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ProjectileHitMob any 当投掷物击中任意生物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ProjectileHitProj any 当投掷物击中任意投掷物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ProjectileHitItem any 当投掷物击中任意掉落物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ProjectileHitEntity any 当投掷物击中任意实体 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ItemCreate any 当掉落物创建 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- DropItemPickup any 当掉落物被拾取 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- ItemDisappear any 当掉落物消失 {eventobjid:触发事件的对象, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerOpenInnerView any 当玩家打开内置界面 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- PlayerCloseInnerView any 当玩家关闭内置界面 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+local TriggerEvent = {}
+_G.TriggerEvent = TriggerEvent
+
+--- CurEventParam 事件参数类 (事件中参数如果是 `nil`，则可以用 `CurEventParam` 来替代获取)
+--- EventTargetPos any 事件中的位置
+--- EventBuff any 事件中的状态效果
+--- EventTargetEffect any 事件中的特效
+--- EventTargetBlock any 事件中的方块类型
+--- EventShortCutIdx any 事件中的快捷栏
+--- EquipItemPos any 事件中的装备栏
+--- EventElementID any 事件中的元件
+--- EventUIID any 事件中的界面
+--- EventString any 事件中的字符串
+--- SelectUIID any 当前编辑的界面
+--- EventAreaid any 事件中的区域
+--- Hurtlv any 事件中伤害值
+--- TriggerByPlayer any 触发事件的玩家
+--- EventTargetPlayer any 事件中的目标玩家
+--- TriggerByCreature any 触发事件的生物
+--- EventTargetCreature any 事件中的目标生物
+--- Actorid any 触发事件的生物类型
+--- targetactorid any 事件中的目标生物类型
+--- EventTargetItemID any 事件中的道具类型
+--- TriggerByMissile any 触发事件的投射物
+--- EventTargetDropItem any 事件中的掉落物
+--- eventworldid any 事件中的星球
+--- Itemnum any 事件中的道具数量
+local CurEventParam = {}
+_G.CurEventParam = CurEventParam
+
+--- ObjectEvent 组件事件枚举
+--- OnPropertyChange any 当对象的属性发生改变 {}
+--- PlayerEnterGame any 当此玩家进入游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerLeaveGame any 当此玩家离开游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中的星球}
+--- PlayerVictory any 当此玩家游戏胜利 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerDefeat any 当此玩家游戏失败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerClickBlock any 当此玩家点击任意方块 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- PlayerClickPlayer any 当此玩家点击任意玩家 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickMob any 当此玩家点击任意生物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickProjectile any 当此玩家点击任意投掷物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickDropItem any 当此玩家点击任意掉落物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerClickEntity any 当此玩家点击任意实体 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerInputKeyClick any 当此玩家点击按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerInputKeyDown any 当此玩家按下按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerInputKeyUp any 当此玩家抬起按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerInputKeyOnPress any 当此玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- PlayerNewInputContent any 此玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ObjectMotionStateChangeEnd any 当此玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- ObjectMotionStateChange any 当此玩家运动状态发生改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- PlayerAddItem any 当此玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerUseItem any 当此玩家开始使用道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerChargeItemBegin any 当此玩家开始蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerConsumeItem any 当此玩家消耗道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerPickUpItem any 当此玩家拾取道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- PlayerChargeItemEnd any 当此玩家结束蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerShortcutChange any 当此玩家快捷栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerShortcutAddItem any 当此玩家快捷栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerShortcutRemItem any 当此玩家快捷栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerBackPackChange any 当此玩家背包栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerBackPackAddItem any 当此玩家背包栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerBackPackRemItem any 当此玩家背包栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerEquipChange any 当此玩家装备栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerEquipAddItem any 当此玩家装备栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerEquipRemItem any 当此玩家装备栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerEquipOn any 当此玩家穿上装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerEquipOff any 当此玩家脱下装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- PlayerRevive any 此玩家复活 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerMoveOneBlockSize any 此玩家移动 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerInvateFriend any 此玩家邀请好友 {eventobjid:触发事件的对象, x,y,z:事件中的位置, toobjid:事件中的目标对象, eventworldid:事件中的星球}
+--- PlayerSelectShortcut any 此玩家选中快捷栏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- BlockAdd any 此类方块被创建 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球}
+--- BlockClicked any 当此类方块被被点击 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- BlockRemove any 当此类方块被被破坏 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- BlockDigBegin any 当此类方块被被挖掘 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- BlockDigEnd any 当此类方块被被挖掘完毕 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- BlockDigCancel any 当此类方块被被挖掘中断 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- OnInteract any 当此类方块开关状态发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
+--- BlockChangeColor any 当此类方块颜色发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
+--- BlockChangeDir any 当此类方块方向发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
+--- BlockContainerChange any 当储存容器内发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
+--- BlockContainerPutIn any 当储存容器内放入道具 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
+--- BlockContainerTakeOut any 当储存容器内取出道具 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
+--- ObjectPlayAnim any 当此对象播放动画时 {eventobjid:触发事件的对象, actorid:触发事件的生物类型, x,y,z:事件中的位置, anim:事件中的动作, eventworldid:事件中的星球}
+--- ObjectCollideByPlayer any 当此角色和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectCollideByMob any 当此角色和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectCollideByMissile any 当此角色和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectCollideByDropItem any 当此角色和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectCollideByEntity any 当此角色和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectCollideByAreaObj any 当此角色和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectBeClick any 此角色被玩家点击 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectBeHurt any 当此角色受到伤害 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectDie any 当此角色被击败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ObjectAttack any 当此角色开始攻击 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ObjectAttackHit any 当此角色攻击命中 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectDefeat any 当此角色击败目标 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectDamage any 当此角色造成伤害 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectAddBuff any 当此角色获得状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ObjectRemoveBuff any 当此角色失去状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ObjectAttrStateChange any 当此角色权限改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- ObjectChangeAttr any 当此角色属性改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playerattr:玩家属性, playerattrval:玩家属性值, eventworldid:事件中星球}
+--- ObjectMountActor any 此角色骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- ObjectDismountActor any 此角色取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+local ObjectEvent = {}
+_G.ObjectEvent = ObjectEvent
+--- Timer
+--- 计时器模块管理接口 Timer
+local Timer = {}
+_G.Timer = Timer
+
+--- 判断计时器是否存在
+--- id number 计时器ID
+--- boolean 是否存在
+function Timer:IsExist(id) return true end
+
+--- 添加计时器
+--- name string 计时器名称
+--- number 计时器ID
+function Timer:CreateTimer(name) return 0 end
+
+--- 删除计时器
+--- timerid number 计时器ID
+--- boolean 操作是否成功
+function Timer:DeleteTimer(timerid) return true end
+
+--- 启动倒计时
+--- id number 计时器ID
+--- interval number 开始倒计时时间
+--- repeated boolean 是否重复
+--- boolean 操作是否成功
+function Timer:StartBackwardTimer(id, interval, repeated) return true end
+
+--- 启动正向计时
+--- id number 计时器ID
+--- boolean 操作是否成功
+function Timer:StartForwardTimer(id) return true end
+
+--- 暂停计时器
+--- id number 计时器ID
+--- boolean 操作是否成功
+function Timer:PauseTimer(id) return true end
+
+--- 恢复计时器
+--- id number 计时器ID
+--- boolean 操作是否成功
+function Timer:ResumeTimer(id) return true end
+
+--- 停止计时器
+--- id number 计时器ID
+--- boolean 操作是否成功
+function Timer:StopTimer(id) return true end
+
+--- 改变计时器计时
+--- id number 计时器ID
+--- curtime number 计时器当前时刻
+--- boolean 操作是否成功
+function Timer:ChangeTimerTime(id, curtime) return true end
+
+--- 获取计时器时间
+--- id number 计时器ID
+--- number 当前倒计时时间
+function Timer:GetTimerTime(id) return 0 end
+
+--- 显示计时器窗口(若其他计时器已经显示，则替换显示)
+--- playerids table 玩家ID/玩家id数组
+--- timerid number 计时器ID
+--- title string 计时器窗口显示的标题
+--- boolean 操作是否成功
+function Timer:ShowTimerWnd(playerids, timerid, title) return true end
+
+--- 隐藏计时器窗口
+--- playerids table 玩家ID/玩家id数组
+--- timerid number 计时器ID
+--- boolean 操作是否成功
+function Timer:HideTimerWnd(playerids, timerid) return true end
+--- Mod
+--- 资源模块管理接口 Mod
+local Mod = {}
+_G.Mod = Mod
+
+--- 通过资源id获取defid
+--- assetId string 资源id
+--- number defid
+function Mod:GetCfgIdByAssetId(assetId) return 0 end
+--- WorldContainer
+--- 世界容器模块管理接口 WorldContainer
+local WorldContainer = {}
+_G.WorldContainer = WorldContainer
+
+--- 检测是否是储物箱
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 是否是储物箱
+function WorldContainer:CheckStorage(x, y, z, worldId) return true end
+
+--- 清空储物箱
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:ClearStorageBox(x, y, z, worldId) return true end
+
+--- 检测储物箱空余格子,传入道具ID同时检测已存该道具的格子
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itemId number|string 道具类型ID
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 是否有空余格子
+function WorldContainer:CheckStorageEmptyGrid(x, y, z, itemId, worldId) return true end
+
+--- 设置储物箱道具
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- offset number 仓库格子索引(从1开始)
+--- itemId number|string 道具类型ID
+--- num number 道具数量
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:SetStorageItem(x, y, z, offset, itemId, num, worldId) return true end
+
+--- 获取储物箱道具ID
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- offset number 仓库格子索引(从1开始)
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- number|string|nil, number|string|nil 道具类型ID,道具数量
+function WorldContainer:GetStorageItem(x, y, z, offset, worldId) return 0, 0 end
+
+--- 向储物箱按堆叠规则添加道具，返回实际加入的数量
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itemId number|string 道具类型ID
+--- num number 道具数量
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- number|boolean|nil 成功添加数量
+function WorldContainer:AddStorageItem(x, y, z, itemId, num, worldId) return 0 end
+
+--- 移除储物箱内指定类型的道具
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itemId number|string 道具类型ID
+--- num number 道具数量
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:RemoveStorageItemByID(x, y, z, itemId, num, worldId) return true end
+
+--- 移除储物箱内指定格子的道具
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- offset number 储物箱格子索引(从1开始)
+--- num number 道具数量
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:RemoveStorageItemByIndex(x, y, z, offset, num, worldId) return true end
+
+--- 将一定数量道具添加到储物箱中
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itemid number|string 道具类型ID
+--- num number 道具数量
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- number 成功添加数量
+function WorldContainer:AddItemToContainer(x, y, z, itemid, num, worldId) return 0 end
+
+--- 移除储物箱中一定数量道具
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itemid number|string 道具类型ID
+--- num number 道具数量
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:RemoveContainerItemByID(x, y, z, itemid, num, worldId) return true end
+
+--- 清空指定位置的储物箱
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:ClearContainer(x, y, z, worldId) return true end
+
+--- 给当前世界的储物箱添加道具
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itemIds table 道具数组({itemId itemNum}...)
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- number 成功添加数量
+function WorldContainer:AddWorldStorageItems(x, y, z, itemIds, worldId) return 0 end
+
+--- 获取储物箱内指定格子的道具实例ID
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- offset number 仓库格子索引(从1开始)
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- string 道具实例ID
+function WorldContainer:GetStorageItemInstanceId(x, y, z, offset, worldId) return "" end
+
+--- 获取储物箱里所有的道具实例(只取通过接口创建的道具实例)
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- table 道具实例ID数组
+function WorldContainer:GetAllStorageItemInstanceIds(x, y, z, worldId) return {} end
+
+--- 玩家和指定位置的储物箱或熔炉交换道具
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- grid number Container格子索引(从1开始)
+--- uin number 玩家uin
+--- grid2 number 玩家格子索引
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- boolean 操作是否成功
+function WorldContainer:SwapContainerItem(x, y, z, grid, uin, grid2, worldId) return true end
+
+--- 获取格子属性
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- offset number 格子索引
+--- attrType number 属性类型
+--- worldId? number|nil 世界ID (默认当前主机所在星球)
+--- number 属性值
+function WorldContainer:GetGridAttr(x, y, z, offset, attrType, worldId) return 0 end
+--- World
+--- 世界模块管理接口 World
+local World = {}
+_G.World = World
+
+--- 停止指定位置的特效
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- particleId number 特效ID
+--- boolean 操作是否成功
+function World:StopParticleOnPos(x, y, z, particleId) return true end
+
+--- 设置指定位置的特效偏移旋转缩放
+--- pos table 位置坐标表{x=x, y=y, z=z}
+--- particleIdArg number|table 特效ID或ID数组
+--- offset? table 偏移量(缺省参数)
+--- rot? table 旋转角度(缺省参数)
+--- scale table 缩放比例
+--- boolean 操作是否成功
+function World:SetParticleTransform(pos, particleIdArg, offset, rot, scale) return true end
+
+--- 在指定位置播放特效
+--- pos table 位置坐标表{x=x, y=y, z=z}
+--- particleIdArg number|table 特效ID或ID数组
+--- ptimeArg number 播放时长(秒)
+--- scale? table 缩放比例(缺省参数)
+--- boolean 操作是否成功
+function World:PlayParticle(pos, particleIdArg, ptimeArg, scale) return true end
+
+--- 获取指定位置的光照强度
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number 星球ID
+--- number 光照强度(0~16)，失败为-1
+function World:GetLightByPos(x, y, z, worldId) return 0 end
+
+--- 生成生物(包括怪物、NPC、动物等)
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- actorid number|string 生物类型ID
+--- num? number 生成数量(默认1)
+--- trigger? boolean 是否触发事件(默认true)
+--- table 生成的生物对象ID数组
+function World:SpawnCreature(x, y, z, actorid, num, trigger) return {} end
+
+--- 移除生物
+--- creatureId number 生物对象ID
+--- boolean 操作是否成功
+function World:DespawnActor(creatureId) return true end
+
+--- 获取全部玩家数量
+--- alive number 玩家状态(0阵亡,1存活,-1全体玩家)
+--- number 玩家数量
+function World:GetPlayerTotal(alive) return 0 end
+
+--- 获取全部玩家
+--- alive number 玩家状态(0阵亡,1存活,-1全体玩家)
+--- table 玩家ID数组
+function World:GetAllPlayers(alive) return {} end
+
+--- 获取默认出生点
+--- number,number,number x,y,z方块坐标
+function World:GetSpawnPoint() return 0, 0, 0 end
+
+--- 获取附近合适的生物出生点位置(方块坐标单位)
+--- centerX number 中心位置x
+--- centerY number 中心位置y
+--- centerZ number 中心位置z
+--- radius number 搜索半径
+--- includeCenterPos? boolean 是否包含中心位置(默认true)
+--- table 位置坐标表数组
+function World:FindCanSpawnMobPosList(centerX, centerY, centerZ, radius, includeCenterPos) return {} end
+
+--- 获取距离某点最近的玩家(方块坐标单位)
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number 世界ID
+--- number 最近的玩家ID
+function World:FindNearestPlayerByPos(x, y, z, worldId) return 0 end
+
+--- 在指定位置上播放指定音效
+--- pos table 位置坐标表{x=x, y=y, z=z}
+--- soundId number 音效ID
+--- volume number 音量调节
+--- pitch number 音调调节
+--- isLoop boolean 是否循环播放
+--- boolean 操作是否成功
+function World:PlaySoundEffectOnPos(pos, soundId, volume, pitch, isLoop) return true end
+
+--- 停止指定位置上的指定音效
+--- pos table 位置坐标表{x=x, y=y, z=z}
+--- soundId number 音效ID
+--- boolean 操作是否成功
+function World:StopSoundEffectOnPos(pos, soundId) return true end
+
+--- 暂停/恢复指定位置上的指定音效
+--- pos table 位置坐标表{x=x, y=y, z=z}
+--- soundId number 音效ID
+--- pause boolean true暂停/false恢复
+--- boolean 操作是否成功
+function World:PauseSoundEffectOnPos(pos, soundId, pause) return true end
+
+--- 是否是白天
+--- boolean 是否白天
+function World:IsDaytime() return true end
+
+--- 设置游戏当前时间(小时)
+--- time number 时间(小时)
+--- boolean 操作是否成功
+function World:SetHours(time) return true end
+
+--- 获取游戏当前时间(小时)
+--- number 当前时间(小时)
+function World:GetHours() return 0 end
+
+--- 获取游戏当前天数
+--- number 当前天数
+function World:GetDay() return 0 end
+
+--- 设置重力
+--- gravity number 重力值
+--- boolean 操作是否成功
+function World:SetGravity(gravity) return true end
+
+--- 获取重力
+--- number 重力值
+function World:GetGravity() return 0 end
+
+--- 获取XZ位置上是否可创建生物并返回对应的Y轴位置
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- number 可创建的Y轴位置(不可创建返回0)
+function World:CanMobSpawnOnPosXZ(x, y, z) return 0 end
+
+--- 获取主机所在星球ID
+--- number 星球ID
+function World:GetHostWorldId() return 0 end
+
+--- 生成投掷物
+--- uin number 玩家uin
+--- itemid number|string 道具类型
+--- srcX number 起点坐标x
+--- srcY number 起点坐标y
+--- srcZ number 起点坐标z
+--- dstX number 目标坐标x
+--- dstY number 目标坐标y
+--- dstZ number 目标坐标z
+--- speed number 速度
+--- number 投掷物对象ID
+function World:SpawnProjectile(uin, itemid, srcX, srcY, srcZ, dstX, dstY, dstZ, speed) return 0 end
+
+--- 生成投掷物(通过方向向量)
+--- uin number 玩家uin
+--- itemid number|string 道具类型
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- dirX number 方向向量x
+--- dirY number 方向向量y
+--- dirZ number 方向向量z
+--- speed number 速度
+--- number 投掷物对象ID
+function World:SpawnProjectileByDir(uin, itemid, x, y, z, dirX, dirY, dirZ, speed) return 0 end
+
+--- 获取某个位置的地形类型
+--- x number 位置坐标x
+--- z number 位置坐标z
+--- number 地形类型
+function World:GetBiomeType(x, z) return 0 end
+
+--- 获取地形类型所属的地形组类型
+--- x number 位置坐标x
+--- z number 位置坐标z
+--- number 地形组类型
+function World:GetBiomeGroup(x, z) return 0 end
+
+--- 查找地形位置
+--- centerX number 查找起点x
+--- centerY number 查找起点y
+--- centerZ number 查找起点z
+--- biomeType number 地形类型
+--- radius number 查找范围半径(单位chunk)
+--- number,number,number 找到的地形位置x,y,z
+function World:FindEcosystem(centerX, centerY, centerZ, biomeType, radius) return 0, 0, 0 end
+
+--- 添加地图标记
+--- uin number 玩家ID
+--- markId string 标记ID
+--- params table 标记参数表
+--- boolean 操作是否成功
+function World:PixelMapAddMarker(uin, markId, params) return true end
+
+--- 刷新地图标记
+--- uin number 玩家ID
+--- markId string 标记ID
+--- params table 标记参数表
+--- boolean 操作是否成功
+function World:PixelMapRefreshMarker(uin, markId, params) return true end
+
+--- 删除地图标记
+--- uin number 玩家ID
+--- markId string 标记ID
+--- boolean 操作是否成功
+function World:PixelMapDelMarker(uin, markId) return true end
+
+--- 添加地图纹理
+--- uin number 玩家ID
+--- textureId string 纹理ID
+--- params table 纹理参数表
+--- boolean 操作是否成功
+function World:PixelMapAddTexture(uin, textureId, params) return true end
+
+--- 刷新地图纹理
+--- uin number 玩家ID
+--- textureId string 纹理ID
+--- params table 纹理参数表
+--- boolean 操作是否成功
+function World:PixelMapRefreshTexture(uin, textureId, params) return true end
+
+--- 删除地图纹理
+--- uin number 玩家ID
+--- textureId string 纹理ID
+--- boolean 操作是否成功
+function World:PixelMapDelTexture(uin, textureId) return true end
+
+--- 设置天空盒颜色参数(带动效)
+--- uin number 玩家ID
+--- colorType number 颜色类型
+--- colorValue string 颜色值
+--- easingType number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function World:SetSkyBoxColorAnim(uin, colorType, colorValue, easingType, time) return true end
+
+--- 设置天空盒时间流逝速度
+--- speed number 时间流逝速度
+--- boolean 操作是否成功
+function World:SetTimeVanishingSpeed(speed) return true end
+
+--- 设置天空盒模板
+--- templateId number 模板ID
+--- boolean 操作是否成功
+function World:SetSkyBoxTemplate(templateId) return true end
+
+--- 设置天空盒贴图
+--- mapType number 贴图类型
+--- url string 图片链接
+--- boolean 操作是否成功
+function World:SetSkyBoxMaps(mapType, url) return true end
+
+--- 设置天空盒颜色参数
+--- timeType number 时间类型
+--- colorType number 颜色类型
+--- colorValue string 颜色值
+--- boolean 操作是否成功
+function World:SetSkyBoxColor(timeType, colorType, colorValue) return true end
+
+--- 设置天空盒属性参数
+--- timeType number 时间类型
+--- attrType number 属性类型
+--- value number 属性值
+--- boolean 操作是否成功
+function World:SetSkyBoxAttr(timeType, attrType, value) return true end
+
+--- 设置天空盒属性参数(不带时间维度，直接作用于当前配置)
+--- attrType number 属性类型(SkyboxAttr)
+--- value number 参数值(0~100)
+--- boolean 是否设置成功
+function World:SetSkyBoxAttrWithNoTime(attrType, value) return true end
+
+--- 设置天空盒滤镜参数
+--- uin number 玩家ID
+--- filterType number 滤镜类型
+--- value number|string 参数值
+--- boolean 操作是否成功
+function World:SetSkyBoxFilter(uin, filterType, value) return true end
+
+--- 天空盒属性开关
+--- timeType number 时间类型
+--- switchType number 开关类型
+--- enable boolean 是否开启
+--- boolean 操作是否成功
+function World:SetSkyBoxSwitch(timeType, switchType, enable) return true end
+
+--- 设置天空盒贴图(带动效)
+--- uin number 玩家ID
+--- mapType number 贴图类型
+--- url string 图片链接
+--- easingType number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function World:SetSkyBoxMapsAnim(uin, mapType, url, easingType, time) return true end
+
+--- 设置天空盒滤镜参数(带动效)
+--- uin number 玩家ID
+--- filterType number 滤镜类型
+--- value number|string 参数值
+--- easingType number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function World:SetSkyBoxFilterAnim(uin, filterType, value, easingType, time) return true end
+
+--- 获取本地设备时间的指定字段
+--- enum number 枚举值(EventDate)
+--- number 时间值
+function World:GetLocalDate(enum) return 0 end
+
+--- 获取完整本地设备时间字符串
+--- string 时间字符串
+function World:GetLocalDateString() return '' end
+
+--- 获取服务器时间的指定字段(云服模式下会回退到本地时间)
+--- enum number 枚举值(EventDate)
+--- number 时间值(取不到返回0)
+function World:GetServerDate(enum) return 0 end
+
+--- 获取对象到某个方向上的射线检测目标
+--- pos table 对象位置{x=x, y=y, z=z}
+--- dir table 方向向量{x=x, y=y, z=z}
+--- maxLen number 最大检测距离
+--- detectType number 检测类型
+--- number 检测到的对象ID
+function World:GetDirRayDetection(pos, dir, maxLen, detectType) return 0 end
+
+--- 计算指定方向射线长度(遇到方块结束)
+--- srcX number 起点坐标x
+--- srcY number 起点坐标y
+--- srcZ number 起点坐标z
+--- dstX number 终点坐标x
+--- dstY number 终点坐标y
+--- dstZ number 终点坐标z
+--- distance number 最大检测距离
+--- number 射线长度
+function World:GetRayLength(srcX, srcY, srcZ, dstX, dstY, dstZ, distance) return 0 end
+
+--- 射线打到的方块类型(遇到方块结束)
+--- srcX number 起点坐标x
+--- srcY number 起点坐标y
+--- srcZ number 起点坐标z
+--- faceDir number 面方向
+--- distance number 最大检测距离
+--- number 方块类型ID
+function World:GetRayBlock(srcX, srcY, srcZ, faceDir, distance) return 0 end
+
+--- 通过局部坐标方向计算绝对正方向(忽略视角仰角)
+--- uin number 玩家uin
+--- vx number 局部坐标x方向
+--- vy number 局部坐标y方向
+--- vz number 局部坐标z方向
+--- table 绝对方向向量{x=x, y=y, z=z}
+function World:CalcDirectionByYawDirection(uin, vx, vy, vz) return {} end
+
+--- 通过局部球坐标方向计算绝对正方向(忽略视角仰角)
+--- uin number 玩家uin
+--- yaw number 水平偏移夹角
+--- pitch number 垂直偏移夹角
+--- table 绝对方向向量{x=x, y=y, z=z}
+function World:CalcDirectionByYawAngle(uin, yaw, pitch) return {} end
+
+--- 绝对坐标方向
+--- x number 坐标x
+--- y number 坐标y
+--- z number 坐标z
+--- table 绝对方向向量{x=x, y=y, z=z}
+function World:CalcDirectionByCoord(x, y, z) return {} end
+
+--- 角度坐标方向
+--- yaw number 水平偏移夹角
+--- pitch number 垂直偏移夹角
+--- table 绝对方向向量{x=x, y=y, z=z}
+function World:CalcDirectionByAngle(yaw, pitch) return {} end
+
+--- 随机特效类型,随机返回一种特效ID
+--- number 随机特效ID
+function World:RandomParticleEffectID() return 0 end
+
+--- 随机音效ID,随机返回一种音效ID
+--- number 随机音效ID
+function World:RandomSoundID() return 0 end
+
+--- 计算两个三维坐标之间的距离
+--- posSrc table 源坐标{x=x, y=y, z=z}
+--- posDst table 目标坐标{x=x, y=y, z=z}
+--- number 两点之间的距离
+function World:CalcDistance(posSrc, posDst) return 0 end
+
+--- 设置天气组的天气状态
+--- groupId number 天气组ID
+--- weatherType number 天气类型
+--- boolean 操作是否成功
+function World:SetGroupWeather(groupId, weatherType) return true end
+
+--- 随机天气
+--- number 随机天气ID
+function World:RandomWeatherID() return 0 end
+
+--- 获取天气组天气
+--- groupId number 天气组ID
+--- number 天气值
+function World:GetGroupWeather(groupId) return 0 end
+
+--- 设置出生点
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- boolean 操作是否成功
+function World:SetSpawnPoint(x, y, z) return true end
+
+--- 位置到位置的单位方向
+--- pos1 table 位置1{x=x, y=y, z=z}
+--- pos2 table 位置2{x=x, y=y, z=z}
+--- table 单位方向向量
+function World:CalcDirectionByPos2Pos(pos1, pos2) return {} end
+
+--- 设置世界创建生物规则(设置不保存,退出游戏后失效,只适用迷拉星)
+--- cfgs table 生物规则配置表
+--- boolean 操作是否成功
+function World:SetWorldCreateMobRule(cfgs) return true end
+
+--- 设置生物生成密度(设置不保存,退出游戏后失效,只适用迷拉星)
+--- mobType number 生物类型
+--- density number 生成密度
+--- boolean 操作是否成功
+function World:SetMobSpawnDensity(mobType, density) return true end
+
+--- 设置农作物生长时间要求修正(设置不保存,退出游戏后失效,只适用迷拉星)
+--- rate number 时间修正系数
+--- boolean 操作是否成功
+function World:SetPlantGrowRate(rate) return true end
+
+--- 设置游戏内的界面是否禁用
+--- popupType number 弹窗类型
+--- enable boolean 是否启用
+--- boolean 操作是否成功
+function World:SetInnerViewEnable(popupType, enable) return true end
+
+--- 设置是否可中途加入
+--- enable boolean 是否开启中途加入
+--- boolean 操作是否成功
+function World:SetMidJoin(enable) return true end
+
+--- 获取游戏模式
+--- number 游戏模式
+function World:GetGameMode() return 0 end
+
+--- 设置指定位置的方块光照强度(<1.50+>)
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- value number 光照强度(0~15)
+--- worldId? number 星球ID
+--- boolean 是否设置成功
+function World:SetLightByPos(x, y, z, value, worldId) return true end
+
+--- 获取XZ位置上是否加载了区块
+--- x number 位置坐标x
+--- z number 位置坐标z
+--- worldId number 世界ID
+--- boolean 是否加载了区块
+function World:IsChunkLoaded(x, z, worldId) return true end
+
+--- 增加重力
+--- value number 重力值
+--- boolean 操作是否成功
+function World:AddGravity(value) return true end
+
+--- 转换时间戳为时间单位
+--- number number 时间戳
+--- enum number 时间单位枚举 (EventDate)
+--- number 转换后的时间
+function World:GetDateFromTime(number, enum) return 0 end
+--- 回调设置kv数据
+--- varId string 排行榜/排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（数值key会转换成字符串）
+--- value string|number|boolean 具体值
+--- callback function 回调函数
+--- boolean 是否调用成功(非全局云变量建议使用阻塞接口)
+function Data.Map:SetValueAndCallBack(varId, playerId, key, value, callback)
+    return true
+end
+
+--- 阻塞设置kv数据
+--- varId string 排行榜/排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（数值key会转换成字符串）
+--- value string|number|boolean 具体值
+--- call_back function 内部回调(缺省参数)
+--- number,string,string|number|boolean 错误码,键值,具体值
+function Data.Map:SetValueAndBlock(varId, playerId, key, value, call_back)
+    return 0, "", ""
+end
+
+--- 回调删除指定key的数据
+--- varId string 排行榜/排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（数值会转换成字符串）
+--- callback? function|nil 回调函数
+--- boolean 是否调用成功(非全局云变量建议使用阻塞接口)
+function Data.Map:RemoveValueAndCallBack(varId, playerId, key, callback)
+    return true
+end
+
+--- 阻塞删除指定key的数据
+--- varId string 排行榜/排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（小数会向下取整，科学计数法会返回失败）
+--- callback? function|nil 内部回调(缺省参数)
+--- number,string 错误码,键值
+function Data.Map:RemoveValueAndBlock(varId, playerId, key, callback)
+    return 0, ""
+end
+
+--- 更新指定key的数据
+--- varId string kv表变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（数值会转换成字符串）
+--- value string|number|boolean 具体值
+--- boolean 是否成功(全局云KV变量可用)
+function Data.Map:UpdateValueAndCallback(varId, playerId, key, value)
+    return true
+end
+
+--- 回调获取kv数据
+--- varId string kv/排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（数值会转换成字符串）
+--- callback function 回调函数
+--- boolean 是否调用成功(非全局云变量建议使用阻塞接口)
+function Data.Map:GetValueAndCallBack(varId, playerId, key, callback)
+    return true
+end
+
+--- 阻塞获取kv数据
+--- varId string kv/排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（数值会转换成字符串）
+--- number,string,string|number|boolean 错误码,键值,具体值
+function Data.Map:GetValueAndBlock(varId, playerId, key)
+    return 0, "", ""
+end
+
+--- 获取排行榜指定排名索引的值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- index number 排名索引
+--- ascending boolean 是否升序
+--- callback function 回调函数
+--- boolean 是否调用成功(非全局云变量建议使用阻塞接口)
+function Data.Map:GetIndexValueAndCallback(varId, playerId, index, ascending, callback)
+    return true
+end
+
+--- 获取排行榜指定排名索引的值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- index number 排名索引
+--- ascending boolean 是否升序
+--- number,string,any,number,boolean 错误码,键值,具体值,排名索引,是否升序
+function Data.Map:GetIndexValueAndBlock(varId, playerId, index, ascending)
+    return 0, "", nil, 0, true
+end
+
+--- 获取排行榜指定前num个值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- num number 数量
+--- ascending boolean 是否升序
+--- callback function 回调函数
+--- boolean 是否调用成功
+function Data.Map:GetNumValuesAndCallback(varId, playerId, num, ascending, callback)
+    return true
+end
+
+--- 获取排行榜值为min~max区间的所有值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- min number 最小值
+--- max number 最大值
+--- ascending boolean 是否升序
+--- pagesize number 单次返回数量
+--- callback function 回调函数
+--- boolean 是否调用成功
+function Data.Map:GetRangeValuesAndCallback(varId, playerId, min, max, ascending, pagesize, callback)
+    return true
+end
+
+--- 阻塞设置排行榜的值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（小数会向下取整，科学计数法会返回失败）
+--- value number 数值
+--- extendvalue string|number|boolean 附带信息（附带信息只会更新不会删除）
+--- callback? function|nil 内部回调(缺省参数)
+--- number,string,number 错误码,键值,数值
+function Data.Map:SetRankValueAndBlock(varId, playerId, key, value, extendvalue, callback)
+    return 0, "", 0
+end
+
+--- 清空kv表/排行榜
+--- varId string 表ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- boolean 是否成功
+function Data.Map:ClearData(varId, playerId)
+    return true
+end
+
+--- 阻塞增加排行榜的值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（小数会向下取整，科学计数法会返回失败）
+--- value number 数值
+--- extendvalue string|number|boolean 附带信息（附带信息只会更新不会删除）
+--- callback? function|nil 内部回调(缺省参数)
+--- number,string,number 错误码,键值,数值
+function Data.Map:IncreasesRankValueAndBlock(varId, playerId, key, value, extendvalue, callback)
+    return 0, "", 0
+end
+
+--- 回调增加排行榜的值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- key string 键值（小数会向下取整，科学计数法会返回失败）
+--- value number 数值
+--- extendvalue string|number|boolean 附带信息（附带信息只会更新不会删除）
+--- callback? function|nil 内部回调(缺省参数)
+--- number,string,number 错误码,键值,数值
+function Data.Map:IncreasesRankValueAndCallback(varId, playerId, key, value, extendvalue, callback)
+    return 0, "", 0
+end
+
+--- 获取排行榜排名为min~max区间的所有值
+--- varId string 排行榜变量ID
+--- playerId? number|nil 玩家uin(全局变量传nil)
+--- min number 最小排名
+--- max number 最大排名
+--- ascending boolean 是否升序
+--- pagesize number 单次返回数量
+--- callback function 回调函数
+--- boolean 是否调用成功
+function Data.Map:GetRangeIndexsAndCallback(varId, playerId, min, max, ascending, pagesize, callback)
+    return true
+end
+--- Block
+--- 方块模块管理接口 Block
+local Block = {}
+_G.Block = Block
+
+--- 是否为固体方块
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 是否为固体方块
+function Block:IsSolidBlock(x, y, z, worldId) return true end
+
+--- 是否是液体方块
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 是否为液体方块
+function Block:IsLiquidBlock(x, y, z, worldId) return true end
+
+--- 是否是空气方块
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 是否为空气方块
+function Block:IsAirBlock(x, y, z, worldId) return true end
+
+--- 获取指定位置的方块类型
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- number 方块类型ID
+function Block:GetBlockID(x, y, z, worldId) return 0 end
+
+--- 摧毁方块
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- dropItem? boolean 是否掉落物品(缺省参数，默认false)
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- btrigger? boolean 是否触发方块事件(缺省参数，默认true)
+--- boolean 操作是否成功
+function Block:DestroyBlock(x, y, z, dropItem, worldId, btrigger) return true end
+
+--- 放置方块
+--- blockId number|string 方块ID
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- dir number 方块方向
+--- color? number HEX颜色值(0XFFFFFF，颜色方块类型才生效，默认-1)
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- btrigger? boolean 是否触发方块事件(缺省参数，默认true)
+--- boolean 操作是否成功
+function Block:PlaceBlock(blockId, x, y, z, dir, color, worldId, btrigger) return true end
+
+--- 替换指定位置的方块 (支持颜色方块)
+--- blockId number|string 新方块ID
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- face? number 朝向 (默认为0)
+--- color? number HEX颜色值(0XFFFFFF，颜色方块类型才生效，默认-1)
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- btrigger? boolean 是否触发方块事件(缺省参数，默认true)
+--- boolean 操作是否成功
+function Block:ReplaceBlock(blockId, x, y, z, face, color, worldId, btrigger) return true end
+
+--- 设置指定位置方块的 data 数据 (更新当前位置方块)
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- data number 方块数据
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:SetBlockData(x, y, z, data, worldId) return true end
+
+--- 获取方块数据
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- number 方块数据值
+function Block:GetBlockData(x, y, z, worldId) return 0 end
+
+--- 获取方块朝向
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- number 方块朝向 (FaceDir枚举)
+function Block:GetBlockDir(x, y, z, worldId) return 0 end
+
+--- 播放方块动作
+--- pos table 位置坐标表{x=x, y=y, z=z}
+--- animid number|string 动作id
+--- speed number 播放速度
+--- animMode number 动画模式 (AnimMode枚举)
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:PlayAnim(pos, animid, speed, animMode, worldId) return true end
+
+--- 设置方块设置属性状态 (全局设置)
+--- blockId number|string 方块ID
+--- attrType number 方块属性类型 (BlockLimits)
+--- switch boolean 是否开关
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:SetBlockSettingAttState(blockId, attrType, switch, worldId) return true end
+
+--- 获取方块设置属性状态 (全局设置)
+--- blockId number|string 方块ID
+--- attrType number 方块属性类型
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 是否开启
+function Block:GetBlockSettingAttState(blockId, attrType, worldId) return true end
+
+--- 获取功能方块的开关状态
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 是否开启
+function Block:GetBlockSwitchStatus(x, y, z, worldId) return true end
+
+--- 获取方块的通电状态
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 是否开启
+function Block:GetBlockPowerStatus(x, y, z, worldId) return true end
+
+--- 在资源库里随机获取一个方块
+--- number 随机的方块类型ID
+function Block:RandomBlockID() return 0 end
+
+--- 获取方块名称
+--- blockId number|string 方块ID
+--- string 方块名称
+function Block:GetBlockDefName(blockId) return "" end
+
+--- 获取方块描述
+--- blockId number|string 方块ID
+--- string 方块描述
+function Block:GetBlockDefDesc(blockId) return "" end
+
+--- 放置蓝图 (未支持多星球)
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- blueprintid string 蓝图ID
+--- angle number 旋转角度
+--- mirror boolean 是否镜像
+--- placeMode boolean 是否蓝图区域全部覆盖
+--- boolean 操作是否成功
+function Block:ReplaceBluePrint(x, y, z, blueprintid, angle, mirror, placeMode) return true end
+
+--- 播放方块裂纹特效
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- process number 裂纹进度 (`-1` ~ `10`)
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:PlayCrackEffect(x, y, z, process, worldId) return true end
+
+--- 播放方块损毁特效
+--- x number 方块位置的X坐标
+--- y number 方块位置的Y坐标
+--- z number 方块位置的Z坐标
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:PlayDestroyEffect(x, y, z, worldId) return true end
+
+--- 获取方块掉落物信息
+--- blockId number|string 方块ID
+--- iType number 类型 (1手持敲方块, 2手持道具正确, 3手持道具不正确)
+--- table 返回掉落道具信息 {itemid:道具ID, itemnum:数量, odds:概率}
+function Block:GetBlockDropItemType(blockId, iType) return {} end
+
+--- 获取方块的采集经验
+--- blockId number|string 方块ID
+--- iType number 采集类型
+--- number 经验值
+function Block:GetBlockDropExp(blockId, iType) return 0 end
+
+--- 设置方块颜色
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- color number 颜色值
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:SetBlockColor(x, y, z, color, worldId) return true end
+
+--- 设置方块方向
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- dir number 方块方向 (FaceDir枚举)
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:SetBlockDir(x, y, z, dir, worldId) return true end
+
+--- 获取方块类型外观
+--- blockId number|string 方块类型ID或方块预制ID
+--- string 方块类型外观
+function Block:GetFacade(blockId) return "" end
+
+--- 设置方块纹理颜色 (仅支持草块、土块、树叶、花草等方块，其它方块暂不支持；设置后不会存档；玩法转编辑后需要重进地图才可还原)
+--- blockId number|string 方块ID
+--- color number 颜色值(0:还原默认颜色)
+--- alpha number 混合比例(0-100)
+--- slotindex? number 材质槽索引 (默认1)
+--- boolean 操作是否成功
+function Block:SetBlockTextureColor(blockId, color, alpha, slotindex) return true end
+
+--- 设置指定位置功能方块的开关状态
+--- x number 位置坐标x
+--- y number 位置坐标y
+--- z number 位置坐标z
+--- isActive boolean 开关状态
+--- worldId? number|nil 星球ID(缺省参数，默认当前主机所在星球)
+--- boolean 操作是否成功
+function Block:SetBlockSwitchStatus(x, y, z, isActive, worldId) return true end
+--- GameObject
+--- 对象模块管理接口 - GameObject
+local GameObject = {}
+_G.GameObject = GameObject
+
+--- 根据ID查找游戏对象
+--- string|nil 返回查找的方块对象，如果没有找到则返回nil
+--- id number|string 游戏对象的唯一标识
+function GameObject:FindObject(id) return "" end
+
+--- 获取当前游戏UI对象
+--- string|nil 返回查找的UI对象，如果没有找到则返回nil
+--- id number|string 游戏对象的唯一标识
+function GameObject:FindUIObject(id) return "" end
+
+--- 注意: 方块对象接口只能查找到 **编辑过的方块** 或 **自定义的方块**
+--- 注意: 场景中 **至少有一个** 方块才能获取到!
+--- 获取当前游戏方块类别对象
+--- string|nil 返回查找的方块类别对象，如果没有找到则返回nil
+--- id number|string 游戏对象的唯一标识
+function GameObject:FindBlockObject(id) return "" end
+
+--- 创建预制实例
+--- prefabId string 预制体ID
+--- worldId number 星球ID(默认为当前主机所在星球)
+--- x number X坐标
+--- y number Y坐标
+--- z number Z坐标
+--- trigger boolean 是否触发事件
+--- string|nil 返回创建的预制实例，如果创建失败则返回nil
+function GameObject:CreatePrefabInst(prefabId, worldId, x, y, z, trigger) return "" end
+
+--- 创建对象
+--- 如果需要objId，则需要用GetId()获取
+--- objectType number 对象类型枚举(ObjType)
+--- prefabId number|string 类型ID|预制体ID
+--- x number X坐标
+--- y number Y坐标
+--- z number Z坐标
+--- num number 数量
+--- trigger? boolean 是否触发事件(可缺省)
+--- worldId number 星球ID(默认为当前主机所在星球)
+--- table|nil 返回创建对象的列表(Table), 如果创建失败则返回nil
+function GameObject:CreatePrefab(objectType, prefabId, x, y, z, num, trigger, worldId) return {} end
+
+--- 删除对象
+--- (玩家，方块，世界，UI 对象 **不能** 删除)
+--- objId string 对象ID
+--- boolean 返回true表示成功删除，false表示失败
+function GameObject:Destroy(objId) return true end
+
+--- 获取对象的预制ID
+--- objId string 对象ID (掉落物，投掷物，生物 **可用**)
+--- number|string|nil 返回预制ID(number/string)，如果没有找到则返回nil
+--- number 对象类型枚举(bjType)
+function GetObjectPrefab(objId)
+    return "" or 0, 0
+end
+--- Actor
+--- 角色模块管理接口 Actor
+local Actor = {}
+_G.Actor = Actor
+
+--- 获取掉落物的类型ID
+--- objId number 对象ID
+--- number 掉落物类型ID
+function Actor:GetItemId(objId) return 0 end
+
+--- 获取掉落物品数量
+--- objId number 对象ID
+--- number 掉落物品数量
+function Actor:GetDropItemNum(objId) return 0 end
+
+--- 设置角色队伍
+--- objid number 对象ID
+--- teamType number 队伍类型
+--- bResetAttr boolean 是否重置属性(玩家有效，默认false)
+--- boolean 成功状态
+function Actor:SetTeam(objid, teamType, bResetAttr) return true end
+
+--- 获取角色队伍
+--- objid number 对象ID
+--- number 队伍类型
+function Actor:GetTeam(objid) return 0 end
+
+--- 增加角色当前生命量
+--- objid number 对象ID
+--- hp number 血量值(hp>0增加血量，hp<0减少血量)
+--- boolean 成功状态
+function Actor:AddHp(objid, hp) return true end
+
+--- 获取最大血量(包括加成)
+--- objid number 对象ID
+--- number 最大生命值
+function Actor:GetMaxHP(objid) return 0 end
+
+--- 设置对象昵称是否显示
+--- objid number 对象ID
+--- bshow boolean 是否显示
+--- boolean 成功状态
+function Actor:ShowNickName(objid, bshow) return true end
+
+--- 设置角色昵称
+--- objid number 对象ID
+--- nickname string 昵称
+--- boolean 成功状态
+function Actor:SetNickName(objid, nickname) return true end
+
+--- 获取角色昵称
+--- objid number 对象ID
+--- string 角色昵称
+function Actor:GetNickName(objid) return "" end
+
+--- 在指定角色身上播放音效
+--- objid number 对象ID
+--- soundId number 音效ID
+--- volume number 音量
+--- pitch number 音调
+--- isLoop boolean 是否循环播放
+--- boolean 成功状态
+function Actor:PlaySoundEffectById(objid, soundId, volume, pitch, isLoop) return true end
+
+--- 停止指定对象身上的音效
+--- objid number 对象ID
+--- soundId number 音效ID
+--- boolean 成功状态
+function Actor:StopSoundEffectById(objid, soundId) return true end
+
+--- 暂停/恢复指定对象身上的音效
+--- objid number 对象ID
+--- soundId number 音效ID
+--- pause boolean true暂停/false恢复
+--- boolean 成功状态
+function Actor:PauseSoundEffectById(objid, soundId, pause) return true end
+
+--- 使生物朝向目标生物
+--- objid number 对象ID
+--- targetid number 目标对象ID
+--- boolean 成功状态
+function Actor:RotateFaceToActor(objid, targetid) return true end
+
+--- 获取对象的当前移动速度
+--- objId number 对象ID
+--- number, number, number x,y,z方向速度
+function Actor:GetMotion(objId) return 0, 0, 0 end
+
+--- 设置目标仇恨目标
+--- objId number 对象ID
+--- targetId number 目标对象ID
+--- boolean 成功状态
+function Actor:SetBeHurtTarget(objId, targetId) return true end
+
+--- 获取角色外观(需要确保对象在场景中存在)
+--- objid number 对象ID
+--- string 对象外观
+function Actor:GetActorFacade(objid) return "" end
+
+--- 比较两个主模型外观是否相等
+--- facade1 string 外观类型1
+--- facade2 string 外观类型2
+--- boolean 是否相等
+function Actor:CompareMainModel(facade1, facade2) return false end
+
+--- 在指定对象身上播放粒子特效
+--- objid number 对象ID
+--- particleId number|table 粒子特效ID或ID列表
+--- time number 时长(秒)
+--- offset table 偏移位置
+--- rotation table 旋转角度
+--- scale table 缩放比例
+--- boolean 成功状态
+function Actor:PlayBodyParticleById(objid, particleId, time, offset, rotation, scale) return true end
+
+--- 停止指定对象身上的粒子特效
+--- objid number 对象ID
+--- particleId number 粒子特效ID
+--- boolean 成功状态
+function Actor:StopBodyEffectById(objid, particleId) return true end
+
+--- 设置指定对象身上的特效大小
+--- objid number 对象ID
+--- particleId number 粒子特效ID
+--- offset table 偏移位置
+--- rotation table 旋转角度
+--- scale table 缩放比例
+--- boolean 成功状态
+function Actor:SetBodyParticleTransform(objid, particleId, offset, rotation, scale) return true end
+
+--- 使玩家/生物跳跃一次
+--- objId number 对象ID
+--- boolean 成功状态
+function Actor:Jump(objId) return true end
+
+--- 获取骑乘生物的objid
+--- objid number 对象ID
+--- number 骑乘对象ID
+function Actor:GetRidingActorObjId(objid) return 0 end
+
+--- 获取actor朝向
+--- objId number 对象ID
+--- table 轴向上的方向
+function Actor:GetFaceDirection(objId) return {} end
+
+--- 使对象向目标行动者移动
+--- objid number 执行动作的对象id
+--- targetid number 目标对象id
+--- speed number 移动速度
+--- boolean 成功状态
+function Actor:TryMoveToActor(objid, targetid, speed) return true end
+
+--- 设置对象朝向
+--- objId number 对象ID
+--- x number x方向
+--- y number y方向
+--- z number z方向
+--- boolean 成功状态
+function Actor:SetFaceDirection(objId, x, y, z) return true end
+
+--- 击败对象
+--- objId number 对象ID
+--- boolean 成功状态
+function Actor:KillSelf(objId) return true end
+
+--- 设置角色属性
+--- objId number 对象ID
+--- attrType number 属性类型
+--- val number 属性值
+--- boolean 成功状态
+function Actor:SetAttr(objId, attrType, val) return true end
+
+--- 增加角色属性值
+--- objid number 对象ID
+--- atttype number 属性类型
+--- val number 增加值
+--- boolean 成功状态
+function Actor:IncreasesAttr(objid, atttype, val) return true end
+
+--- 获取角色属性值
+--- objId number 对象ID
+--- attrType number 属性类型
+--- number 属性值
+function Actor:GetAttr(objId, attrType) return 0 end
+
+--- 设置对象权限
+--- objId number 对象ID
+--- abilityType number 权限类型
+--- switch boolean 是否开启
+--- boolean 成功状态
+function Actor:SetActorPermissions(objId, abilityType, switch) return true end
+
+--- 获取对象权限
+--- objId number 对象ID
+--- abilityType number 权限类型
+--- boolean 权限状态
+function Actor:GetActorPermissions(objId, abilityType) return false end
+
+--- 设置对象面向角度
+--- objId number 对象ID
+--- yaw number 面朝角度
+--- boolean 成功状态
+function Actor:SetFaceYaw(objId, yaw) return true end
+
+--- 获取actor视角偏移角度
+--- objId number 对象ID
+--- number 面朝角度 (-180~180)
+function Actor:GetFaceYaw(objId) return 0 end
+
+--- 设置actor视角仰望角度
+--- objid number 对象ID
+--- pitch number 面仰角度
+--- boolean 成功状态
+function Actor:SetFacePitch(objid, pitch) return true end
+
+--- 获取actor视角仰望角度
+--- objid number 对象ID
+--- number 仰望角度
+function Actor:GetFacePitch(objid) return 0 end
+
+--- 设置角色位置
+--- objId number 对象ID
+--- x number 目标X坐标
+--- y number 目标Y坐标
+--- z number 目标Z坐标
+--- boolean 成功状态
+function Actor:SetPosition(objId, x, y, z) return true end
+
+--- 获取对象位置
+--- objId number 对象ID
+--- number, number, number x,y,z坐标
+function Actor:GetPosition(objId) return 0, 0, 0 end
+
+--- 改变对象外观
+--- objid number 对象ID
+--- modleName string 对象外观描述
+--- boolean 成功状态
+function Actor:ChangeCustomModel(objid, modleName) return true end
+
+--- 恢复对象外观
+--- objid number 对象ID
+--- boolean 成功状态
+function Actor:RecoverinitialModel(objid) return true end
+
+--- 使对象A对对象B造成伤害
+--- attackerId number 攻击者对象ID
+--- targetId number 目标对象ID
+--- damage number 伤害值
+--- hurtType number 伤害类型
+--- ignoreResist boolean 忽略伤害抵抗
+--- ignoreTriggerEvent boolean 忽略触发伤害事件
+--- boolean 成功状态
+function Actor:ActorHurt(attackerId, targetId, damage, hurtType, ignoreResist, ignoreTriggerEvent) return true end
+
+--- 设置免疫伤害类型
+--- objId number 对象ID
+--- hurtType number 伤害类型
+--- enable boolean 是否开启
+--- boolean 成功状态
+function Actor:SetImmuneType(objId, hurtType, enable) return true end
+
+--- 改变玩家移动方式
+--- objid number 对象ID
+--- moveType number 移动类型
+--- boolean 成功状态
+function Actor:ChangActorMoveType(objid, moveType) return true end
+
+--- 取角色的移动模式
+--- objid number 对象ID
+--- number 移动模式
+function Actor:GetActorMovementMode(objid) return 0 end
+
+--- 获取模型大小值
+--- objId number 对象ID
+--- table 模型大小
+function Actor:GetBoundSzie(objId) return {} end
+
+--- 随机一个外观获取其id字符串
+--- string 随机外观ID
+function Actor:RandomFacadeID() return "" end
+
+--- 判断对象是否是玩家/生物
+--- objId number 对象ID
+--- number 对象类型
+function Actor:GetObjType(objId) return 0 end
+
+--- 尝试移动到某个位置走寻路(方块坐标)
+--- objId number 对象ID
+--- x number 目标X坐标
+--- y number 目标Y坐标
+--- z number 目标Z坐标
+--- cancontrol boolean 是否能控制
+--- bshowtip boolean 是否显示提示
+--- boolean 成功状态
+function Actor:TryMoveToPos(objId, x, y, z, cancontrol, bshowtip) return true end
+
+--- 给对象附加一个速度
+--- objId number 对象ID
+--- x number x轴速度
+--- y number y轴速度
+--- z number z轴速度
+--- boolean 成功状态
+function Actor:AppendSpeed(objId, x, y, z) return true end
+
+--- 寻找对象附近某个类型方块的最近位置
+--- objid number 对象ID
+--- blockid number 查找的方块类型
+--- blockRange number 查找范围(格子数)
+--- number, number, number x,y,z方块坐标
+function Actor:FindNearestBlock(objid, blockid, blockRange) return 0, 0, 0 end
+
+--- 获取角色高度
+--- objId number 对象ID
+--- number 角色高度
+function Actor:GetEyeHeight(objId) return 0 end
+
+--- 清除生物ID为actorid的生物
+--- actorid number 生物类型ID
+--- bkill boolean 是否杀死生物(默认false)
+--- boolean 成功状态
+function Actor:ClearActorWithId(actorid, bkill) return true end
+
+--- 对象是否存在
+--- objId number 对象ID
+--- boolean 是否存在
+function Actor:IsExist(objId) return false end
+
+--- 对象播放动作
+--- objId number 对象ID
+--- animid number|string 动作id
+--- speed number 播放速度
+--- animMode number 动画模式
+--- boolean 成功状态
+function Actor:PlayAnim(objId, animid, speed, animMode) return true end
+
+--- 对象手持播放动作
+--- objId number 对象ID
+--- animid number|string 动作id
+--- speed number 播放速度
+--- loop boolean|number 是否循环或循环模式
+--- boolean 成功状态
+function Actor:PlayHandAnim(objId, animid, speed, loop) return true end
+
+--- 角色骑乘
+--- riderId number 骑乘者ID
+--- mountId number 被骑乘者ID
+--- isContrl boolean 是否控制
+--- isCloseAI boolean 是否关闭AI
+--- boolean 成功状态
+function Actor:MountActor(riderId, mountId, isContrl, isCloseAI) return true end
+
+--- 角色取消骑乘
+--- objid number 对象ID
+--- boolean 成功状态
+function Actor:DisMountActor(objid) return true end
+
+--- 对象抓举对象
+--- grabberId number 抓举者ID
+--- targetId number 目标对象ID
+--- boolean 成功状态
+function Actor:PickupActor(grabberId, targetId) return true end
+
+--- 尝试抓取前方指定距离的对象
+--- objid number 对象ID
+--- distance number 距离
+--- boolean 成功状态
+function Actor:TryPickupActorForward(objid, distance) return true end
+
+--- 尝试投掷角色
+--- throwerId number 投掷者ID
+--- dir table 投掷方向
+--- useDir boolean 是否使用方向
+--- speed number 投掷速度
+--- useGravity boolean 是否使用重力
+--- boolean 成功状态
+function Actor:DropActor(throwerId, dir, useDir, speed, useGravity) return true end
+
+--- 尝试逃脱抓举
+--- objid number 被抓举的对象objid
+--- boolean 成功状态
+function Actor:EscapePickup(objid) return true end
+
+--- 设置行为树变量
+--- objid number 生物对象objid
+--- varid string 变量id
+--- val any 变量值(数字/字符/boolean)
+--- boolean 成功状态
+function Actor:SetBtreeVarValue(objid, varid, val) return true end
+
+--- 获取行为树变量
+--- objid number 生物对象objid
+--- varid string 变量id
+--- any 变量值
+function Actor:GetBtreeVarValue(objid, varid) return nil end
+
+--- 根据掉落物objid获取道具实例id
+--- objid number 掉落物对象ID
+--- string 道具实例id
+function Actor:GetDropItemInstanceId(objid) return "" end
+
+--- 设置掉落物是否可以拾取
+--- objId number 对象ID
+--- able boolean 是否可以拾取
+--- boolean 成功状态
+function Actor:SetAblePick(objId, able) return true end
+
+--- 获取实体类型外观
+--- entityId string 实体类型ID
+--- string 外观描述
+function Actor:GetEntityFacade(entityId) return "" end
+
+--- 角色拾取地上的掉落物或者投掷物
+--- objid number 角色ID
+--- itemobjid number 掉落物或投掷物objid
+--- number 拾取数量
+function Actor:PickupItem(objid, itemobjid) return 0 end
+
+--- 获取角色举起的角色objid
+--- objid number 对象ID
+--- number 举起的角色objid
+function Actor:GetPickupObjID(objid) return 0 end
+
+--- 获取指定角色当前所在的星球ID
+--- objId number 对象ID
+--- number 星球ID (失败返回 -1)
+function Actor:GetObjWorldId(objId) return 0 end
+
+--- 检测指定对象ID是否为玩家对象
+--- objId number 对象ID
+--- boolean 是否为玩家对象
+function Actor:IsPlayer(objId) return true end
+
+--- 检测指定对象是否具有指定标签
+--- objid number 对象ID
+--- tags string|table 标签或标签数组
+--- matchmode number 匹配方式(MatchMode)
+--- bexactmatch boolean 每条标签是否精确匹配
+--- boolean 是否具有标签
+function Actor:HasTags(objid, tags, matchmode, bexactmatch) return false end
+
+--- 获取指定对象的所有标签列表
+--- objid number 对象ID
+--- table|nil 标签数组(失败返回nil)
+function Actor:GetTags(objid) return {} end
+
+--- 为指定对象添加标签
+--- objid number 对象ID
+--- tags string|table 标签或标签数组
+--- icount number 引用计数(默认1)
+--- boolean 是否添加成功
+function Actor:AddTags(objid, tags, icount) return true end
+
+--- 从指定对象删除标签
+--- objid number 对象ID
+--- tags string|table 标签或标签数组
+--- icount number 引用计数(默认0，传0全部删除)
+--- boolean 是否删除成功
+function Actor:RemoveTags(objid, tags, icount) return true end
+
+--- 清空指定对象的所有标签
+--- objid number 对象ID
+--- boolean 是否清空成功
+function Actor:ClearTags(objid) return true end
+
+--- 使对象A播放对象B的动作(仅玩家、生物和实体生效)
+--- objidA number 对象ID A
+--- objidB number 对象ID B
+--- breplay boolean 是否重新播放(默认false)
+--- boolean 是否播放成功
+function Actor:PlayAnimByObj(objidA, objidB, breplay) return true end
+--- Player
+--- 玩家模块管理接口 Player
+local Player = {}
+_G.Player = Player
+
+--- 获取房主uin
+--- number 房主uin
+function Player:GetHostUin() return 0 end
+
+--- 设置玩家是否胜利
+--- uin number 玩家uin
+--- result number 胜利结果
+--- boolean 操作是否成功
+function Player:SetGameResults(uin, result) return true end
+
+--- 设置玩家胜利
+--- uin number 玩家uin
+--- boolean 操作是否成功
+function Player:SetGameWin(uin) return true end
+
+--- 获取玩家手持道具
+--- uin number 玩家uin
+--- number,string 道具ID
+function Player:GetCurToolID(uin) return 0, "" end
+
+--- 获取玩家当前选中快捷栏索引
+--- uin number 玩家uin
+--- number 索引值(1~8)
+function Player:GetShotcutIndex(uin) return 0 end
+
+--- 设置玩家当前选中快捷栏索引
+--- uin number 玩家uin
+--- index number 快捷栏索引(1~8)
+--- boolean 操作是否成功
+function Player:SetShotcutIndex(uin, index) return true end
+
+--- 设置道具技能时间
+--- uin number 玩家uin
+--- itemid number|string 道具类型
+--- cd number 冷却时间
+--- boolean 操作是否成功
+function Player:SetSkillCD(uin, itemid, cd) return true end
+
+--- 玩家在指定位置复活
+--- uin number 玩家uin
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- boolean 操作是否成功
+function Player:ReviveToPos(uin, x, y, z) return true end
+
+--- 设置玩家复活点
+--- uin number 玩家uin
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- boolean 操作是否成功
+function Player:SetRevivePoint(uin, x, y, z) return true end
+
+--- 使玩家显示飘窗文字
+--- uin number 玩家uin
+--- info string 文本内容
+--- boolean 操作是否成功
+function Player:NotifyGameInfo2Self(uin, info) return true end
+
+--- 玩家旋转摄像机角度
+--- uin number 玩家uin
+--- yaw number 视角偏移旋转角度
+--- pitch number 视角仰望旋转角度
+--- issmooth boolean 是否平滑
+--- iscorrectyaw boolean 是否修正
+--- deltayaw number 视角偏移平滑变化量
+--- deltapitch number 视角仰望变化量
+--- boolean 操作是否成功
+function Player:RotateCamera(uin, yaw, pitch, issmooth, iscorrectyaw, deltayaw, deltapitch) return true end
+
+--- 抖动玩家镜头
+--- uin number 玩家uin
+--- power number 强度(取值范围1-1000)
+--- time number 持续时间
+--- boolean 操作是否成功
+function Player:ShakeCamera(uin, power, time) return true end
+
+--- 停止抖动玩家镜头
+--- uin number 玩家uin
+--- boolean 操作是否成功
+function Player:StopShakeCamera(uin) return true end
+
+--- 玩家旋转摄像机角度朝向actor
+--- uin number 玩家uin
+--- objId number 对象ID
+--- boolean 操作是否成功
+function Player:RotateCameraToActor(uin, objId) return true end
+
+--- 玩家改变视角
+--- uin number 玩家uin
+--- viewporttype number 视角类型
+--- islock boolean 是否锁定
+--- boolean 操作是否成功
+function Player:ChangeViewMode(uin, viewporttype, islock) return true end
+
+--- 玩家是否装备了某件装备
+--- uin number 玩家uin
+--- itemid number|string 道具类型
+--- boolean 是否装备
+function Player:IsEquipByResID(uin, itemid) return true end
+
+--- 获取玩家准心位置
+--- uin number 玩家uin
+--- number,number,number x,y,z坐标
+function Player:GetAimPos(uin) return 0, 0, 0 end
+
+--- 获取玩家准心方向
+--- objId number 对象ID
+--- table 单位方向向量
+function Player:GetAimDir(objId) return {} end
+
+--- 获取玩家射线检测起点位置
+--- objId number 对象ID
+--- number,number,number x,y,z方块坐标
+function Player:GetRayOriginPos(objId) return 0, 0, 0 end
+
+--- 对玩家播放背景音乐2D
+--- uin number 玩家uin
+--- musicid number 音乐ID
+--- volume number 声音大小
+--- pitch number 声音音调
+--- isLoop boolean 是否循环
+--- boolean 操作是否成功
+function Player:PlayMusic(uin, musicid, volume, pitch, isLoop) return true end
+
+--- 玩家停止播放背景音乐2D
+--- uin number 玩家uin
+--- musicid number 音乐ID
+--- boolean 操作是否成功
+function Player:StopMusic(uin, musicid) return true end
+
+--- 玩家暂停/恢复播放背景音乐
+--- uin number 玩家uin
+--- musicid number 音乐ID
+--- pause boolean true暂停/false恢复
+--- boolean 操作是否成功
+function Player:PauseMusic(uin, musicid, pause) return true end
+
+--- 打开一个UI界面
+--- uin number 玩家uin
+--- viewid string 界面ID
+--- effectid number 动作ID(缺省参数)
+--- time number 动画事件(缺省参数)
+--- boolean 操作是否成功
+function Player:OpenUIView(uin, viewid, effectid, time) return true end
+
+--- 隐藏一个UI界面
+--- uin number 玩家uin
+--- viewid string 界面ID
+--- effectid number 动作ID(缺省参数)
+--- time number 动画事件(缺省参数)
+--- boolean 操作是否成功
+function Player:HideUIView(uin, viewid, effectid, time) return true end
+
+--- 获取客机类型
+--- uin number 玩家uin
+--- any 客机类型信息
+function Player:GetClientInfo(uin) return nil end
+
+--- 获取玩家昵称
+--- objId number 对象ID
+--- string 玩家昵称
+function Player:GetNickname(objId) return "" end
+
+--- 打开开发者商店商品购买弹框(开发者账号和自定义按钮点击事件可用)
+--- objId number 对象ID
+--- devGoodsId string 开发者商品ID
+--- customDesc string 自定义商品描述
+--- number 操作结果代码
+function Player:OpenDevGoodsBuyDialog(objId, devGoodsId, customDesc) return 0 end
+
+--- 打开开发者商店商品详情页
+--- objId number 对象ID
+--- devGoodsId string 开发者商品ID
+--- number 操作结果代码
+function Player:OpenDevGoodsBuyDetailedDialog(objId, devGoodsId) return 0 end
+
+--- 玩家打开开发者商店(仅开发者可用)
+--- objId number 对象ID
+--- any 操作结果
+function Player:OpenDevStore(objId) return nil end
+
+--- 打开开发者商品二级分类
+--- objId number 对象ID
+--- page number 分类页码
+--- name string 分类名称
+--- any 操作结果
+function Player:OpenDevStoreTab(objId, page, name) return nil end
+
+--- 打开开发者商店一级页面
+--- playerId number 玩家ID
+--- pagetype number 页面类型
+--- pagetitle string 页面标题
+--- any 操作结果
+function Player:OpenDevGoodsPage(playerId, pagetype, pagetitle) return nil end
+
+--- 获取玩家的消费统计(有5s冷却限制,触发冷却返回nil)
+--- uin number 玩家uin
+--- tbegin number 开始时间
+--- tend number 结束时间
+--- currencytype number 货币类型
+--- call_back function 内部回调(缺省参数)
+--- number 消费数量(-1表示请求失败)
+function Player:GetPlayerCostStatic(uin, tbegin, tend, currencytype, call_back) return 0 end
+
+--- 玩家自定义数据上报埋点
+--- uin number 玩家uin
+--- eventname string 事件名称
+--- boolean 操作是否成功
+function Player:StandReportEvent(uin, eventname) return true end
+
+--- 清空运动趋势(配合'禁止移动'使用)
+--- uin number 玩家uin
+--- boolean 操作是否成功
+function Player:ClearMotion(uin) return true end
+
+--- 玩家手机震动
+--- uin number 玩家uin
+--- time number 震动时长(单位:ms)
+--- amplitude number 震动强度(范围:1~255)
+--- boolean 操作是否成功
+function Player:SetMobileVibrate(uin, time, amplitude) return true end
+
+--- 根据玩家uin,3D坐标获取玩家屏幕2D坐标
+--- uin number 玩家uin
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- number,number 屏幕x坐标,屏幕y坐标
+function Player:GetScreenSpacePos(uin, x, y, z) return 0, 0 end
+
+--- 根据玩家uin,3D坐标获取玩家屏幕2D坐标(V2版本)
+--- playerId number 玩家ID
+--- x number 坐标x
+--- y number 坐标y
+--- z number 坐标z
+--- number 屏幕x坐标
+function Player:GetScreenSpacePosV2(playerId, x, y, z) return 0 end
+
+--- 发送好友申请
+--- uin1 number 发起申请的玩家uin
+--- uin2 number 添加的好友uin
+--- boolean 操作是否成功
+function Player:SendFriendApply(uin1, uin2) return true end
+
+--- 玩家摄像机变换到位置
+--- uin number 玩家uin
+--- pos table 位置坐标
+--- easingtype number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function Player:SetCameraPosTransformTo(uin, pos, easingtype, time) return true end
+
+--- 玩家摄像机旋转到角度
+--- uin number 玩家uin
+--- rot table 角度坐标
+--- easingtype number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function Player:SetCameraRotTransformTo(uin, rot, easingtype, time) return true end
+
+--- 玩家摄像机Fov变换到值
+--- uin number 玩家uin
+--- fov number Fov值
+--- easingtype number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function Player:SetCameraFovTransformTo(uin, fov, easingtype, time) return true end
+
+--- 玩家摄像机变换相对位置
+--- uin number 玩家uin
+--- delta table 相对位置坐标(100=1方块)
+--- easingtype number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function Player:SetCameraPosTransformBy(uin, delta, easingtype, time) return true end
+
+--- 玩家摄像机旋转相对角度
+--- uin number 玩家uin
+--- delta table 相对角度坐标
+--- easingtype number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function Player:SetCameraRotTransformBy(uin, delta, easingtype, time) return true end
+
+--- 玩家摄像机Fov变换相对值
+--- uin number 玩家uin
+--- delta number 相对Fov值
+--- easingtype number 缓动类型
+--- time number 动画时间
+--- boolean 操作是否成功
+function Player:SetCameraFovTransformBy(uin, delta, easingtype, time) return true end
+
+--- 设置玩家的摄像机设置开关
+--- uin number 玩家uin
+--- attrtype number 摄像机属性类型
+--- enable boolean 开关(true开启 false关闭)
+--- boolean 操作是否成功
+function Player:SetCameraAttrState(uin, attrtype, enable) return true end
+
+--- 设置玩家的摄像机旋转模式
+--- uin number 玩家uin
+--- rotmode number 旋转模式
+--- boolean 操作是否成功
+function Player:SetCameraRotMode(uin, rotmode) return true end
+
+--- 设置玩家的摄像机挂载到对象
+--- uin number 玩家uin
+--- targetuin number 目标玩家uin
+--- boolean 操作是否成功
+function Player:SetCameraMountObj(uin, targetuin) return true end
+
+--- 设置玩家的摄像机挂载到位置
+--- uin number 玩家uin
+--- pos table 挂载位置坐标
+--- boolean 操作是否成功
+function Player:SetCameraMountPos(uin, pos) return true end
+
+--- 重置玩家摄像机
+--- uin number 玩家uin
+--- boolean 操作是否成功
+function Player:ResetCameraAttr(uin) return true end
+
+--- 打开可以操作的箱子
+--- uin number 玩家uin
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- boolean 操作是否成功
+function Player:OpenBoxByPos(uin, x, y, z) return true end
+
+--- 获取玩家首次邀请人(阻塞接口,请求间隔10s)
+--- uin number 玩家uin
+--- call_back function 内部回调(缺省参数)
+--- number 邀请人的玩家Uin(获取失败时返回错误码)
+function Player:GetFirstInviter(uin, call_back) return 0 end
+
+--- 判断两个玩家是否是好友(阻塞接口)
+--- uin1 number 玩家1的uin
+--- uin2 number|string 玩家2的uin
+--- boolean 是否是好友
+function Player:HasFriend(uin1, uin2) return true end
+
+--- 获取玩家VIP等级
+--- uin number 玩家uin
+--- number VIP等级
+function Player:GetMiniVipLevel(uin) return 0 end
+
+--- 改变玩家移动方式
+--- uin number 玩家uin
+--- movetype number 移动类型
+--- boolean 操作是否成功
+function Player:ChangPlayerMoveType(uin, movetype) return true end
+
+--- 触发器播放广告接口
+--- uin number 玩家uin
+--- adname string 广告名称
+--- number,number,string 操作代码,玩家uin,广告名称
+function Player:PlayAdvertising(uin, adname) return 0, 0, "" end
+
+--- 玩家组显示游戏内弹窗
+--- uin number 玩家uin
+--- popuptype number 弹窗类型
+--- bopen boolean 打开或者关闭
+--- data any 附加数据
+--- boolean 操作是否成功
+function Player:OpenInnerView(uin, popuptype, bopen, data) return true end
+
+--- 设置玩家道具设置属性
+--- uin number 玩家uin
+--- itemid number|string 道具ID
+--- abilitytype number 道具能力类型
+--- switch boolean 是否打开
+--- boolean 操作是否成功
+function Player:SetItemAttAction(uin, itemid, abilitytype, switch) return true end
+
+--- 玩家强制打开UI界面
+--- uin number 玩家uin
+--- workstage number 工作阶段
+--- boolean 操作是否成功
+function Player:ForceOpenBoxUI(uin, workstage) return true end
+
+--- 设置道具技能进入冷却
+--- uin number 玩家uin
+--- itemid number|string 道具ID
+--- cd number CD时间
+--- boolean 操作是否成功
+function Player:ItemSkillCDEnter(uin, itemid, cd) return true end
+
+--- 设置道具技能结束冷却
+--- uin number 玩家uin
+--- itemid number|string 道具ID
+--- boolean 操作是否成功
+function Player:ItemSkillCDDone(uin, itemid) return true end
+
+--- 设置玩家枪械权限
+--- uin number 玩家uin
+--- actiontype number 枪禁用状态枚举
+--- switch boolean 是否打开
+--- boolean 操作是否成功
+function Player:SetGunActionState(uin, actiontype, switch) return true end
+
+--- 获取玩家视角模式
+--- uin number 玩家uin
+--- any 视角模式信息
+function Player:GetViewMode(uin) return nil end
+
+--- 获取玩家复活点
+--- uin number 玩家uin
+--- number,number,number x,y,z方块坐标
+function Player:GetRevivePoint(uin) return 0, 0, 0 end
+
+--- 获取租赁云服务器服主
+--- number 玩家Uin(仅租赁云服生效)
+function Player:GetRentCloudServerOwner() return 0 end
+
+--- 将玩家移出本局游戏
+--- objId number 对象ID
+--- boolean 操作是否成功
+function Player:RemovePlayer(objId) return true end
+
+--- 获取玩家好友列表信息
+--- objId number 玩家Uin
+--- index number 起始索引
+--- size number 获取数量
+--- number 最大好友数量
+--- table {{name: string, uin: number, headframe: string, live: boolean, online: boolean}, ...} 好友列表信息
+function Player:GetFriendList(objId, index, size) return 0, {} end
+
+--- 设置游戏设置开关
+--- playerId number 玩家ID
+--- iType number 设置类型 (GameSetting)
+--- enable boolean 开关
+--- boolean 操作是否成功
+function Player:SetSettingEnable(playerId, iType, enable) return true end
+
+--- 设置游戏设置权限开关
+--- playerId number 玩家ID
+--- iType number 设置类型 (GameSetting)
+--- enable boolean 开关
+--- boolean 操作是否成功
+function Player:SetSettingAbility(playerId, iType, enable) return true end
+
+--- 旋转玩家模型
+--- playerId number 玩家ID
+--- yaw number 偏航角(X轴)
+--- pitch number 俯仰角(Y轴)
+--- boolean 操作是否成功
+function Player:RotateMainModel(playerId, yaw, pitch) return true end
+
+--- 获取本地玩家迷你币数量 (阻塞等待函数)
+--- objId number 玩家对象ID
+--- iType number 币种类型 (MiniCurrency)
+--- number 货币数量
+function Player:GetMiniCurrency(objId, iType) return 0 end
+--- Monster
+--- 生物模块管理接口 Monster
+local Monster = {}
+_G.Monster = Monster
+
+--- 获取生物类型ID
+--- objid number 对象ID
+--- number 生物类型ID
+function Monster:GetActorID(objid) return 0 end
+
+--- 获取生物类型名称
+--- objId number 对象ID
+--- string 生物类型名称
+function Monster:GetActorName(objId) return "" end
+
+--- 替换生物
+--- objId number 原生物对象ID
+--- newactorId number 新生物类型ID
+--- number 新生物对象ID
+function Monster:ReplaceActor(objId, newactorId) return 0 end
+
+--- 获取生物击杀掉落经验
+--- actorId number 生物类型ID
+--- number 击杀掉落经验值
+function Monster:GetMonsterDefLevelExp(actorId) return 0 end
+
+--- 设置生物击杀掉落经验
+--- actorId number 生物类型ID
+--- exp number 经验值
+--- boolean 操作是否成功
+function Monster:SetMonsterDefLevelExp(actorId, exp) return true end
+
+--- 切换Ai行为树
+--- objid number 生物对象ID
+--- treeid number|string 行为树ID
+--- boolean 操作是否成功
+function Monster:ChangeAI(objid, treeid) return true end
+
+--- 怪物对目标是否可见
+--- objId number 怪物对象ID
+--- targetUin number 目标玩家uin
+--- boolean 是否可见
+function Monster:CanSee(objId, targetUin) return true end
+
+--- 获取生物的掉落物信息
+--- actorId number 生物类型ID
+--- table 掉落物信息表，包含道具ID、数量、概率
+function Monster:GetDropItemInfo(actorId) return {} end
+
+--- 设置生物A被玩家驯服
+--- objId number 生物对象ID
+--- playerUin number 玩家uin
+--- boolean 操作是否成功
+function Monster:SetTameTarget(objId, playerUin) return true end
+
+--- 随机获取一个生物类型ID
+--- number 随机生物类型ID
+function Monster:RandomActorID() return 0 end
+
+--- 获取驯养主ID
+--- objId number 生物对象ID
+--- number 驯养主ID
+function Monster:GetTamedOwnerID(objId) return 0 end
+
+--- 获取生物类型外观
+--- monsterId number|string 生物定义ID或生物预制ID
+--- any 生物外观模型信息
+function Monster:GetFacade(monsterId) return nil end
+
+--- 获取生物定义中的标签组
+--- actorId number|string 生物类型ID
+--- table|nil 标签组信息
+function Monster:GetTags(actorId) return {} end
+
+--- 获取生物名称
+--- actorId number|string 生物类型ID
+--- string|nil 生物名称
+function Monster:GetMonsterDefName(actorId) return "" end
+--- Area
+--- 区域模块管理接口 Area
+local Area = {}
+_G.Area = Area
+
+--- 创建一个区域对象
+--- pos table 区域底部中心位置
+--- size table 区域大小
+--- number 区域对象ID
+function Area:CreateAreaPrefab(pos, size) return 0 end
+
+--- 通过区域对象id获取区域uuid
+--- objId number 区域对象ID
+--- any 区域UUID
+function Area:GetAreaUuidByObjId(objId) return nil end
+
+--- 创建矩形区域(通过范围)
+--- posBeg table 区域起始坐标
+--- posEnd table 区域结束坐标
+--- btmp boolean 是否是临时区域
+--- any 操作结果
+function Area:CreateAreaRectByRange(posBeg, posEnd, btmp) return nil end
+
+--- 销毁区域
+--- areaid number 区域ID
+--- boolean 操作是否成功
+function Area:DestroyArea(areaid) return true end
+
+--- 获取区域中间点
+--- areaid number 区域ID
+--- table 区域中心位置
+function Area:GetAreaCenter(areaid) return {} end
+
+--- 获取区域各边长
+--- areaid number 区域ID
+--- number,number,number x轴向长度,y轴向长度,z轴向长度
+function Area:GetAreaRectLength(areaid) return 0, 0, 0 end
+
+--- 获取区域范围
+--- areaid number 区域ID
+--- table,table 区域起始坐标,区域结束坐标
+function Area:GetAreaRectRange(areaid) return {}, {} end
+
+--- 随机区域内位置
+--- areaid number 区域ID
+--- table 随机坐标
+function Area:GetRandomPos(areaid) return {} end
+
+--- 检测obj是否在区域内
+--- areaid number 区域ID
+--- objid number 对象ID
+--- boolean 是否在区域内
+function Area:ObjInArea(areaid, objid) return true end
+
+--- 检测区域内是否有某个方块
+--- areaid number 区域ID
+--- blockid number|string 方块类型ID
+--- boolean 是否在区域内
+function Area:BlockInArea(areaid, blockid) return true end
+
+--- 位置是否在区域内
+--- areaid number 区域ID
+--- pos table 位置坐标
+--- boolean 是否在区域内
+function Area:PosInArea(areaid, pos) return true end
+
+--- 获取区域中的所有玩家
+--- areaid number 区域ID
+--- table 玩家objid组
+function Area:GetAreaPlayers(areaid) return {} end
+
+--- 获取区域中的所有生物(当帧创建的生物获取不到)
+--- areaid number 区域ID
+--- table 生物objid组
+function Area:GetAreaCreatures(areaid) return {} end
+
+--- 清空区域内全部方块
+--- areaid number 区域ID
+--- blockid number|string 方块类型ID
+--- num number 最大清除数量
+--- btriggerevent boolean 是否触发事件
+--- boolean 操作是否成功
+function Area:ClearAllBlock(areaid, blockid, num, btriggerevent) return true end
+
+--- 复制区域内方块到另一个区域
+--- areaid number 区域ID
+--- pos table 目标起始位置
+--- boolean 操作是否成功
+function Area:CloneAreaBlock(areaid, pos) return true end
+
+--- 替换方块类型为新的方块类型
+--- areaid number 区域ID
+--- srcblockid number|string 区域内的方块类型
+--- destblockid number|string 替换的方块类型
+--- face number 方块朝向
+--- color string|number 颜色
+--- boolean 操作是否成功
+function Area:ReplaceAreaBlock(areaid, srcblockid, destblockid, face, color) return true end
+
+--- 获取区域范围内全部对象
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- objtype number 对象类型
+--- table 对象列表
+function Area:GetAllObjsInAreaRange(posbeg, posend, objtype) return {} end
+
+--- 获取区域范围内全部玩家
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- table 玩家列表
+function Area:GetAllPlayersInAreaRange(posbeg, posend) return {} end
+
+--- 获取区域范围内全部生物
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- table 生物列表
+function Area:GetAllCreaturesInAreaRange(posbeg, posend) return {} end
+
+--- 用方块填充区域范围(分帧处理,当前帧率操作不到填充的方块)
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- blockid number|string 方块类型
+--- face number 方块朝向
+--- color string|number 颜色
+--- switch boolean 是否开启
+--- filltype number 填充类型
+--- boolean 操作是否成功
+function Area:FillBlockAreaRange(posbeg, posend, blockid, face, color, switch, filltype) return true end
+
+--- 清空区域范围内方块
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- blockid number|string 方块类型
+--- btriggerevent boolean 是否触发事件
+--- boolean 操作是否成功
+function Area:ClearAllBlockAreaRange(posbeg, posend, blockid, btriggerevent) return true end
+
+--- 破坏区域内的方块
+--- areaid number 区域ID
+--- blockid string|number 方块ID或资产ID
+--- n number 销毁数量(不填或者0则全部销毁)
+--- candrop boolean 是否掉落物品
+--- btriggerevent boolean 是否触发事件
+--- boolean 操作是否成功
+function Area:DestroyAllBlock(areaid, blockid, n, candrop, btriggerevent) return true end
+
+--- 复制区域范围内方块到另一个区域
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- deststartpos table 目标起始位置
+--- itype number 复制类型
+--- boolean 操作是否成功
+function Area:CloneAreaRange(posbeg, posend, deststartpos, itype) return true end
+
+--- 替换区域范围方块
+--- posbeg table 起始位置
+--- posend table 末点位置
+--- srcblockid number|string 方块类型
+--- destblockid number|string 目标方块类型
+--- face number 方块朝向
+--- inair boolean 是否包括空气方块
+--- boolean 操作是否成功
+function Area:ReplaceAreaRangeBlock(posbeg, posend, srcblockid, destblockid, face, inair) return true end
+
+--- 获取一个区域内随机空气方块
+--- posbeg table 区域起始位置
+--- posend table 区域结束位置
+--- table 随机空气位置(x y z)
+function Area:GetRandomAirPos(posbeg, posend) return {} end
+
+--- 获取区域内的方块类型
+--- areaid number 区域ID
+--- table 类型组
+function Area:GetAreaBlockTypes(areaid) return {} end
+
+--- 获取区域内的方块数量
+--- areaid number 区域ID
+--- blockid string|number 方块ID
+--- number 方块数量
+function Area:GetBlockNum(areaid, blockid) return 0 end
+
+--- 检查指定范围内是否可以放置方块
+--- posbeg table 区域起始位置
+--- posend table 区域结束位置
+--- blockid string|number 方块ID
+--- boolean 是否可以放置方块(true/false)
+function Area:CheckRangeCanPlace(posbeg, posend, blockid) return true end
+
+--- 获取区域中指定玩家关系的角色
+--- posbeg table 区域起始位置
+--- posend table 区域结束位置
+--- uin number 玩家uin
+--- relativing number 关系类型
+--- actortype number 角色类型
+--- number,table 数量,角色数组
+function Area:GetRelativeActors(posbeg, posend, uin, relativing, actortype) return 0, {} end
+--- Buff
+--- 状态模块管理接口 Buff
+local Buff = {}
+_G.Buff = Buff
+
+--- 给对象附加效果
+--- objId number 对象ID
+--- buffId number|string 效果ID
+--- customticks? number 效果持续时间 **(-1表示默认配置，0表示无限)**
+--- boolean 成功返回true，失败返回false
+function Buff:AddBuff(objId, buffId, customticks) return true end
+
+--- 给对象移除指定效果
+--- objId number 对象ID
+--- buffId number|string 效果ID
+--- boolean 成功返回true，失败返回false
+function Buff:RemoveBuff(objId, buffId) return true end
+
+--- 给对象清除所有效果
+--- objId number 对象ID
+--- boolean 成功返回true，失败返回false
+function Buff:ClearAllBuff(objId) return true end
+
+--- 为对象清除所有负面效果
+--- objId number 对象ID
+--- boolean 成功返回true，失败返回false
+function Buff:ClearAllBadBuff(objId) return true end
+
+--- 为对象清除所有有益效果
+--- objId number 对象ID
+--- boolean 成功返回true，失败返回false
+function Buff:ClearAllGoodBuff(objId) return true end
+
+--- 判断对象身上是否有指定效果
+--- objId number 对象ID
+--- buffId number|string 效果ID
+--- bufflv number 效果等级
+--- boolean 成功返回true，失败返回false
+function Buff:HasBuff(objId, buffId, bufflv) return true end
+
+--- 获取对象身上效果列表
+--- objId number 对象ID
+--- number, table 效果数量, 效果ID数组
+function Buff:GetBuffList(objId) return 0, {} end
+
+--- 获取对象身上指定效果数量
+--- objId number 对象ID
+--- buffId number|string 效果ID
+--- number 数量
+function Buff:GetBuffNumByBuffid(objId, buffId) return 0 end
+
+--- 获取对象身上指定效果剩余时间
+--- objId number 对象ID
+--- buffId number|string 效果ID
+--- number 剩余时间 **(秒，0表示永久)**
+function Buff:GetBuffLeftTime(objId, buffId) return 0 end
+
+--- 获取状态效果名称
+--- buffId number|string 效果ID
+--- string 效果名称
+function Buff:GetBuffDefName(buffId) return "" end
+
+--- 获取状态效果描述
+--- buffId number|string 效果ID
+--- string 状态效果描述
+function Buff:GetBuffDefDesc(buffId) return "" end
+
+--- 替换已有状态
+--- objId number 对象ID
+--- buffsrc number|string 源状态ID
+--- buffsrclv number 源状态等级
+--- buffdst number|string 目标状态
+--- buffdstlv number 目标状态等级
+--- customticks number 持续时间
+--- boolean 成功返回true，失败返回false
+function Buff:ReplaceBuff(objId, buffsrc, buffsrclv, buffdst, buffdstlv, customticks) return true end
+--- Item
+--- 道具模块管理接口 Item
+local Item = {}
+_G.Item = Item
+
+--- 获取道具名称
+--- itemId number|string 道具ID
+--- string 道具名称
+function Item:GetItemName(itemId) return "" end
+
+--- 在资源库里随机获取一个道具ID
+--- number 随机道具ID
+function Item:RandomItemID() return 0 end
+
+--- 在资源库里随机获取一个投掷物ID
+--- number 随机投掷物ID
+function Item:RandomProjectileID() return 0 end
+
+--- 获取道具属性
+--- itemId number|string 道具ID
+--- attrType number 属性类型
+--- number 属性值
+function Item:GetAttr(itemId, attrType) return 0 end
+
+--- 获取道具描述
+--- itemId number|string 道具ID
+--- string 道具描述
+function Item:GetItemDesc(itemId) return "" end
+
+--- 获取自定义枪械的属性(仅自定义枪械有效)
+--- itemId number|string 道具ID
+--- attrName string 属性名称
+--- any 属性值
+function Item:GetCustomGunAttr(itemId, attrName) return nil end
+
+--- 获取道具配方的数量
+--- itemId number|string 道具ID
+--- number 配方数量
+function Item:GetCraftIDNum(itemId) return 0 end
+
+--- 获取道具的配方材料和数量
+--- itemId number|string 道具ID
+--- index number 配方索引
+--- table 配方材料表{{材料ID, 数量}, ...}
+function Item:GetCraftMaterialAndNum(itemId, index) return {} end
+
+--- 获取道具类型外观
+--- itemId number|string 道具类型ID或道具预制ID
+--- string 道具类型外观
+function Item:GetFacade(itemId) return "" end
+
+--- 在位置上创建道具实例的掉落物
+--- itemId number|string 道具ID
+--- pos table 掉落物位置{x=0, y=0, z=0}
+--- number 掉落物对象ID
+function Item:CreateItemInstInWorld(itemId, pos) return 0 end
+
+--- 在位置上创建枪械道具实例的掉落物
+--- itemId number|string 道具ID
+--- pos table 掉落物位置
+--- number 掉落物对象ID
+function Item:CreateGunInWorld(itemId, pos) return 0 end
+
+--- 获取装备道具所对应的装备栏
+--- itemId number|string 装备道具ID
+--- number 装备栏位置(BackpackBeginIndex.Equip + EquipSlotType)
+function Item:GetEquipItemGridID(itemId) return 0 end
+
+--- 修改枪械道具实例的属性
+--- instId number 道具实例ID
+--- key string 属性键
+--- value any 属性值(number|string|bool)
+--- boolean 操作是否成功
+function Item:ModifyGunAttribute(instId, key, value) return true end
+
+--- 获取枪械道具实例的属性
+--- instId number 道具实例ID
+--- key string 属性键
+--- any 属性值
+function Item:GetGunAttribute(instId, key) return nil end
+
+--- 获取枪预制的属性
+--- instId number 道具实例ID
+--- key string 属性键
+--- any 属性值
+function Item:GetGunPrefabAttribute(instId, key) return nil end
+
+--- 根据道具实例ID获取道具ID
+--- instId number 道具实例ID
+--- number|string 道具ID
+function Item:GetItemIdByInstanceId(instId) return 0 end
+
+--- 给道具实例添加一个模型子部件
+--- instId number 道具实例ID
+--- partName string 子部件名字
+--- boneName string 骨骼名称
+--- modelStr string 模型字符串
+--- offset table 位置偏移{x=0, y=0, z=0}
+--- rot table 旋转角度{x=0, y=0, z=0}
+--- scale table 缩放比例{x=1, y=1, z=1}
+--- string 部件名字
+function Item:AddSubModelPart(instId, partName, boneName, modelStr, offset, rot, scale) return "" end
+
+--- 删除一个道具实例的模型子部件
+--- instId number 道具实例ID
+--- partName string 子部件名字
+--- boolean 操作是否成功
+function Item:DeleteSubModelPart(instId, partName) return true end
+
+--- 修改一个道具实例的模型子部件
+--- instId number 道具实例ID
+--- partName string 子部件名字
+--- boneName string 骨骼名称
+--- modelStr string 模型字符串
+--- offset table 位置偏移
+--- rot table 旋转角度
+--- scale table 缩放比例
+--- boolean 操作是否成功
+function Item:ReplaceSubModelPart(instId, partName, boneName, modelStr, offset, rot, scale) return true end
+
+--- 设置道具实例的自定义数据string
+--- instId number 道具实例ID
+--- key string 数据键
+--- value string 字符串值
+--- boolean 操作是否成功
+function Item:SetStringCustomData(instId, key, value) return true end
+
+--- 设置道具实例的自定义数据boolean
+--- instId number 道具实例ID
+--- key string 数据键
+--- value boolean 布尔值
+--- boolean 操作是否成功
+function Item:SetBoolCustomData(instId, key, value) return true end
+
+--- 设置道具实例的自定义数据number
+--- instId number 道具实例ID
+--- key string 数据键
+--- value number 数值
+--- boolean 操作是否成功
+function Item:SetNumberCustomData(instId, key, value) return true end
+
+--- 设置道具实例的自定义数据Object
+--- instId number 道具实例ID
+--- key string 数据键
+--- value table 对象值
+--- boolean 操作是否成功
+function Item:SetObjCustomData(instId, key, value) return true end
+
+--- 设置道具实例的自定义数据Array
+--- instId number 道具实例ID
+--- key string 数据键
+--- value table 数组值
+--- boolean 操作是否成功
+function Item:SetArrayCustomData(instId, key, value) return true end
+
+--- 获取道具实例的自定义数据string
+--- instId number 道具实例ID
+--- key string 数据键
+--- string 字符串值
+function Item:GetStringCustomData(instId, key) return "" end
+
+--- 获取道具实例的自定义数据bool
+--- instId number 道具实例ID
+--- key string 数据键
+--- boolean 布尔值
+function Item:GetBoolCustomData(instId, key) return true end
+
+--- 获取道具实例的自定义数据number
+--- instId number 道具实例ID
+--- key string 数据键
+--- number 数值
+function Item:GetNumberCustomData(instId, key) return 0 end
+
+--- 获取道具实例的自定义数据Object
+--- instId number 道具实例ID
+--- key string 数据键
+--- table 对象值
+function Item:GetObjCustomData(instId, key) return {} end
+
+--- 获取道具实例的自定义数据Array
+--- instId number 道具实例ID
+--- key string 数据键
+--- table 数组值
+function Item:GetArrayCustomData(instId, key) return {} end
+
+--- 获取具有道具实例ID的道具外观
+--- instId number 道具实例ID
+--- string 道具实例外观
+function Item:GetItemInstFacade(instId) return "" end
+
+--- 获取掉落物或者投掷物的格子属性
+--- objId number 对象ID
+--- attrType number 属性类型
+--- number 属性值
+function Item:GetGridAttr(objId, attrType) return 0 end
+
+--- 获取道具定义中的标签组
+--- table 道具的标签组
+--- itemId number|string 道具定义ID/道具预制ID
+function Item:GetTags(itemId) return {} end
+--- Backpack
+--- 背包模块管理接口 Backpack
+local Backpack = {}
+_G.Backpack = Backpack
+
+--- 设置背包格道具
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- itemid number|string 道具类型
+--- num number 道具数量(默认1)
+--- boolean 是否成功
+function Backpack:SetGridItem(playerid, gridid, itemid, num) return true end
+
+--- 移除背包格内一定数量道具
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- num number 道具数量(默认全部移除)
+--- boolean 是否成功
+function Backpack:RemoveGridItem(playerid, gridid, num) return true end
+
+--- 移除背包内一定数量道具,通过道具ID移除,默认全部移除
+--- playerid number 玩家ID
+--- itemid number|string 道具类型
+--- num number 道具数量
+--- number 移除数量(ret and ret>0 成功)
+function Backpack:RemoveGridItemByItemID(playerid, itemid, num) return 0 end
+
+--- 清空指定背包栏
+--- playerid number 玩家ID
+--- bartype number 背包栏类型
+--- boolean 是否成功
+function Backpack:ClearPack(playerid, bartype) return true end
+
+--- 清空全部背包(包含背包栏、快捷栏、装备栏)
+--- playerid number 玩家ID
+--- boolean 是否成功
+function Backpack:ClearAllPack(playerid) return true end
+
+--- 移动背包道具,默认全部转移
+--- playerid number 玩家ID
+--- gridsrc number 源格子ID
+--- griddst number 移动至的目标格子ID
+--- num number 道具数量(默认全部)
+--- boolean 是否成功
+function Backpack:MoveGridItem(playerid, gridsrc, griddst, num) return true end
+
+--- 交换背包道具
+--- playerid number 玩家ID
+--- grid1 number 格子1 ID
+--- grid2 number 格子2 ID
+--- boolean 是否成功
+function Backpack:SwapGridItem(playerid, grid1, grid2) return true end
+
+--- 背包(包含背包栏、快捷栏)是否有足够的空间存放一定数量的道具
+--- playerid number 玩家ID
+--- itemid number|string 道具类型
+--- num number 道具数量(默认1)
+--- boolean 是否成功
+function Backpack:EnoughSpaceForItem(playerid, itemid, num) return true end
+
+--- 计算背包(包含背包栏、快捷栏)能存放的道具剩余总数量
+--- playerid number 玩家ID
+--- itemid number|string 道具类型
+--- number 可以存放的数量
+function Backpack:CalcSpaceNumForItem(playerid, itemid) return 0 end
+
+--- 检测背包是否持有某个道具
+--- playerid number 玩家ID
+--- bartype number 背包栏类型
+--- itemid number|string 道具类型
+--- boolean 是否成功
+function Backpack:HasItemByBackpackBar(playerid, bartype, itemid) return true end
+
+--- 获取背包持有某个道具总数量,同时返回装有道具的背包格数组
+--- playerid number 玩家ID
+--- bartype number 背包栏类型
+--- itemid number|string 道具类型
+--- number,table 道具数量,格子ID数组
+function Backpack:GetItemNumByBackpackBar(playerid, bartype, itemid) return 0, {} end
+
+--- 获取背包持有某个道具总数量,同时返回装有道具的背包格数组
+--- playerid number 玩家ID
+--- itemid number|string 道具类型
+--- isAddEquip boolean 是否添加装备栏(默认True)
+--- number,table 道具数量,格子ID数组
+function Backpack:GetItemNum(playerid, itemid, isAddEquip) return 0, {} end
+
+--- 获取背包格道具ID(返回itemid, num)
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- number,number 道具类型,道具数量(无道具 数量是0 itemid是0)
+function Backpack:GetGridItemID(playerid, gridid) return 0, 0 end
+
+--- 获取背包格道具名称
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- string 道具名称
+function Backpack:GetGridItemName(playerid, gridid) return "" end
+
+--- 添加道具到背包
+--- playerid number 玩家ID
+--- itemid number|string 道具类型
+--- num number 道具数量
+--- prioritytype number 优先快捷栏还是背包栏:1优先快捷栏 2优先背包栏(默认1)
+--- number 成功添加的数量
+function Backpack:AddItem(playerid, itemid, num, prioritytype) return 0 end
+
+--- 丢弃背包某个格子里的道具
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- num number 道具数量
+--- ablePick boolean 能否拾取
+--- boolean 是否成功
+function Backpack:DiscardItem(playerid, gridid, num, ablePick) return true end
+
+--- 丢弃背包某个格子里的道具
+--- playerid number 玩家ID
+--- itemid number|string 道具ID
+--- boolean 是否成功
+function Backpack:DiscardItemByID(playerid, itemid) return true end
+
+--- 玩家穿上装备
+--- playerid number 玩家ID
+--- itemid number|string 道具类型
+--- frompos number 格子ID(可不传,如果不为nil 则必须和itemid一致)
+--- boolean 是否成功
+function Backpack:ActEquipUpByResID(playerid, itemid, frompos) return true end
+
+--- 玩家脱下装备栏装备
+--- playerid number 玩家ID
+--- grid number 装备栏ID
+--- grid2 number 目标格子ID(可不传,如果不为nil 则必须是空格子)
+--- boolean 是否成功
+function Backpack:ActEquipOffByEquipID(playerid, grid, grid2) return true end
+
+--- 销毁装备
+--- playerid number 玩家ID
+--- grid number 装备栏ID
+--- boolean 是否成功
+function Backpack:ActDestructEquip(playerid, grid) return true end
+
+--- 创建道具到玩家背包
+--- playerid number 玩家ID
+--- itemid number 道具类型
+--- num number 道具数量
+--- ipos number 优先存放的位置
+--- any 操作结果
+function Backpack:CreateItem(playerid, itemid, num, ipos) return nil end
+
+--- 在手持道具上播放特效
+--- playerid number 玩家ID
+--- effectid number 特效ID
+--- offset table 偏移量
+--- rot table 旋转
+--- scale table 缩放
+--- boolean 是否成功
+function Backpack:PlayShortCutIxParticle(playerid, effectid, offset, rot, scale) return true end
+
+--- 停止手持道具上播放特效
+--- playerid number 玩家ID
+--- effectid number 特效ID
+--- boolean 是否成功
+function Backpack:StopShortCutIxEffect(playerid, effectid) return true end
+
+--- 设置玩家快捷栏上某种类型道具手持特效
+--- playerid number 玩家ID
+--- itemid number 道具类型
+--- effectid number 特效ID
+--- boolean 是否成功
+function Backpack:PlayShortCutItemParticle(playerid, itemid, effectid) return true end
+
+--- 删除玩家快捷栏上某种类型道具手持特效
+--- playerid number 玩家ID
+--- itemid number 道具类型
+--- effectid number 特效ID
+--- boolean 是否成功
+function Backpack:StopShortCutItemEffect(playerid, itemid, effectid) return true end
+
+--- 批量获取背包和快捷栏格子信息数据
+--- playerid number 玩家ID
+--- begingridId number 开始格子id
+--- endgridId number 结束格子id
+--- any 格子信息数据
+function Backpack:GetGridInfos(playerid, begingridId, endgridId) return nil end
+
+--- 加载背包和快捷栏格子信息数据
+--- playerid number 玩家ID
+--- gridinfo string 格子信息
+--- boolean 是否成功
+function Backpack:LoadGridInfos(playerid, gridinfo) return true end
+
+--- 解析格子信息数据
+--- str string GetGridInfos打包字符串
+--- table 解析后的数据
+function Backpack:DecodeGridInfo(str) return {} end
+
+--- 将解析的格子信息数据打包
+--- infos table DecodeGridInfo解析后的数据
+--- string 打包后的字符串
+function Backpack:EncodeTableGridInfo(infos) return "" end
+
+--- 设置背包和快捷栏格子锁定状态
+--- playerid number 玩家ID
+--- begingridId number 开始格子id
+--- endgridId number 结束格子id
+--- lock boolean true锁定 false打开
+--- boolean 是否成功
+function Backpack:SetGridsLock(playerid, begingridId, endgridId, lock) return true end
+
+--- 批量清理背包格子数据
+--- playerid number 玩家ID
+--- begingridId number 开始格子id
+--- endgridId number 结束格子id
+--- boolean 是否成功
+function Backpack:ClearGrids(playerid, begingridId, endgridId) return true end
+
+--- 设置背包格子数量
+--- playerid number 玩家ID
+--- num number 数量暂定范围(0-100)
+--- boolean 是否成功
+function Backpack:SetBackPackNum(playerid, num) return true end
+
+--- 获取指定背包中所有道具实例
+--- playerid number 玩家ID
+--- bartype number 背包栏类型
+--- table 道具实例ID数组
+function Backpack:GetAllBackPackInstanceIds(playerid, bartype) return {} end
+
+--- 在玩家的背包内创建一个道具实例
+--- playerid number 玩家ID
+--- itemid number|string 道具id
+--- gridIndex number 格子索引
+--- string 道具实例ID
+function Backpack:CreateItemInstInBackpack(playerid, itemid, gridIndex) return "" end
+
+--- 在玩家的背包内创建一把实例化的枪械
+--- playerid number 玩家ID
+--- itemid number|string 道具id
+--- gridIndex number 格子索引
+--- string 道具实例ID
+function Backpack:CreateGunInBackpack(playerid, itemid, gridIndex) return "" end
+
+--- 根据背包索引获取道具实例id
+--- playerid number 玩家ID
+--- gridIndex number 格子索引
+--- string 道具实例id
+function Backpack:GetInstIdByGridIndex(playerid, gridIndex) return "" end
+
+--- 获取背包所有实例化的枪械
+--- playerid number 玩家ID
+--- table 实例id数组
+function Backpack:GetGunInstIdInBackpack(playerid) return {} end
+
+--- 获取背包格子是否锁定
+--- playerid number 玩家ID
+--- gridIndex number 格子索引
+--- boolean 是否锁定(参数错误返回true)
+function Backpack:IsLock(playerid, gridIndex) return true end
+
+--- 获取背包格子属性
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- attr number 属性类型
+--- number 属性值
+function Backpack:GetGridAttr(playerid, gridid, attr) return 0 end
+
+--- 设置背包格子属性
+--- playerid number 玩家ID
+--- gridid number 格子ID
+--- attr number 属性类型
+--- value number 属性值
+--- boolean 是否成功
+function Backpack:SetGridAttr(playerid, gridid, attr, value) return true end
+--- Chat
+--- 消息模块管理接口 - Chat
+local Chat = {}
+_G.Chat = Chat
+
+--- 发送系统信息
+--- **注意：playerId参数传0，表示发送给所有玩家**
+--- content string 内容
+--- playerId number 玩家ID
+--- boolean 是否发送成功
+function Chat:SendSystemMsg(content, playerId) return true end
+---CustomUI
+---界面模块管理接口 - CustomUI
+local CustomUI = {}
+_G.CustomUI = CustomUI
+
+---设置文本元件内容
+---boolean
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---text string 文本内容
+---animId? number 动画ID(缺省参数)
+---time? number 动画时长(缺省参数)
+---mode? number 播放模式(缺省参数)
+function CustomUI:SetText(playerId, uiId, elementId, text, animId, time, mode) return true end
+
+---设置元件图案纹理
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---url string 图案纹理ID
+function CustomUI:SetTexture(playerId, uiId, elementId, url) return true end
+
+---设置元件大小
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---width number 元件宽度
+---heigth number 元件高度
+function CustomUI:SetSize(playerId, uiId, elementId, width, heigth) return true end
+
+---设置文本元件字体大小
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---size number 字体大小
+function CustomUI:SetFontSize(playerId, uiId, elementId, size) return true end
+
+---设置元件颜色
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---color number 颜色值(0xFFFFFF)
+function CustomUI:SetColor(playerId, uiId, elementId, color) return true end
+
+---显示元件
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---effectid? number 动画ID(缺省参数)
+---time? number 动画时长(缺省参数)
+function CustomUI:ShowElement(playerId, uiId, elementId, effectid, time) return true end
+
+---隐藏元件
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---effectid? number 动画ID(缺省参数)
+---time? number 动画时长(缺省参数)
+function CustomUI:HideElement(playerId, uiId, elementId, effectid, time) return true end
+
+---旋转元件
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---rotate number 旋转角度
+function CustomUI:RotateElement(playerId, uiId, elementId, rotate) return true end
+
+---设置元件透明度
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---alpha number 透明度(0-100)
+function CustomUI:SetAlpha(playerId, uiId, elementId, alpha) return true end
+
+---设置状态
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---pageIndex number 状态值
+---easeType number 缓动类型枚举(Easing)
+---time? number 动画时长(缺省函数)
+function CustomUI:SetState(playerId, uiId, elementId, pageIndex, easeType, time) return true end
+
+---设置元件位置
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---x number X坐标
+---y number Y坐标
+function CustomUI:SetPosition(playerId, uiId, elementId, x, y) return true end
+
+---设置模型装载器的模型缩放
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---x number X缩放
+---y number Y缩放
+function CustomUI:SetScale(playerId, uiId, elementId, x, y) return true end
+
+---获取道具类型图标
+---string|nil 成功时返回道具图标的资源标识符
+---itemId number|string 道具ID
+function CustomUI:GetItemIcon(itemId) return "" end
+
+---获取生物图标
+---string|nil 成功时返回生物图标的资源标识符
+---objId number 生物ID
+function CustomUI:GetMonsterObjIcon(objId) return "" end
+
+---获取生物类型图标
+---string|nil 成功时返回生物类型图标的资源标识符
+---actor number|string 生物类型ID
+function CustomUI:GetMonsterIcon(actor) return "" end
+
+---获取状态图标
+---string|nil 成功时返回状态图标的资源标识符
+---buffId number 状态ID
+function CustomUI:GetStatusIcon(buffId) return "" end
+
+
+---获取方块类型图标
+---string|nil 成功时返回方块类型图标的资源标识符
+---blockId number|string 方块类型ID
+function CustomUI:GetBlockIcon(blockId) return "" end
+
+---获取玩家当前角色图标
+---string|nil 成功时返回玩家当前角色图标的资源标识符
+---playerId number 玩家ID
+function CustomUI:GetRoleIcon(playerId) return "" end
+
+---获取玩家当前角色图标
+---string|nil 成功时返回玩家当前角色头像的资源标识符
+---playerId number 玩家ID
+function CustomUI:GetRoleHeadIcon(playerId) return "" end
+
+---获取玩家快捷栏图标
+---string|nil 成功时返回玩家快捷栏图标的资源标识符
+---playerId number 玩家ID
+---ix number 快捷栏索引(1-8)
+function CustomUI:GetShortcutIcon(playerId, ix) return "" end
+
+---元件平滑移动到指定位置
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---x number 目标X坐标
+---y number 目标Y坐标
+function CustomUI:SmoothMoveTo(playerId, uiId, elementId, time, x, y) return true end
+
+---元件平滑移动相对距离
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---x number X坐标
+---y number Y坐标
+function CustomUI:SmoothMoveBy(playerId, uiId, elementId, time, x, y) return true end
+
+---元件平滑改变到指定宽度和高度
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---w number 目标宽度
+---h number 目标高度
+function CustomUI:SmoothScaleTo(playerId, uiId, elementId, time, w, h) return true end
+
+---元件平滑改变相对宽度和高度
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---w number 宽度
+---h number 高度
+function CustomUI:SmoothScaleBy(playerId, uiId, elementId, time, w, h) return true end
+
+---元件平滑改变相对缩放大小（子节点也会改变大小）
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---x number X缩放
+---y number Y缩放
+---delayTime number 延迟时间
+---easeType number 缓动类型枚举(Easing)
+function CustomUI:SmoothScaleByEx(playerId, uiId, elementId, time, x, y, delayTime, easeType) return true end
+
+---元件平滑旋转到指定角度
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---angle number 目标角度
+function CustomUI:SmoothRotateTo(playerId, uiId, elementId, time, angle) return true end
+
+---元件平滑旋转相对角度
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长(>0)
+---angle number 角度
+function CustomUI:SmoothRotateBy(playerId, uiId, elementId, time, angle) return true end
+
+---元件播放动画
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---animId number 动画ID
+---time number 动画时长(>0)
+---mode number 播放模式枚举(AnimMode)
+---easeType number 缓动类型枚举(Easing)
+---delayTime number 延迟时间
+---endValue number 动画结束值
+function CustomUI:PlayElementAnim(playerId, uiId, elementId, animId, time, mode, easeType, delayTime, endValue) return true end
+
+---元件停止动画
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---iType number 类型(lement-如果为0就是停止所有的UI的动效，1就是停止elementid对应的UI动效)
+function CustomUI:StopAnim(playerId, uiId, elementId, iType) return true end
+
+---设置装载器的模型（调用道具实例的模型：模型名称填"ItemInstance_道具实例id"）
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---modelName string 模型名称
+function CustomUI:SetLoaderModel(playerId, uiId, elementId, modelName) return true end
+
+---设置装载器的模型缩放
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---modelScale number 模型缩放值
+function CustomUI:SetLoaderModelScale(playerId, uiId, elementId, modelScale) return true end
+
+---设置装载器的模型方向
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---yaw number 水平角度(角度制)
+function CustomUI:SetLoaderModelDir(playerId, uiId, elementId, yaw) return true end
+
+---设置装载器的模型位置
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---x number X坐标
+---y number Y坐标
+---z number Z坐标
+function CustomUI:SetLoaderModelPosition(playerId, uiId, elementId, x, y, z) return true end
+
+---滑动列表跳转到某位置
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---x number 目标X坐标
+---y number 目标Y坐标
+function CustomUI:TurnSliderToPos(playerId, uiId, elementId, x, y) return true end
+
+---设置滑动列表的滑动方式
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---dir number 滑动方向(0:水平，1:垂直, 2:自由)
+function CustomUI:SetSliderDir(playerId, uiId, elementId, dir) return true end
+
+---设置滑动条的图片
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---url string 图片资源ID
+function CustomUI:SetSliderBarImg(playerId, uiId, elementId, url) return true end
+
+---设置元件相对位置
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---v number 水平偏移枚举(HorizontalOffset)
+---xOffset number X方向数值
+---xUnits number 像素单位枚举(PixelUnits)
+---h number 垂直偏移枚举(VerticalOffset)
+---yOffset number Y方向数值
+---yUnits number 像素单位枚举(PixelUnits)
+function CustomUI:SetRelationPosition(playerId, uiId, elementId, v, xOffset, xUnits, h, yOffset, yUnits) return true end
+
+---设置元件相对大小
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---width number 宽度数值
+---widthUnits number 宽度单位枚举(PixelUnits)
+---heigth number 高度数值
+---heigthUnits number 高度单位枚举(PixelUnits)
+function CustomUI:SetRelationSize(playerId, uiId, elementId, width, widthUnits, heigth, heigthUnits) return true end
+
+---动态创建元件
+---string 成功时返回元件ID
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementType number 元件类型枚举(ElementType)
+function CustomUI:CreateElement(playerId, uiId, elementType) return "" end
+
+---克隆元件
+---string 成功时返回元件ID
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 目标元件ID
+function CustomUI:CloneElement(playerId, uiId, elementId) return "" end
+
+---修改元件父元件
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---parentElementId string 父元件ID
+function CustomUI:ChangeParent(playerId, uiId, elementId, parentElementId) return true end
+
+---设置玩家界面进度条的值
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---iType number 类型枚举(ProgressType)
+---value number 设定值
+function CustomUI:SetProgressBarValue(playerId, uiId, elementId, iType, value) return true end
+
+---获取玩家界面进度条的值
+---number, number, number 成功时返回最小值，最大值，当前值
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---iType number 类型枚举(ProgressType)
+function CustomUI:GetProgressBarValue(playerId, uiId, elementId, iType) return 0, 0, 0 end
+
+---设置玩家界面进度条的纹理
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---iType number 类型枚举(ProgressType)
+---url string 纹理资源ID 
+function CustomUI:SetProgressBarResId(playerId, uiId, elementId, iType, url) return true end
+
+---进度条文本平滑计时
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---bVal number 开始值
+---eVal number 结束值
+---time number 动画时长
+function CustomUI:SmoothChangeProgress(playerId, uiId, elementId, bVal, eVal, time) return true end
+
+---设置动画元件动画ID
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---animId number 动画ID
+---animIndex number 动画序列
+---playMode number 播放模式枚举(ViedoPlayMode)
+function CustomUI:SetSpineAnimID(playerId, uiId, elementId, animId, animIndex, playMode) return true end
+
+---进度条文本平滑增加计时
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+---time number 动画时长
+---pType number 类型枚举(1.增加, 2.减少. 3.变化至)
+---value number 变化值
+function CustomUI:SmoothIncreaseProgress(playerId, uiId, elementId, time, pType, value) return true end
+
+---设置伤害文本
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---elementId string 元件ID
+---objId number 目标对象ID
+---text string 文本内容
+---color number 颜色
+---offsetX number X偏移
+---offsetY number Y偏移
+---moveX number 移动X
+---moveY number 移动Y
+---showTime number 显示时间
+---moveX2 number 移动X2
+---moveY2 number 移动Y2
+---showTime2 number 显示时间2
+function CustomUI:SetFloatDamageTxt(playerId, elementId, objId, text, color, offsetX, offsetY, moveX, moveY, showTime, moveX2, moveY2, showTime2) return true end
+
+---获取客机屏幕分辨率
+---number, number 返回屏幕大小(width, height)
+function CustomUI:GetScreenSize(playerId) return 0, 0 end
+
+---删除UI元件
+---boolean 成功返回True, 失败返回False
+---playerId number 玩家ID
+---uiId string 界面ID
+---elementId string 元件ID
+function CustomUI:DeleteElement(playerId, uiId, elementId) return true end
+
+--- 设置信标映射类型
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- mapType number 信标映射类型枚举(BeaconMapType)
+function CustomUI:SetBeaconMapType(playerId, uiId, elementId, mapType) return true end
+
+--- 设置信标位置
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- bandPosX number 信标X坐标
+--- bandPosY number 信标Y坐标
+--- bandPosZ number 信标Z坐标
+function CustomUI:SetBeaconBandPos(playerId, uiId, elementId, bandPosX, bandPosY, bandPosZ) return true end
+
+--- 设置信标对象
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- objId number 信标对象ID
+function CustomUI:SetBeaconObjId(playerId, uiId, elementId, objId) return true end
+
+--- 设置信标偏移
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- offsetX number 信标X偏移
+--- offsetY number 信标Y偏移
+--- offsetZ number 信标Z偏移
+function CustomUI:SetBeaconOffset(playerId, uiId, elementId, offsetX, offsetY, offsetZ) return true end
+
+--- 设置信标限制范围类型
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- clampRange number 信标限制范围类型枚举(BeaconClampType)
+function CustomUI:SetBeaconClampType(playerId, uiId, elementId, clampRange) return true end
+
+--- 设置信标显示半径
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- radius number 信标半径
+function CustomUI:SetBeaconRadius(playerId, uiId, elementId, radius) return true end
+
+--- 设置信标矩形限制范围
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- rectMinX number 矩形范围最小X坐标
+--- rectMinY number 矩形范围最小Y坐标
+--- rectMaxX number 矩形范围最大X坐标
+--- rectMaxY number 矩形范围最大Y坐标
+--- boolean 成功返回True, 失败返回False
+function CustomUI:SetBeaconMargin(playerId, uiId, elementId, rectMinX, rectMinY, rectMaxX, rectMaxY) return true end
+
+--- 设置装载器元件模型播放的动画
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- animId number 动画ID
+--- playMode number 播放模式枚举(`AnimMode`)
+--- speed number 动画播放速度(`0` ~ `1`)
+--- boolean 成功返回True, 失败返回False
+function CustomUI:SetLoaderModelAct(playerId, uiId, elementId, animId, playMode, speed) return true end
+--- Graphics
+--- 图形界面模块管理接口 Graphics
+local Graphics = {}
+_G.Graphics = Graphics
+
+--- 创建文字板信息
+--- title string 文本内容
+--- font number 字体大小
+--- apha number 不透明度
+--- autoWrap number 自动换行(默认自动换行)
+--- table 文本信息内容
+function Graphics:MakeGraphicsText(title, font, apha, autoWrap) return {} end
+
+--- 创建漂浮文字信息
+--- title string 文本信息
+--- font number 字体大小
+--- apha number 不透明度
+--- table 漂浮文字信息内容
+function Graphics:MakeflotageText(title, font, apha) return {} end
+
+--- 创建进度条信息
+--- current number 当前进度值
+--- total number 总进度值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 进度条信息内容
+function Graphics:MakeGraphicsProgress(current, total, color, apha) return {} end
+
+--- 生成指向位置的箭头数据
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- size number 缩放值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 箭头信息内容
+function Graphics:MakeGraphicsArrowToPos(x, y, z, size, color, apha) return {} end
+
+--- 生成指向位置的线数据
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- size number 缩放值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 线信息内容
+function Graphics:MakeGraphicsLineToPos(x, y, z, size, color, apha) return {} end
+
+--- 生成指向位置的寻路引导线数据
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- itype number 线ID
+--- tCanSeePlayers? table 可见玩家列表(可选)
+--- table 寻路线信息内容
+function Graphics:MakeGraphicsNavPathToPos(x, y, z, itype, tCanSeePlayers) return {} end
+
+--- 生成指向位置的面数据
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- size number 缩放值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 面信息内容
+function Graphics:MakeGraphicsSurfaceToPos(x, y, z, size, color, apha) return {} end
+
+--- 生成指向对象的箭头数据
+--- objId number 对象ID
+--- size number 缩放值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 箭头信息内容
+function Graphics:MakeGraphicsArrowToActor(objId, size, color, apha) return {} end
+
+--- 生成指向对象的线数据
+--- objId number 对象ID
+--- size number 缩放值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 线信息内容
+function Graphics:MakeGraphicsLineToActor(objId, size, color, apha) return {} end
+
+--- 生成指向对象的面数据
+--- objId number 对象ID
+--- size number 缩放值
+--- color string 颜色值(十六进制)
+--- apha number 不透明度
+--- table 面信息内容
+function Graphics:MakeGraphicsSurfaceToActor(objId, size, color, apha) return {} end
+
+--- 生成图片信息
+--- imgid string 图片ID
+--- size number 缩放值
+--- height number 高度
+--- apha number 不透明度
+--- table 图片信息内容
+function Graphics:MakeGraphicsImage(imgid, size, height, apha) return {} end
+
+--- 创建图文信息
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- info table 图文信息
+--- x2 number X坐标偏移(缺省参数)
+--- y2 number Y坐标偏移(缺省参数)
+--- number 图文对象ID
+function Graphics:CreateGraphicsTxtByPos(x, y, z, info, x2, y2) return 0 end
+
+--- 在生物身上创建文字板
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- number 图文实例ID
+function Graphics:CreateGraphicsTxtByActor(objId, info, offset, distance) return 0 end
+
+--- 在位置上创建漂浮文字
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- info table 图文信息
+--- x2 number X坐标偏移(缺省参数)
+--- y2 number Y坐标偏移(缺省参数)
+--- number 图文实例ID
+function Graphics:CreateflotageTextByPos(x, y, z, info, x2, y2) return 0 end
+
+--- 在生物身上创建漂浮文字
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- number 图文实例ID
+function Graphics:CreateflotageTextByActor(objId, info, offset, distance) return 0 end
+
+--- 在位置上创建进度条
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- info table 图文信息
+--- x2 number X坐标偏移(缺省参数)
+--- y2 number Y坐标偏移(缺省参数)
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsProgressByPos(x, y, z, info, x2, y2) return true end
+
+--- 在生物身上创建进度条
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsProgressByActor(objId, info, offset, distance) return true end
+
+--- 删除位置上的图文信息
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- graphid number 图文ID
+--- graphType number 图文类型
+--- boolean 操作是否成功
+function Graphics:RemoveGraphicsByPos(x, y, z, graphid, graphType) return true end
+
+--- 删除生物的图文信息
+--- objId number 对象ID
+--- graphid number 图文ID
+--- graphType number 图文类型
+--- boolean 操作是否成功
+function Graphics:RemoveGraphicsByObjID(objId, graphid, graphType) return true end
+
+--- 更新图文信息的文字内容
+--- graphid number 图文ID
+--- title string 文本内容
+--- fontsize number 字体大小
+--- apha number 不透明度
+--- boolean 操作是否成功
+function Graphics:UpdateGraphicsTextById(graphid, title, fontsize, apha) return true end
+
+--- 按实例ID更新进度条图文的当前值/最大值
+--- graphId number 图文实例ID
+--- val1 number 当前值
+--- val2 number 最大值
+--- isync? boolean 是否同步到客机(可选)
+--- boolean 是否更新成功
+function Graphics:UpdateGraphicsProgressById(graphId, val1, val2, isync) return true end
+
+--- 创建生物指向位置的箭头
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsArrowByActorToPos(objId, info, offset, distance) return true end
+
+--- 创建生物指向生物的箭头
+--- srcobjId number 源对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsArrowByActorToActor(srcobjId, info, offset, distance) return true end
+
+--- 创建位置指向位置的箭头
+--- pos table 位置坐标{x=x, y=y, z=z}
+--- info table 图文信息
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsArrowByPosToPos(pos, info) return true end
+
+--- 创建位置指向生物的箭头
+--- pos table 位置坐标{x=x, y=y, z=z}
+--- info table 图文信息
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsArrowByPosToActor(pos, info) return true end
+
+--- 创建生物与位置的线
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsLineByActorToPos(objId, info, offset, distance) return true end
+
+--- 创建生物到位置的寻路引导线
+--- objId number 对象ID
+--- info table 图文信息(含pos、id、tCanSeePlayers等)
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 是否创建成功
+function Graphics:CreateGraphicsNavPathByActorToPos(objId, info, offset, distance) return true end
+
+--- 创建指向生物的线
+--- srcobjId number 源对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsLineByActorToActor(srcobjId, info, offset, distance) return true end
+
+--- 创建位置指向位置的线
+--- pos table 位置坐标{x=x, y=y, z=z}
+--- info table 图文信息
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsLineByPosToPos(pos, info) return true end
+
+--- 创建位置指向生物的线
+--- pos table 位置坐标{x=x, y=y, z=z}
+--- info table 图文信息
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsLineByPosToActor(pos, info) return true end
+
+--- 创建生物与位置的面
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsSurfaceByActorToPos(objId, info, offset, distance) return true end
+
+--- 创建生物与生物的引导面
+--- srcobjId number 源对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsSurfaceByActorToActor(srcobjId, info, offset, distance) return true end
+
+--- 创建位置指向位置的面
+--- pos table 位置坐标{x=x, y=y, z=z}
+--- info table 图文信息
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsSurfaceByPosToPos(pos, info) return true end
+
+--- 创建位置指向生物的面
+--- pos table 位置坐标{x=x, y=y, z=z}
+--- info table 图文信息
+--- boolean 操作是否成功
+function Graphics:CreateGraphicsSurfaceByPosToActor(pos, info) return true end
+
+--- 将src相关的所有图文信息转移到des身上
+--- srcobjId number 源对象ID
+--- desobjId number 目标对象ID
+--- boolean 是否成功
+function Graphics:ReplaceAllGraphics(srcobjId, desobjId) return true end
+
+--- 在位置上创建图像
+--- x number 方块坐标x
+--- y number 方块坐标y
+--- z number 方块坐标z
+--- info table 图文信息
+--- x2 number X坐标偏移(缺省参数)
+--- y2 number Y坐标偏移(缺省参数)
+--- boolean 是否成功
+function Graphics:CreateGraphicsImageByPos(x, y, z, info, x2, y2) return true end
+
+--- 在生物上创建图像
+--- objId number 对象ID
+--- info table 图文信息
+--- offset table 方向偏移距离{x=x, y=y, z=z}
+--- distance number 偏移距离
+--- boolean 是否成功
+function Graphics:CreateGraphicsImageByActor(objId, info, offset, distance) return true end
+
+--- 获取玩家昵称或称号的偏移高度
+--- objId number 对象ID
+--- nameType number 名称类型
+--- callback function 回调函数
+--- number 高度值(未展示返回0)
+function Graphics:GetInnerGraphicsOffset(objId, nameType, callback) return 0 end
+
+--- 在指定位置创建笔刷区域图文
+--- pos table {x: number, y: number, z: number} 位置坐标
+--- dim table {x: number, y: number, z: number} 区域范围
+--- color string 颜色值(十六进制)
+--- showUin number 显示玩家ID (0:全部)
+--- iType number 类型ID
+--- worldId? number 世界ID (可选)
+--- number|false 图文实例ID, 失败返回false
+function Graphics:CreateBrushByPos(pos, dim, color, showUin, iType, worldId) return 0 end
+
+--- 按图文实例ID删除图文信息
+--- objId number 图文实例ID
+--- boolean 操作是否成功
+function Graphics:RemoveGraphicsByGraphicsID(objId) return true end
