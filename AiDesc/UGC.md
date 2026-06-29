@@ -85,7 +85,7 @@ end
 
 ### 事件回调函数
 
-- 回调函数仅需接收一个 `event` 参数（表类型，包含事件信息，可修改为任意合法标识符），通常无 `nil` 无需检查，具体信息请参考 `MNDeclaration.d.lua`
+- 回调函数仅需接收一个 `event` 参数 (表类型，包含事件信息，可修改为任意合法标识符), 通常无 `nil` 无需检查
 - 例如:
 
     ```lua
@@ -133,68 +133,64 @@ end
 - 组件A:
 
     ```lua
-        -- 组件A
-        local Script = {}
-        Script.openFnArgs = {
-            Add = {
-                returnType = Mini.Number，
-                displayName = "别名",
-                params = {Mini.Number, Mini.Number},
-            }
-        }
+    -- 组件A
+    local Script = {}
+    Script.openFnArgs = {
+      Add = {
+        returnType = Mini.Number，
+        displayName = "别名",
+        params = {Mini.Number, Mini.Number},
+      }
+    }
 
-        -- 函数定义示例
-        function Script:Add(a, b)
-            if a and b then
-                return a + b
-            end
-        end
+    -- 函数定义示例
+    function Script:Add(a, b)
+      if a and b then
+        return a + b
+      end
+    end
 
-        -- 组件启动时调用
-        function Script:OnStart()
-            -- 调用自己定义的函数示例
-            -- PS:调用本组件的函数不需要任何配置
-            local result = self:Add(1, 2)
-            print("result", result)
-        end
+    -- 组件启动时调用
+    function Script:OnStart()
+      -- 调用自己定义的函数示例
+      -- PS:调用本组件的函数不需要任何配置
+      local result = self:Add(1, 2)
+      print("result", result)
+    end
 
-
-        return Script
+    return Script
     ```
 
 - 组件B:
 
     ```lua
-        -- 组件B
-        local Script = {} -- 定义组件表
+    -- 组件B
+    local Script = {}
+    function Script:OnStart()
+      -- 同对象下操作
 
-        -- 组件启动时调用
-        function Script:OnStart()
-            -- 同对象下操作
+      -- 获取对象上组件A
+      local cmpA = self:GetComponent("组件id")
 
-            -- 获取对象上组件A
-            local cmpA = self:GetComponent("组件id")
+      -- 调用组件A的函数
+      local result = cmpA:Add(1, 2)
+      print("result", result)
 
-            -- 调用组件A的函数
-            local result = cmpA:Add(1, 2)
-            print("result", result)
+      -- 跨对象操作
+      local obj = GameObject:FindObject("对象id") -- 获取一般对象    
+      local world = GetWorld() -- 世界对象的获取方式
 
-            -- 跨对象操作
-            local obj = GameObject:FindObject("对象id") -- 获取一般对象    
-            local world = GetWorld() -- 世界对象的获取方式
+      -- 获取对象上组件A
+      local cmpA = world:GetComponent("组件id")
 
-            -- 获取对象上组件A
-            local cmpA = world:GetComponent("组件id")
-
-            -- 调用组件A的函数
-            local result = cmpA:Add(1, 2)
-            print("result", result)
-        
-            local age = cmpA.age -- 获取cmpA组件的age属性
-            cmpA.age = 123 -- 设置cmpA的age属性值为123
-        end 
-
-        return Script -- 返回组件定义的表
+      -- 调用组件A的函数
+      local result = cmpA:Add(1, 2)
+      print("result", result)
+    
+      local age = cmpA.age -- 获取cmpA组件的age属性
+      cmpA.age = 123 -- 设置cmpA的age属性值为123
+    end
+    return Script -- 返回组件定义的表
     ```
 
 ## 等待
@@ -218,7 +214,7 @@ end
 
 ```lua
 self:ThreadWork(function()
-    print("线程启动")
+  print("线程启动")
 end)
 ```
 
@@ -309,7 +305,7 @@ end)
 
 - 为一般普通的数据存储，其如同一张表，而表里面可以存任何类型的数据，并且可以存储多个不同关键字（`Key`）的表
 
-- 存储中的每个 `值`  ( `Value` ) 都由一个 `键` ( `key` ) 索引，可以往里面添加任意值。一个 `Key` 只能对应一个 `Value`，`Value` 类型可以是数值，可以是 `字符串` / `JSON字符串` 等。例如玩家相关数据可如下所示存取:
+- 存储中的每个 `值` 都由一个 `键` 索引，可以往里面添加任意值。一个 `Key` 只能对应一个 `Value`，`Value` 类型可以是数值，可以是 `字符串` / `JSON字符串` 等。例如玩家相关数据可如下所示存取:
 
     | KEY | VALUE |
     | :-: | :-: |
@@ -677,108 +673,108 @@ return Script
 
 ```lua
 Script.propertys = {
-    numberAttr = {
-        type = Mini.Number,
-        default = 100,
-        displayName = "数字",
-        sort = 1,
-        minValue = -1000,
-        maxValue = 1000,
-        format = "%.0f米",
-        style = ComponentUIStyle.NumberSlider,
-        tips = "属性作用提示",
-        stride = 1,
-    },
-    stringAttr = {
-        type = Mini.String,
-        default = "您好！",
-        displayName = "字符串",
-        sort = 2,
-        multiLine = false,
-        maxLength = 10,
-        tips = "属性作用提示",
-    },
-    boolAttr = {
-        type = Mini.Bool,
-        default = true,
-        displayName = "布尔值",
-        sort = 3,
-        tips = "属性作用提示",
-    },
-    colorAttr = {
-        type = Mini.Color,
-        default = 0xFFFFFF,
-        displayName = "颜色",
-        sort = 4,
-        tips = "属性作用提示",
-    },
-    vec3Attr = {
-        type = Mini.Vec3,
-        default = Mini.Vec3(0, 0, 0),
-        displayName = "位置",
-        displayNames = {"yaw", "pitch", "roll"},
-        sort = 5,
-        format = "%.2f",
-        minValue = -10000,
-        maxValue = 10000,
-        tips = "属性作用提示",
-    },
-    mobTypeAttr = {
-        type = Mini.MobType,
-        default = 3400,
-        displayName = "生物类型",
-        sort = 6,
-        tips = "属性作用提示",
-    },
-    blockAttr = {
-        type = Mini.Block,
-        default = 100,
-        displayName = "方块类型",
-        sort = 7,
-        tips = "属性作用提示",
-    },
-    itemAttr = {
-        type = Mini.Item,
-        default = 100,
-        displayName = "道具类型",
-        sort = 8,
-        tips = "属性作用提示",
-    },
-    effectAttr = {
-        type = Mini.Effect,
-        default = 1051,
-        displayName = "特效类型",
-        sort = 9,
-        tips = "属性作用提示",
-    },
-    pictureAttr = {
-        type = Mini.Picture,
-        default = "0_10001",
-        displayName = "图像类型",
-        sort = 10,
-        tips = "属性作用提示",
-    },
-    buffAttr = {
-        type = Mini.Buff,
-        default = 6002,
-        displayName = "状态类型",
-        sort = 11,
-        tips = "属性作用提示",
-    },
-    soundAttr = {
-        type = Mini.Sound,
-        default = 6002,
-        displayName = "音效类型",
-        sort = 12,
-        tips = "属性作用提示",
-    },
-    modelAttr = {
-        type = Mini.Model,
-        default = "mob_1145",
-        displayName = "模型类型",
-        sort = 13,
-        tips = "属性作用提示",
-    },
+  numberAttr = {
+    type = Mini.Number,
+    default = 100,
+    displayName = "数字",
+    sort = 1,
+    minValue = -1000,
+    maxValue = 1000,
+    format = "%.0f米",
+    style = ComponentUIStyle.NumberSlider,
+    tips = "属性作用提示",
+    stride = 1,
+  },
+  stringAttr = {
+    type = Mini.String,
+    default = "您好！",
+    displayName = "字符串",
+    sort = 2,
+    multiLine = false,
+    maxLength = 10,
+    tips = "属性作用提示",
+  },
+  boolAttr = {
+    type = Mini.Bool,
+    default = true,
+    displayName = "布尔值",
+    sort = 3,
+    tips = "属性作用提示",
+  },
+  colorAttr = {
+    type = Mini.Color,
+    default = 0xFFFFFF,
+    displayName = "颜色",
+    sort = 4,
+    tips = "属性作用提示",
+  },
+  vec3Attr = {
+    type = Mini.Vec3,
+    default = Mini.Vec3(0, 0, 0),
+    displayName = "位置",
+    displayNames = {"yaw", "pitch", "roll"},
+    sort = 5,
+    format = "%.2f",
+    minValue = -10000,
+    maxValue = 10000,
+    tips = "属性作用提示",
+  },
+  mobTypeAttr = {
+    type = Mini.MobType,
+    default = 3400,
+    displayName = "生物类型",
+    sort = 6,
+    tips = "属性作用提示",
+  },
+  blockAttr = {
+    type = Mini.Block,
+    default = 100,
+    displayName = "方块类型",
+    sort = 7,
+    tips = "属性作用提示",
+  },
+  itemAttr = {
+    type = Mini.Item,
+    default = 100,
+    displayName = "道具类型",
+    sort = 8,
+    tips = "属性作用提示",
+  },
+  effectAttr = {
+    type = Mini.Effect,
+    default = 1051,
+    displayName = "特效类型",
+    sort = 9,
+    tips = "属性作用提示",
+  },
+  pictureAttr = {
+    type = Mini.Picture,
+    default = "0_10001",
+    displayName = "图像类型",
+    sort = 10,
+    tips = "属性作用提示",
+  },
+  buffAttr = {
+    type = Mini.Buff,
+    default = 6002,
+    displayName = "状态类型",
+    sort = 11,
+    tips = "属性作用提示",
+  },
+  soundAttr = {
+    type = Mini.Sound,
+    default = 6002,
+    displayName = "音效类型",
+    sort = 12,
+    tips = "属性作用提示",
+  },
+  modelAttr = {
+    type = Mini.Model,
+    default = "mob_1145",
+    displayName = "模型类型",
+    sort = 13,
+    tips = "属性作用提示",
+  },
 }
 ```
 
