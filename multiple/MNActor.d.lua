@@ -268,7 +268,7 @@ end
 
 --- 获取actor视角偏移角度
 --- @param objId number @对象ID
---- @return number @面朝角度
+--- @return number @面朝角度 (-180~180)
 function Actor:GetFaceYaw(objId)
     return 0
 end

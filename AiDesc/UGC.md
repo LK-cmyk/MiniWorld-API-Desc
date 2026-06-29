@@ -64,62 +64,14 @@ end
 
 - 此函数只在 `UI` 与 `世界组件` 生效
 
-### 事件注册
+### 事件注册与删除
 
-#### 注册方法1
-
-- 参数:
-    1. 事件类型: string
-    2. 回调函数: function
-    3. 过滤参数1 (可不传): number / string
-    4. 过滤参数2 (可不传): number / string
-- 返回:
-    1. 无返回
-
-```lua
-self:AddTriggerEvent(事件枚举常量, 回调函数, 过滤参数1, 过滤参数2)
-```
-
-#### 注册方法2
-
-- 参数:
-    1. 事件类型: string
-    2. 回调函数: function
-    3. 事件触发的优先级 (可不传): number
-    4. 过滤参数1 (可不传): number / string
-    5. 过滤参数2 (可不传): number / string
-- 返回:
-    1. 无返回
-
-```lua
-self:AddEvent(事件枚举常量 或 自定义消息(广播), 回调函数, 优先级, 过滤参数1, 过滤参数2)
-```
-
-- PS: 可监听官方的事件，也可监听自定义消息(广播)
-
-### 事件删除
-
-#### 删除方法1
-
-- 参数:
-    1. 事件类型: string
-- 返回:
-    1. 无返回
-
-```lua
-self:RemoveTriggerEvent(事件枚举常量)
-```
-
-#### 删除方法2
-
-- 参数:
-    1. 事件类型: string
-- 返回:
-    1. 无返回
-
-```lua
-self:RemoveEvent(事件枚举常量 或 自定义消息(广播))
-```
+| 操作 | 方法 | 参数 | 返回 | API调用 | 备注 |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 事件注册 | 方法1 | 事件类型: string, 回调函数: function, 过滤参数1(可选): number/string, 过滤参数2(可选): number/string | 无返回 | `self:AddTriggerEvent(事件枚举常量, 回调函数, 过滤参数1, 过滤参数2)` | 仅可监听官方的触发器事件 |
+| 事件注册 | 方法2 | 事件类型: string, 回调函数: function, 优先级(可选): number, 过滤参数1(可选): number/string, 过滤参数2(可选): number/string | 无返回 | `self:AddEvent(事件枚举常量 或 自定义消息(广播), 回调函数, 优先级, 过滤参数1, 过滤参数2)` | 可监听官方的组件事件，也可监听自定义消息(广播) |
+| 事件删除 | 方法1 | 事件类型: string | 无返回 | `self:RemoveTriggerEvent(事件枚举常量)` | - |
+| 事件删除 | 方法2 | 事件类型: string | 无返回 | `self:RemoveEvent(事件枚举常量 或 自定义消息(广播))` | - |
 
 ### 事件枚举
 
@@ -159,96 +111,15 @@ self:RemoveEvent(事件枚举常量 或 自定义消息(广播))
 - `消息ID`: 需要在触发器界面先定义消息(广播), 获取由系统生成的ID
 - `参数类型` & `参数数量`: 需要跟触发器定义$的消息(广播)对应上
 
-### 普通异步消息
-
-- 参数:
-    1. 消息ID: string
-    2. N个参数
-- 返回:
-    1. 无返回
-
-```lua
-self:PushCustomEvent(消息ID, ...)
-```
-
-### 普通同步消息
-
-- 参数:
-    1. 消息ID: string
-    2. N个参数
-- 返回:
-    1. 无返回
-
-```lua
-self:PushCustomEventSync(消息ID, ...)
-```
-
-### 添加监听消息
-
-- 参数:
-    1. 事件类型: string
-    2. 回调函数: function
-    3. 事件触发的优先级 (可不传): number
-    4. 过滤参数1 (可不传): number / string
-    5. 过滤参数2 (可不传): number / string
-- 返回:
-    1. 无返回
-
-```lua
-self:AddEvent(事件枚举常量 或 自定义消息(广播), 回调函数, 优先级, 过滤参数1, 过滤参数2)
-```
-
-- PS: 可监听官方的事件，也可监听自定义消息(广播)
-
-### 移除监听消息
-
-- 参数:
-    1. 事件类型: string
-- 返回:
-    1. 无返回
-
-```lua
-self:RemoveEvent(事件枚举常量 或 自定义消息(广播))
-```
-
-- PS: 可移除监听官方的事件，也可移除监听自定义消息(广播)
-
-### 云服异步消息
-
-- 参数:
-    1. 消息ID: string
-    2. N个参数
-- 返回:
-    1. 无返回
-
-```lua
-self:PushCloudServerMsg(消息ID, ...)
-```
-
-- PS: 只有同个对象上监听的组件才能收到事件
-
-### 添加监听云服消息
-
-- 参数:
-    1. 事件类型: string
-    2. 回调函数: function
-- 返回:
-    1. 无返回
-
-```lua
-self:AddCloudSeverEvent(事件枚举常量 或 自定义云服消息(广播), 回调函数)
-```
-
-### 移除监听云服消息
-
-- 参数:
-    1. 事件类型: string
-- 返回:
-    1. 无返回
-
-```lua
-self:RemoveCloudSeverEvent(事件枚举常量 或 自定义消息(广播))
-```
+| 操作 | 类型 | 参数 | 返回 | API调用 | 备注 |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 普通异步消息 | 异步 | 消息ID: string, N个参数 | 无返回 | `self:PushCustomEvent(消息ID, ...)` | - |
+| 普通同步消息 | 同步 | 消息ID: string, N个参数 | 无返回 | `self:PushCustomEventSync(消息ID, ...)` | - |
+| 添加监听消息 | - | 事件类型: string, 回调函数: function, 优先级(可选): number, 过滤参数1(可选): number/string, 过滤参数2(可选): number/string | 无返回 | `self:AddEvent(事件枚举常量 或 自定义消息(广播), 回调函数, 优先级, 过滤参数1, 过滤参数2)` | 可监听官方的事件，也可监听自定义消息(广播) |
+| 移除监听消息 | - | 事件类型: string | 无返回 | `self:RemoveEvent(事件枚举常量 或 自定义消息(广播))` | 可移除监听官方的事件，也可移除监听自定义消息(广播) |
+| 云服异步消息 | 异步 | 消息ID: string, N个参数 | 无返回 | `self:PushCloudServerMsg(消息ID, ...)` | 只有同个对象上监听的组件才能收到事件 |
+| 添加监听云服消息 | - | 事件类型: string, 回调函数: function | 无返回 | `self:AddCloudSeverEvent(事件枚举常量 或 自定义云服消息(广播), 回调函数)` | - |
+| 移除监听云服消息 | - | 事件类型: string | 无返回 | `self:RemoveCloudSeverEvent(事件枚举常量 或 自定义消息(广播))` | - |
 
 ## 坐标系
 
@@ -570,36 +441,33 @@ graph LR
 
   - 案例:
 
-    ```lua
-    -- ret只有 0 & 2 两种值
-    -- callback至少会调用两次，首次调用ret必然为0，用于设置数值
-    -- 第2次或第2次以上调用callback时，如果设置失败会再次调用callback，此时ret为0；如果设置成功则ret为ErrorCode.OK，不会再次设置
-    local function GlobalKVCallback(code,key,value)
-        Chat:SendChat(table.concat({"UpdateValueAndCallback code = ",tostring(code), "key = ",tostring(key), "value = ",tostring(value)}, " "))
-        value = json.decode(value) or value
-        print("code", code , "key", key, "value", value)
+  ```lua
+  -- ret只有 0 & 2 两种值
+  -- callback至少会调用两次，首次调用ret必然为0，用于设置数值
+  -- 第2次或第2次以上调用callback时，如果设置失败会再次调用callback，此时ret为0；如果设置成功则ret为ErrorCode.OK，不会再次设置
+  local function GlobalKVCallback(code,key,value)
+    Chat:SendChat(table.concat({"UpdateValueAndCallback code = ",tostring(code), "key = ",tostring(key), "value = ",tostring(value)}, " "))
+    value = json.decode(value) or value
+    print("code", code , "key", key, "value", value)
 
-        if code == ErrorCode.KV_UPDATE_SET then  -- 需要返回更新设置的最终值
-            value = value or {} 
-            value.updatevalue = 999
-            return json.encode(value) -- 需要返回更新设置的最终值 并且序列化结构
-        elseif code == ErrorCode.KV_UPDATE_GET then
-            print("获取到的当前最新的值:", value)
-        elseif code == ErrorCode.OK then
-            print("更新完成")
-        else 
-            print("更新失败")
-        end
-    end
-
-    local result = Data.Map:UpdateValueAndCallback(GlobalKV, nil, "GlobalKV_Key2", GlobalKVCallback)
-
-    if result then
-        print("调用成功")
+    if code == ErrorCode.KV_UPDATE_SET then -- 需要返回更新设置的最终值
+      value = value or {}
+      value.updatevalue = 999
+      return json.encode(value) -- 需要返回更新设置的最终值 并且序列化结构
+    elseif code == ErrorCode.KV_UPDATE_GET then
+      print("获取到的当前最新的值:", value)
+    elseif code == ErrorCode.OK then
+      print("更新完成")
     else
-        print("调用失败")
+      print("更新失败")
     end
-    ```
+  end
+
+  local result = Data.Map:UpdateValueAndCallback(GlobalKV, nil, "GlobalKV_Key2", GlobalKVCallback)
+
+  if result then print("调用成功")
+  else print("调用失败") end
+  ```
 
 #### 普通KV存储 VS 全局KV数据并发读写
 
@@ -641,16 +509,16 @@ graph LR
 
 - Q: 如何合理的进行 `Set` / `Get` 操作?
 - A:
-    1. **避免** 零值 (或初始值) 参与排行榜，会出现所有玩家都进行 `Set` 操作了一次
-    2. 避免低于排行榜最后一名的数据也 `Set` 操作。假设你的排行榜展示前50名，如果第50名已经有100分了，那么对于分数低于100分的玩家就无需添加到排行榜里面去
-    3. 参与排行的数值，例: `经验` / `等级` / `杀怪数量` 等，这几个数值可以序列化成 `JSON字符串` 保存在一个 `K/V` 中，避免多次拉取数据的情况
-    4. 假设某游戏有 `经验` / `等级` / `杀怪数` 3个排行榜，那么可以一个玩家一个 `JSON` 保存在 `K/V表` 里面，`Key` 为 `玩家Uin` / `Value` 为 `JSON`:
+    1. 避免零值/初始值参与排行
+    2. 避免低于排行榜末位的数据进行 `Set`
+    3. 多维度排行数值可序列化为 `JSON` 存入单个 `K/V`，避免多次拉取
+    4. 多个排行榜可合并为一个 `JSON` 存入 `K/V表`，`Key` 为 `玩家Uin`，`Value` 为 `JSON`:
 
         ```lua
         {"exp": 888999,"lvl": 7,"kmonster": 39}
         ```
 
-    5. 区分游戏商店购买、任务、成就等模块的配置和需要 **持久化** 的状态数据
+    5. 区分模块配置与需持久化的状态数据
 
 - Q: 配置文件建议不设置到数据储存中
 - A:

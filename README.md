@@ -5,8 +5,10 @@
 - `UGC` 开发套件: `v3.0`
 - 项目工具需使用 `Python3.10`
 
-[![GitHub stars](https://img.shields.io/github/stars/LK-cmyk/MiniWorld-API-Desc?style=flat-square)](https://github.com/LK-cmyk/MiniWorld-API-Desc)
+![GitHub stars](https://img.shields.io/github/stars/LK-cmyk/MiniWorld-API-Desc?style=flat)
+![GitHub forks](https://img.shields.io/github/forks/LK-cmyk/MiniWorld-API-Desc?style=flat)
 ![License](https://img.shields.io/github/license/LK-cmyk/MiniWorld-API-Desc)
+![Language](https://img.shields.io/github/languages/top/LK-cmyk/MiniWorld-API-Docs)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
 
 ## 项目简介
@@ -17,10 +19,10 @@
 
 ```shell
 MiniWorld-API-Desc/
-├── .gitignore
-├── LICENSE
-├── pyproject.toml
-├── README.md
+├── .gitignore  # Git 忽略文件
+├── LICENSE  # 开源协议
+├── pyproject.toml  # Python 依赖管理文件
+├── README.md  # 项目说明文档
 ├── MNDeclaration.d.lua  # 全集成声明文件，适合直接导入项目
 ├── AiDesc/  # AI 描述内容，便于喂给智能助手使用
 │   └── UGC.md  # UGC 描述文件
@@ -102,3 +104,7 @@ sequenceDiagram
 - 本仓库声明文件与模板仅支持UGC **3.0**。
 - 部分接口可能与实际游戏版本存在差异，请以游戏实际行为为准。
 - 发现问题欢迎提交 Issues 或 Fork 后发起 PR。
+
+## Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=LK-cmyk/MiniWorld-API-Desc&type=Date)](https://star-history.com/#LK-cmyk/MiniWorld-API-Desc&Date)
