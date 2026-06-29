@@ -6,6 +6,4 @@ _G.Mod = Mod
 --- 通过资源id获取defid
 --- @param assetId string @资源id
 --- @return number @defid
-function Mod:GetCfgIdByAssetId(assetId)
-    return 0
-end
+function Mod:GetCfgIdByAssetId(assetId) return 0 end

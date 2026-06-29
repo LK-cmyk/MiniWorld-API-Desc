@@ -11,22 +11,16 @@ end
 
 --- 获取组件挂载的对象实例id
 --- @return number @对象实例id
-function Component:GetGameObjectId()
-    return 0
-end
+function Component:GetGameObjectId() return 0 end
 
 --- 获取组件是否有效
 --- @return boolean @是否有效
-function Component:IsValid()
-    return true
-end
+function Component:IsValid() return true end
 
 --- 在组件所在的对象上添加指定组件
 --- @param componentId string @组件ID
 --- @return nil @组件对象
-function Component:AddComponent(componentId)
-    return nil
-end
+function Component:AddComponent(componentId) return nil end
 
 --- 删除在组件所在的对象上的指定组件
 --- @param componentId string @组件ID
@@ -37,9 +31,7 @@ end
 --- 获取组件所在对象上的指定组件
 --- @param componentId string @组件ID
 --- @return nil @组件对象
-function Component:GetComponent(componentId)
-    return nil
-end
+function Component:GetComponent(componentId) return nil end
 
 --- 发送自定义消息(异步)
 --- @param eventId string @消息ID
@@ -94,24 +86,18 @@ end
 --- @param eventType string @自定义事件类型
 --- @param ... any @消息内容
 --- @return nil
-function Component:PushEventSync(eventType, ...)
-    return nil
-end
+function Component:PushEventSync(eventType, ...) return nil end
 
 --- 监听对象事件(可以监听自定义的，也能监听官方内置对象事件)
 --- @param eventType string|number @事件类型
 --- @param callback function @回调函数
 --- @return nil
-function Component:AddEvent(eventType, callback)
-    return nil
-end
+function Component:AddEvent(eventType, callback) return nil end
 
 --- 移除对象的事件监听
 --- @param eventType string|number @事件类型
 --- @return nil
-function Component:RemoveEvent(eventType)
-    return nil
-end
+function Component:RemoveEvent(eventType) return nil end
 
 --- 启动定时器在指定时间执行任务
 --- ```lua
@@ -122,9 +108,7 @@ end
 --- @param callback function @回调函数
 --- @param delay number @时间间隔(秒)
 --- @return nil @定时器任务对象
-function Component:DoTaskInTime(callback, delay)
-    return nil
-end
+function Component:DoTaskInTime(callback, delay) return nil end
 
 --- 启动定时器周期性执行任务
 --- ```lua
@@ -137,59 +121,43 @@ end
 --- @param delay? number @延迟开始第一次执行时间(默认0)
 --- @param count? number @执行次数(默认无限次)
 --- @return nil @定时器任务对象
-function Component:DoPeriodicTask(callback, interval, delay, count)
-    return nil
-end
+function Component:DoPeriodicTask(callback, interval, delay, count) return nil end
 
 --- 清除所有定时器任务
 --- @return nil
-function Component:ClearAllTask()
-    return nil
-end
+function Component:ClearAllTask() return nil end
 
 --- 设置是否启用事件
 --- @param callback function @事件回调函数
 --- @param enable boolean @是否启用
 --- @return nil
-function Component:SetEventIsEnable(callback, enable)
-    return nil
-end
+function Component:SetEventIsEnable(callback, enable) return nil end
 
 --- 启动新协程
 --- @param callback function @协程函数
 --- @return nil
-function Component:ThreadWork(callback)
-    return nil
-end
+function Component:ThreadWork(callback) return nil end
 
 --- 协程等待
 --- @param delay number @等待时间(默认一帧)
 --- @return nil
-function Component:ThreadWait(delay)
-    return nil
-end
+function Component:ThreadWait(delay) return nil end
 
 --- 发送云服广播消息(异步)
 --- @param eventType string @自定义事件类型
 --- @param ... any @事件内容
 --- @return nil
-function Component:PushCloudServerMsg(eventType, ...)
-    return nil
-end
+function Component:PushCloudServerMsg(eventType, ...) return nil end
 
 --- 接收云服事件
 --- @param eventType string @消息类型
 --- @param callback function @回调函数
 --- @return nil
-function Component:AddCloudSeverEvent(eventType, callback)
-    return nil
-end
+function Component:AddCloudSeverEvent(eventType, callback) return nil end
 
 --- 移除云服消息监听
 --- @param eventType string @消息类型
 --- @return nil
-function Component:RemoveCloudSeverEvent(eventType)
-    return nil
-end
+function Component:RemoveCloudSeverEvent(eventType) return nil end
 
 --- @type Component self

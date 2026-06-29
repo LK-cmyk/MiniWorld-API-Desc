@@ -1,50 +1,50 @@
 --- @class json
 local json = {
-    --- 解码Json字符串
-    --- @return table @解码后的Table数据
-    --- @param data string @Json字符串
-    decode = function(data)
-        return {}
-    end,
+  --- 解码Json字符串
+  --- @return table @解码后的Table数据
+  --- @param data string @Json字符串
+  decode = function(data)
+    return {}
+  end,
 
-    --- 编码Table数据
-    --- @return string @编码后的Json字符串
-    --- @param data table @Table数据
-    encode = function(data)
-        return ""
-    end
+  --- 编码Table数据
+  --- @return string @编码后的Json字符串
+  --- @param data table @Table数据
+  encode = function(data)
+    return ""
+  end
 }
 _G.json = json
 
 --- @class threadpool
 local threadpool = {
-    --- 等待时间
-    --- @return nil
-    --- @param time number @等待时间（秒）
-    wait = function(self, time)
-        return nil
-    end
+  --- 等待时间
+  --- @return nil
+  --- @param time number @等待时间（秒）
+  wait = function(self, time)
+    return nil
+  end
 }
 _G.threadpool = threadpool
 
 --- 获取当前世界对象
 --- @return table @世界对象
 local GetWorld = function()
-    return {}
+  return {}
 end
 _G.GetWorld = GetWorld
 
 --- 打印信息
 --- @param message any @要打印的信息
 local print = function(message)
-    return nil
+  return nil
 end
 _G.print = print
 
 --- 打印错误信息
 --- @param message any @要打印的错误信息
 local printError = function(message)
-    return nil
+  return nil
 end
 _G.printError = printError
 
@@ -52,7 +52,7 @@ _G.printError = printError
 --- @param className string @类名
 --- @param super table|string @父类原表|父类名
 local Class = function(className, super, isSingle)
-    return {}
+  return {}
 end
 _G.Class = Class
 
@@ -60,7 +60,7 @@ _G.Class = Class
 --- @param className string @类名
 --- @return table @对象实例
 local Instance = function(className)
-    return {}
+  return {}
 end
 _G.Instance = Instance
 
@@ -68,7 +68,7 @@ _G.Instance = Instance
 --- @param className string @类名
 --- @return table @类单例
 local GetInst = function(className)
-    return {}
+  return {}
 end
 _G.GetInst = GetInst
 
@@ -77,5 +77,5 @@ os = os
 --- 获取当前时间（ms）
 --- @return number @当前时间（ms）
 function os.timeMs()
-    return 0
+  return 0
 end

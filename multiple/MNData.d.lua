@@ -14,9 +14,7 @@ _G.Data = Data
 --- @param varId string @变量ID
 --- @param playerId number @玩家ID
 --- @param value any @默认值
-function Data:SetValue(varId, playerId, value)
-    return true
-end
+function Data:SetValue(varId, playerId, value) return true end
 
 --- 获取变量值
 --- 
@@ -24,9 +22,7 @@ end
 --- @return any
 --- @param varId string @变量ID
 --- @param playerId number @玩家ID
-function Data:GetValue(varId, playerId)
-    return nil
-end
+function Data:GetValue(varId, playerId) return nil end
 
 --- 数值变量增加值
 --- 
@@ -35,6 +31,4 @@ end
 --- @param varId string @变量ID
 --- @param playerId number @玩家ID
 --- @param value number @增加值
-function Data:IncreasesValue(varId, playerId, value)
-    return nil
-end
+function Data:IncreasesValue(varId, playerId, value) return nil end
