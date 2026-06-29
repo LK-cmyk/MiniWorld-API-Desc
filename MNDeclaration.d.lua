@@ -1,50 +1,50 @@
 --- @class json
 local json = {
-    --- 解码Json字符串
-    --- @return table @解码后的Table数据
-    --- @param data string @Json字符串
-    decode = function(data)
-        return {}
-    end,
+  --- 解码Json字符串
+  --- @return table @解码后的Table数据
+  --- @param data string @Json字符串
+  decode = function(data)
+    return {}
+  end,
 
-    --- 编码Table数据
-    --- @return string @编码后的Json字符串
-    --- @param data table @Table数据
-    encode = function(data)
-        return ""
-    end
+  --- 编码Table数据
+  --- @return string @编码后的Json字符串
+  --- @param data table @Table数据
+  encode = function(data)
+    return ""
+  end
 }
 _G.json = json
 
 --- @class threadpool
 local threadpool = {
-    --- 等待时间
-    --- @return nil
-    --- @param time number @等待时间（秒）
-    wait = function(self, time)
-        return nil
-    end
+  --- 等待时间
+  --- @return nil
+  --- @param time number @等待时间（秒）
+  wait = function(self, time)
+    return nil
+  end
 }
 _G.threadpool = threadpool
 
 --- 获取当前世界对象
 --- @return table @世界对象
 local GetWorld = function()
-    return {}
+  return {}
 end
 _G.GetWorld = GetWorld
 
 --- 打印信息
 --- @param message any @要打印的信息
 local print = function(message)
-    return nil
+  return nil
 end
 _G.print = print
 
 --- 打印错误信息
 --- @param message any @要打印的错误信息
 local printError = function(message)
-    return nil
+  return nil
 end
 _G.printError = printError
 
@@ -52,7 +52,7 @@ _G.printError = printError
 --- @param className string @类名
 --- @param super table|string @父类原表|父类名
 local Class = function(className, super, isSingle)
-    return {}
+  return {}
 end
 _G.Class = Class
 
@@ -60,7 +60,7 @@ _G.Class = Class
 --- @param className string @类名
 --- @return table @对象实例
 local Instance = function(className)
-    return {}
+  return {}
 end
 _G.Instance = Instance
 
@@ -68,7 +68,7 @@ _G.Instance = Instance
 --- @param className string @类名
 --- @return table @类单例
 local GetInst = function(className)
-    return {}
+  return {}
 end
 _G.GetInst = GetInst
 
@@ -77,7 +77,7 @@ os = os
 --- 获取当前时间（ms）
 --- @return number @当前时间（ms）
 function os.timeMs()
-    return 0
+  return 0
 end
 --- @class Mini @组件属性
 --- @field Number number @数值
@@ -1324,9 +1324,7 @@ _G.Data = Data
 --- @param varId string @变量ID
 --- @param playerId number @玩家ID
 --- @param value any @默认值
-function Data:SetValue(varId, playerId, value)
-    return true
-end
+function Data:SetValue(varId, playerId, value) return true end
 
 --- 获取变量值
 --- 
@@ -1334,9 +1332,7 @@ end
 --- @return any
 --- @param varId string @变量ID
 --- @param playerId number @玩家ID
-function Data:GetValue(varId, playerId)
-    return nil
-end
+function Data:GetValue(varId, playerId) return nil end
 
 --- 数值变量增加值
 --- 
@@ -1345,9 +1341,7 @@ end
 --- @param varId string @变量ID
 --- @param playerId number @玩家ID
 --- @param value number @增加值
-function Data:IncreasesValue(varId, playerId, value)
-    return nil
-end
+function Data:IncreasesValue(varId, playerId, value) return nil end
 --- 更新整个表的数据信息
 --- @param varId string @变量ID
 --- @param playerId? number|nil @玩家uin(全局变量传nil)
@@ -1722,22 +1716,16 @@ end
 
 --- 获取组件挂载的对象实例id
 --- @return number @对象实例id
-function Component:GetGameObjectId()
-    return 0
-end
+function Component:GetGameObjectId() return 0 end
 
 --- 获取组件是否有效
 --- @return boolean @是否有效
-function Component:IsValid()
-    return true
-end
+function Component:IsValid() return true end
 
 --- 在组件所在的对象上添加指定组件
 --- @param componentId string @组件ID
 --- @return nil @组件对象
-function Component:AddComponent(componentId)
-    return nil
-end
+function Component:AddComponent(componentId) return nil end
 
 --- 删除在组件所在的对象上的指定组件
 --- @param componentId string @组件ID
@@ -1748,9 +1736,7 @@ end
 --- 获取组件所在对象上的指定组件
 --- @param componentId string @组件ID
 --- @return nil @组件对象
-function Component:GetComponent(componentId)
-    return nil
-end
+function Component:GetComponent(componentId) return nil end
 
 --- 发送自定义消息(异步)
 --- @param eventId string @消息ID
@@ -1805,24 +1791,18 @@ end
 --- @param eventType string @自定义事件类型
 --- @param ... any @消息内容
 --- @return nil
-function Component:PushEventSync(eventType, ...)
-    return nil
-end
+function Component:PushEventSync(eventType, ...) return nil end
 
 --- 监听对象事件(可以监听自定义的，也能监听官方内置对象事件)
 --- @param eventType string|number @事件类型
 --- @param callback function @回调函数
 --- @return nil
-function Component:AddEvent(eventType, callback)
-    return nil
-end
+function Component:AddEvent(eventType, callback) return nil end
 
 --- 移除对象的事件监听
 --- @param eventType string|number @事件类型
 --- @return nil
-function Component:RemoveEvent(eventType)
-    return nil
-end
+function Component:RemoveEvent(eventType) return nil end
 
 --- 启动定时器在指定时间执行任务
 --- ```lua
@@ -1833,9 +1813,7 @@ end
 --- @param callback function @回调函数
 --- @param delay number @时间间隔(秒)
 --- @return nil @定时器任务对象
-function Component:DoTaskInTime(callback, delay)
-    return nil
-end
+function Component:DoTaskInTime(callback, delay) return nil end
 
 --- 启动定时器周期性执行任务
 --- ```lua
@@ -1848,60 +1826,44 @@ end
 --- @param delay? number @延迟开始第一次执行时间(默认0)
 --- @param count? number @执行次数(默认无限次)
 --- @return nil @定时器任务对象
-function Component:DoPeriodicTask(callback, interval, delay, count)
-    return nil
-end
+function Component:DoPeriodicTask(callback, interval, delay, count) return nil end
 
 --- 清除所有定时器任务
 --- @return nil
-function Component:ClearAllTask()
-    return nil
-end
+function Component:ClearAllTask() return nil end
 
 --- 设置是否启用事件
 --- @param callback function @事件回调函数
 --- @param enable boolean @是否启用
 --- @return nil
-function Component:SetEventIsEnable(callback, enable)
-    return nil
-end
+function Component:SetEventIsEnable(callback, enable) return nil end
 
 --- 启动新协程
 --- @param callback function @协程函数
 --- @return nil
-function Component:ThreadWork(callback)
-    return nil
-end
+function Component:ThreadWork(callback) return nil end
 
 --- 协程等待
 --- @param delay number @等待时间(默认一帧)
 --- @return nil
-function Component:ThreadWait(delay)
-    return nil
-end
+function Component:ThreadWait(delay) return nil end
 
 --- 发送云服广播消息(异步)
 --- @param eventType string @自定义事件类型
 --- @param ... any @事件内容
 --- @return nil
-function Component:PushCloudServerMsg(eventType, ...)
-    return nil
-end
+function Component:PushCloudServerMsg(eventType, ...) return nil end
 
 --- 接收云服事件
 --- @param eventType string @消息类型
 --- @param callback function @回调函数
 --- @return nil
-function Component:AddCloudSeverEvent(eventType, callback)
-    return nil
-end
+function Component:AddCloudSeverEvent(eventType, callback) return nil end
 
 --- 移除云服消息监听
 --- @param eventType string @消息类型
 --- @return nil
-function Component:RemoveCloudSeverEvent(eventType)
-    return nil
-end
+function Component:RemoveCloudSeverEvent(eventType) return nil end
 
 --- @type Component self
 --- @class TriggerEvent @触发器事件枚举
@@ -2186,92 +2148,68 @@ _G.Timer = Timer
 --- 判断计时器是否存在
 --- @param id number @计时器ID
 --- @return boolean @是否存在
-function Timer:IsExist(id)
-    return true
-end
+function Timer:IsExist(id) return true end
 
 --- 添加计时器
 --- @param name string @计时器名称
 --- @return number @计时器ID
-function Timer:CreateTimer(name)
-    return 0
-end
+function Timer:CreateTimer(name) return 0 end
 
 --- 删除计时器
 --- @param timerid number @计时器ID
 --- @return boolean @操作是否成功
-function Timer:DeleteTimer(timerid)
-    return true
-end
+function Timer:DeleteTimer(timerid) return true end
 
 --- 启动倒计时
 --- @param id number @计时器ID
 --- @param interval number @开始倒计时时间
 --- @param repeated boolean @是否重复
 --- @return boolean @操作是否成功
-function Timer:StartBackwardTimer(id, interval, repeated)
-    return true
-end
+function Timer:StartBackwardTimer(id, interval, repeated) return true end
 
 --- 启动正向计时
 --- @param id number @计时器ID
 --- @return boolean @操作是否成功
-function Timer:StartForwardTimer(id)
-    return true
-end
+function Timer:StartForwardTimer(id) return true end
 
 --- 暂停计时器
 --- @param id number @计时器ID
 --- @return boolean @操作是否成功
-function Timer:PauseTimer(id)
-    return true
-end
+function Timer:PauseTimer(id) return true end
 
 --- 恢复计时器
 --- @param id number @计时器ID
 --- @return boolean @操作是否成功
-function Timer:ResumeTimer(id)
-    return true
-end
+function Timer:ResumeTimer(id) return true end
 
 --- 停止计时器
 --- @param id number @计时器ID
 --- @return boolean @操作是否成功
-function Timer:StopTimer(id)
-    return true
-end
+function Timer:StopTimer(id) return true end
 
 --- 改变计时器计时
 --- @param id number @计时器ID
 --- @param curtime number @计时器当前时刻
 --- @return boolean @操作是否成功
-function Timer:ChangeTimerTime(id, curtime)
-    return true
-end
+function Timer:ChangeTimerTime(id, curtime) return true end
 
 --- 获取计时器时间
 --- @param id number @计时器ID
 --- @return number @当前倒计时时间
-function Timer:GetTimerTime(id)
-    return 0
-end
+function Timer:GetTimerTime(id) return 0 end
 
 --- 显示计时器窗口(若其他计时器已经显示，则替换显示)
 --- @param playerids table @玩家ID/玩家id数组
 --- @param timerid number @计时器ID
 --- @param title string @计时器窗口显示的标题
 --- @return boolean @操作是否成功
-function Timer:ShowTimerWnd(playerids, timerid, title)
-    return true
-end
+function Timer:ShowTimerWnd(playerids, timerid, title) return true end
 
 --- 隐藏计时器窗口
 --- @param playerids table @玩家ID/玩家id数组
 --- @param timerid number @计时器ID
 --- @return boolean @操作是否成功
-function Timer:HideTimerWnd(playerids, timerid)
-    return true
-end
+function Timer:HideTimerWnd(playerids, timerid) return true end
 --- @class Mod
 --- 资源模块管理接口 Mod
 local Mod = {}
@@ -2280,9 +2218,7 @@ _G.Mod = Mod
 --- 通过资源id获取defid
 --- @param assetId string @资源id
 --- @return number @defid
-function Mod:GetCfgIdByAssetId(assetId)
-    return 0
-end
+function Mod:GetCfgIdByAssetId(assetId) return 0 end
 --- @class WorldContainer
 --- 世界容器模块管理接口 WorldContainer
 local WorldContainer = {}
@@ -2294,9 +2230,7 @@ _G.WorldContainer = WorldContainer
 --- @param z number @方块坐标z
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @是否是储物箱
-function WorldContainer:CheckStorage(x, y, z, worldId)
-    return true
-end
+function WorldContainer:CheckStorage(x, y, z, worldId) return true end
 
 --- 清空储物箱
 --- @param x number @方块坐标x
@@ -2304,9 +2238,7 @@ end
 --- @param z number @方块坐标z
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:ClearStorageBox(x, y, z, worldId)
-    return true
-end
+function WorldContainer:ClearStorageBox(x, y, z, worldId) return true end
 
 --- 检测储物箱空余格子,传入道具ID同时检测已存该道具的格子
 --- @param x number @方块坐标x
@@ -2315,9 +2247,7 @@ end
 --- @param itemId number|string @道具类型ID
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @是否有空余格子
-function WorldContainer:CheckStorageEmptyGrid(x, y, z, itemId, worldId)
-    return true
-end
+function WorldContainer:CheckStorageEmptyGrid(x, y, z, itemId, worldId) return true end
 
 --- 设置储物箱道具
 --- @param x number @方块坐标x
@@ -2328,9 +2258,7 @@ end
 --- @param num number @道具数量
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:SetStorageItem(x, y, z, offset, itemId, num, worldId)
-    return true
-end
+function WorldContainer:SetStorageItem(x, y, z, offset, itemId, num, worldId) return true end
 
 --- 获取储物箱道具ID
 --- @param x number @方块坐标x
@@ -2339,9 +2267,7 @@ end
 --- @param offset number @仓库格子索引(从1开始)
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number|string|nil, number|string|nil @道具类型ID,道具数量
-function WorldContainer:GetStorageItem(x, y, z, offset, worldId)
-    return 0, 0
-end
+function WorldContainer:GetStorageItem(x, y, z, offset, worldId) return 0, 0 end
 
 --- 向储物箱按堆叠规则添加道具，返回实际加入的数量
 --- @param x number @方块坐标x
@@ -2351,9 +2277,7 @@ end
 --- @param num number @道具数量
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number|boolean|nil @成功添加数量
-function WorldContainer:AddStorageItem(x, y, z, itemId, num, worldId)
-    return 0
-end
+function WorldContainer:AddStorageItem(x, y, z, itemId, num, worldId) return 0 end
 
 --- 移除储物箱内指定类型的道具
 --- @param x number @方块坐标x
@@ -2363,9 +2287,7 @@ end
 --- @param num number @道具数量
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:RemoveStorageItemByID(x, y, z, itemId, num, worldId)
-    return true
-end
+function WorldContainer:RemoveStorageItemByID(x, y, z, itemId, num, worldId) return true end
 
 --- 移除储物箱内指定格子的道具
 --- @param x number @方块坐标x
@@ -2375,9 +2297,7 @@ end
 --- @param num number @道具数量
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:RemoveStorageItemByIndex(x, y, z, offset, num, worldId)
-    return true
-end
+function WorldContainer:RemoveStorageItemByIndex(x, y, z, offset, num, worldId) return true end
 
 --- 将一定数量道具添加到储物箱中
 --- @param x number @方块坐标x
@@ -2387,9 +2307,7 @@ end
 --- @param num number @道具数量
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number @成功添加数量
-function WorldContainer:AddItemToContainer(x, y, z, itemid, num, worldId)
-    return 0
-end
+function WorldContainer:AddItemToContainer(x, y, z, itemid, num, worldId) return 0 end
 
 --- 移除储物箱中一定数量道具
 --- @param x number @方块坐标x
@@ -2399,9 +2317,7 @@ end
 --- @param num number @道具数量
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:RemoveContainerItemByID(x, y, z, itemid, num, worldId)
-    return true
-end
+function WorldContainer:RemoveContainerItemByID(x, y, z, itemid, num, worldId) return true end
 
 --- 清空指定位置的储物箱
 --- @param x number @方块坐标x
@@ -2409,9 +2325,7 @@ end
 --- @param z number @方块坐标z
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:ClearContainer(x, y, z, worldId)
-    return true
-end
+function WorldContainer:ClearContainer(x, y, z, worldId) return true end
 
 --- 给当前世界的储物箱添加道具
 --- @param x number @方块坐标x
@@ -2420,9 +2334,7 @@ end
 --- @param itemIds table @道具数组({itemId itemNum}...)
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number @成功添加数量
-function WorldContainer:AddWorldStorageItems(x, y, z, itemIds, worldId)
-    return 0
-end
+function WorldContainer:AddWorldStorageItems(x, y, z, itemIds, worldId) return 0 end
 
 --- 获取储物箱内指定格子的道具实例ID
 --- @param x number @方块坐标x
@@ -2431,9 +2343,7 @@ end
 --- @param offset number @仓库格子索引(从1开始)
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return string @道具实例ID
-function WorldContainer:GetStorageItemInstanceId(x, y, z, offset, worldId)
-    return ""
-end
+function WorldContainer:GetStorageItemInstanceId(x, y, z, offset, worldId) return "" end
 
 --- 获取储物箱里所有的道具实例(只取通过接口创建的道具实例)
 --- @param x number @方块坐标x
@@ -2441,9 +2351,7 @@ end
 --- @param z number @方块坐标z
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return table @道具实例ID数组
-function WorldContainer:GetAllStorageItemInstanceIds(x, y, z, worldId)
-    return {}
-end
+function WorldContainer:GetAllStorageItemInstanceIds(x, y, z, worldId) return {} end
 
 --- 玩家和指定位置的储物箱或熔炉交换道具
 --- @param x number @方块坐标x
@@ -2454,9 +2362,7 @@ end
 --- @param grid2 number @玩家格子索引
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function WorldContainer:SwapContainerItem(x, y, z, grid, uin, grid2, worldId)
-    return true
-end
+function WorldContainer:SwapContainerItem(x, y, z, grid, uin, grid2, worldId) return true end
 
 --- 获取格子属性
 --- @param x number @方块坐标x
@@ -2466,9 +2372,7 @@ end
 --- @param attrType number @属性类型
 --- @param worldId? number|nil @世界ID (默认当前主机所在星球)
 --- @return number @属性值
-function WorldContainer:GetGridAttr(x, y, z, offset, attrType, worldId)
-    return 0
-end
+function WorldContainer:GetGridAttr(x, y, z, offset, attrType, worldId) return 0 end
 --- @class World
 --- 世界模块管理接口 World
 local World = {}
@@ -2480,9 +2384,7 @@ _G.World = World
 --- @param z number @位置坐标z
 --- @param particleId number @特效ID
 --- @return boolean @操作是否成功
-function World:StopParticleOnPos(x, y, z, particleId)
-    return true
-end
+function World:StopParticleOnPos(x, y, z, particleId) return true end
 
 --- 设置指定位置的特效偏移旋转缩放
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
@@ -2491,9 +2393,7 @@ end
 --- @param rot? table @旋转角度(缺省参数)
 --- @param scale table @缩放比例
 --- @return boolean @操作是否成功
-function World:SetParticleTransform(pos, particleIdArg, offset, rot, scale)
-    return true
-end
+function World:SetParticleTransform(pos, particleIdArg, offset, rot, scale) return true end
 
 --- 在指定位置播放特效
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
@@ -2501,9 +2401,7 @@ end
 --- @param ptimeArg number @播放时长(秒)
 --- @param scale? table @缩放比例(缺省参数)
 --- @return boolean @操作是否成功
-function World:PlayParticle(pos, particleIdArg, ptimeArg, scale)
-    return true
-end
+function World:PlayParticle(pos, particleIdArg, ptimeArg, scale) return true end
 
 --- 获取指定位置的光照强度
 --- @param x number @位置坐标x
@@ -2511,9 +2409,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number @星球ID
 --- @return number @光照强度(0~16)，失败为-1
-function World:GetLightByPos(x, y, z, worldId)
-    return 0
-end
+function World:GetLightByPos(x, y, z, worldId) return 0 end
 
 --- 生成生物(包括怪物、NPC、动物等)
 --- @param x number @方块坐标x
@@ -2523,36 +2419,26 @@ end
 --- @param num? number @生成数量(默认1)
 --- @param trigger? boolean @是否触发事件(默认true)
 --- @return table @生成的生物对象ID数组
-function World:SpawnCreature(x, y, z, actorid, num, trigger)
-    return {}
-end
+function World:SpawnCreature(x, y, z, actorid, num, trigger) return {} end
 
 --- 移除生物
 --- @param creatureId number @生物对象ID
 --- @return boolean @操作是否成功
-function World:DespawnActor(creatureId)
-    return true
-end
+function World:DespawnActor(creatureId) return true end
 
 --- 获取全部玩家数量
 --- @param alive number @玩家状态(0阵亡,1存活,-1全体玩家)
 --- @return number @玩家数量
-function World:GetPlayerTotal(alive)
-    return 0
-end
+function World:GetPlayerTotal(alive) return 0 end
 
 --- 获取全部玩家
 --- @param alive number @玩家状态(0阵亡,1存活,-1全体玩家)
 --- @return table @玩家ID数组
-function World:GetAllPlayers(alive)
-    return {}
-end
+function World:GetAllPlayers(alive) return {} end
 
 --- 获取默认出生点
 --- @return number,number,number @x,y,z方块坐标
-function World:GetSpawnPoint()
-    return 0, 0, 0
-end
+function World:GetSpawnPoint() return 0, 0, 0 end
 
 --- 获取附近合适的生物出生点位置(方块坐标单位)
 --- @param centerX number @中心位置x
@@ -2561,9 +2447,7 @@ end
 --- @param radius number @搜索半径
 --- @param includeCenterPos? boolean @是否包含中心位置(默认true)
 --- @return table @位置坐标表数组
-function World:FindCanSpawnMobPosList(centerX, centerY, centerZ, radius, includeCenterPos)
-    return {}
-end
+function World:FindCanSpawnMobPosList(centerX, centerY, centerZ, radius, includeCenterPos) return {} end
 
 --- 获取距离某点最近的玩家(方块坐标单位)
 --- @param x number @位置坐标x
@@ -2571,9 +2455,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number @世界ID
 --- @return number @最近的玩家ID
-function World:FindNearestPlayerByPos(x, y, z, worldId)
-    return 0
-end
+function World:FindNearestPlayerByPos(x, y, z, worldId) return 0 end
 
 --- 在指定位置上播放指定音效
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
@@ -2582,79 +2464,57 @@ end
 --- @param pitch number @音调调节
 --- @param isLoop boolean @是否循环播放
 --- @return boolean @操作是否成功
-function World:PlaySoundEffectOnPos(pos, soundId, volume, pitch, isLoop)
-    return true
-end
+function World:PlaySoundEffectOnPos(pos, soundId, volume, pitch, isLoop) return true end
 
 --- 停止指定位置上的指定音效
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
 --- @param soundId number @音效ID
 --- @return boolean @操作是否成功
-function World:StopSoundEffectOnPos(pos, soundId)
-    return true
-end
+function World:StopSoundEffectOnPos(pos, soundId) return true end
 
 --- 暂停/恢复指定位置上的指定音效
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
 --- @param soundId number @音效ID
 --- @param pause boolean @true暂停/false恢复
 --- @return boolean @操作是否成功
-function World:PauseSoundEffectOnPos(pos, soundId, pause)
-    return true
-end
+function World:PauseSoundEffectOnPos(pos, soundId, pause) return true end
 
 --- 是否是白天
 --- @return boolean @是否白天
-function World:IsDaytime()
-    return true
-end
+function World:IsDaytime() return true end
 
 --- 设置游戏当前时间(小时)
 --- @param time number @时间(小时)
 --- @return boolean @操作是否成功
-function World:SetHours(time)
-    return true
-end
+function World:SetHours(time) return true end
 
 --- 获取游戏当前时间(小时)
 --- @return number @当前时间(小时)
-function World:GetHours()
-    return 0
-end
+function World:GetHours() return 0 end
 
 --- 获取游戏当前天数
 --- @return number @当前天数
-function World:GetDay()
-    return 0
-end
+function World:GetDay() return 0 end
 
 --- 设置重力
 --- @param gravity number @重力值
 --- @return boolean @操作是否成功
-function World:SetGravity(gravity)
-    return true
-end
+function World:SetGravity(gravity) return true end
 
 --- 获取重力
 --- @return number @重力值
-function World:GetGravity()
-    return 0
-end
+function World:GetGravity() return 0 end
 
 --- 获取XZ位置上是否可创建生物并返回对应的Y轴位置
 --- @param x number @位置坐标x
 --- @param y number @位置坐标y
 --- @param z number @位置坐标z
 --- @return number @可创建的Y轴位置(不可创建返回0)
-function World:CanMobSpawnOnPosXZ(x, y, z)
-    return 0
-end
+function World:CanMobSpawnOnPosXZ(x, y, z) return 0 end
 
 --- 获取主机所在星球ID
 --- @return number @星球ID
-function World:GetHostWorldId()
-    return 0
-end
+function World:GetHostWorldId() return 0 end
 
 --- 生成投掷物
 --- @param uin number @玩家uin
@@ -2667,9 +2527,7 @@ end
 --- @param dstZ number @目标坐标z
 --- @param speed number @速度
 --- @return number @投掷物对象ID
-function World:SpawnProjectile(uin, itemid, srcX, srcY, srcZ, dstX, dstY, dstZ, speed)
-    return 0
-end
+function World:SpawnProjectile(uin, itemid, srcX, srcY, srcZ, dstX, dstY, dstZ, speed) return 0 end
 
 --- 生成投掷物(通过方向向量)
 --- @param uin number @玩家uin
@@ -2682,25 +2540,19 @@ end
 --- @param dirZ number @方向向量z
 --- @param speed number @速度
 --- @return number @投掷物对象ID
-function World:SpawnProjectileByDir(uin, itemid, x, y, z, dirX, dirY, dirZ, speed)
-    return 0
-end
+function World:SpawnProjectileByDir(uin, itemid, x, y, z, dirX, dirY, dirZ, speed) return 0 end
 
 --- 获取某个位置的地形类型
 --- @param x number @位置坐标x
 --- @param z number @位置坐标z
 --- @return number @地形类型
-function World:GetBiomeType(x, z)
-    return 0
-end
+function World:GetBiomeType(x, z) return 0 end
 
 --- 获取地形类型所属的地形组类型
 --- @param x number @位置坐标x
 --- @param z number @位置坐标z
 --- @return number @地形组类型
-function World:GetBiomeGroup(x, z)
-    return 0
-end
+function World:GetBiomeGroup(x, z) return 0 end
 
 --- 查找地形位置
 --- @param centerX number @查找起点x
@@ -2709,61 +2561,47 @@ end
 --- @param biomeType number @地形类型
 --- @param radius number @查找范围半径(单位chunk)
 --- @return number,number,number @找到的地形位置x,y,z
-function World:FindEcosystem(centerX, centerY, centerZ, biomeType, radius)
-    return 0, 0, 0
-end
+function World:FindEcosystem(centerX, centerY, centerZ, biomeType, radius) return 0, 0, 0 end
 
 --- 添加地图标记
 --- @param uin number @玩家ID
 --- @param markId string @标记ID
 --- @param params table @标记参数表
 --- @return boolean @操作是否成功
-function World:PixelMapAddMarker(uin, markId, params)
-    return true
-end
+function World:PixelMapAddMarker(uin, markId, params) return true end
 
 --- 刷新地图标记
 --- @param uin number @玩家ID
 --- @param markId string @标记ID
 --- @param params table @标记参数表
 --- @return boolean @操作是否成功
-function World:PixelMapRefreshMarker(uin, markId, params)
-    return true
-end
+function World:PixelMapRefreshMarker(uin, markId, params) return true end
 
 --- 删除地图标记
 --- @param uin number @玩家ID
 --- @param markId string @标记ID
 --- @return boolean @操作是否成功
-function World:PixelMapDelMarker(uin, markId)
-    return true
-end
+function World:PixelMapDelMarker(uin, markId) return true end
 
 --- 添加地图纹理
 --- @param uin number @玩家ID
 --- @param textureId string @纹理ID
 --- @param params table @纹理参数表
 --- @return boolean @操作是否成功
-function World:PixelMapAddTexture(uin, textureId, params)
-    return true
-end
+function World:PixelMapAddTexture(uin, textureId, params) return true end
 
 --- 刷新地图纹理
 --- @param uin number @玩家ID
 --- @param textureId string @纹理ID
 --- @param params table @纹理参数表
 --- @return boolean @操作是否成功
-function World:PixelMapRefreshTexture(uin, textureId, params)
-    return true
-end
+function World:PixelMapRefreshTexture(uin, textureId, params) return true end
 
 --- 删除地图纹理
 --- @param uin number @玩家ID
 --- @param textureId string @纹理ID
 --- @return boolean @操作是否成功
-function World:PixelMapDelTexture(uin, textureId)
-    return true
-end
+function World:PixelMapDelTexture(uin, textureId) return true end
 
 --- 设置天空盒颜色参数(带动效)
 --- @param uin number @玩家ID
@@ -2772,75 +2610,57 @@ end
 --- @param easingType number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function World:SetSkyBoxColorAnim(uin, colorType, colorValue, easingType, time)
-    return true
-end
+function World:SetSkyBoxColorAnim(uin, colorType, colorValue, easingType, time) return true end
 
 --- 设置天空盒时间流逝速度
 --- @param speed number @时间流逝速度
 --- @return boolean @操作是否成功
-function World:SetTimeVanishingSpeed(speed)
-    return true
-end
+function World:SetTimeVanishingSpeed(speed) return true end
 
 --- 设置天空盒模板
 --- @param templateId number @模板ID
 --- @return boolean @操作是否成功
-function World:SetSkyBoxTemplate(templateId)
-    return true
-end
+function World:SetSkyBoxTemplate(templateId) return true end
 
 --- 设置天空盒贴图
 --- @param mapType number @贴图类型
 --- @param url string @图片链接
 --- @return boolean @操作是否成功
-function World:SetSkyBoxMaps(mapType, url)
-    return true
-end
+function World:SetSkyBoxMaps(mapType, url) return true end
 
 --- 设置天空盒颜色参数
 --- @param timeType number @时间类型
 --- @param colorType number @颜色类型
 --- @param colorValue string @颜色值
 --- @return boolean @操作是否成功
-function World:SetSkyBoxColor(timeType, colorType, colorValue)
-    return true
-end
+function World:SetSkyBoxColor(timeType, colorType, colorValue) return true end
 
 --- 设置天空盒属性参数
 --- @param timeType number @时间类型
 --- @param attrType number @属性类型
 --- @param value number @属性值
 --- @return boolean @操作是否成功
-function World:SetSkyBoxAttr(timeType, attrType, value)
-    return true
-end
+function World:SetSkyBoxAttr(timeType, attrType, value) return true end
 
 --- 设置天空盒属性参数(不带时间维度，直接作用于当前配置)
 --- @param attrType number @属性类型(SkyboxAttr)
 --- @param value number @参数值(0~100)
 --- @return boolean @是否设置成功
-function World:SetSkyBoxAttrWithNoTime(attrType, value)
-    return true
-end
+function World:SetSkyBoxAttrWithNoTime(attrType, value) return true end
 
 --- 设置天空盒滤镜参数
 --- @param uin number @玩家ID
 --- @param filterType number @滤镜类型
 --- @param value number|string @参数值
 --- @return boolean @操作是否成功
-function World:SetSkyBoxFilter(uin, filterType, value)
-    return true
-end
+function World:SetSkyBoxFilter(uin, filterType, value) return true end
 
 --- 天空盒属性开关
 --- @param timeType number @时间类型
 --- @param switchType number @开关类型
 --- @param enable boolean @是否开启
 --- @return boolean @操作是否成功
-function World:SetSkyBoxSwitch(timeType, switchType, enable)
-    return true
-end
+function World:SetSkyBoxSwitch(timeType, switchType, enable) return true end
 
 --- 设置天空盒贴图(带动效)
 --- @param uin number @玩家ID
@@ -2849,9 +2669,7 @@ end
 --- @param easingType number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function World:SetSkyBoxMapsAnim(uin, mapType, url, easingType, time)
-    return true
-end
+function World:SetSkyBoxMapsAnim(uin, mapType, url, easingType, time) return true end
 
 --- 设置天空盒滤镜参数(带动效)
 --- @param uin number @玩家ID
@@ -2860,29 +2678,21 @@ end
 --- @param easingType number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function World:SetSkyBoxFilterAnim(uin, filterType, value, easingType, time)
-    return true
-end
+function World:SetSkyBoxFilterAnim(uin, filterType, value, easingType, time) return true end
 
 --- 获取本地设备时间的指定字段
 --- @param enum number @枚举值(EventDate)
 --- @return number @时间值
-function World:GetLocalDate(enum)
-    return 0
-end
+function World:GetLocalDate(enum) return 0 end
 
 --- 获取完整本地设备时间字符串
 --- @return string @时间字符串
-function World:GetLocalDateString()
-    return ''
-end
+function World:GetLocalDateString() return '' end
 
 --- 获取服务器时间的指定字段(云服模式下会回退到本地时间)
 --- @param enum number @枚举值(EventDate)
 --- @return number @时间值(取不到返回0)
-function World:GetServerDate(enum)
-    return 0
-end
+function World:GetServerDate(enum) return 0 end
 
 --- 获取对象到某个方向上的射线检测目标
 --- @param pos table @对象位置{x=x, y=y, z=z}
@@ -2890,9 +2700,7 @@ end
 --- @param maxLen number @最大检测距离
 --- @param detectType number @检测类型
 --- @return number @检测到的对象ID
-function World:GetDirRayDetection(pos, dir, maxLen, detectType)
-    return 0
-end
+function World:GetDirRayDetection(pos, dir, maxLen, detectType) return 0 end
 
 --- 计算指定方向射线长度(遇到方块结束)
 --- @param srcX number @起点坐标x
@@ -2903,9 +2711,7 @@ end
 --- @param dstZ number @终点坐标z
 --- @param distance number @最大检测距离
 --- @return number @射线长度
-function World:GetRayLength(srcX, srcY, srcZ, dstX, dstY, dstZ, distance)
-    return 0
-end
+function World:GetRayLength(srcX, srcY, srcZ, dstX, dstY, dstZ, distance) return 0 end
 
 --- 射线打到的方块类型(遇到方块结束)
 --- @param srcX number @起点坐标x
@@ -2914,9 +2720,7 @@ end
 --- @param faceDir number @面方向
 --- @param distance number @最大检测距离
 --- @return number @方块类型ID
-function World:GetRayBlock(srcX, srcY, srcZ, faceDir, distance)
-    return 0
-end
+function World:GetRayBlock(srcX, srcY, srcZ, faceDir, distance) return 0 end
 
 --- 通过局部坐标方向计算绝对正方向(忽略视角仰角)
 --- @param uin number @玩家uin
@@ -2924,136 +2728,100 @@ end
 --- @param vy number @局部坐标y方向
 --- @param vz number @局部坐标z方向
 --- @return table @绝对方向向量{x=x, y=y, z=z}
-function World:CalcDirectionByYawDirection(uin, vx, vy, vz)
-    return {}
-end
+function World:CalcDirectionByYawDirection(uin, vx, vy, vz) return {} end
 
 --- 通过局部球坐标方向计算绝对正方向(忽略视角仰角)
 --- @param uin number @玩家uin
 --- @param yaw number @水平偏移夹角
 --- @param pitch number @垂直偏移夹角
 --- @return table @绝对方向向量{x=x, y=y, z=z}
-function World:CalcDirectionByYawAngle(uin, yaw, pitch)
-    return {}
-end
+function World:CalcDirectionByYawAngle(uin, yaw, pitch) return {} end
 
 --- 绝对坐标方向
 --- @param x number @坐标x
 --- @param y number @坐标y
 --- @param z number @坐标z
 --- @return table @绝对方向向量{x=x, y=y, z=z}
-function World:CalcDirectionByCoord(x, y, z)
-    return {}
-end
+function World:CalcDirectionByCoord(x, y, z) return {} end
 
 --- 角度坐标方向
 --- @param yaw number @水平偏移夹角
 --- @param pitch number @垂直偏移夹角
 --- @return table @绝对方向向量{x=x, y=y, z=z}
-function World:CalcDirectionByAngle(yaw, pitch)
-    return {}
-end
+function World:CalcDirectionByAngle(yaw, pitch) return {} end
 
 --- 随机特效类型,随机返回一种特效ID
 --- @return number @随机特效ID
-function World:RandomParticleEffectID()
-    return 0
-end
+function World:RandomParticleEffectID() return 0 end
 
 --- 随机音效ID,随机返回一种音效ID
 --- @return number @随机音效ID
-function World:RandomSoundID()
-    return 0
-end
+function World:RandomSoundID() return 0 end
 
 --- 计算两个三维坐标之间的距离
 --- @param posSrc table @源坐标{x=x, y=y, z=z}
 --- @param posDst table @目标坐标{x=x, y=y, z=z}
 --- @return number @两点之间的距离
-function World:CalcDistance(posSrc, posDst)
-    return 0
-end
+function World:CalcDistance(posSrc, posDst) return 0 end
 
 --- 设置天气组的天气状态
 --- @param groupId number @天气组ID
 --- @param weatherType number @天气类型
 --- @return boolean @操作是否成功
-function World:SetGroupWeather(groupId, weatherType)
-    return true
-end
+function World:SetGroupWeather(groupId, weatherType) return true end
 
 --- 随机天气
 --- @return number @随机天气ID
-function World:RandomWeatherID()
-    return 0
-end
+function World:RandomWeatherID() return 0 end
 
 --- 获取天气组天气
 --- @param groupId number @天气组ID
 --- @return number @天气值
-function World:GetGroupWeather(groupId)
-    return 0
-end
+function World:GetGroupWeather(groupId) return 0 end
 
 --- 设置出生点
 --- @param x number @方块坐标x
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @return boolean @操作是否成功
-function World:SetSpawnPoint(x, y, z)
-    return true
-end
+function World:SetSpawnPoint(x, y, z) return true end
 
 --- 位置到位置的单位方向
 --- @param pos1 table @位置1{x=x, y=y, z=z}
 --- @param pos2 table @位置2{x=x, y=y, z=z}
 --- @return table @单位方向向量
-function World:CalcDirectionByPos2Pos(pos1, pos2)
-    return {}
-end
+function World:CalcDirectionByPos2Pos(pos1, pos2) return {} end
 
 --- 设置世界创建生物规则(设置不保存,退出游戏后失效,只适用迷拉星)
 --- @param cfgs table @生物规则配置表
 --- @return boolean @操作是否成功
-function World:SetWorldCreateMobRule(cfgs)
-    return true
-end
+function World:SetWorldCreateMobRule(cfgs) return true end
 
 --- 设置生物生成密度(设置不保存,退出游戏后失效,只适用迷拉星)
 --- @param mobType number @生物类型
 --- @param density number @生成密度
 --- @return boolean @操作是否成功
-function World:SetMobSpawnDensity(mobType, density)
-    return true
-end
+function World:SetMobSpawnDensity(mobType, density) return true end
 
 --- 设置农作物生长时间要求修正(设置不保存,退出游戏后失效,只适用迷拉星)
 --- @param rate number @时间修正系数
 --- @return boolean @操作是否成功
-function World:SetPlantGrowRate(rate)
-    return true
-end
+function World:SetPlantGrowRate(rate) return true end
 
 --- 设置游戏内的界面是否禁用
 --- @param popupType number @弹窗类型
 --- @param enable boolean @是否启用
 --- @return boolean @操作是否成功
-function World:SetInnerViewEnable(popupType, enable)
-    return true
-end
+function World:SetInnerViewEnable(popupType, enable) return true end
 
 --- 设置是否可中途加入
 --- @param enable boolean @是否开启中途加入
 --- @return boolean @操作是否成功
-function World:SetMidJoin(enable)
-    return true
-end
+function World:SetMidJoin(enable) return true end
 
 --- 获取游戏模式
 --- @return number @游戏模式
-function World:GetGameMode()
-    return 0
-end
+function World:GetGameMode() return 0 end
 
 --- 设置指定位置的方块光照强度(<1.50+>)
 --- @param x number @位置坐标x
@@ -3062,33 +2830,25 @@ end
 --- @param value number @光照强度(0~15)
 --- @param worldId? number @星球ID
 --- @return boolean @是否设置成功
-function World:SetLightByPos(x, y, z, value, worldId)
-    return true
-end
+function World:SetLightByPos(x, y, z, value, worldId) return true end
 
 --- 获取XZ位置上是否加载了区块
 --- @param x number @位置坐标x
 --- @param z number @位置坐标z
 --- @param worldId number @世界ID
 --- @return boolean @是否加载了区块
-function World:IsChunkLoaded(x, z, worldId)
-    return true
-end
+function World:IsChunkLoaded(x, z, worldId) return true end
 
 --- 增加重力
 --- @param value number @重力值
 --- @return boolean @操作是否成功
-function World:AddGravity(value)
-    return true
-end
+function World:AddGravity(value) return true end
 
 --- 转换时间戳为时间单位
 --- @param number number @时间戳
 --- @param enum number @时间单位枚举 (EventDate)
 --- @return number @转换后的时间
-function World:GetDateFromTime(number, enum)
-    return 0
-end
+function World:GetDateFromTime(number, enum) return 0 end
 --- 回调设置kv数据
 --- @param varId string @排行榜/排行榜变量ID
 --- @param playerId? number|nil @玩家uin(全局变量传nil)
@@ -3272,9 +3032,7 @@ _G.Block = Block
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @是否为固体方块
-function Block:IsSolidBlock(x, y, z, worldId)
-    return true
-end
+function Block:IsSolidBlock(x, y, z, worldId) return true end
 
 --- 是否是液体方块
 --- @param x number @位置坐标x
@@ -3282,9 +3040,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @是否为液体方块
-function Block:IsLiquidBlock(x, y, z, worldId)
-    return true
-end
+function Block:IsLiquidBlock(x, y, z, worldId) return true end
 
 --- 是否是空气方块
 --- @param x number @位置坐标x
@@ -3292,9 +3048,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @是否为空气方块
-function Block:IsAirBlock(x, y, z, worldId)
-    return true
-end
+function Block:IsAirBlock(x, y, z, worldId) return true end
 
 --- 获取指定位置的方块类型
 --- @param x number @位置坐标x
@@ -3302,9 +3056,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return number @方块类型ID
-function Block:GetBlockID(x, y, z, worldId)
-    return 0
-end
+function Block:GetBlockID(x, y, z, worldId) return 0 end
 
 --- 摧毁方块
 --- @param x number @位置坐标x
@@ -3314,9 +3066,7 @@ end
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @param btrigger? boolean @是否触发方块事件(缺省参数，默认true)
 --- @return boolean @操作是否成功
-function Block:DestroyBlock(x, y, z, dropItem, worldId, btrigger)
-    return true
-end
+function Block:DestroyBlock(x, y, z, dropItem, worldId, btrigger) return true end
 
 --- 放置方块
 --- @param blockId number|string @方块ID
@@ -3328,9 +3078,7 @@ end
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @param btrigger? boolean @是否触发方块事件(缺省参数，默认true)
 --- @return boolean @操作是否成功
-function Block:PlaceBlock(blockId, x, y, z, dir, color, worldId, btrigger)
-    return true
-end
+function Block:PlaceBlock(blockId, x, y, z, dir, color, worldId, btrigger) return true end
 
 --- 替换指定位置的方块 (支持颜色方块)
 --- @param blockId number|string @新方块ID
@@ -3342,9 +3090,7 @@ end
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @param btrigger? boolean @是否触发方块事件(缺省参数，默认true)
 --- @return boolean @操作是否成功
-function Block:ReplaceBlock(blockId, x, y, z, face, color, worldId, btrigger)
-    return true
-end
+function Block:ReplaceBlock(blockId, x, y, z, face, color, worldId, btrigger) return true end
 
 --- 设置指定位置方块的 data 数据 (更新当前位置方块)
 --- @param x number @位置坐标x
@@ -3353,9 +3099,7 @@ end
 --- @param data number @方块数据
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:SetBlockData(x, y, z, data, worldId)
-    return true
-end
+function Block:SetBlockData(x, y, z, data, worldId) return true end
 
 --- 获取方块数据
 --- @param x number @位置坐标x
@@ -3363,9 +3107,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return number @方块数据值
-function Block:GetBlockData(x, y, z, worldId)
-    return 0
-end
+function Block:GetBlockData(x, y, z, worldId) return 0 end
 
 --- 获取方块朝向
 --- @param x number @位置坐标x
@@ -3373,9 +3115,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return number @方块朝向 (FaceDir枚举)
-function Block:GetBlockDir(x, y, z, worldId)
-    return 0
-end
+function Block:GetBlockDir(x, y, z, worldId) return 0 end
 
 --- 播放方块动作
 --- @param pos table @位置坐标表{x=x, y=y, z=z}
@@ -3384,9 +3124,7 @@ end
 --- @param animMode number @动画模式 (AnimMode枚举)
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:PlayAnim(pos, animid, speed, animMode, worldId)
-    return true
-end
+function Block:PlayAnim(pos, animid, speed, animMode, worldId) return true end
 
 --- 设置方块设置属性状态 (全局设置)
 --- @param blockId number|string @方块ID
@@ -3394,18 +3132,14 @@ end
 --- @param switch boolean @是否开关
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:SetBlockSettingAttState(blockId, attrType, switch, worldId)
-    return true
-end
+function Block:SetBlockSettingAttState(blockId, attrType, switch, worldId) return true end
 
 --- 获取方块设置属性状态 (全局设置)
 --- @param blockId number|string @方块ID
 --- @param attrType number @方块属性类型
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @是否开启
-function Block:GetBlockSettingAttState(blockId, attrType, worldId)
-    return true
-end
+function Block:GetBlockSettingAttState(blockId, attrType, worldId) return true end
 
 --- 获取功能方块的开关状态
 --- @param x number @位置坐标x
@@ -3413,9 +3147,7 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @是否开启
-function Block:GetBlockSwitchStatus(x, y, z, worldId)
-    return true
-end
+function Block:GetBlockSwitchStatus(x, y, z, worldId) return true end
 
 --- 获取方块的通电状态
 --- @param x number @位置坐标x
@@ -3423,29 +3155,21 @@ end
 --- @param z number @位置坐标z
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @是否开启
-function Block:GetBlockPowerStatus(x, y, z, worldId)
-    return true
-end
+function Block:GetBlockPowerStatus(x, y, z, worldId) return true end
 
 --- 在资源库里随机获取一个方块
 --- @return number @随机的方块类型ID
-function Block:RandomBlockID()
-    return 0
-end
+function Block:RandomBlockID() return 0 end
 
 --- 获取方块名称
 --- @param blockId number|string @方块ID
 --- @return string @方块名称
-function Block:GetBlockDefName(blockId)
-    return ""
-end
+function Block:GetBlockDefName(blockId) return "" end
 
 --- 获取方块描述
 --- @param blockId number|string @方块ID
 --- @return string @方块描述
-function Block:GetBlockDefDesc(blockId)
-    return ""
-end
+function Block:GetBlockDefDesc(blockId) return "" end
 
 --- 放置蓝图 (未支持多星球)
 --- @param x number @位置坐标x
@@ -3456,9 +3180,7 @@ end
 --- @param mirror boolean @是否镜像
 --- @param placeMode boolean @是否蓝图区域全部覆盖
 --- @return boolean @操作是否成功
-function Block:ReplaceBluePrint(x, y, z, blueprintid, angle, mirror, placeMode)
-    return true
-end
+function Block:ReplaceBluePrint(x, y, z, blueprintid, angle, mirror, placeMode) return true end
 
 --- 播放方块裂纹特效
 --- @param x number @位置坐标x
@@ -3467,9 +3189,7 @@ end
 --- @param process number @裂纹进度 (`-1` ~ `10`)
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:PlayCrackEffect(x, y, z, process, worldId)
-    return true
-end
+function Block:PlayCrackEffect(x, y, z, process, worldId) return true end
 
 --- 播放方块损毁特效
 --- @param x number @方块位置的X坐标
@@ -3477,25 +3197,19 @@ end
 --- @param z number @方块位置的Z坐标
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:PlayDestroyEffect(x, y, z, worldId)
-    return true
-end
+function Block:PlayDestroyEffect(x, y, z, worldId) return true end
 
 --- 获取方块掉落物信息
 --- @param blockId number|string @方块ID
 --- @param iType number @类型 (1手持敲方块, 2手持道具正确, 3手持道具不正确)
 --- @return table @返回掉落道具信息 {itemid:道具ID, itemnum:数量, odds:概率}
-function Block:GetBlockDropItemType(blockId, iType)
-    return {}
-end
+function Block:GetBlockDropItemType(blockId, iType) return {} end
 
 --- 获取方块的采集经验
 --- @param blockId number|string @方块ID
 --- @param iType number @采集类型
 --- @return number @经验值
-function Block:GetBlockDropExp(blockId, iType)
-    return 0
-end
+function Block:GetBlockDropExp(blockId, iType) return 0 end
 
 --- 设置方块颜色
 --- @param x number @位置坐标x
@@ -3504,9 +3218,7 @@ end
 --- @param color number @颜色值
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:SetBlockColor(x, y, z, color, worldId)
-    return true
-end
+function Block:SetBlockColor(x, y, z, color, worldId) return true end
 
 --- 设置方块方向
 --- @param x number @位置坐标x
@@ -3515,16 +3227,12 @@ end
 --- @param dir number @方块方向 (FaceDir枚举)
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:SetBlockDir(x, y, z, dir, worldId)
-    return true
-end
+function Block:SetBlockDir(x, y, z, dir, worldId) return true end
 
 --- 获取方块类型外观
 --- @param blockId number|string @方块类型ID或方块预制ID
 --- @return string @方块类型外观
-function Block:GetFacade(blockId)
-    return ""
-end
+function Block:GetFacade(blockId) return "" end
 
 --- 设置方块纹理颜色 (仅支持草块、土块、树叶、花草等方块，其它方块暂不支持；设置后不会存档；玩法转编辑后需要重进地图才可还原)
 --- @param blockId number|string @方块ID
@@ -3532,9 +3240,7 @@ end
 --- @param alpha number @混合比例(0-100)
 --- @param slotindex? number @材质槽索引 (默认1)
 --- @return boolean @操作是否成功
-function Block:SetBlockTextureColor(blockId, color, alpha, slotindex)
-    return true
-end
+function Block:SetBlockTextureColor(blockId, color, alpha, slotindex) return true end
 
 --- 设置指定位置功能方块的开关状态
 --- @param x number @位置坐标x
@@ -3543,9 +3249,7 @@ end
 --- @param isActive boolean @开关状态
 --- @param worldId? number|nil @星球ID(缺省参数，默认当前主机所在星球)
 --- @return boolean @操作是否成功
-function Block:SetBlockSwitchStatus(x, y, z, isActive, worldId)
-    return true
-end
+function Block:SetBlockSwitchStatus(x, y, z, isActive, worldId) return true end
 --- @class GameObject
 --- 对象模块管理接口 - GameObject
 local GameObject = {}
@@ -3554,16 +3258,12 @@ _G.GameObject = GameObject
 --- 根据ID查找游戏对象
 --- @return string|nil @返回查找的方块对象，如果没有找到则返回nil
 --- @param id number|string @游戏对象的唯一标识
-function GameObject:FindObject(id)
-    return ""
-end
+function GameObject:FindObject(id) return "" end
 
 --- 获取当前游戏UI对象
 --- @return string|nil @返回查找的UI对象，如果没有找到则返回nil
 --- @param id number|string @游戏对象的唯一标识
-function GameObject:FindUIObject(id)
-    return ""
-end
+function GameObject:FindUIObject(id) return "" end
 
 --- 注意: 方块对象接口只能查找到 **编辑过的方块** 或 **自定义的方块**
 --- 
@@ -3572,9 +3272,7 @@ end
 --- 获取当前游戏方块类别对象
 --- @return string|nil @返回查找的方块类别对象，如果没有找到则返回nil
 --- @param id number|string @游戏对象的唯一标识
-function GameObject:FindBlockObject(id)
-    return ""
-end
+function GameObject:FindBlockObject(id) return "" end
 
 --- 创建预制实例
 --- @param prefabId string @预制体ID
@@ -3584,9 +3282,7 @@ end
 --- @param z number @Z坐标
 --- @param trigger boolean @是否触发事件
 --- @return string|nil @返回创建的预制实例，如果创建失败则返回nil
-function GameObject:CreatePrefabInst(prefabId, worldId, x, y, z, trigger)
-    return ""
-end
+function GameObject:CreatePrefabInst(prefabId, worldId, x, y, z, trigger) return "" end
 
 --- 创建对象
 --- 
@@ -3600,18 +3296,14 @@ end
 --- @param trigger? boolean @是否触发事件(可缺省)
 --- @param worldId number @星球ID(默认为当前主机所在星球)
 --- @return table|nil @返回创建对象的列表(Table), 如果创建失败则返回nil
-function GameObject:CreatePrefab(objectType, prefabId, x, y, z, num, trigger, worldId)
-    return {}
-end
+function GameObject:CreatePrefab(objectType, prefabId, x, y, z, num, trigger, worldId) return {} end
 
 --- 删除对象
 --- 
 --- (玩家，方块，世界，UI 对象 **不能** 删除)
 --- @param objId string @对象ID
 --- @return boolean @返回true表示成功删除，false表示失败
-function GameObject:Destroy(objId)
-    return true
-end
+function GameObject:Destroy(objId) return true end
 
 --- 获取对象的预制ID
 --- @param objId string @对象ID (掉落物，投掷物，生物 **可用**)
@@ -3628,70 +3320,52 @@ _G.Actor = Actor
 --- 获取掉落物的类型ID
 --- @param objId number @对象ID
 --- @return number @掉落物类型ID
-function Actor:GetItemId(objId)
-    return 0
-end
+function Actor:GetItemId(objId) return 0 end
 
 --- 获取掉落物品数量
 --- @param objId number @对象ID
 --- @return number @掉落物品数量
-function Actor:GetDropItemNum(objId)
-    return 0
-end
+function Actor:GetDropItemNum(objId) return 0 end
 
 --- 设置角色队伍
 --- @param objid number @对象ID
 --- @param teamType number @队伍类型
 --- @param bResetAttr boolean @是否重置属性(玩家有效，默认false)
 --- @return boolean @成功状态
-function Actor:SetTeam(objid, teamType, bResetAttr)
-    return true
-end
+function Actor:SetTeam(objid, teamType, bResetAttr) return true end
 
 --- 获取角色队伍
 --- @param objid number @对象ID
 --- @return number @队伍类型
-function Actor:GetTeam(objid)
-    return 0
-end
+function Actor:GetTeam(objid) return 0 end
 
 --- 增加角色当前生命量
 --- @param objid number @对象ID
 --- @param hp number @血量值(hp>0增加血量，hp<0减少血量)
 --- @return boolean @成功状态
-function Actor:AddHp(objid, hp)
-    return true
-end
+function Actor:AddHp(objid, hp) return true end
 
 --- 获取最大血量(包括加成)
 --- @param objid number @对象ID
 --- @return number @最大生命值
-function Actor:GetMaxHP(objid)
-    return 0
-end
+function Actor:GetMaxHP(objid) return 0 end
 
 --- 设置对象昵称是否显示
 --- @param objid number @对象ID
 --- @param bshow boolean @是否显示
 --- @return boolean @成功状态
-function Actor:ShowNickName(objid, bshow)
-    return true
-end
+function Actor:ShowNickName(objid, bshow) return true end
 
 --- 设置角色昵称
 --- @param objid number @对象ID
 --- @param nickname string @昵称
 --- @return boolean @成功状态
-function Actor:SetNickName(objid, nickname)
-    return true
-end
+function Actor:SetNickName(objid, nickname) return true end
 
 --- 获取角色昵称
 --- @param objid number @对象ID
 --- @return string @角色昵称
-function Actor:GetNickName(objid)
-    return ""
-end
+function Actor:GetNickName(objid) return "" end
 
 --- 在指定角色身上播放音效
 --- @param objid number @对象ID
@@ -3700,64 +3374,48 @@ end
 --- @param pitch number @音调
 --- @param isLoop boolean @是否循环播放
 --- @return boolean @成功状态
-function Actor:PlaySoundEffectById(objid, soundId, volume, pitch, isLoop)
-    return true
-end
+function Actor:PlaySoundEffectById(objid, soundId, volume, pitch, isLoop) return true end
 
 --- 停止指定对象身上的音效
 --- @param objid number @对象ID
 --- @param soundId number @音效ID
 --- @return boolean @成功状态
-function Actor:StopSoundEffectById(objid, soundId)
-    return true
-end
+function Actor:StopSoundEffectById(objid, soundId) return true end
 
 --- 暂停/恢复指定对象身上的音效
 --- @param objid number @对象ID
 --- @param soundId number @音效ID
 --- @param pause boolean @true暂停/false恢复
 --- @return boolean @成功状态
-function Actor:PauseSoundEffectById(objid, soundId, pause)
-    return true
-end
+function Actor:PauseSoundEffectById(objid, soundId, pause) return true end
 
 --- 使生物朝向目标生物
 --- @param objid number @对象ID
 --- @param targetid number @目标对象ID
 --- @return boolean @成功状态
-function Actor:RotateFaceToActor(objid, targetid)
-    return true
-end
+function Actor:RotateFaceToActor(objid, targetid) return true end
 
 --- 获取对象的当前移动速度
 --- @param objId number @对象ID
 --- @return number, number, number @x,y,z方向速度
-function Actor:GetMotion(objId)
-    return 0, 0, 0
-end
+function Actor:GetMotion(objId) return 0, 0, 0 end
 
 --- 设置目标仇恨目标
 --- @param objId number @对象ID
 --- @param targetId number @目标对象ID
 --- @return boolean @成功状态
-function Actor:SetBeHurtTarget(objId, targetId)
-    return true
-end
+function Actor:SetBeHurtTarget(objId, targetId) return true end
 
 --- 获取角色外观(需要确保对象在场景中存在)
 --- @param objid number @对象ID
 --- @return string @对象外观
-function Actor:GetActorFacade(objid)
-    return ""
-end
+function Actor:GetActorFacade(objid) return "" end
 
 --- 比较两个主模型外观是否相等
 --- @param facade1 string @外观类型1
 --- @param facade2 string @外观类型2
 --- @return boolean @是否相等
-function Actor:CompareMainModel(facade1, facade2)
-    return false
-end
+function Actor:CompareMainModel(facade1, facade2) return false end
 
 --- 在指定对象身上播放粒子特效
 --- @param objid number @对象ID
@@ -3767,17 +3425,13 @@ end
 --- @param rotation table @旋转角度
 --- @param scale table @缩放比例
 --- @return boolean @成功状态
-function Actor:PlayBodyParticleById(objid, particleId, time, offset, rotation, scale)
-    return true
-end
+function Actor:PlayBodyParticleById(objid, particleId, time, offset, rotation, scale) return true end
 
 --- 停止指定对象身上的粒子特效
 --- @param objid number @对象ID
 --- @param particleId number @粒子特效ID
 --- @return boolean @成功状态
-function Actor:StopBodyEffectById(objid, particleId)
-    return true
-end
+function Actor:StopBodyEffectById(objid, particleId) return true end
 
 --- 设置指定对象身上的特效大小
 --- @param objid number @对象ID
@@ -3786,39 +3440,29 @@ end
 --- @param rotation table @旋转角度
 --- @param scale table @缩放比例
 --- @return boolean @成功状态
-function Actor:SetBodyParticleTransform(objid, particleId, offset, rotation, scale)
-    return true
-end
+function Actor:SetBodyParticleTransform(objid, particleId, offset, rotation, scale) return true end
 
 --- 使玩家/生物跳跃一次
 --- @param objId number @对象ID
 --- @return boolean @成功状态
-function Actor:Jump(objId)
-    return true
-end
+function Actor:Jump(objId) return true end
 
 --- 获取骑乘生物的objid
 --- @param objid number @对象ID
 --- @return number @骑乘对象ID
-function Actor:GetRidingActorObjId(objid)
-    return 0
-end
+function Actor:GetRidingActorObjId(objid) return 0 end
 
 --- 获取actor朝向
 --- @param objId number @对象ID
 --- @return table @轴向上的方向
-function Actor:GetFaceDirection(objId)
-    return {}
-end
+function Actor:GetFaceDirection(objId) return {} end
 
 --- 使对象向目标行动者移动
 --- @param objid number @执行动作的对象id
 --- @param targetid number @目标对象id
 --- @param speed number @移动速度
 --- @return boolean @成功状态
-function Actor:TryMoveToActor(objid, targetid, speed)
-    return true
-end
+function Actor:TryMoveToActor(objid, targetid, speed) return true end
 
 --- 设置对象朝向
 --- @param objId number @对象ID
@@ -3826,89 +3470,67 @@ end
 --- @param y number @y方向
 --- @param z number @z方向
 --- @return boolean @成功状态
-function Actor:SetFaceDirection(objId, x, y, z)
-    return true
-end
+function Actor:SetFaceDirection(objId, x, y, z) return true end
 
 --- 击败对象
 --- @param objId number @对象ID
 --- @return boolean @成功状态
-function Actor:KillSelf(objId)
-    return true
-end
+function Actor:KillSelf(objId) return true end
 
 --- 设置角色属性
 --- @param objId number @对象ID
 --- @param attrType number @属性类型
 --- @param val number @属性值
 --- @return boolean @成功状态
-function Actor:SetAttr(objId, attrType, val)
-    return true
-end
+function Actor:SetAttr(objId, attrType, val) return true end
 
 --- 增加角色属性值
 --- @param objid number @对象ID
 --- @param atttype number @属性类型
 --- @param val number @增加值
 --- @return boolean @成功状态
-function Actor:IncreasesAttr(objid, atttype, val)
-    return true
-end
+function Actor:IncreasesAttr(objid, atttype, val) return true end
 
 --- 获取角色属性值
 --- @param objId number @对象ID
 --- @param attrType number @属性类型
 --- @return number @属性值
-function Actor:GetAttr(objId, attrType)
-    return 0
-end
+function Actor:GetAttr(objId, attrType) return 0 end
 
 --- 设置对象权限
 --- @param objId number @对象ID
 --- @param abilityType number @权限类型
 --- @param switch boolean @是否开启
 --- @return boolean @成功状态
-function Actor:SetActorPermissions(objId, abilityType, switch)
-    return true
-end
+function Actor:SetActorPermissions(objId, abilityType, switch) return true end
 
 --- 获取对象权限
 --- @param objId number @对象ID
 --- @param abilityType number @权限类型
 --- @return boolean @权限状态
-function Actor:GetActorPermissions(objId, abilityType)
-    return false
-end
+function Actor:GetActorPermissions(objId, abilityType) return false end
 
 --- 设置对象面向角度
 --- @param objId number @对象ID
 --- @param yaw number @面朝角度
 --- @return boolean @成功状态
-function Actor:SetFaceYaw(objId, yaw)
-    return true
-end
+function Actor:SetFaceYaw(objId, yaw) return true end
 
 --- 获取actor视角偏移角度
 --- @param objId number @对象ID
 --- @return number @面朝角度 (-180~180)
-function Actor:GetFaceYaw(objId)
-    return 0
-end
+function Actor:GetFaceYaw(objId) return 0 end
 
 --- 设置actor视角仰望角度
 --- @param objid number @对象ID
 --- @param pitch number @面仰角度
 --- @return boolean @成功状态
-function Actor:SetFacePitch(objid, pitch)
-    return true
-end
+function Actor:SetFacePitch(objid, pitch) return true end
 
 --- 获取actor视角仰望角度
 --- @param objid number @对象ID
 --- @return number @仰望角度
-function Actor:GetFacePitch(objid)
-    return 0
-end
+function Actor:GetFacePitch(objid) return 0 end
 
 --- 设置角色位置
 --- @param objId number @对象ID
@@ -3916,31 +3538,23 @@ end
 --- @param y number @目标Y坐标
 --- @param z number @目标Z坐标
 --- @return boolean @成功状态
-function Actor:SetPosition(objId, x, y, z)
-    return true
-end
+function Actor:SetPosition(objId, x, y, z) return true end
 
 --- 获取对象位置
 --- @param objId number @对象ID
 --- @return number, number, number @x,y,z坐标
-function Actor:GetPosition(objId)
-    return 0, 0, 0
-end
+function Actor:GetPosition(objId) return 0, 0, 0 end
 
 --- 改变对象外观
 --- @param objid number @对象ID
 --- @param modleName string @对象外观描述
 --- @return boolean @成功状态
-function Actor:ChangeCustomModel(objid, modleName)
-    return true
-end
+function Actor:ChangeCustomModel(objid, modleName) return true end
 
 --- 恢复对象外观
 --- @param objid number @对象ID
 --- @return boolean @成功状态
-function Actor:RecoverinitialModel(objid)
-    return true
-end
+function Actor:RecoverinitialModel(objid) return true end
 
 --- 使对象A对对象B造成伤害
 --- @param attackerId number @攻击者对象ID
@@ -3950,53 +3564,39 @@ end
 --- @param ignoreResist boolean @忽略伤害抵抗
 --- @param ignoreTriggerEvent boolean @忽略触发伤害事件
 --- @return boolean @成功状态
-function Actor:ActorHurt(attackerId, targetId, damage, hurtType, ignoreResist, ignoreTriggerEvent)
-    return true
-end
+function Actor:ActorHurt(attackerId, targetId, damage, hurtType, ignoreResist, ignoreTriggerEvent) return true end
 
 --- 设置免疫伤害类型
 --- @param objId number @对象ID
 --- @param hurtType number @伤害类型
 --- @param enable boolean @是否开启
 --- @return boolean @成功状态
-function Actor:SetImmuneType(objId, hurtType, enable)
-    return true
-end
+function Actor:SetImmuneType(objId, hurtType, enable) return true end
 
 --- 改变玩家移动方式
 --- @param objid number @对象ID
 --- @param moveType number @移动类型
 --- @return boolean @成功状态
-function Actor:ChangActorMoveType(objid, moveType)
-    return true
-end
+function Actor:ChangActorMoveType(objid, moveType) return true end
 
 --- 取角色的移动模式
 --- @param objid number @对象ID
 --- @return number @移动模式
-function Actor:GetActorMovementMode(objid)
-    return 0
-end
+function Actor:GetActorMovementMode(objid) return 0 end
 
 --- 获取模型大小值
 --- @param objId number @对象ID
 --- @return table @模型大小
-function Actor:GetBoundSzie(objId)
-    return {}
-end
+function Actor:GetBoundSzie(objId) return {} end
 
 --- 随机一个外观获取其id字符串
 --- @return string @随机外观ID
-function Actor:RandomFacadeID()
-    return ""
-end
+function Actor:RandomFacadeID() return "" end
 
 --- 判断对象是否是玩家/生物
 --- @param objId number @对象ID
 --- @return number @对象类型
-function Actor:GetObjType(objId)
-    return 0
-end
+function Actor:GetObjType(objId) return 0 end
 
 --- 尝试移动到某个位置走寻路(方块坐标)
 --- @param objId number @对象ID
@@ -4006,9 +3606,7 @@ end
 --- @param cancontrol boolean @是否能控制
 --- @param bshowtip boolean @是否显示提示
 --- @return boolean @成功状态
-function Actor:TryMoveToPos(objId, x, y, z, cancontrol, bshowtip)
-    return true
-end
+function Actor:TryMoveToPos(objId, x, y, z, cancontrol, bshowtip) return true end
 
 --- 给对象附加一个速度
 --- @param objId number @对象ID
@@ -4016,40 +3614,30 @@ end
 --- @param y number @y轴速度
 --- @param z number @z轴速度
 --- @return boolean @成功状态
-function Actor:AppendSpeed(objId, x, y, z)
-    return true
-end
+function Actor:AppendSpeed(objId, x, y, z) return true end
 
 --- 寻找对象附近某个类型方块的最近位置
 --- @param objid number @对象ID
 --- @param blockid number @查找的方块类型
 --- @param blockRange number @查找范围(格子数)
 --- @return number, number, number @x,y,z方块坐标
-function Actor:FindNearestBlock(objid, blockid, blockRange)
-    return 0, 0, 0
-end
+function Actor:FindNearestBlock(objid, blockid, blockRange) return 0, 0, 0 end
 
 --- 获取角色高度
 --- @param objId number @对象ID
 --- @return number @角色高度
-function Actor:GetEyeHeight(objId)
-    return 0
-end
+function Actor:GetEyeHeight(objId) return 0 end
 
 --- 清除生物ID为actorid的生物
 --- @param actorid number @生物类型ID
 --- @param bkill boolean @是否杀死生物(默认false)
 --- @return boolean @成功状态
-function Actor:ClearActorWithId(actorid, bkill)
-    return true
-end
+function Actor:ClearActorWithId(actorid, bkill) return true end
 
 --- 对象是否存在
 --- @param objId number @对象ID
 --- @return boolean @是否存在
-function Actor:IsExist(objId)
-    return false
-end
+function Actor:IsExist(objId) return false end
 
 --- 对象播放动作
 --- @param objId number @对象ID
@@ -4057,9 +3645,7 @@ end
 --- @param speed number @播放速度
 --- @param animMode number @动画模式
 --- @return boolean @成功状态
-function Actor:PlayAnim(objId, animid, speed, animMode)
-    return true
-end
+function Actor:PlayAnim(objId, animid, speed, animMode) return true end
 
 --- 对象手持播放动作
 --- @param objId number @对象ID
@@ -4067,9 +3653,7 @@ end
 --- @param speed number @播放速度
 --- @param loop boolean|number @是否循环或循环模式
 --- @return boolean @成功状态
-function Actor:PlayHandAnim(objId, animid, speed, loop)
-    return true
-end
+function Actor:PlayHandAnim(objId, animid, speed, loop) return true end
 
 --- 角色骑乘
 --- @param riderId number @骑乘者ID
@@ -4077,32 +3661,24 @@ end
 --- @param isContrl boolean @是否控制
 --- @param isCloseAI boolean @是否关闭AI
 --- @return boolean @成功状态
-function Actor:MountActor(riderId, mountId, isContrl, isCloseAI)
-    return true
-end
+function Actor:MountActor(riderId, mountId, isContrl, isCloseAI) return true end
 
 --- 角色取消骑乘
 --- @param objid number @对象ID
 --- @return boolean @成功状态
-function Actor:DisMountActor(objid)
-    return true
-end
+function Actor:DisMountActor(objid) return true end
 
 --- 对象抓举对象
 --- @param grabberId number @抓举者ID
 --- @param targetId number @目标对象ID
 --- @return boolean @成功状态
-function Actor:PickupActor(grabberId, targetId)
-    return true
-end
+function Actor:PickupActor(grabberId, targetId) return true end
 
 --- 尝试抓取前方指定距离的对象
 --- @param objid number @对象ID
 --- @param distance number @距离
 --- @return boolean @成功状态
-function Actor:TryPickupActorForward(objid, distance)
-    return true
-end
+function Actor:TryPickupActorForward(objid, distance) return true end
 
 --- 尝试投掷角色
 --- @param throwerId number @投掷者ID
@@ -4111,84 +3687,62 @@ end
 --- @param speed number @投掷速度
 --- @param useGravity boolean @是否使用重力
 --- @return boolean @成功状态
-function Actor:DropActor(throwerId, dir, useDir, speed, useGravity)
-    return true
-end
+function Actor:DropActor(throwerId, dir, useDir, speed, useGravity) return true end
 
 --- 尝试逃脱抓举
 --- @param objid number @被抓举的对象objid
 --- @return boolean @成功状态
-function Actor:EscapePickup(objid)
-    return true
-end
+function Actor:EscapePickup(objid) return true end
 
 --- 设置行为树变量
 --- @param objid number @生物对象objid
 --- @param varid string @变量id
 --- @param val any @变量值(数字/字符/boolean)
 --- @return boolean @成功状态
-function Actor:SetBtreeVarValue(objid, varid, val)
-    return true
-end
+function Actor:SetBtreeVarValue(objid, varid, val) return true end
 
 --- 获取行为树变量
 --- @param objid number @生物对象objid
 --- @param varid string @变量id
 --- @return any @变量值
-function Actor:GetBtreeVarValue(objid, varid)
-    return nil
-end
+function Actor:GetBtreeVarValue(objid, varid) return nil end
 
 --- 根据掉落物objid获取道具实例id
 --- @param objid number @掉落物对象ID
 --- @return string @道具实例id
-function Actor:GetDropItemInstanceId(objid)
-    return ""
-end
+function Actor:GetDropItemInstanceId(objid) return "" end
 
 --- 设置掉落物是否可以拾取
 --- @param objId number @对象ID
 --- @param able boolean @是否可以拾取
 --- @return boolean @成功状态
-function Actor:SetAblePick(objId, able)
-    return true
-end
+function Actor:SetAblePick(objId, able) return true end
 
 --- 获取实体类型外观
 --- @param entityId string @实体类型ID
 --- @return string @外观描述
-function Actor:GetEntityFacade(entityId)
-    return ""
-end
+function Actor:GetEntityFacade(entityId) return "" end
 
 --- 角色拾取地上的掉落物或者投掷物
 --- @param objid number @角色ID
 --- @param itemobjid number @掉落物或投掷物objid
 --- @return number @拾取数量
-function Actor:PickupItem(objid, itemobjid)
-    return 0
-end
+function Actor:PickupItem(objid, itemobjid) return 0 end
 
 --- 获取角色举起的角色objid
 --- @param objid number @对象ID
 --- @return number @举起的角色objid
-function Actor:GetPickupObjID(objid)
-    return 0
-end
+function Actor:GetPickupObjID(objid) return 0 end
 
 --- 获取指定角色当前所在的星球ID
 --- @param objId number @对象ID
 --- @return number @星球ID (失败返回 -1)
-function Actor:GetObjWorldId(objId)
-    return 0
-end
+function Actor:GetObjWorldId(objId) return 0 end
 
 --- 检测指定对象ID是否为玩家对象
 --- @param objId number @对象ID
 --- @return boolean @是否为玩家对象
-function Actor:IsPlayer(objId)
-    return true
-end
+function Actor:IsPlayer(objId) return true end
 
 --- 检测指定对象是否具有指定标签
 --- @param objid number @对象ID
@@ -4196,50 +3750,38 @@ end
 --- @param matchmode number @匹配方式(MatchMode)
 --- @param bexactmatch boolean @每条标签是否精确匹配
 --- @return boolean @是否具有标签
-function Actor:HasTags(objid, tags, matchmode, bexactmatch)
-    return false
-end
+function Actor:HasTags(objid, tags, matchmode, bexactmatch) return false end
 
 --- 获取指定对象的所有标签列表
 --- @param objid number @对象ID
 --- @return table|nil @标签数组(失败返回nil)
-function Actor:GetTags(objid)
-    return {}
-end
+function Actor:GetTags(objid) return {} end
 
 --- 为指定对象添加标签
 --- @param objid number @对象ID
 --- @param tags string|table @标签或标签数组
 --- @param icount number @引用计数(默认1)
 --- @return boolean @是否添加成功
-function Actor:AddTags(objid, tags, icount)
-    return true
-end
+function Actor:AddTags(objid, tags, icount) return true end
 
 --- 从指定对象删除标签
 --- @param objid number @对象ID
 --- @param tags string|table @标签或标签数组
 --- @param icount number @引用计数(默认0，传0全部删除)
 --- @return boolean @是否删除成功
-function Actor:RemoveTags(objid, tags, icount)
-    return true
-end
+function Actor:RemoveTags(objid, tags, icount) return true end
 
 --- 清空指定对象的所有标签
 --- @param objid number @对象ID
 --- @return boolean @是否清空成功
-function Actor:ClearTags(objid)
-    return true
-end
+function Actor:ClearTags(objid) return true end
 
 --- 使对象A播放对象B的动作(仅玩家、生物和实体生效)
 --- @param objidA number @对象ID A
 --- @param objidB number @对象ID B
 --- @param breplay boolean @是否重新播放(默认false)
 --- @return boolean @是否播放成功
-function Actor:PlayAnimByObj(objidA, objidB, breplay)
-    return true
-end
+function Actor:PlayAnimByObj(objidA, objidB, breplay) return true end
 --- @class Player
 --- 玩家模块管理接口 Player
 local Player = {}
@@ -4247,55 +3789,41 @@ _G.Player = Player
 
 --- 获取房主uin
 --- @return number @房主uin
-function Player:GetHostUin()
-    return 0
-end
+function Player:GetHostUin() return 0 end
 
 --- 设置玩家是否胜利
 --- @param uin number @玩家uin
 --- @param result number @胜利结果
 --- @return boolean @操作是否成功
-function Player:SetGameResults(uin, result)
-    return true
-end
+function Player:SetGameResults(uin, result) return true end
 
 --- 设置玩家胜利
 --- @param uin number @玩家uin
 --- @return boolean @操作是否成功
-function Player:SetGameWin(uin)
-    return true
-end
+function Player:SetGameWin(uin) return true end
 
 --- 获取玩家手持道具
 --- @param uin number @玩家uin
 --- @return number,string @道具ID
-function Player:GetCurToolID(uin)
-    return 0, ""
-end
+function Player:GetCurToolID(uin) return 0, "" end
 
 --- 获取玩家当前选中快捷栏索引
 --- @param uin number @玩家uin
 --- @return number @索引值(1~8)
-function Player:GetShotcutIndex(uin)
-    return 0
-end
+function Player:GetShotcutIndex(uin) return 0 end
 
 --- 设置玩家当前选中快捷栏索引
 --- @param uin number @玩家uin
 --- @param index number @快捷栏索引(1~8)
 --- @return boolean @操作是否成功
-function Player:SetShotcutIndex(uin, index)
-    return true
-end
+function Player:SetShotcutIndex(uin, index) return true end
 
 --- 设置道具技能时间
 --- @param uin number @玩家uin
 --- @param itemid number|string @道具类型
 --- @param cd number @冷却时间
 --- @return boolean @操作是否成功
-function Player:SetSkillCD(uin, itemid, cd)
-    return true
-end
+function Player:SetSkillCD(uin, itemid, cd) return true end
 
 --- 玩家在指定位置复活
 --- @param uin number @玩家uin
@@ -4303,9 +3831,7 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @return boolean @操作是否成功
-function Player:ReviveToPos(uin, x, y, z)
-    return true
-end
+function Player:ReviveToPos(uin, x, y, z) return true end
 
 --- 设置玩家复活点
 --- @param uin number @玩家uin
@@ -4313,17 +3839,13 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @return boolean @操作是否成功
-function Player:SetRevivePoint(uin, x, y, z)
-    return true
-end
+function Player:SetRevivePoint(uin, x, y, z) return true end
 
 --- 使玩家显示飘窗文字
 --- @param uin number @玩家uin
 --- @param info string @文本内容
 --- @return boolean @操作是否成功
-function Player:NotifyGameInfo2Self(uin, info)
-    return true
-end
+function Player:NotifyGameInfo2Self(uin, info) return true end
 
 --- 玩家旋转摄像机角度
 --- @param uin number @玩家uin
@@ -4334,71 +3856,53 @@ end
 --- @param deltayaw number @视角偏移平滑变化量
 --- @param deltapitch number @视角仰望变化量
 --- @return boolean @操作是否成功
-function Player:RotateCamera(uin, yaw, pitch, issmooth, iscorrectyaw, deltayaw, deltapitch)
-    return true
-end
+function Player:RotateCamera(uin, yaw, pitch, issmooth, iscorrectyaw, deltayaw, deltapitch) return true end
 
 --- 抖动玩家镜头
 --- @param uin number @玩家uin
 --- @param power number @强度(取值范围1-1000)
 --- @param time number @持续时间
 --- @return boolean @操作是否成功
-function Player:ShakeCamera(uin, power, time)
-    return true
-end
+function Player:ShakeCamera(uin, power, time) return true end
 
 --- 停止抖动玩家镜头
 --- @param uin number @玩家uin
 --- @return boolean @操作是否成功
-function Player:StopShakeCamera(uin)
-    return true
-end
+function Player:StopShakeCamera(uin) return true end
 
 --- 玩家旋转摄像机角度朝向actor
 --- @param uin number @玩家uin
 --- @param objId number @对象ID
 --- @return boolean @操作是否成功
-function Player:RotateCameraToActor(uin, objId)
-    return true
-end
+function Player:RotateCameraToActor(uin, objId) return true end
 
 --- 玩家改变视角
 --- @param uin number @玩家uin
 --- @param viewporttype number @视角类型
 --- @param islock boolean @是否锁定
 --- @return boolean @操作是否成功
-function Player:ChangeViewMode(uin, viewporttype, islock)
-    return true
-end
+function Player:ChangeViewMode(uin, viewporttype, islock) return true end
 
 --- 玩家是否装备了某件装备
 --- @param uin number @玩家uin
 --- @param itemid number|string @道具类型
 --- @return boolean @是否装备
-function Player:IsEquipByResID(uin, itemid)
-    return true
-end
+function Player:IsEquipByResID(uin, itemid) return true end
 
 --- 获取玩家准心位置
 --- @param uin number @玩家uin
 --- @return number,number,number @x,y,z坐标
-function Player:GetAimPos(uin)
-    return 0, 0, 0
-end
+function Player:GetAimPos(uin) return 0, 0, 0 end
 
 --- 获取玩家准心方向
 --- @param objId number @对象ID
 --- @return table @单位方向向量
-function Player:GetAimDir(objId)
-    return {}
-end
+function Player:GetAimDir(objId) return {} end
 
 --- 获取玩家射线检测起点位置
 --- @param objId number @对象ID
 --- @return number,number,number @x,y,z方块坐标
-function Player:GetRayOriginPos(objId)
-    return 0, 0, 0
-end
+function Player:GetRayOriginPos(objId) return 0, 0, 0 end
 
 --- 对玩家播放背景音乐2D
 --- @param uin number @玩家uin
@@ -4407,26 +3911,20 @@ end
 --- @param pitch number @声音音调
 --- @param isLoop boolean @是否循环
 --- @return boolean @操作是否成功
-function Player:PlayMusic(uin, musicid, volume, pitch, isLoop)
-    return true
-end
+function Player:PlayMusic(uin, musicid, volume, pitch, isLoop) return true end
 
 --- 玩家停止播放背景音乐2D
 --- @param uin number @玩家uin
 --- @param musicid number @音乐ID
 --- @return boolean @操作是否成功
-function Player:StopMusic(uin, musicid)
-    return true
-end
+function Player:StopMusic(uin, musicid) return true end
 
 --- 玩家暂停/恢复播放背景音乐
 --- @param uin number @玩家uin
 --- @param musicid number @音乐ID
 --- @param pause boolean @true暂停/false恢复
 --- @return boolean @操作是否成功
-function Player:PauseMusic(uin, musicid, pause)
-    return true
-end
+function Player:PauseMusic(uin, musicid, pause) return true end
 
 --- 打开一个UI界面
 --- @param uin number @玩家uin
@@ -4434,9 +3932,7 @@ end
 --- @param effectid number @动作ID(缺省参数)
 --- @param time number @动画事件(缺省参数)
 --- @return boolean @操作是否成功
-function Player:OpenUIView(uin, viewid, effectid, time)
-    return true
-end
+function Player:OpenUIView(uin, viewid, effectid, time) return true end
 
 --- 隐藏一个UI界面
 --- @param uin number @玩家uin
@@ -4444,65 +3940,49 @@ end
 --- @param effectid number @动作ID(缺省参数)
 --- @param time number @动画事件(缺省参数)
 --- @return boolean @操作是否成功
-function Player:HideUIView(uin, viewid, effectid, time)
-    return true
-end
+function Player:HideUIView(uin, viewid, effectid, time) return true end
 
 --- 获取客机类型
 --- @param uin number @玩家uin
 --- @return any @客机类型信息
-function Player:GetClientInfo(uin)
-    return nil
-end
+function Player:GetClientInfo(uin) return nil end
 
 --- 获取玩家昵称
 --- @param objId number @对象ID
 --- @return string @玩家昵称
-function Player:GetNickname(objId)
-    return ""
-end
+function Player:GetNickname(objId) return "" end
 
 --- 打开开发者商店商品购买弹框(开发者账号和自定义按钮点击事件可用)
 --- @param objId number @对象ID
 --- @param devGoodsId string @开发者商品ID
 --- @param customDesc string @自定义商品描述
 --- @return number @操作结果代码
-function Player:OpenDevGoodsBuyDialog(objId, devGoodsId, customDesc)
-    return 0
-end
+function Player:OpenDevGoodsBuyDialog(objId, devGoodsId, customDesc) return 0 end
 
 --- 打开开发者商店商品详情页
 --- @param objId number @对象ID
 --- @param devGoodsId string @开发者商品ID
 --- @return number @操作结果代码
-function Player:OpenDevGoodsBuyDetailedDialog(objId, devGoodsId)
-    return 0
-end
+function Player:OpenDevGoodsBuyDetailedDialog(objId, devGoodsId) return 0 end
 
 --- 玩家打开开发者商店(仅开发者可用)
 --- @param objId number @对象ID
 --- @return any @操作结果
-function Player:OpenDevStore(objId)
-    return nil
-end
+function Player:OpenDevStore(objId) return nil end
 
 --- 打开开发者商品二级分类
 --- @param objId number @对象ID
 --- @param page number @分类页码
 --- @param name string @分类名称
 --- @return any @操作结果
-function Player:OpenDevStoreTab(objId, page, name)
-    return nil
-end
+function Player:OpenDevStoreTab(objId, page, name) return nil end
 
 --- 打开开发者商店一级页面
 --- @param playerId number @玩家ID
 --- @param pagetype number @页面类型
 --- @param pagetitle string @页面标题
 --- @return any @操作结果
-function Player:OpenDevGoodsPage(playerId, pagetype, pagetitle)
-    return nil
-end
+function Player:OpenDevGoodsPage(playerId, pagetype, pagetitle) return nil end
 
 --- 获取玩家的消费统计(有5s冷却限制,触发冷却返回nil)
 --- @param uin number @玩家uin
@@ -4511,33 +3991,25 @@ end
 --- @param currencytype number @货币类型
 --- @param call_back function @内部回调(缺省参数)
 --- @return number @消费数量(-1表示请求失败)
-function Player:GetPlayerCostStatic(uin, tbegin, tend, currencytype, call_back)
-    return 0
-end
+function Player:GetPlayerCostStatic(uin, tbegin, tend, currencytype, call_back) return 0 end
 
 --- 玩家自定义数据上报埋点
 --- @param uin number @玩家uin
 --- @param eventname string @事件名称
 --- @return boolean @操作是否成功
-function Player:StandReportEvent(uin, eventname)
-    return true
-end
+function Player:StandReportEvent(uin, eventname) return true end
 
 --- 清空运动趋势(配合'禁止移动'使用)
 --- @param uin number @玩家uin
 --- @return boolean @操作是否成功
-function Player:ClearMotion(uin)
-    return true
-end
+function Player:ClearMotion(uin) return true end
 
 --- 玩家手机震动
 --- @param uin number @玩家uin
 --- @param time number @震动时长(单位:ms)
 --- @param amplitude number @震动强度(范围:1~255)
 --- @return boolean @操作是否成功
-function Player:SetMobileVibrate(uin, time, amplitude)
-    return true
-end
+function Player:SetMobileVibrate(uin, time, amplitude) return true end
 
 --- 根据玩家uin,3D坐标获取玩家屏幕2D坐标
 --- @param uin number @玩家uin
@@ -4545,9 +4017,7 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @return number,number @屏幕x坐标,屏幕y坐标
-function Player:GetScreenSpacePos(uin, x, y, z)
-    return 0, 0
-end
+function Player:GetScreenSpacePos(uin, x, y, z) return 0, 0 end
 
 --- 根据玩家uin,3D坐标获取玩家屏幕2D坐标(V2版本)
 --- @param playerId number @玩家ID
@@ -4555,17 +4025,13 @@ end
 --- @param y number @坐标y
 --- @param z number @坐标z
 --- @return number @屏幕x坐标
-function Player:GetScreenSpacePosV2(playerId, x, y, z)
-    return 0
-end
+function Player:GetScreenSpacePosV2(playerId, x, y, z) return 0 end
 
 --- 发送好友申请
 --- @param uin1 number @发起申请的玩家uin
 --- @param uin2 number @添加的好友uin
 --- @return boolean @操作是否成功
-function Player:SendFriendApply(uin1, uin2)
-    return true
-end
+function Player:SendFriendApply(uin1, uin2) return true end
 
 --- 玩家摄像机变换到位置
 --- @param uin number @玩家uin
@@ -4573,9 +4039,7 @@ end
 --- @param easingtype number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function Player:SetCameraPosTransformTo(uin, pos, easingtype, time)
-    return true
-end
+function Player:SetCameraPosTransformTo(uin, pos, easingtype, time) return true end
 
 --- 玩家摄像机旋转到角度
 --- @param uin number @玩家uin
@@ -4583,9 +4047,7 @@ end
 --- @param easingtype number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function Player:SetCameraRotTransformTo(uin, rot, easingtype, time)
-    return true
-end
+function Player:SetCameraRotTransformTo(uin, rot, easingtype, time) return true end
 
 --- 玩家摄像机Fov变换到值
 --- @param uin number @玩家uin
@@ -4593,9 +4055,7 @@ end
 --- @param easingtype number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function Player:SetCameraFovTransformTo(uin, fov, easingtype, time)
-    return true
-end
+function Player:SetCameraFovTransformTo(uin, fov, easingtype, time) return true end
 
 --- 玩家摄像机变换相对位置
 --- @param uin number @玩家uin
@@ -4603,9 +4063,7 @@ end
 --- @param easingtype number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function Player:SetCameraPosTransformBy(uin, delta, easingtype, time)
-    return true
-end
+function Player:SetCameraPosTransformBy(uin, delta, easingtype, time) return true end
 
 --- 玩家摄像机旋转相对角度
 --- @param uin number @玩家uin
@@ -4613,9 +4071,7 @@ end
 --- @param easingtype number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function Player:SetCameraRotTransformBy(uin, delta, easingtype, time)
-    return true
-end
+function Player:SetCameraRotTransformBy(uin, delta, easingtype, time) return true end
 
 --- 玩家摄像机Fov变换相对值
 --- @param uin number @玩家uin
@@ -4623,49 +4079,37 @@ end
 --- @param easingtype number @缓动类型
 --- @param time number @动画时间
 --- @return boolean @操作是否成功
-function Player:SetCameraFovTransformBy(uin, delta, easingtype, time)
-    return true
-end
+function Player:SetCameraFovTransformBy(uin, delta, easingtype, time) return true end
 
 --- 设置玩家的摄像机设置开关
 --- @param uin number @玩家uin
 --- @param attrtype number @摄像机属性类型
 --- @param enable boolean @开关(true开启 false关闭)
 --- @return boolean @操作是否成功
-function Player:SetCameraAttrState(uin, attrtype, enable)
-    return true
-end
+function Player:SetCameraAttrState(uin, attrtype, enable) return true end
 
 --- 设置玩家的摄像机旋转模式
 --- @param uin number @玩家uin
 --- @param rotmode number @旋转模式
 --- @return boolean @操作是否成功
-function Player:SetCameraRotMode(uin, rotmode)
-    return true
-end
+function Player:SetCameraRotMode(uin, rotmode) return true end
 
 --- 设置玩家的摄像机挂载到对象
 --- @param uin number @玩家uin
 --- @param targetuin number @目标玩家uin
 --- @return boolean @操作是否成功
-function Player:SetCameraMountObj(uin, targetuin)
-    return true
-end
+function Player:SetCameraMountObj(uin, targetuin) return true end
 
 --- 设置玩家的摄像机挂载到位置
 --- @param uin number @玩家uin
 --- @param pos table @挂载位置坐标
 --- @return boolean @操作是否成功
-function Player:SetCameraMountPos(uin, pos)
-    return true
-end
+function Player:SetCameraMountPos(uin, pos) return true end
 
 --- 重置玩家摄像机
 --- @param uin number @玩家uin
 --- @return boolean @操作是否成功
-function Player:ResetCameraAttr(uin)
-    return true
-end
+function Player:ResetCameraAttr(uin) return true end
 
 --- 打开可以操作的箱子
 --- @param uin number @玩家uin
@@ -4673,48 +4117,36 @@ end
 --- @param y number @方块坐标y
 --- @param z number @方块坐标z
 --- @return boolean @操作是否成功
-function Player:OpenBoxByPos(uin, x, y, z)
-    return true
-end
+function Player:OpenBoxByPos(uin, x, y, z) return true end
 
 --- 获取玩家首次邀请人(阻塞接口,请求间隔10s)
 --- @param uin number @玩家uin
 --- @param call_back function @内部回调(缺省参数)
 --- @return number @邀请人的玩家Uin(获取失败时返回错误码)
-function Player:GetFirstInviter(uin, call_back)
-    return 0
-end
+function Player:GetFirstInviter(uin, call_back) return 0 end
 
 --- 判断两个玩家是否是好友(阻塞接口)
 --- @param uin1 number @玩家1的uin
 --- @param uin2 number|string @玩家2的uin
 --- @return boolean @是否是好友
-function Player:HasFriend(uin1, uin2)
-    return true
-end
+function Player:HasFriend(uin1, uin2) return true end
 
 --- 获取玩家VIP等级
 --- @param uin number @玩家uin
 --- @return number @VIP等级
-function Player:GetMiniVipLevel(uin)
-    return 0
-end
+function Player:GetMiniVipLevel(uin) return 0 end
 
 --- 改变玩家移动方式
 --- @param uin number @玩家uin
 --- @param movetype number @移动类型
 --- @return boolean @操作是否成功
-function Player:ChangPlayerMoveType(uin, movetype)
-    return true
-end
+function Player:ChangPlayerMoveType(uin, movetype) return true end
 
 --- 触发器播放广告接口
 --- @param uin number @玩家uin
 --- @param adname string @广告名称
 --- @return number,number,string @操作代码,玩家uin,广告名称
-function Player:PlayAdvertising(uin, adname)
-    return 0, 0, ""
-end
+function Player:PlayAdvertising(uin, adname) return 0, 0, "" end
 
 --- 玩家组显示游戏内弹窗
 --- @param uin number @玩家uin
@@ -4722,9 +4154,7 @@ end
 --- @param bopen boolean @打开或者关闭
 --- @param data any @附加数据
 --- @return boolean @操作是否成功
-function Player:OpenInnerView(uin, popuptype, bopen, data)
-    return true
-end
+function Player:OpenInnerView(uin, popuptype, bopen, data) return true end
 
 --- 设置玩家道具设置属性
 --- @param uin number @玩家uin
@@ -4732,70 +4162,52 @@ end
 --- @param abilitytype number @道具能力类型
 --- @param switch boolean @是否打开
 --- @return boolean @操作是否成功
-function Player:SetItemAttAction(uin, itemid, abilitytype, switch)
-    return true
-end
+function Player:SetItemAttAction(uin, itemid, abilitytype, switch) return true end
 
 --- 玩家强制打开UI界面
 --- @param uin number @玩家uin
 --- @param workstage number @工作阶段
 --- @return boolean @操作是否成功
-function Player:ForceOpenBoxUI(uin, workstage)
-    return true
-end
+function Player:ForceOpenBoxUI(uin, workstage) return true end
 
 --- 设置道具技能进入冷却
 --- @param uin number @玩家uin
 --- @param itemid number|string @道具ID
 --- @param cd number @CD时间
 --- @return boolean @操作是否成功
-function Player:ItemSkillCDEnter(uin, itemid, cd)
-    return true
-end
+function Player:ItemSkillCDEnter(uin, itemid, cd) return true end
 
 --- 设置道具技能结束冷却
 --- @param uin number @玩家uin
 --- @param itemid number|string @道具ID
 --- @return boolean @操作是否成功
-function Player:ItemSkillCDDone(uin, itemid)
-    return true
-end
+function Player:ItemSkillCDDone(uin, itemid) return true end
 
 --- 设置玩家枪械权限
 --- @param uin number @玩家uin
 --- @param actiontype number @枪禁用状态枚举
 --- @param switch boolean @是否打开
 --- @return boolean @操作是否成功
-function Player:SetGunActionState(uin, actiontype, switch)
-    return true
-end
+function Player:SetGunActionState(uin, actiontype, switch) return true end
 
 --- 获取玩家视角模式
 --- @param uin number @玩家uin
 --- @return any @视角模式信息
-function Player:GetViewMode(uin)
-    return nil
-end
+function Player:GetViewMode(uin) return nil end
 
 --- 获取玩家复活点
 --- @param uin number @玩家uin
 --- @return number,number,number @x,y,z方块坐标
-function Player:GetRevivePoint(uin)
-    return 0, 0, 0
-end
+function Player:GetRevivePoint(uin) return 0, 0, 0 end
 
 --- 获取租赁云服务器服主
 --- @return number @玩家Uin(仅租赁云服生效)
-function Player:GetRentCloudServerOwner()
-    return 0
-end
+function Player:GetRentCloudServerOwner() return 0 end
 
 --- 将玩家移出本局游戏
 --- @param objId number @对象ID
 --- @return boolean @操作是否成功
-function Player:RemovePlayer(objId)
-    return true
-end
+function Player:RemovePlayer(objId) return true end
 
 --- 获取玩家好友列表信息
 --- @param objId number @玩家Uin
@@ -4803,44 +4215,34 @@ end
 --- @param size number @获取数量
 --- @return number @最大好友数量
 --- @return table {{name: string, uin: number, headframe: string, live: boolean, online: boolean}, ...} @好友列表信息
-function Player:GetFriendList(objId, index, size)
-    return 0, {}
-end
+function Player:GetFriendList(objId, index, size) return 0, {} end
 
 --- 设置游戏设置开关
 --- @param playerId number @玩家ID
 --- @param iType number @设置类型 (GameSetting)
 --- @param enable boolean @开关
 --- @return boolean @操作是否成功
-function Player:SetSettingEnable(playerId, iType, enable)
-    return true
-end
+function Player:SetSettingEnable(playerId, iType, enable) return true end
 
 --- 设置游戏设置权限开关
 --- @param playerId number @玩家ID
 --- @param iType number @设置类型 (GameSetting)
 --- @param enable boolean @开关
 --- @return boolean @操作是否成功
-function Player:SetSettingAbility(playerId, iType, enable)
-    return true
-end
+function Player:SetSettingAbility(playerId, iType, enable) return true end
 
 --- 旋转玩家模型
 --- @param playerId number @玩家ID
 --- @param yaw number @偏航角(X轴)
 --- @param pitch number @俯仰角(Y轴)
 --- @return boolean @操作是否成功
-function Player:RotateMainModel(playerId, yaw, pitch)
-    return true
-end
+function Player:RotateMainModel(playerId, yaw, pitch) return true end
 
 --- 获取本地玩家迷你币数量 (阻塞等待函数)
 --- @param objId number @玩家对象ID
 --- @param iType number @币种类型 (MiniCurrency)
 --- @return number @货币数量
-function Player:GetMiniCurrency(objId, iType)
-    return 0
-end
+function Player:GetMiniCurrency(objId, iType) return 0 end
 --- @class Monster
 --- 生物模块管理接口 Monster
 local Monster = {}
@@ -4849,104 +4251,76 @@ _G.Monster = Monster
 --- 获取生物类型ID
 --- @param objid number @对象ID
 --- @return number @生物类型ID
-function Monster:GetActorID(objid)
-    return 0
-end
+function Monster:GetActorID(objid) return 0 end
 
 --- 获取生物类型名称
 --- @param objId number @对象ID
 --- @return string @生物类型名称
-function Monster:GetActorName(objId)
-    return ""
-end
+function Monster:GetActorName(objId) return "" end
 
 --- 替换生物
 --- @param objId number @原生物对象ID
 --- @param newactorId number @新生物类型ID
 --- @return number @新生物对象ID
-function Monster:ReplaceActor(objId, newactorId)
-    return 0
-end
+function Monster:ReplaceActor(objId, newactorId) return 0 end
 
 --- 获取生物击杀掉落经验
 --- @param actorId number @生物类型ID
 --- @return number @击杀掉落经验值
-function Monster:GetMonsterDefLevelExp(actorId)
-    return 0
-end
+function Monster:GetMonsterDefLevelExp(actorId) return 0 end
 
 --- 设置生物击杀掉落经验
 --- @param actorId number @生物类型ID
 --- @param exp number @经验值
 --- @return boolean @操作是否成功
-function Monster:SetMonsterDefLevelExp(actorId, exp)
-    return true
-end
+function Monster:SetMonsterDefLevelExp(actorId, exp) return true end
 
 --- 切换Ai行为树
 --- @param objid number @生物对象ID
 --- @param treeid number|string @行为树ID
 --- @return boolean @操作是否成功
-function Monster:ChangeAI(objid, treeid)
-    return true
-end
+function Monster:ChangeAI(objid, treeid) return true end
 
 --- 怪物对目标是否可见
 --- @param objId number @怪物对象ID
 --- @param targetUin number @目标玩家uin
 --- @return boolean @是否可见
-function Monster:CanSee(objId, targetUin)
-    return true
-end
+function Monster:CanSee(objId, targetUin) return true end
 
 --- 获取生物的掉落物信息
 --- @param actorId number @生物类型ID
 --- @return table @掉落物信息表，包含道具ID、数量、概率
-function Monster:GetDropItemInfo(actorId)
-    return {}
-end
+function Monster:GetDropItemInfo(actorId) return {} end
 
 --- 设置生物A被玩家驯服
 --- @param objId number @生物对象ID
 --- @param playerUin number @玩家uin
 --- @return boolean @操作是否成功
-function Monster:SetTameTarget(objId, playerUin)
-    return true
-end
+function Monster:SetTameTarget(objId, playerUin) return true end
 
 --- 随机获取一个生物类型ID
 --- @return number @随机生物类型ID
-function Monster:RandomActorID()
-    return 0
-end
+function Monster:RandomActorID() return 0 end
 
 --- 获取驯养主ID
 --- @param objId number @生物对象ID
 --- @return number @驯养主ID
-function Monster:GetTamedOwnerID(objId)
-    return 0
-end
+function Monster:GetTamedOwnerID(objId) return 0 end
 
 --- 获取生物类型外观
 --- @param monsterId number|string @生物定义ID或生物预制ID
 --- @return any @生物外观模型信息
-function Monster:GetFacade(monsterId)
-    return nil
-end
+function Monster:GetFacade(monsterId) return nil end
 
 --- 获取生物定义中的标签组
 --- @param actorId number|string @生物类型ID
 --- @return table|nil @标签组信息
-function Monster:GetTags(actorId)
-    return {}
-end
+function Monster:GetTags(actorId) return {} end
 
 --- 获取生物名称
 --- @param actorId number|string @生物类型ID
 --- @return string|nil @生物名称
-function Monster:GetMonsterDefName(actorId)
-    return ""
-end
+function Monster:GetMonsterDefName(actorId) return "" end
 --- @class Area
 --- 区域模块管理接口 Area
 local Area = {}
@@ -4956,98 +4330,72 @@ _G.Area = Area
 --- @param pos table @区域底部中心位置
 --- @param size table @区域大小
 --- @return number @区域对象ID
-function Area:CreateAreaPrefab(pos, size)
-    return 0
-end
+function Area:CreateAreaPrefab(pos, size) return 0 end
 
 --- 通过区域对象id获取区域uuid
 --- @param objId number @区域对象ID
 --- @return any @区域UUID
-function Area:GetAreaUuidByObjId(objId)
-    return nil
-end
+function Area:GetAreaUuidByObjId(objId) return nil end
 
 --- 创建矩形区域(通过范围)
 --- @param posBeg table @区域起始坐标
 --- @param posEnd table @区域结束坐标
 --- @param btmp boolean @是否是临时区域
 --- @return any @操作结果
-function Area:CreateAreaRectByRange(posBeg, posEnd, btmp)
-    return nil
-end
+function Area:CreateAreaRectByRange(posBeg, posEnd, btmp) return nil end
 
 --- 销毁区域
 --- @param areaid number @区域ID
 --- @return boolean @操作是否成功
-function Area:DestroyArea(areaid)
-    return true
-end
+function Area:DestroyArea(areaid) return true end
 
 --- 获取区域中间点
 --- @param areaid number @区域ID
 --- @return table @区域中心位置
-function Area:GetAreaCenter(areaid)
-    return {}
-end
+function Area:GetAreaCenter(areaid) return {} end
 
 --- 获取区域各边长
 --- @param areaid number @区域ID
 --- @return number,number,number @x轴向长度,y轴向长度,z轴向长度
-function Area:GetAreaRectLength(areaid)
-    return 0, 0, 0
-end
+function Area:GetAreaRectLength(areaid) return 0, 0, 0 end
 
 --- 获取区域范围
 --- @param areaid number @区域ID
 --- @return table,table @区域起始坐标,区域结束坐标
-function Area:GetAreaRectRange(areaid)
-    return {}, {}
-end
+function Area:GetAreaRectRange(areaid) return {}, {} end
 
 --- 随机区域内位置
 --- @param areaid number @区域ID
 --- @return table @随机坐标
-function Area:GetRandomPos(areaid)
-    return {}
-end
+function Area:GetRandomPos(areaid) return {} end
 
 --- 检测obj是否在区域内
 --- @param areaid number @区域ID
 --- @param objid number @对象ID
 --- @return boolean @是否在区域内
-function Area:ObjInArea(areaid, objid)
-    return true
-end
+function Area:ObjInArea(areaid, objid) return true end
 
 --- 检测区域内是否有某个方块
 --- @param areaid number @区域ID
 --- @param blockid number|string @方块类型ID
 --- @return boolean @是否在区域内
-function Area:BlockInArea(areaid, blockid)
-    return true
-end
+function Area:BlockInArea(areaid, blockid) return true end
 
 --- 位置是否在区域内
 --- @param areaid number @区域ID
 --- @param pos table @位置坐标
 --- @return boolean @是否在区域内
-function Area:PosInArea(areaid, pos)
-    return true
-end
+function Area:PosInArea(areaid, pos) return true end
 
 --- 获取区域中的所有玩家
 --- @param areaid number @区域ID
 --- @return table @玩家objid组
-function Area:GetAreaPlayers(areaid)
-    return {}
-end
+function Area:GetAreaPlayers(areaid) return {} end
 
 --- 获取区域中的所有生物(当帧创建的生物获取不到)
 --- @param areaid number @区域ID
 --- @return table @生物objid组
-function Area:GetAreaCreatures(areaid)
-    return {}
-end
+function Area:GetAreaCreatures(areaid) return {} end
 
 --- 清空区域内全部方块
 --- @param areaid number @区域ID
@@ -5055,17 +4403,13 @@ end
 --- @param num number @最大清除数量
 --- @param btriggerevent boolean @是否触发事件
 --- @return boolean @操作是否成功
-function Area:ClearAllBlock(areaid, blockid, num, btriggerevent)
-    return true
-end
+function Area:ClearAllBlock(areaid, blockid, num, btriggerevent) return true end
 
 --- 复制区域内方块到另一个区域
 --- @param areaid number @区域ID
 --- @param pos table @目标起始位置
 --- @return boolean @操作是否成功
-function Area:CloneAreaBlock(areaid, pos)
-    return true
-end
+function Area:CloneAreaBlock(areaid, pos) return true end
 
 --- 替换方块类型为新的方块类型
 --- @param areaid number @区域ID
@@ -5074,34 +4418,26 @@ end
 --- @param face number @方块朝向
 --- @param color string|number @颜色
 --- @return boolean @操作是否成功
-function Area:ReplaceAreaBlock(areaid, srcblockid, destblockid, face, color)
-    return true
-end
+function Area:ReplaceAreaBlock(areaid, srcblockid, destblockid, face, color) return true end
 
 --- 获取区域范围内全部对象
 --- @param posbeg table @起始位置
 --- @param posend table @末点位置
 --- @param objtype number @对象类型
 --- @return table @对象列表
-function Area:GetAllObjsInAreaRange(posbeg, posend, objtype)
-    return {}
-end
+function Area:GetAllObjsInAreaRange(posbeg, posend, objtype) return {} end
 
 --- 获取区域范围内全部玩家
 --- @param posbeg table @起始位置
 --- @param posend table @末点位置
 --- @return table @玩家列表
-function Area:GetAllPlayersInAreaRange(posbeg, posend)
-    return {}
-end
+function Area:GetAllPlayersInAreaRange(posbeg, posend) return {} end
 
 --- 获取区域范围内全部生物
 --- @param posbeg table @起始位置
 --- @param posend table @末点位置
 --- @return table @生物列表
-function Area:GetAllCreaturesInAreaRange(posbeg, posend)
-    return {}
-end
+function Area:GetAllCreaturesInAreaRange(posbeg, posend) return {} end
 
 --- 用方块填充区域范围(分帧处理,当前帧率操作不到填充的方块)
 --- @param posbeg table @起始位置
@@ -5112,9 +4448,7 @@ end
 --- @param switch boolean @是否开启
 --- @param filltype number @填充类型
 --- @return boolean @操作是否成功
-function Area:FillBlockAreaRange(posbeg, posend, blockid, face, color, switch, filltype)
-    return true
-end
+function Area:FillBlockAreaRange(posbeg, posend, blockid, face, color, switch, filltype) return true end
 
 --- 清空区域范围内方块
 --- @param posbeg table @起始位置
@@ -5122,9 +4456,7 @@ end
 --- @param blockid number|string @方块类型
 --- @param btriggerevent boolean @是否触发事件
 --- @return boolean @操作是否成功
-function Area:ClearAllBlockAreaRange(posbeg, posend, blockid, btriggerevent)
-    return true
-end
+function Area:ClearAllBlockAreaRange(posbeg, posend, blockid, btriggerevent) return true end
 
 --- 破坏区域内的方块
 --- @param areaid number @区域ID
@@ -5133,9 +4465,7 @@ end
 --- @param candrop boolean @是否掉落物品
 --- @param btriggerevent boolean @是否触发事件
 --- @return boolean @操作是否成功
-function Area:DestroyAllBlock(areaid, blockid, n, candrop, btriggerevent)
-    return true
-end
+function Area:DestroyAllBlock(areaid, blockid, n, candrop, btriggerevent) return true end
 
 --- 复制区域范围内方块到另一个区域
 --- @param posbeg table @起始位置
@@ -5143,9 +4473,7 @@ end
 --- @param deststartpos table @目标起始位置
 --- @param itype number @复制类型
 --- @return boolean @操作是否成功
-function Area:CloneAreaRange(posbeg, posend, deststartpos, itype)
-    return true
-end
+function Area:CloneAreaRange(posbeg, posend, deststartpos, itype) return true end
 
 --- 替换区域范围方块
 --- @param posbeg table @起始位置
@@ -5155,41 +4483,31 @@ end
 --- @param face number @方块朝向
 --- @param inair boolean @是否包括空气方块
 --- @return boolean @操作是否成功
-function Area:ReplaceAreaRangeBlock(posbeg, posend, srcblockid, destblockid, face, inair)
-    return true
-end
+function Area:ReplaceAreaRangeBlock(posbeg, posend, srcblockid, destblockid, face, inair) return true end
 
 --- 获取一个区域内随机空气方块
 --- @param posbeg table @区域起始位置
 --- @param posend table @区域结束位置
 --- @return table @随机空气位置(x y z)
-function Area:GetRandomAirPos(posbeg, posend)
-    return {}
-end
+function Area:GetRandomAirPos(posbeg, posend) return {} end
 
 --- 获取区域内的方块类型
 --- @param areaid number @区域ID
 --- @return table @类型组
-function Area:GetAreaBlockTypes(areaid)
-    return {}
-end
+function Area:GetAreaBlockTypes(areaid) return {} end
 
 --- 获取区域内的方块数量
 --- @param areaid number @区域ID
 --- @param blockid string|number @方块ID
 --- @return number @方块数量
-function Area:GetBlockNum(areaid, blockid)
-    return 0
-end
+function Area:GetBlockNum(areaid, blockid) return 0 end
 
 --- 检查指定范围内是否可以放置方块
 --- @param posbeg table @区域起始位置
 --- @param posend table @区域结束位置
 --- @param blockid string|number @方块ID
 --- @return boolean @是否可以放置方块(true/false)
-function Area:CheckRangeCanPlace(posbeg, posend, blockid)
-    return true
-end
+function Area:CheckRangeCanPlace(posbeg, posend, blockid) return true end
 
 --- 获取区域中指定玩家关系的角色
 --- @param posbeg table @区域起始位置
@@ -5198,9 +4516,7 @@ end
 --- @param relativing number @关系类型
 --- @param actortype number @角色类型
 --- @return number,table @数量,角色数组
-function Area:GetRelativeActors(posbeg, posend, uin, relativing, actortype)
-    return 0, {}
-end
+function Area:GetRelativeActors(posbeg, posend, uin, relativing, actortype) return 0, {} end
 --- @class Buff
 --- 状态模块管理接口 Buff
 local Buff = {}
@@ -5211,84 +4527,62 @@ _G.Buff = Buff
 --- @param buffId number|string @效果ID
 --- @param customticks? number @效果持续时间 **(-1表示默认配置，0表示无限)**
 --- @return boolean @成功返回true，失败返回false
-function Buff:AddBuff(objId, buffId, customticks)
-    return true
-end
+function Buff:AddBuff(objId, buffId, customticks) return true end
 
 --- 给对象移除指定效果
 --- @param objId number @对象ID
 --- @param buffId number|string @效果ID
 --- @return boolean @成功返回true，失败返回false
-function Buff:RemoveBuff(objId, buffId)
-    return true
-end
+function Buff:RemoveBuff(objId, buffId) return true end
 
 --- 给对象清除所有效果
 --- @param objId number @对象ID
 --- @return boolean @成功返回true，失败返回false
-function Buff:ClearAllBuff(objId)
-    return true
-end
+function Buff:ClearAllBuff(objId) return true end
 
 --- 为对象清除所有负面效果
 --- @param objId number @对象ID
 --- @return boolean @成功返回true，失败返回false
-function Buff:ClearAllBadBuff(objId)
-    return true
-end
+function Buff:ClearAllBadBuff(objId) return true end
 
 --- 为对象清除所有有益效果
 --- @param objId number @对象ID
 --- @return boolean @成功返回true，失败返回false
-function Buff:ClearAllGoodBuff(objId)
-    return true
-end
+function Buff:ClearAllGoodBuff(objId) return true end
 
 --- 判断对象身上是否有指定效果
 --- @param objId number @对象ID
 --- @param buffId number|string @效果ID
 --- @param bufflv number @效果等级
 --- @return boolean @成功返回true，失败返回false
-function Buff:HasBuff(objId, buffId, bufflv)
-    return true
-end
+function Buff:HasBuff(objId, buffId, bufflv) return true end
 
 --- 获取对象身上效果列表
 --- @param objId number @对象ID
 --- @return number, table @效果数量, 效果ID数组
-function Buff:GetBuffList(objId)
-    return 0, {}
-end
+function Buff:GetBuffList(objId) return 0, {} end
 
 --- 获取对象身上指定效果数量
 --- @param objId number @对象ID
 --- @param buffId number|string @效果ID
 --- @return number @数量
-function Buff:GetBuffNumByBuffid(objId, buffId)
-    return 0
-end
+function Buff:GetBuffNumByBuffid(objId, buffId) return 0 end
 
 --- 获取对象身上指定效果剩余时间
 --- @param objId number @对象ID
 --- @param buffId number|string @效果ID
 --- @return number @剩余时间 **(秒，0表示永久)**
-function Buff:GetBuffLeftTime(objId, buffId)
-    return 0
-end
+function Buff:GetBuffLeftTime(objId, buffId) return 0 end
 
 --- 获取状态效果名称
 --- @param buffId number|string @效果ID
 --- @return string @效果名称
-function Buff:GetBuffDefName(buffId)
-    return ""
-end
+function Buff:GetBuffDefName(buffId) return "" end
 
 --- 获取状态效果描述
 --- @param buffId number|string @效果ID
 --- @return string @状态效果描述
-function Buff:GetBuffDefDesc(buffId)
-    return ""
-end
+function Buff:GetBuffDefDesc(buffId) return "" end
 
 --- 替换已有状态
 --- @param objId number @对象ID
@@ -5298,9 +4592,7 @@ end
 --- @param buffdstlv number @目标状态等级
 --- @param customticks number @持续时间
 --- @return boolean @成功返回true，失败返回false
-function Buff:ReplaceBuff(objId, buffsrc, buffsrclv, buffdst, buffdstlv, customticks)
-    return true
-end
+function Buff:ReplaceBuff(objId, buffsrc, buffsrclv, buffdst, buffdstlv, customticks) return true end
 --- @class Item
 --- 道具模块管理接口 Item
 local Item = {}
@@ -5309,121 +4601,89 @@ _G.Item = Item
 --- 获取道具名称
 --- @param itemId number|string @道具ID
 --- @return string @道具名称
-function Item:GetItemName(itemId)
-    return ""
-end
+function Item:GetItemName(itemId) return "" end
 
 --- 在资源库里随机获取一个道具ID
 --- @return number @随机道具ID
-function Item:RandomItemID()
-    return 0
-end
+function Item:RandomItemID() return 0 end
 
 --- 在资源库里随机获取一个投掷物ID
 --- @return number @随机投掷物ID
-function Item:RandomProjectileID()
-    return 0
-end
+function Item:RandomProjectileID() return 0 end
 
 --- 获取道具属性
 --- @param itemId number|string @道具ID
 --- @param attrType number @属性类型
 --- @return number @属性值
-function Item:GetAttr(itemId, attrType)
-    return 0
-end
+function Item:GetAttr(itemId, attrType) return 0 end
 
 --- 获取道具描述
 --- @param itemId number|string @道具ID
 --- @return string @道具描述
-function Item:GetItemDesc(itemId)
-    return ""
-end
+function Item:GetItemDesc(itemId) return "" end
 
 --- 获取自定义枪械的属性(仅自定义枪械有效)
 --- @param itemId number|string @道具ID
 --- @param attrName string @属性名称
 --- @return any @属性值
-function Item:GetCustomGunAttr(itemId, attrName)
-    return nil
-end
+function Item:GetCustomGunAttr(itemId, attrName) return nil end
 
 --- 获取道具配方的数量
 --- @param itemId number|string @道具ID
 --- @return number @配方数量
-function Item:GetCraftIDNum(itemId)
-    return 0
-end
+function Item:GetCraftIDNum(itemId) return 0 end
 
 --- 获取道具的配方材料和数量
 --- @param itemId number|string @道具ID
 --- @param index number @配方索引
 --- @return table @配方材料表{{材料ID, 数量}, ...}
-function Item:GetCraftMaterialAndNum(itemId, index)
-    return {}
-end
+function Item:GetCraftMaterialAndNum(itemId, index) return {} end
 
 --- 获取道具类型外观
 --- @param itemId number|string @道具类型ID或道具预制ID
 --- @return string @道具类型外观
-function Item:GetFacade(itemId)
-    return ""
-end
+function Item:GetFacade(itemId) return "" end
 
 --- 在位置上创建道具实例的掉落物
 --- @param itemId number|string @道具ID
 --- @param pos table @掉落物位置{x=0, y=0, z=0}
 --- @return number @掉落物对象ID
-function Item:CreateItemInstInWorld(itemId, pos)
-    return 0
-end
+function Item:CreateItemInstInWorld(itemId, pos) return 0 end
 
 --- 在位置上创建枪械道具实例的掉落物
 --- @param itemId number|string @道具ID
 --- @param pos table @掉落物位置
 --- @return number @掉落物对象ID
-function Item:CreateGunInWorld(itemId, pos)
-    return 0
-end
+function Item:CreateGunInWorld(itemId, pos) return 0 end
 
 --- 获取装备道具所对应的装备栏
 --- @param itemId number|string @装备道具ID
 --- @return number @装备栏位置(BackpackBeginIndex.Equip + EquipSlotType)
-function Item:GetEquipItemGridID(itemId)
-    return 0
-end
+function Item:GetEquipItemGridID(itemId) return 0 end
 
 --- 修改枪械道具实例的属性
 --- @param instId number @道具实例ID
 --- @param key string @属性键
 --- @param value any @属性值(number|string|bool)
 --- @return boolean @操作是否成功
-function Item:ModifyGunAttribute(instId, key, value)
-    return true
-end
+function Item:ModifyGunAttribute(instId, key, value) return true end
 
 --- 获取枪械道具实例的属性
 --- @param instId number @道具实例ID
 --- @param key string @属性键
 --- @return any @属性值
-function Item:GetGunAttribute(instId, key)
-    return nil
-end
+function Item:GetGunAttribute(instId, key) return nil end
 
 --- 获取枪预制的属性
 --- @param instId number @道具实例ID
 --- @param key string @属性键
 --- @return any @属性值
-function Item:GetGunPrefabAttribute(instId, key)
-    return nil
-end
+function Item:GetGunPrefabAttribute(instId, key) return nil end
 
 --- 根据道具实例ID获取道具ID
 --- @param instId number @道具实例ID
 --- @return number|string @道具ID
-function Item:GetItemIdByInstanceId(instId)
-    return 0
-end
+function Item:GetItemIdByInstanceId(instId) return 0 end
 
 --- 给道具实例添加一个模型子部件
 --- @param instId number @道具实例ID
@@ -5434,17 +4694,13 @@ end
 --- @param rot table @旋转角度{x=0, y=0, z=0}
 --- @param scale table @缩放比例{x=1, y=1, z=1}
 --- @return string @部件名字
-function Item:AddSubModelPart(instId, partName, boneName, modelStr, offset, rot, scale)
-    return ""
-end
+function Item:AddSubModelPart(instId, partName, boneName, modelStr, offset, rot, scale) return "" end
 
 --- 删除一个道具实例的模型子部件
 --- @param instId number @道具实例ID
 --- @param partName string @子部件名字
 --- @return boolean @操作是否成功
-function Item:DeleteSubModelPart(instId, partName)
-    return true
-end
+function Item:DeleteSubModelPart(instId, partName) return true end
 
 --- 修改一个道具实例的模型子部件
 --- @param instId number @道具实例ID
@@ -5455,116 +4711,88 @@ end
 --- @param rot table @旋转角度
 --- @param scale table @缩放比例
 --- @return boolean @操作是否成功
-function Item:ReplaceSubModelPart(instId, partName, boneName, modelStr, offset, rot, scale)
-    return true
-end
+function Item:ReplaceSubModelPart(instId, partName, boneName, modelStr, offset, rot, scale) return true end
 
 --- 设置道具实例的自定义数据string
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @param value string @字符串值
 --- @return boolean @操作是否成功
-function Item:SetStringCustomData(instId, key, value)
-    return true
-end
+function Item:SetStringCustomData(instId, key, value) return true end
 
 --- 设置道具实例的自定义数据boolean
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @param value boolean @布尔值
 --- @return boolean @操作是否成功
-function Item:SetBoolCustomData(instId, key, value)
-    return true
-end
+function Item:SetBoolCustomData(instId, key, value) return true end
 
 --- 设置道具实例的自定义数据number
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @param value number @数值
 --- @return boolean @操作是否成功
-function Item:SetNumberCustomData(instId, key, value)
-    return true
-end
+function Item:SetNumberCustomData(instId, key, value) return true end
 
 --- 设置道具实例的自定义数据Object
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @param value table @对象值
 --- @return boolean @操作是否成功
-function Item:SetObjCustomData(instId, key, value)
-    return true
-end
+function Item:SetObjCustomData(instId, key, value) return true end
 
 --- 设置道具实例的自定义数据Array
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @param value table @数组值
 --- @return boolean @操作是否成功
-function Item:SetArrayCustomData(instId, key, value)
-    return true
-end
+function Item:SetArrayCustomData(instId, key, value) return true end
 
 --- 获取道具实例的自定义数据string
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @return string @字符串值
-function Item:GetStringCustomData(instId, key)
-    return ""
-end
+function Item:GetStringCustomData(instId, key) return "" end
 
 --- 获取道具实例的自定义数据bool
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @return boolean @布尔值
-function Item:GetBoolCustomData(instId, key)
-    return true
-end
+function Item:GetBoolCustomData(instId, key) return true end
 
 --- 获取道具实例的自定义数据number
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @return number @数值
-function Item:GetNumberCustomData(instId, key)
-    return 0
-end
+function Item:GetNumberCustomData(instId, key) return 0 end
 
 --- 获取道具实例的自定义数据Object
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @return table @对象值
-function Item:GetObjCustomData(instId, key)
-    return {}
-end
+function Item:GetObjCustomData(instId, key) return {} end
 
 --- 获取道具实例的自定义数据Array
 --- @param instId number @道具实例ID
 --- @param key string @数据键
 --- @return table @数组值
-function Item:GetArrayCustomData(instId, key)
-    return {}
-end
+function Item:GetArrayCustomData(instId, key) return {} end
 
 --- 获取具有道具实例ID的道具外观
 --- @param instId number @道具实例ID
 --- @return string @道具实例外观
-function Item:GetItemInstFacade(instId)
-    return ""
-end
+function Item:GetItemInstFacade(instId) return "" end
 
 --- 获取掉落物或者投掷物的格子属性
 --- @param objId number @对象ID
 --- @param attrType number @属性类型
 --- @return number @属性值
-function Item:GetGridAttr(objId, attrType)
-    return 0
-end
+function Item:GetGridAttr(objId, attrType) return 0 end
 
 --- 获取道具定义中的标签组
 --- @return table @道具的标签组
 --- @param itemId number|string @道具定义ID/道具预制ID
-function Item:GetTags(itemId)
-    return {}
-end
+function Item:GetTags(itemId) return {} end
 --- @class Backpack
 --- 背包模块管理接口 Backpack
 local Backpack = {}
@@ -5576,42 +4804,32 @@ _G.Backpack = Backpack
 --- @param itemid number|string @道具类型
 --- @param num number @道具数量(默认1)
 --- @return boolean @是否成功
-function Backpack:SetGridItem(playerid, gridid, itemid, num)
-    return true
-end
+function Backpack:SetGridItem(playerid, gridid, itemid, num) return true end
 
 --- 移除背包格内一定数量道具
 --- @param playerid number @玩家ID
 --- @param gridid number @格子ID
 --- @param num number @道具数量(默认全部移除)
 --- @return boolean @是否成功
-function Backpack:RemoveGridItem(playerid, gridid, num)
-    return true
-end
+function Backpack:RemoveGridItem(playerid, gridid, num) return true end
 
 --- 移除背包内一定数量道具,通过道具ID移除,默认全部移除
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具类型
 --- @param num number @道具数量
 --- @return number @移除数量(ret and ret>0 成功)
-function Backpack:RemoveGridItemByItemID(playerid, itemid, num)
-    return 0
-end
+function Backpack:RemoveGridItemByItemID(playerid, itemid, num) return 0 end
 
 --- 清空指定背包栏
 --- @param playerid number @玩家ID
 --- @param bartype number @背包栏类型
 --- @return boolean @是否成功
-function Backpack:ClearPack(playerid, bartype)
-    return true
-end
+function Backpack:ClearPack(playerid, bartype) return true end
 
 --- 清空全部背包(包含背包栏、快捷栏、装备栏)
 --- @param playerid number @玩家ID
 --- @return boolean @是否成功
-function Backpack:ClearAllPack(playerid)
-    return true
-end
+function Backpack:ClearAllPack(playerid) return true end
 
 --- 移动背包道具,默认全部转移
 --- @param playerid number @玩家ID
@@ -5619,78 +4837,60 @@ end
 --- @param griddst number @移动至的目标格子ID
 --- @param num number @道具数量(默认全部)
 --- @return boolean @是否成功
-function Backpack:MoveGridItem(playerid, gridsrc, griddst, num)
-    return true
-end
+function Backpack:MoveGridItem(playerid, gridsrc, griddst, num) return true end
 
 --- 交换背包道具
 --- @param playerid number @玩家ID
 --- @param grid1 number @格子1 ID
 --- @param grid2 number @格子2 ID
 --- @return boolean @是否成功
-function Backpack:SwapGridItem(playerid, grid1, grid2)
-    return true
-end
+function Backpack:SwapGridItem(playerid, grid1, grid2) return true end
 
 --- 背包(包含背包栏、快捷栏)是否有足够的空间存放一定数量的道具
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具类型
 --- @param num number @道具数量(默认1)
 --- @return boolean @是否成功
-function Backpack:EnoughSpaceForItem(playerid, itemid, num)
-    return true
-end
+function Backpack:EnoughSpaceForItem(playerid, itemid, num) return true end
 
 --- 计算背包(包含背包栏、快捷栏)能存放的道具剩余总数量
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具类型
 --- @return number @可以存放的数量
-function Backpack:CalcSpaceNumForItem(playerid, itemid)
-    return 0
-end
+function Backpack:CalcSpaceNumForItem(playerid, itemid) return 0 end
 
 --- 检测背包是否持有某个道具
 --- @param playerid number @玩家ID
 --- @param bartype number @背包栏类型
 --- @param itemid number|string @道具类型
 --- @return boolean @是否成功
-function Backpack:HasItemByBackpackBar(playerid, bartype, itemid)
-    return true
-end
+function Backpack:HasItemByBackpackBar(playerid, bartype, itemid) return true end
 
 --- 获取背包持有某个道具总数量,同时返回装有道具的背包格数组
 --- @param playerid number @玩家ID
 --- @param bartype number @背包栏类型
 --- @param itemid number|string @道具类型
 --- @return number,table @道具数量,格子ID数组
-function Backpack:GetItemNumByBackpackBar(playerid, bartype, itemid)
-    return 0, {}
-end
+function Backpack:GetItemNumByBackpackBar(playerid, bartype, itemid) return 0, {} end
 
 --- 获取背包持有某个道具总数量,同时返回装有道具的背包格数组
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具类型
 --- @param isAddEquip boolean @是否添加装备栏(默认True)
 --- @return number,table @道具数量,格子ID数组
-function Backpack:GetItemNum(playerid, itemid, isAddEquip)
-    return 0, {}
-end
+function Backpack:GetItemNum(playerid, itemid, isAddEquip) return 0, {} end
 
 --- 获取背包格道具ID(返回itemid, num)
 --- @param playerid number @玩家ID
 --- @param gridid number @格子ID
 --- @return number,number @道具类型,道具数量(无道具 数量是0 itemid是0)
-function Backpack:GetGridItemID(playerid, gridid)
-    return 0, 0
-end
+function Backpack:GetGridItemID(playerid, gridid) return 0, 0 end
 
 --- 获取背包格道具名称
 --- @param playerid number @玩家ID
 --- @param gridid number @格子ID
 --- @return string @道具名称
-function Backpack:GetGridItemName(playerid, gridid)
-    return ""
-end
+function Backpack:GetGridItemName(playerid, gridid) return "" end
 
 --- 添加道具到背包
 --- @param playerid number @玩家ID
@@ -5698,9 +4898,7 @@ end
 --- @param num number @道具数量
 --- @param prioritytype number @优先快捷栏还是背包栏:1优先快捷栏 2优先背包栏(默认1)
 --- @return number @成功添加的数量
-function Backpack:AddItem(playerid, itemid, num, prioritytype)
-    return 0
-end
+function Backpack:AddItem(playerid, itemid, num, prioritytype) return 0 end
 
 --- 丢弃背包某个格子里的道具
 --- @param playerid number @玩家ID
@@ -5708,43 +4906,33 @@ end
 --- @param num number @道具数量
 --- @param ablePick boolean @能否拾取
 --- @return boolean @是否成功
-function Backpack:DiscardItem(playerid, gridid, num, ablePick)
-    return true
-end
+function Backpack:DiscardItem(playerid, gridid, num, ablePick) return true end
 
 --- 丢弃背包某个格子里的道具
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具ID
 --- @return boolean @是否成功
-function Backpack:DiscardItemByID(playerid, itemid)
-    return true
-end
+function Backpack:DiscardItemByID(playerid, itemid) return true end
 
 --- 玩家穿上装备
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具类型
 --- @param frompos number @格子ID(可不传,如果不为nil 则必须和itemid一致)
 --- @return boolean @是否成功
-function Backpack:ActEquipUpByResID(playerid, itemid, frompos)
-    return true
-end
+function Backpack:ActEquipUpByResID(playerid, itemid, frompos) return true end
 
 --- 玩家脱下装备栏装备
 --- @param playerid number @玩家ID
 --- @param grid number @装备栏ID
 --- @param grid2 number @目标格子ID(可不传,如果不为nil 则必须是空格子)
 --- @return boolean @是否成功
-function Backpack:ActEquipOffByEquipID(playerid, grid, grid2)
-    return true
-end
+function Backpack:ActEquipOffByEquipID(playerid, grid, grid2) return true end
 
 --- 销毁装备
 --- @param playerid number @玩家ID
 --- @param grid number @装备栏ID
 --- @return boolean @是否成功
-function Backpack:ActDestructEquip(playerid, grid)
-    return true
-end
+function Backpack:ActDestructEquip(playerid, grid) return true end
 
 --- 创建道具到玩家背包
 --- @param playerid number @玩家ID
@@ -5752,9 +4940,7 @@ end
 --- @param num number @道具数量
 --- @param ipos number @优先存放的位置
 --- @return any @操作结果
-function Backpack:CreateItem(playerid, itemid, num, ipos)
-    return nil
-end
+function Backpack:CreateItem(playerid, itemid, num, ipos) return nil end
 
 --- 在手持道具上播放特效
 --- @param playerid number @玩家ID
@@ -5763,66 +4949,50 @@ end
 --- @param rot table @旋转
 --- @param scale table @缩放
 --- @return boolean @是否成功
-function Backpack:PlayShortCutIxParticle(playerid, effectid, offset, rot, scale)
-    return true
-end
+function Backpack:PlayShortCutIxParticle(playerid, effectid, offset, rot, scale) return true end
 
 --- 停止手持道具上播放特效
 --- @param playerid number @玩家ID
 --- @param effectid number @特效ID
 --- @return boolean @是否成功
-function Backpack:StopShortCutIxEffect(playerid, effectid)
-    return true
-end
+function Backpack:StopShortCutIxEffect(playerid, effectid) return true end
 
 --- 设置玩家快捷栏上某种类型道具手持特效
 --- @param playerid number @玩家ID
 --- @param itemid number @道具类型
 --- @param effectid number @特效ID
 --- @return boolean @是否成功
-function Backpack:PlayShortCutItemParticle(playerid, itemid, effectid)
-    return true
-end
+function Backpack:PlayShortCutItemParticle(playerid, itemid, effectid) return true end
 
 --- 删除玩家快捷栏上某种类型道具手持特效
 --- @param playerid number @玩家ID
 --- @param itemid number @道具类型
 --- @param effectid number @特效ID
 --- @return boolean @是否成功
-function Backpack:StopShortCutItemEffect(playerid, itemid, effectid)
-    return true
-end
+function Backpack:StopShortCutItemEffect(playerid, itemid, effectid) return true end
 
 --- 批量获取背包和快捷栏格子信息数据
 --- @param playerid number @玩家ID
 --- @param begingridId number @开始格子id
 --- @param endgridId number @结束格子id
 --- @return any @格子信息数据
-function Backpack:GetGridInfos(playerid, begingridId, endgridId)
-    return nil
-end
+function Backpack:GetGridInfos(playerid, begingridId, endgridId) return nil end
 
 --- 加载背包和快捷栏格子信息数据
 --- @param playerid number @玩家ID
 --- @param gridinfo string @格子信息
 --- @return boolean @是否成功
-function Backpack:LoadGridInfos(playerid, gridinfo)
-    return true
-end
+function Backpack:LoadGridInfos(playerid, gridinfo) return true end
 
 --- 解析格子信息数据
 --- @param str string @GetGridInfos打包字符串
 --- @return table @解析后的数据
-function Backpack:DecodeGridInfo(str)
-    return {}
-end
+function Backpack:DecodeGridInfo(str) return {} end
 
 --- 将解析的格子信息数据打包
 --- @param infos table @DecodeGridInfo解析后的数据
 --- @return string @打包后的字符串
-function Backpack:EncodeTableGridInfo(infos)
-    return ""
-end
+function Backpack:EncodeTableGridInfo(infos) return "" end
 
 --- 设置背包和快捷栏格子锁定状态
 --- @param playerid number @玩家ID
@@ -5830,84 +5000,64 @@ end
 --- @param endgridId number @结束格子id
 --- @param lock boolean @true锁定 false打开
 --- @return boolean @是否成功
-function Backpack:SetGridsLock(playerid, begingridId, endgridId, lock)
-    return true
-end
+function Backpack:SetGridsLock(playerid, begingridId, endgridId, lock) return true end
 
 --- 批量清理背包格子数据
 --- @param playerid number @玩家ID
 --- @param begingridId number @开始格子id
 --- @param endgridId number @结束格子id
 --- @return boolean @是否成功
-function Backpack:ClearGrids(playerid, begingridId, endgridId)
-    return true
-end
+function Backpack:ClearGrids(playerid, begingridId, endgridId) return true end
 
 --- 设置背包格子数量
 --- @param playerid number @玩家ID
 --- @param num number @数量暂定范围(0-100)
 --- @return boolean @是否成功
-function Backpack:SetBackPackNum(playerid, num)
-    return true
-end
+function Backpack:SetBackPackNum(playerid, num) return true end
 
 --- 获取指定背包中所有道具实例
 --- @param playerid number @玩家ID
 --- @param bartype number @背包栏类型
 --- @return table @道具实例ID数组
-function Backpack:GetAllBackPackInstanceIds(playerid, bartype)
-    return {}
-end
+function Backpack:GetAllBackPackInstanceIds(playerid, bartype) return {} end
 
 --- 在玩家的背包内创建一个道具实例
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具id
 --- @param gridIndex number @格子索引
 --- @return string @道具实例ID
-function Backpack:CreateItemInstInBackpack(playerid, itemid, gridIndex)
-    return ""
-end
+function Backpack:CreateItemInstInBackpack(playerid, itemid, gridIndex) return "" end
 
 --- 在玩家的背包内创建一把实例化的枪械
 --- @param playerid number @玩家ID
 --- @param itemid number|string @道具id
 --- @param gridIndex number @格子索引
 --- @return string @道具实例ID
-function Backpack:CreateGunInBackpack(playerid, itemid, gridIndex)
-    return ""
-end
+function Backpack:CreateGunInBackpack(playerid, itemid, gridIndex) return "" end
 
 --- 根据背包索引获取道具实例id
 --- @param playerid number @玩家ID
 --- @param gridIndex number @格子索引
 --- @return string @道具实例id
-function Backpack:GetInstIdByGridIndex(playerid, gridIndex)
-    return ""
-end
+function Backpack:GetInstIdByGridIndex(playerid, gridIndex) return "" end
 
 --- 获取背包所有实例化的枪械
 --- @param playerid number @玩家ID
 --- @return table @实例id数组
-function Backpack:GetGunInstIdInBackpack(playerid)
-    return {}
-end
+function Backpack:GetGunInstIdInBackpack(playerid) return {} end
 
 --- 获取背包格子是否锁定
 --- @param playerid number @玩家ID
 --- @param gridIndex number @格子索引
 --- @return boolean @是否锁定(参数错误返回true)
-function Backpack:IsLock(playerid, gridIndex)
-    return true
-end
+function Backpack:IsLock(playerid, gridIndex) return true end
 
 --- 获取背包格子属性
 --- @param playerid number @玩家ID
 --- @param gridid number @格子ID
 --- @param attr number @属性类型
 --- @return number @属性值
-function Backpack:GetGridAttr(playerid, gridid, attr)
-    return 0
-end
+function Backpack:GetGridAttr(playerid, gridid, attr) return 0 end
 
 --- 设置背包格子属性
 --- @param playerid number @玩家ID
@@ -5915,9 +5065,7 @@ end
 --- @param attr number @属性类型
 --- @param value number @属性值
 --- @return boolean @是否成功
-function Backpack:SetGridAttr(playerid, gridid, attr, value)
-    return true
-end
+function Backpack:SetGridAttr(playerid, gridid, attr, value) return true end
 --- @class Chat
 --- 消息模块管理接口 - Chat
 local Chat = {}
@@ -5929,9 +5077,7 @@ _G.Chat = Chat
 --- @param content string @内容
 --- @param playerId number @玩家ID
 --- @return boolean @是否发送成功
-function Chat:SendSystemMsg(content, playerId)
-    return true
-end
+function Chat:SendSystemMsg(content, playerId) return true end
 ---@class CustomUI
 ---界面模块管理接口 - CustomUI
 local CustomUI = {}
@@ -5946,9 +5092,7 @@ _G.CustomUI = CustomUI
 ---@param animId? number @动画ID(缺省参数)
 ---@param time? number @动画时长(缺省参数)
 ---@param mode? number @播放模式(缺省参数)
-function CustomUI:SetText(playerId, uiId, elementId, text, animId, time, mode)
-    return true
-end
+function CustomUI:SetText(playerId, uiId, elementId, text, animId, time, mode) return true end
 
 ---设置元件图案纹理
 ---@return boolean @成功返回True, 失败返回False
@@ -5956,9 +5100,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param url string @图案纹理ID
-function CustomUI:SetTexture(playerId, uiId, elementId, url)
-    return true
-end
+function CustomUI:SetTexture(playerId, uiId, elementId, url) return true end
 
 ---设置元件大小
 ---@return boolean @成功返回True, 失败返回False
@@ -5967,9 +5109,7 @@ end
 ---@param elementId string @元件ID
 ---@param width number @元件宽度
 ---@param heigth number @元件高度
-function CustomUI:SetSize(playerId, uiId, elementId, width, heigth)
-    return true
-end
+function CustomUI:SetSize(playerId, uiId, elementId, width, heigth) return true end
 
 ---设置文本元件字体大小
 ---@return boolean @成功返回True, 失败返回False
@@ -5977,9 +5117,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param size number @字体大小
-function CustomUI:SetFontSize(playerId, uiId, elementId, size)
-    return true
-end
+function CustomUI:SetFontSize(playerId, uiId, elementId, size) return true end
 
 ---设置元件颜色
 ---@return boolean @成功返回True, 失败返回False
@@ -5987,9 +5125,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param color number @颜色值(0xFFFFFF)
-function CustomUI:SetColor(playerId, uiId, elementId, color)
-    return true
-end
+function CustomUI:SetColor(playerId, uiId, elementId, color) return true end
 
 ---显示元件
 ---@return boolean @成功返回True, 失败返回False
@@ -5998,9 +5134,7 @@ end
 ---@param elementId string @元件ID
 ---@param effectid? number @动画ID(缺省参数)
 ---@param time? number @动画时长(缺省参数)
-function CustomUI:ShowElement(playerId, uiId, elementId, effectid, time)
-    return true
-end
+function CustomUI:ShowElement(playerId, uiId, elementId, effectid, time) return true end
 
 ---隐藏元件
 ---@return boolean @成功返回True, 失败返回False
@@ -6009,9 +5143,7 @@ end
 ---@param elementId string @元件ID
 ---@param effectid? number @动画ID(缺省参数)
 ---@param time? number @动画时长(缺省参数)
-function CustomUI:HideElement(playerId, uiId, elementId, effectid, time)
-    return true
-end
+function CustomUI:HideElement(playerId, uiId, elementId, effectid, time) return true end
 
 ---旋转元件
 ---@return boolean @成功返回True, 失败返回False
@@ -6019,9 +5151,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param rotate number @旋转角度
-function CustomUI:RotateElement(playerId, uiId, elementId, rotate)
-    return true
-end
+function CustomUI:RotateElement(playerId, uiId, elementId, rotate) return true end
 
 ---设置元件透明度
 ---@return boolean @成功返回True, 失败返回False
@@ -6029,9 +5159,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param alpha number @透明度(0-100)
-function CustomUI:SetAlpha(playerId, uiId, elementId, alpha)
-    return true
-end
+function CustomUI:SetAlpha(playerId, uiId, elementId, alpha) return true end
 
 ---设置状态
 ---@return boolean @成功返回True, 失败返回False
@@ -6041,9 +5169,7 @@ end
 ---@param pageIndex number @状态值
 ---@param easeType number @缓动类型枚举(Easing)
 ---@param time? number @动画时长(缺省函数)
-function CustomUI:SetState(playerId, uiId, elementId, pageIndex, easeType, time)
-    return true
-end
+function CustomUI:SetState(playerId, uiId, elementId, pageIndex, easeType, time) return true end
 
 ---设置元件位置
 ---@return boolean @成功返回True, 失败返回False
@@ -6052,9 +5178,7 @@ end
 ---@param elementId string @元件ID
 ---@param x number @X坐标
 ---@param y number @Y坐标
-function CustomUI:SetPosition(playerId, uiId, elementId, x, y)
-    return true
-end
+function CustomUI:SetPosition(playerId, uiId, elementId, x, y) return true end
 
 ---设置模型装载器的模型缩放
 ---@return boolean @成功返回True, 失败返回False
@@ -6063,67 +5187,49 @@ end
 ---@param elementId string @元件ID
 ---@param x number @X缩放
 ---@param y number @Y缩放
-function CustomUI:SetScale(playerId, uiId, elementId, x, y)
-    return true
-end
+function CustomUI:SetScale(playerId, uiId, elementId, x, y) return true end
 
 ---获取道具类型图标
 ---@return string|nil @成功时返回道具图标的资源标识符
 ---@param itemId number|string 道具ID
-function CustomUI:GetItemIcon(itemId)
-    return ""
-end
+function CustomUI:GetItemIcon(itemId) return "" end
 
 ---获取生物图标
 ---@return string|nil @成功时返回生物图标的资源标识符
 ---@param objId number @生物ID
-function CustomUI:GetMonsterObjIcon(objId)
-    return ""
-end
+function CustomUI:GetMonsterObjIcon(objId) return "" end
 
 ---获取生物类型图标
 ---@return string|nil @成功时返回生物类型图标的资源标识符
 ---@param actor number|string @生物类型ID
-function CustomUI:GetMonsterIcon(actor)
-    return ""
-end
+function CustomUI:GetMonsterIcon(actor) return "" end
 
 ---获取状态图标
 ---@return string|nil @成功时返回状态图标的资源标识符
 ---@param buffId number @状态ID
-function CustomUI:GetStatusIcon(buffId)
-    return ""
-end
+function CustomUI:GetStatusIcon(buffId) return "" end
 
 
 ---获取方块类型图标
 ---@return string|nil @成功时返回方块类型图标的资源标识符
 ---@param blockId number|string @方块类型ID
-function CustomUI:GetBlockIcon(blockId)
-    return ""
-end
+function CustomUI:GetBlockIcon(blockId) return "" end
 
 ---获取玩家当前角色图标
 ---@return string|nil @成功时返回玩家当前角色图标的资源标识符
 ---@param playerId number @玩家ID
-function CustomUI:GetRoleIcon(playerId)
-    return ""
-end
+function CustomUI:GetRoleIcon(playerId) return "" end
 
 ---获取玩家当前角色图标
 ---@return string|nil @成功时返回玩家当前角色头像的资源标识符
 ---@param playerId number @玩家ID
-function CustomUI:GetRoleHeadIcon(playerId)
-    return ""
-end
+function CustomUI:GetRoleHeadIcon(playerId) return "" end
 
 ---获取玩家快捷栏图标
 ---@return string|nil @成功时返回玩家快捷栏图标的资源标识符
 ---@param playerId number @玩家ID
 ---@param ix number @快捷栏索引(1-8)
-function CustomUI:GetShortcutIcon(playerId, ix)
-    return ""
-end
+function CustomUI:GetShortcutIcon(playerId, ix) return "" end
 
 ---元件平滑移动到指定位置
 ---@return boolean @成功返回True, 失败返回False
@@ -6133,9 +5239,7 @@ end
 ---@param time number @动画时长(>0)
 ---@param x number @目标X坐标
 ---@param y number @目标Y坐标
-function CustomUI:SmoothMoveTo(playerId, uiId, elementId, time, x, y)
-    return true
-end
+function CustomUI:SmoothMoveTo(playerId, uiId, elementId, time, x, y) return true end
 
 ---元件平滑移动相对距离
 ---@return boolean @成功返回True, 失败返回False
@@ -6145,9 +5249,7 @@ end
 ---@param time number @动画时长(>0)
 ---@param x number @X坐标
 ---@param y number @Y坐标
-function CustomUI:SmoothMoveBy(playerId, uiId, elementId, time, x, y)
-    return true
-end
+function CustomUI:SmoothMoveBy(playerId, uiId, elementId, time, x, y) return true end
 
 ---元件平滑改变到指定宽度和高度
 ---@return boolean @成功返回True, 失败返回False
@@ -6157,9 +5259,7 @@ end
 ---@param time number @动画时长(>0)
 ---@param w number @目标宽度
 ---@param h number @目标高度
-function CustomUI:SmoothScaleTo(playerId, uiId, elementId, time, w, h)
-    return true
-end
+function CustomUI:SmoothScaleTo(playerId, uiId, elementId, time, w, h) return true end
 
 ---元件平滑改变相对宽度和高度
 ---@return boolean @成功返回True, 失败返回False
@@ -6169,9 +5269,7 @@ end
 ---@param time number @动画时长(>0)
 ---@param w number @宽度
 ---@param h number @高度
-function CustomUI:SmoothScaleBy(playerId, uiId, elementId, time, w, h)
-    return true
-end
+function CustomUI:SmoothScaleBy(playerId, uiId, elementId, time, w, h) return true end
 
 ---元件平滑改变相对缩放大小（子节点也会改变大小）
 ---@return boolean @成功返回True, 失败返回False
@@ -6183,9 +5281,7 @@ end
 ---@param y number @Y缩放
 ---@param delayTime number @延迟时间
 ---@param easeType number @缓动类型枚举(Easing)
-function CustomUI:SmoothScaleByEx(playerId, uiId, elementId, time, x, y, delayTime, easeType)
-    return true
-end
+function CustomUI:SmoothScaleByEx(playerId, uiId, elementId, time, x, y, delayTime, easeType) return true end
 
 ---元件平滑旋转到指定角度
 ---@return boolean @成功返回True, 失败返回False
@@ -6194,9 +5290,7 @@ end
 ---@param elementId string @元件ID
 ---@param time number @动画时长(>0)
 ---@param angle number @目标角度
-function CustomUI:SmoothRotateTo(playerId, uiId, elementId, time, angle)
-   return true
-end
+function CustomUI:SmoothRotateTo(playerId, uiId, elementId, time, angle) return true end
 
 ---元件平滑旋转相对角度
 ---@return boolean @成功返回True, 失败返回False
@@ -6205,9 +5299,7 @@ end
 ---@param elementId string @元件ID
 ---@param time number @动画时长(>0)
 ---@param angle number @角度
-function CustomUI:SmoothRotateBy(playerId, uiId, elementId, time, angle)
-    return true
-end
+function CustomUI:SmoothRotateBy(playerId, uiId, elementId, time, angle) return true end
 
 ---元件播放动画
 ---@return boolean @成功返回True, 失败返回False
@@ -6220,9 +5312,7 @@ end
 ---@param easeType number @缓动类型枚举(Easing)
 ---@param delayTime number @延迟时间
 ---@param endValue number @动画结束值
-function CustomUI:PlayElementAnim(playerId, uiId, elementId, animId, time, mode, easeType, delayTime, endValue)
-    return true
-end
+function CustomUI:PlayElementAnim(playerId, uiId, elementId, animId, time, mode, easeType, delayTime, endValue) return true end
 
 ---元件停止动画
 ---@return boolean @成功返回True, 失败返回False
@@ -6230,9 +5320,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param iType number @类型(lement-如果为0就是停止所有的UI的动效，1就是停止elementid对应的UI动效)
-function CustomUI:StopAnim(playerId, uiId, elementId, iType)
-    return true
-end
+function CustomUI:StopAnim(playerId, uiId, elementId, iType) return true end
 
 ---设置装载器的模型（调用道具实例的模型：模型名称填"ItemInstance_道具实例id"）
 ---@return boolean @成功返回True, 失败返回False
@@ -6240,9 +5328,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param modelName string @模型名称
-function CustomUI:SetLoaderModel(playerId, uiId, elementId, modelName)
-    return true
-end
+function CustomUI:SetLoaderModel(playerId, uiId, elementId, modelName) return true end
 
 ---设置装载器的模型缩放
 ---@return boolean @成功返回True, 失败返回False
@@ -6250,9 +5336,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param modelScale number @模型缩放值
-function CustomUI:SetLoaderModelScale(playerId, uiId, elementId, modelScale)
-    return true
-end
+function CustomUI:SetLoaderModelScale(playerId, uiId, elementId, modelScale) return true end
 
 ---设置装载器的模型方向
 ---@return boolean @成功返回True, 失败返回False
@@ -6260,9 +5344,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param yaw number @水平角度(角度制)
-function CustomUI:SetLoaderModelDir(playerId, uiId, elementId, yaw)
-    return true
-end
+function CustomUI:SetLoaderModelDir(playerId, uiId, elementId, yaw) return true end
 
 ---设置装载器的模型位置
 ---@return boolean @成功返回True, 失败返回False
@@ -6272,9 +5354,7 @@ end
 ---@param x number @X坐标
 ---@param y number @Y坐标
 ---@param z number @Z坐标
-function CustomUI:SetLoaderModelPosition(playerId, uiId, elementId, x, y, z)
-    return true
-end
+function CustomUI:SetLoaderModelPosition(playerId, uiId, elementId, x, y, z) return true end
 
 ---滑动列表跳转到某位置
 ---@return boolean @成功返回True, 失败返回False
@@ -6283,9 +5363,7 @@ end
 ---@param elementId string @元件ID
 ---@param x number @目标X坐标
 ---@param y number @目标Y坐标
-function CustomUI:TurnSliderToPos(playerId, uiId, elementId, x, y)
-    return true
-end
+function CustomUI:TurnSliderToPos(playerId, uiId, elementId, x, y) return true end
 
 ---设置滑动列表的滑动方式
 ---@return boolean @成功返回True, 失败返回False
@@ -6293,9 +5371,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param dir number @滑动方向(0:水平，1:垂直, 2:自由)
-function CustomUI:SetSliderDir(playerId, uiId, elementId, dir)
-    return true
-end
+function CustomUI:SetSliderDir(playerId, uiId, elementId, dir) return true end
 
 ---设置滑动条的图片
 ---@return boolean @成功返回True, 失败返回False
@@ -6303,9 +5379,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param url string @图片资源ID
-function CustomUI:SetSliderBarImg(playerId, uiId, elementId, url)
-    return true
-end
+function CustomUI:SetSliderBarImg(playerId, uiId, elementId, url) return true end
 
 ---设置元件相对位置
 ---@return boolean @成功返回True, 失败返回False
@@ -6318,9 +5392,7 @@ end
 ---@param h number @垂直偏移枚举(VerticalOffset)
 ---@param yOffset number @Y方向数值
 ---@param yUnits number @像素单位枚举(PixelUnits)
-function CustomUI:SetRelationPosition(playerId, uiId, elementId, v, xOffset, xUnits, h, yOffset, yUnits)
-    return true
-end
+function CustomUI:SetRelationPosition(playerId, uiId, elementId, v, xOffset, xUnits, h, yOffset, yUnits) return true end
 
 ---设置元件相对大小
 ---@return boolean @成功返回True, 失败返回False
@@ -6331,27 +5403,21 @@ end
 ---@param widthUnits number @宽度单位枚举(PixelUnits)
 ---@param heigth number @高度数值
 ---@param heigthUnits number @高度单位枚举(PixelUnits)
-function CustomUI:SetRelationSize(playerId, uiId, elementId, width, widthUnits, heigth, heigthUnits)
-    return true
-end
+function CustomUI:SetRelationSize(playerId, uiId, elementId, width, widthUnits, heigth, heigthUnits) return true end
 
 ---动态创建元件
 ---@return string @成功时返回元件ID
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementType number @元件类型枚举(ElementType)
-function CustomUI:CreateElement(playerId, uiId, elementType)
-    return ""
-end
+function CustomUI:CreateElement(playerId, uiId, elementType) return "" end
 
 ---克隆元件
 ---@return string @成功时返回元件ID
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @目标元件ID
-function CustomUI:CloneElement(playerId, uiId, elementId)
-    return ""
-end
+function CustomUI:CloneElement(playerId, uiId, elementId) return "" end
 
 ---修改元件父元件
 ---@return boolean @成功返回True, 失败返回False
@@ -6359,9 +5425,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param parentElementId string @父元件ID
-function CustomUI:ChangeParent(playerId, uiId, elementId, parentElementId)
-    return true
-end
+function CustomUI:ChangeParent(playerId, uiId, elementId, parentElementId) return true end
 
 ---设置玩家界面进度条的值
 ---@return boolean @成功返回True, 失败返回False
@@ -6370,9 +5434,7 @@ end
 ---@param elementId string @元件ID
 ---@param iType number @类型枚举(ProgressType)
 ---@param value number @设定值
-function CustomUI:SetProgressBarValue(playerId, uiId, elementId, iType, value)
-    return true
-end
+function CustomUI:SetProgressBarValue(playerId, uiId, elementId, iType, value) return true end
 
 ---获取玩家界面进度条的值
 ---@return number, number, number @成功时返回最小值，最大值，当前值
@@ -6380,9 +5442,7 @@ end
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
 ---@param iType number @类型枚举(ProgressType)
-function CustomUI:GetProgressBarValue(playerId, uiId, elementId, iType)
-    return 0, 0, 0
-end
+function CustomUI:GetProgressBarValue(playerId, uiId, elementId, iType) return 0, 0, 0 end
 
 ---设置玩家界面进度条的纹理
 ---@return boolean @成功返回True, 失败返回False
@@ -6391,9 +5451,7 @@ end
 ---@param elementId string @元件ID
 ---@param iType number @类型枚举(ProgressType)
 ---@param url string @纹理资源ID 
-function CustomUI:SetProgressBarResId(playerId, uiId, elementId, iType, url)
-    return true
-end
+function CustomUI:SetProgressBarResId(playerId, uiId, elementId, iType, url) return true end
 
 ---进度条文本平滑计时
 ---@return boolean @成功返回True, 失败返回False
@@ -6403,9 +5461,7 @@ end
 ---@param bVal number @开始值
 ---@param eVal number @结束值
 ---@param time number @动画时长
-function CustomUI:SmoothChangeProgress(playerId, uiId, elementId, bVal, eVal, time)
-    return true
-end
+function CustomUI:SmoothChangeProgress(playerId, uiId, elementId, bVal, eVal, time) return true end
 
 ---设置动画元件动画ID
 ---@return boolean @成功返回True, 失败返回False
@@ -6415,9 +5471,7 @@ end
 ---@param animId number @动画ID
 ---@param animIndex number @动画序列
 ---@param playMode number @播放模式枚举(ViedoPlayMode)
-function CustomUI:SetSpineAnimID(playerId, uiId, elementId, animId, animIndex, playMode)
-    return true
-end
+function CustomUI:SetSpineAnimID(playerId, uiId, elementId, animId, animIndex, playMode) return true end
 
 ---进度条文本平滑增加计时
 ---@return boolean @成功返回True, 失败返回False
@@ -6427,9 +5481,7 @@ end
 ---@param time number @动画时长
 ---@param pType number @类型枚举(1.增加, 2.减少. 3.变化至)
 ---@param value number @变化值
-function CustomUI:SmoothIncreaseProgress(playerId, uiId, elementId, time, pType, value)
-    return true
-end
+function CustomUI:SmoothIncreaseProgress(playerId, uiId, elementId, time, pType, value) return true end
 
 ---设置伤害文本
 ---@return boolean @成功返回True, 失败返回False
@@ -6446,24 +5498,18 @@ end
 ---@param moveX2 number @移动X2
 ---@param moveY2 number @移动Y2
 ---@param showTime2 number @显示时间2
-function CustomUI:SetFloatDamageTxt(playerId, elementId, objId, text, color, offsetX, offsetY, moveX, moveY, showTime, moveX2, moveY2, showTime2)
-    return true
-end
+function CustomUI:SetFloatDamageTxt(playerId, elementId, objId, text, color, offsetX, offsetY, moveX, moveY, showTime, moveX2, moveY2, showTime2) return true end
 
 ---获取客机屏幕分辨率
 ---@return number, number @返回屏幕大小(width, height)
-function CustomUI:GetScreenSize(playerId)
-    return 0, 0
-end
+function CustomUI:GetScreenSize(playerId) return 0, 0 end
 
 ---删除UI元件
 ---@return boolean @成功返回True, 失败返回False
 ---@param playerId number @玩家ID
 ---@param uiId string @界面ID
 ---@param elementId string @元件ID
-function CustomUI:DeleteElement(playerId, uiId, elementId)
-    return true
-end
+function CustomUI:DeleteElement(playerId, uiId, elementId) return true end
 
 --- 设置信标映射类型
 --- @return boolean @成功返回True, 失败返回False
@@ -6471,9 +5517,7 @@ end
 --- @param uiId string @界面ID
 --- @param elementId string @元件ID
 --- @param mapType number @信标映射类型枚举(BeaconMapType)
-function CustomUI:SetBeaconMapType(playerId, uiId, elementId, mapType)
-    return true
-end
+function CustomUI:SetBeaconMapType(playerId, uiId, elementId, mapType) return true end
 
 --- 设置信标位置
 --- @return boolean @成功返回True, 失败返回False
@@ -6483,9 +5527,7 @@ end
 --- @param bandPosX number @信标X坐标
 --- @param bandPosY number @信标Y坐标
 --- @param bandPosZ number @信标Z坐标
-function CustomUI:SetBeaconBandPos(playerId, uiId, elementId, bandPosX, bandPosY, bandPosZ)
-    return true
-end
+function CustomUI:SetBeaconBandPos(playerId, uiId, elementId, bandPosX, bandPosY, bandPosZ) return true end
 
 --- 设置信标对象
 --- @return boolean @成功返回True, 失败返回False
@@ -6493,9 +5535,7 @@ end
 --- @param uiId string @界面ID
 --- @param elementId string @元件ID
 --- @param objId number @信标对象ID
-function CustomUI:SetBeaconObjId(playerId, uiId, elementId, objId)
-    return true
-end
+function CustomUI:SetBeaconObjId(playerId, uiId, elementId, objId) return true end
 
 --- 设置信标偏移
 --- @return boolean @成功返回True, 失败返回False
@@ -6505,9 +5545,7 @@ end
 --- @param offsetX number @信标X偏移
 --- @param offsetY number @信标Y偏移
 --- @param offsetZ number @信标Z偏移
-function CustomUI:SetBeaconOffset(playerId, uiId, elementId, offsetX, offsetY, offsetZ)
-    return true
-end
+function CustomUI:SetBeaconOffset(playerId, uiId, elementId, offsetX, offsetY, offsetZ) return true end
 
 --- 设置信标限制范围类型
 --- @return boolean @成功返回True, 失败返回False
@@ -6515,9 +5553,7 @@ end
 --- @param uiId string @界面ID
 --- @param elementId string @元件ID
 --- @param clampRange number @信标限制范围类型枚举(BeaconClampType)
-function CustomUI:SetBeaconClampType(playerId, uiId, elementId, clampRange)
-    return true
-end
+function CustomUI:SetBeaconClampType(playerId, uiId, elementId, clampRange) return true end
 
 --- 设置信标显示半径
 --- @return boolean @成功返回True, 失败返回False
@@ -6525,9 +5561,7 @@ end
 --- @param uiId string @界面ID
 --- @param elementId string @元件ID
 --- @param radius number @信标半径
-function CustomUI:SetBeaconRadius(playerId, uiId, elementId, radius)
-    return true
-end
+function CustomUI:SetBeaconRadius(playerId, uiId, elementId, radius) return true end
 
 --- 设置信标矩形限制范围
 --- @param playerId number @玩家ID
@@ -6538,9 +5572,7 @@ end
 --- @param rectMaxX number @矩形范围最大X坐标
 --- @param rectMaxY number @矩形范围最大Y坐标
 --- @return boolean @成功返回True, 失败返回False
-function CustomUI:SetBeaconMargin(playerId, uiId, elementId, rectMinX, rectMinY, rectMaxX, rectMaxY)
-    return true
-end
+function CustomUI:SetBeaconMargin(playerId, uiId, elementId, rectMinX, rectMinY, rectMaxX, rectMaxY) return true end
 
 --- 设置装载器元件模型播放的动画
 --- @param playerId number @玩家ID
@@ -6550,9 +5582,7 @@ end
 --- @param playMode number @播放模式枚举(`AnimMode`)
 --- @param speed number @动画播放速度(`0` ~ `1`)
 --- @return boolean @成功返回True, 失败返回False
-function CustomUI:SetLoaderModelAct(playerId, uiId, elementId, animId, playMode, speed)
-    return true
-end
+function CustomUI:SetLoaderModelAct(playerId, uiId, elementId, animId, playMode, speed) return true end
 --- @class Graphics
 --- 图形界面模块管理接口 Graphics
 local Graphics = {}
@@ -6564,18 +5594,14 @@ _G.Graphics = Graphics
 --- @param apha number @不透明度
 --- @param autoWrap number @自动换行(默认自动换行)
 --- @return table @文本信息内容
-function Graphics:MakeGraphicsText(title, font, apha, autoWrap)
-    return {}
-end
+function Graphics:MakeGraphicsText(title, font, apha, autoWrap) return {} end
 
 --- 创建漂浮文字信息
 --- @param title string @文本信息
 --- @param font number @字体大小
 --- @param apha number @不透明度
 --- @return table @漂浮文字信息内容
-function Graphics:MakeflotageText(title, font, apha)
-    return {}
-end
+function Graphics:MakeflotageText(title, font, apha) return {} end
 
 --- 创建进度条信息
 --- @param current number @当前进度值
@@ -6583,9 +5609,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @进度条信息内容
-function Graphics:MakeGraphicsProgress(current, total, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsProgress(current, total, color, apha) return {} end
 
 --- 生成指向位置的箭头数据
 --- @param x number @方块坐标x
@@ -6595,9 +5619,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @箭头信息内容
-function Graphics:MakeGraphicsArrowToPos(x, y, z, size, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsArrowToPos(x, y, z, size, color, apha) return {} end
 
 --- 生成指向位置的线数据
 --- @param x number @方块坐标x
@@ -6607,9 +5629,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @线信息内容
-function Graphics:MakeGraphicsLineToPos(x, y, z, size, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsLineToPos(x, y, z, size, color, apha) return {} end
 
 --- 生成指向位置的寻路引导线数据
 --- @param x number @方块坐标x
@@ -6618,9 +5638,7 @@ end
 --- @param itype number @线ID
 --- @param tCanSeePlayers? table @可见玩家列表(可选)
 --- @return table @寻路线信息内容
-function Graphics:MakeGraphicsNavPathToPos(x, y, z, itype, tCanSeePlayers)
-    return {}
-end
+function Graphics:MakeGraphicsNavPathToPos(x, y, z, itype, tCanSeePlayers) return {} end
 
 --- 生成指向位置的面数据
 --- @param x number @方块坐标x
@@ -6630,9 +5648,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @面信息内容
-function Graphics:MakeGraphicsSurfaceToPos(x, y, z, size, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsSurfaceToPos(x, y, z, size, color, apha) return {} end
 
 --- 生成指向对象的箭头数据
 --- @param objId number @对象ID
@@ -6640,9 +5656,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @箭头信息内容
-function Graphics:MakeGraphicsArrowToActor(objId, size, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsArrowToActor(objId, size, color, apha) return {} end
 
 --- 生成指向对象的线数据
 --- @param objId number @对象ID
@@ -6650,9 +5664,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @线信息内容
-function Graphics:MakeGraphicsLineToActor(objId, size, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsLineToActor(objId, size, color, apha) return {} end
 
 --- 生成指向对象的面数据
 --- @param objId number @对象ID
@@ -6660,9 +5672,7 @@ end
 --- @param color string @颜色值(十六进制)
 --- @param apha number @不透明度
 --- @return table @面信息内容
-function Graphics:MakeGraphicsSurfaceToActor(objId, size, color, apha)
-    return {}
-end
+function Graphics:MakeGraphicsSurfaceToActor(objId, size, color, apha) return {} end
 
 --- 生成图片信息
 --- @param imgid string @图片ID
@@ -6670,9 +5680,7 @@ end
 --- @param height number @高度
 --- @param apha number @不透明度
 --- @return table @图片信息内容
-function Graphics:MakeGraphicsImage(imgid, size, height, apha)
-    return {}
-end
+function Graphics:MakeGraphicsImage(imgid, size, height, apha) return {} end
 
 --- 创建图文信息
 --- @param x number @方块坐标x
@@ -6682,9 +5690,7 @@ end
 --- @param x2 number @X坐标偏移(缺省参数)
 --- @param y2 number @Y坐标偏移(缺省参数)
 --- @return number @图文对象ID
-function Graphics:CreateGraphicsTxtByPos(x, y, z, info, x2, y2)
-    return 0
-end
+function Graphics:CreateGraphicsTxtByPos(x, y, z, info, x2, y2) return 0 end
 
 --- 在生物身上创建文字板
 --- @param objId number @对象ID
@@ -6692,9 +5698,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return number @图文实例ID
-function Graphics:CreateGraphicsTxtByActor(objId, info, offset, distance)
-    return 0
-end
+function Graphics:CreateGraphicsTxtByActor(objId, info, offset, distance) return 0 end
 
 --- 在位置上创建漂浮文字
 --- @param x number @方块坐标x
@@ -6704,9 +5708,7 @@ end
 --- @param x2 number @X坐标偏移(缺省参数)
 --- @param y2 number @Y坐标偏移(缺省参数)
 --- @return number @图文实例ID
-function Graphics:CreateflotageTextByPos(x, y, z, info, x2, y2)
-    return 0
-end
+function Graphics:CreateflotageTextByPos(x, y, z, info, x2, y2) return 0 end
 
 --- 在生物身上创建漂浮文字
 --- @param objId number @对象ID
@@ -6714,9 +5716,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return number @图文实例ID
-function Graphics:CreateflotageTextByActor(objId, info, offset, distance)
-    return 0
-end
+function Graphics:CreateflotageTextByActor(objId, info, offset, distance) return 0 end
 
 --- 在位置上创建进度条
 --- @param x number @方块坐标x
@@ -6726,9 +5726,7 @@ end
 --- @param x2 number @X坐标偏移(缺省参数)
 --- @param y2 number @Y坐标偏移(缺省参数)
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsProgressByPos(x, y, z, info, x2, y2)
-    return true
-end
+function Graphics:CreateGraphicsProgressByPos(x, y, z, info, x2, y2) return true end
 
 --- 在生物身上创建进度条
 --- @param objId number @对象ID
@@ -6736,9 +5734,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsProgressByActor(objId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsProgressByActor(objId, info, offset, distance) return true end
 
 --- 删除位置上的图文信息
 --- @param x number @方块坐标x
@@ -6747,18 +5743,14 @@ end
 --- @param graphid number @图文ID
 --- @param graphType number @图文类型
 --- @return boolean @操作是否成功
-function Graphics:RemoveGraphicsByPos(x, y, z, graphid, graphType)
-    return true
-end
+function Graphics:RemoveGraphicsByPos(x, y, z, graphid, graphType) return true end
 
 --- 删除生物的图文信息
 --- @param objId number @对象ID
 --- @param graphid number @图文ID
 --- @param graphType number @图文类型
 --- @return boolean @操作是否成功
-function Graphics:RemoveGraphicsByObjID(objId, graphid, graphType)
-    return true
-end
+function Graphics:RemoveGraphicsByObjID(objId, graphid, graphType) return true end
 
 --- 更新图文信息的文字内容
 --- @param graphid number @图文ID
@@ -6766,9 +5758,7 @@ end
 --- @param fontsize number @字体大小
 --- @param apha number @不透明度
 --- @return boolean @操作是否成功
-function Graphics:UpdateGraphicsTextById(graphid, title, fontsize, apha)
-    return true
-end
+function Graphics:UpdateGraphicsTextById(graphid, title, fontsize, apha) return true end
 
 --- 按实例ID更新进度条图文的当前值/最大值
 --- @param graphId number @图文实例ID
@@ -6776,9 +5766,7 @@ end
 --- @param val2 number @最大值
 --- @param isync? boolean @是否同步到客机(可选)
 --- @return boolean @是否更新成功
-function Graphics:UpdateGraphicsProgressById(graphId, val1, val2, isync)
-    return true
-end
+function Graphics:UpdateGraphicsProgressById(graphId, val1, val2, isync) return true end
 
 --- 创建生物指向位置的箭头
 --- @param objId number @对象ID
@@ -6786,9 +5774,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsArrowByActorToPos(objId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsArrowByActorToPos(objId, info, offset, distance) return true end
 
 --- 创建生物指向生物的箭头
 --- @param srcobjId number @源对象ID
@@ -6796,25 +5782,19 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsArrowByActorToActor(srcobjId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsArrowByActorToActor(srcobjId, info, offset, distance) return true end
 
 --- 创建位置指向位置的箭头
 --- @param pos table @位置坐标{x=x, y=y, z=z}
 --- @param info table @图文信息
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsArrowByPosToPos(pos, info)
-    return true
-end
+function Graphics:CreateGraphicsArrowByPosToPos(pos, info) return true end
 
 --- 创建位置指向生物的箭头
 --- @param pos table @位置坐标{x=x, y=y, z=z}
 --- @param info table @图文信息
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsArrowByPosToActor(pos, info)
-    return true
-end
+function Graphics:CreateGraphicsArrowByPosToActor(pos, info) return true end
 
 --- 创建生物与位置的线
 --- @param objId number @对象ID
@@ -6822,9 +5802,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsLineByActorToPos(objId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsLineByActorToPos(objId, info, offset, distance) return true end
 
 --- 创建生物到位置的寻路引导线
 --- @param objId number @对象ID
@@ -6832,9 +5810,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @是否创建成功
-function Graphics:CreateGraphicsNavPathByActorToPos(objId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsNavPathByActorToPos(objId, info, offset, distance) return true end
 
 --- 创建指向生物的线
 --- @param srcobjId number @源对象ID
@@ -6842,25 +5818,19 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsLineByActorToActor(srcobjId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsLineByActorToActor(srcobjId, info, offset, distance) return true end
 
 --- 创建位置指向位置的线
 --- @param pos table @位置坐标{x=x, y=y, z=z}
 --- @param info table @图文信息
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsLineByPosToPos(pos, info)
-    return true
-end
+function Graphics:CreateGraphicsLineByPosToPos(pos, info) return true end
 
 --- 创建位置指向生物的线
 --- @param pos table @位置坐标{x=x, y=y, z=z}
 --- @param info table @图文信息
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsLineByPosToActor(pos, info)
-    return true
-end
+function Graphics:CreateGraphicsLineByPosToActor(pos, info) return true end
 
 --- 创建生物与位置的面
 --- @param objId number @对象ID
@@ -6868,9 +5838,7 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsSurfaceByActorToPos(objId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsSurfaceByActorToPos(objId, info, offset, distance) return true end
 
 --- 创建生物与生物的引导面
 --- @param srcobjId number @源对象ID
@@ -6878,33 +5846,25 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsSurfaceByActorToActor(srcobjId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsSurfaceByActorToActor(srcobjId, info, offset, distance) return true end
 
 --- 创建位置指向位置的面
 --- @param pos table @位置坐标{x=x, y=y, z=z}
 --- @param info table @图文信息
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsSurfaceByPosToPos(pos, info)
-    return true
-end
+function Graphics:CreateGraphicsSurfaceByPosToPos(pos, info) return true end
 
 --- 创建位置指向生物的面
 --- @param pos table @位置坐标{x=x, y=y, z=z}
 --- @param info table @图文信息
 --- @return boolean @操作是否成功
-function Graphics:CreateGraphicsSurfaceByPosToActor(pos, info)
-    return true
-end
+function Graphics:CreateGraphicsSurfaceByPosToActor(pos, info) return true end
 
 --- 将src相关的所有图文信息转移到des身上
 --- @param srcobjId number @源对象ID
 --- @param desobjId number @目标对象ID
 --- @return boolean @是否成功
-function Graphics:ReplaceAllGraphics(srcobjId, desobjId)
-    return true
-end
+function Graphics:ReplaceAllGraphics(srcobjId, desobjId) return true end
 
 --- 在位置上创建图像
 --- @param x number @方块坐标x
@@ -6914,9 +5874,7 @@ end
 --- @param x2 number @X坐标偏移(缺省参数)
 --- @param y2 number @Y坐标偏移(缺省参数)
 --- @return boolean @是否成功
-function Graphics:CreateGraphicsImageByPos(x, y, z, info, x2, y2)
-    return true
-end
+function Graphics:CreateGraphicsImageByPos(x, y, z, info, x2, y2) return true end
 
 --- 在生物上创建图像
 --- @param objId number @对象ID
@@ -6924,18 +5882,14 @@ end
 --- @param offset table @方向偏移距离{x=x, y=y, z=z}
 --- @param distance number @偏移距离
 --- @return boolean @是否成功
-function Graphics:CreateGraphicsImageByActor(objId, info, offset, distance)
-    return true
-end
+function Graphics:CreateGraphicsImageByActor(objId, info, offset, distance) return true end
 
 --- 获取玩家昵称或称号的偏移高度
 --- @param objId number @对象ID
 --- @param nameType number @名称类型
 --- @param callback function @回调函数
 --- @return number @高度值(未展示返回0)
-function Graphics:GetInnerGraphicsOffset(objId, nameType, callback)
-    return 0
-end
+function Graphics:GetInnerGraphicsOffset(objId, nameType, callback) return 0 end
 
 --- 在指定位置创建笔刷区域图文
 --- @param pos table {x: number, y: number, z: number} @位置坐标
@@ -6945,13 +5899,9 @@ end
 --- @param iType number @类型ID
 --- @param worldId? number @世界ID (可选)
 --- @return number|false @图文实例ID, 失败返回false
-function Graphics:CreateBrushByPos(pos, dim, color, showUin, iType, worldId)
-    return 0
-end
+function Graphics:CreateBrushByPos(pos, dim, color, showUin, iType, worldId) return 0 end
 
 --- 按图文实例ID删除图文信息
 --- @param objId number @图文实例ID
 --- @return boolean @操作是否成功
-function Graphics:RemoveGraphicsByGraphicsID(objId)
-    return true
-end
+function Graphics:RemoveGraphicsByGraphicsID(objId) return true end
