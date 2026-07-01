@@ -2,7 +2,6 @@ import typescriptEslint from "typescript-eslint";
 
 export default [{
     files: ["**/*.ts"],
-}, {
     plugins: {
         "@typescript-eslint": typescriptEslint.plugin,
     },
