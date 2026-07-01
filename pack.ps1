@@ -28,7 +28,7 @@ param(
 
 # ---------- 路径定义 ----------
 $ProjectRoot = $PSScriptRoot
-$CompleteDir = Join-Path $ProjectRoot "complete"
+$CompleteDir = Join-Path $ProjectRoot "addon"
 $OutDir = Join-Path $CompleteDir "out"
 $ToolsDir = Join-Path $ProjectRoot "tools"
 

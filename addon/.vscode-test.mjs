@@ -7,6 +7,6 @@ const repoRoot = path.resolve(__dirname, '..');
 
 export default defineConfig({
 	cwd: repoRoot,
-	files: './complete/out/test/**/*.test.js',
+	files: './addon/out/test/**/*.test.js',
 	launchArgs: ['--disable-extensions'],
 });

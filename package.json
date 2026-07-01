@@ -1,8 +1,8 @@
 {
-  "name": "miniworld-api-complete",
+  "name": "miniworld-api-desc",
   "publisher": "LK-cmyk",
-  "displayName": "MiniWorld API Complete",
-  "description": "MiniWorld API Complete",
+  "displayName": "MiniWorld API Description",
+  "description": "MiniWorld API Description",
   "version": "0.0.1",
   "icon": "img/Logo-128px.png",
   "repository": {
@@ -18,7 +18,7 @@
   "activationEvents": [
     "onLanguage:lua"
   ],
-  "main": "./complete/out/extension.js",
+  "main": "./addon/out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -36,7 +36,7 @@
     "compile": "tsc -p .",
     "watch": "tsc -watch -p .",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint complete/src",
+    "lint": "eslint addon/src",
     "test": "vscode-test"
   },
   "devDependencies": {

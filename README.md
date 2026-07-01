@@ -39,7 +39,7 @@ MiniWorld-API-Desc/
 │   └── ......  # 各模块声明文件
 ├── template/  # VS Code Lua 代码片段模板存放目录
 │   └── lua.code-snippets  # 代码片段文件
-├── complete/  # VS Code 补全插件
+├── addon/  # VS Code 补全插件
 │   ├── .vscode-test.mjs  # VS Code 测试配置
 │   ├── types/  # 补全文件
 │   └── src/  # 补全插件源码
@@ -124,7 +124,7 @@ sequenceDiagram
 2. 编译 TypeScript：
 
     ```bash
-    npm run compile
+    npm run addon
     ```
 
 3. 打包扩展，可使用 `vsce`：

@@ -5,14 +5,14 @@ const LUA_CONFIG_SECTION = 'Lua';
 const LIBRARY_KEY = 'workspace.library';
 
 function getTypesDir(context: vscode.ExtensionContext): string {
-    return context.asAbsolutePath('complete/types');
+    return context.asAbsolutePath('addon/types');
 }
 
 function addDeclarations(context: vscode.ExtensionContext): void {
     const typesDir = getTypesDir(context);
 
     if (!fs.existsSync(typesDir)) {
-        vscode.window.showErrorMessage(`❌ 声明目录不存在: ${typesDir}`);
+        vscode.window.showErrorMessage(`声明目录不存在: ${typesDir}`);
         return;
     }
 
@@ -20,22 +20,22 @@ function addDeclarations(context: vscode.ExtensionContext): void {
     const library = luaConfig.get<string[]>(LIBRARY_KEY, []);
 
     if (library.includes(typesDir)) {
-        vscode.window.showInformationMessage('ℹ️ 声明路径已存在，无需重复添加');
+        vscode.window.showInformationMessage('声明路径已存在，无需重复添加');
         return;
     }
 
     Promise.resolve(
         luaConfig.update(LIBRARY_KEY, [...library, typesDir], vscode.ConfigurationTarget.Global)
     )
-        .then(() => vscode.window.showInformationMessage('✅ Lua 声明文件添加成功！'))
-        .catch((err: Error) => vscode.window.showErrorMessage(`❌ 添加失败: ${err.message}`));
+        .then(() => vscode.window.showInformationMessage('Lua 声明文件添加成功！'))
+        .catch((err: Error) => vscode.window.showErrorMessage(`添加失败: ${err.message}`));
 }
 
 function removeDeclarations(context: vscode.ExtensionContext): void {
     const typesDir = getTypesDir(context);
 
     if (!fs.existsSync(typesDir)) {
-        vscode.window.showErrorMessage(`❌ 声明目录不存在: ${typesDir}`);
+        vscode.window.showErrorMessage(`声明目录不存在: ${typesDir}`);
         return;
     }
 
@@ -44,7 +44,7 @@ function removeDeclarations(context: vscode.ExtensionContext): void {
 
     const index = library.indexOf(typesDir);
     if (index === -1) {
-        vscode.window.showInformationMessage('ℹ️ 声明路径不在列表中，无需移除');
+        vscode.window.showInformationMessage('声明路径不在列表中，无需移除');
         return;
     }
 
@@ -54,12 +54,12 @@ function removeDeclarations(context: vscode.ExtensionContext): void {
     Promise.resolve(
         luaConfig.update(LIBRARY_KEY, newLibrary, vscode.ConfigurationTarget.Global)
     )
-        .then(() => vscode.window.showInformationMessage('🗑️ Lua 声明文件移除成功！'))
-        .catch((err: Error) => vscode.window.showErrorMessage(`❌ 移除失败: ${err.message}`));
+        .then(() => vscode.window.showInformationMessage('Lua 声明文件移除成功！'))
+        .catch((err: Error) => vscode.window.showErrorMessage(`移除失败: ${err.message}`));
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('MiniWorld API 完成插件已激活');
+    console.log('MiniWorld API Desc 完成插件已激活');
 
     // 注册命令：添加声明路径
     const addDisposable = vscode.commands.registerCommand('complete.addDeclarations', () => {
