@@ -133,9 +133,22 @@ sequenceDiagram
     npx vsce package
     ```
 
+## 插件使用方法
+
+1. 打开或安装 VS Code 中的 `MiniWorld API Description` 插件。
+2. 打开要编辑的 Lua 项目，确保已安装并启用 `sumneko.lua` / Lua 语言服务扩展。
+3. 按 `Ctrl+Shift+P` 打开命令面板。
+4. 输入并执行命令：
+   - `MiniWorld: 添加 Lua 声明路径`：将 `addon/types` 自动添加到 Lua 语言服务器的 `Lua.workspace.library` 配置中。
+   - `MiniWorld: 移除 Lua 声明路径`：从配置中移除该声明路径。
+5. 插件会在激活时自动添加声明路径，无需每次手动执行。
+6. 重新加载 VS Code 窗口或重新打开 Lua 文件后，Lua 语言服务器将开始使用声明文件进行补全和类型提示。
+
+> 插件依赖 `Lua` 语言服务
+
 ## 注意事项
 
-- 本仓库声明文件与模板仅支持UGC **3.0**
+- 本仓库声明文件、模板、插件仅支持UGC **3.0**
 - 部分接口可能与实际游戏版本存在差异，请以游戏实际行为为准
 - 发现问题欢迎提交 Issues 或 Fork 后发起 PR
 
