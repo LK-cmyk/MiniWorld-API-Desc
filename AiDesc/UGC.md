@@ -42,7 +42,7 @@ end
 1. 例示
 
   '''lua
-  CustomUI:HideElement(1001, "114514-1919810", "114514-1919810_1")
+  CustomUI:HideElement(1001, "114-514", "114-514_1")
   '''
 2. 例示
 
@@ -50,17 +50,18 @@ end
   GetWorld()
   '''
 
-- PS: 可以将 `API` 全局局部化，以此 **提升性能**
+- PS: 可以将 `API` 全局局部化，以此提升性能
 
 ## os库
 
-- 在 UGC 中只有 `time()` & `timeMs()` & `data()` 这三个函数
+- 在 UGC 中只有 `time()` `timeMs()` `data()` 这三个函数
 
 ## 玩家退出资源管理
 
 - 玩家退出游戏时，`UGCS` 会自动释放大部分与该玩家直接相关的资源:
   1. 打开的 UI & 元件
   2. 事件监听/定时器
+  3. ...
 - 当全部玩家退出时，过一段时间此云服将会直接关闭，释放所有资源
 
 ## 玩家的ID (Uin)
@@ -95,22 +96,20 @@ end
 - 回调函数仅需接收一个 `event` 参数 (表类型，包含事件信息，可修改为任意合法标识符), 通常无 `nil` 无需检查
 - 例如:
 
-    ```lua
-    local Script = {}
+  ```lua
+  local Script = {}
 
-    function Script:OnStart()
-      -- 注册事件
-      self:AddTriggerEvent(TriggerEvent.PlayerClickBlock, self.OnPlayerClickBlock)
-    end
+  function Script:OnStart()
+    self:AddTriggerEvent(TriggerEvent.PlayerClickBlock, self.OnPlayerClickBlock) -- 注册事件
+  end
 
-    -- 玩家点击方块回调
-    function Script:OnPlayerClickBlock(event)
-      local block, playerUin = event.blockid, event.eventobjid
-      print("玩家[".. playerUin .."]点击了方块，类型ID: ".. block)
-    end
+  function Script:OnPlayerClickBlock(event) -- 玩家点击方块回调
+    local block, playerUin = event.blockid, event.eventobjid
+    print("玩家[".. playerUin .."]点击了方块，类型ID: ".. block)
+  end
 
-    return Script
-    ```
+  return Script
+  ```
 
 ## 发送/添加/监听/移除监听消息(广播)
 
@@ -176,14 +175,14 @@ end
 
 | 时间段 | 大致时刻 | 感受 |
 | :-: | :-: | :-: |
-| 午夜 | 0 点 | 深夜、最暗 |
-| 黎明前 | 4 点 | 将亮未亮 |
-| 日出 | 6 点 | 天边泛光 |
-| 清晨 | 8 点 | 明亮清新 |
-| 正午 | 12 点 | 最亮 |
-| 下午 | 16 点 | 偏暖 |
-| 黄昏 | 18 点 | 日落、橙红 |
-| 夜晚 | 20 点 | 入夜、繁星 |
+| 午夜 | 0h | 深夜/最暗 |
+| 黎明前 | 4h | 将亮未亮 |
+| 日出 | 6h | 天边泛光 |
+| 清晨 | 8h | 明亮清新 |
+| 正午 | 12h | 最亮 |
+| 下午 | 16h | 偏暖 |
+| 黄昏 | 18h | 日落/橙红 |
+| 夜晚 | 20h | 入夜/繁星 |
 
 ### 示例
 
@@ -204,66 +203,64 @@ return Script
 
 - 组件A:
 
-    ```lua
-    -- 组件A
-    local Script = {}
-    Script.openFnArgs = {
-      Add = {
-        returnType = Mini.Number，
-        displayName = "别名",
-        params = {Mini.Number, Mini.Number},
-      }
+  ```lua
+  local Script = {}
+  Script.openFnArgs = {
+    Add = {
+      returnType = Mini.Number，
+      displayName = "别名",
+      params = {Mini.Number, Mini.Number},
     }
+  }
 
-    -- 函数定义示例
-    function Script:Add(a, b)
-      if a and b then
-        return a + b
-      end
+  -- 函数定义示例
+  function Script:Add(a, b)
+    if a and b then
+      return a + b
     end
+  end
 
-    -- 组件启动时调用
-    function Script:OnStart()
-      -- 调用自己定义的函数示例
-      -- PS:调用本组件的函数不需要任何配置
-      local result = self:Add(1, 2)
-      print("result", result)
-    end
+  -- 组件启动时调用
+  function Script:OnStart()
+    -- 调用自己定义的函数示例
+    -- PS:调用本组件的函数不需要任何配置
+    local result = self:Add(1, 2)
+    print("result", result)
+  end
 
-    return Script
-    ```
+  return Script
+  ```
 
 - 组件B:
 
-    ```lua
-    -- 组件B
-    local Script = {}
-    function Script:OnStart()
-      -- 同对象下操作
+  ```lua
+  local Script = {}
+  function Script:OnStart()
+    -- 同对象下操作
 
-      -- 获取对象上组件A
-      local cmpA = self:GetComponent("组件id")
+    -- 获取对象上组件A
+    local cmpA = self:GetComponent("组件id")
 
-      -- 调用组件A的函数
-      local result = cmpA:Add(1, 2)
-      print("result", result)
+    -- 调用组件A的函数
+    local result = cmpA:Add(1, 2)
+    print("result", result)
 
-      -- 跨对象操作
-      local obj = GameObject:FindObject("对象id") -- 获取一般对象    
-      local world = GetWorld() -- 世界对象的获取方式
+    -- 跨对象操作
+    local obj = GameObject:FindObject("对象id") -- 获取一般对象    
+    local world = GetWorld() -- 世界对象的获取方式
 
-      -- 获取对象上组件A
-      local cmpA = world:GetComponent("组件id")
+    -- 获取对象上组件A
+    local cmpA = world:GetComponent("组件id")
 
-      -- 调用组件A的函数
-      local result = cmpA:Add(1, 2)
-      print("result", result)
-    
-      local age = cmpA.age -- 获取cmpA组件的age属性
-      cmpA.age = 123 -- 设置cmpA的age属性值为123
-    end
-    return Script -- 返回组件定义的表
-    ```
+    -- 调用组件A的函数
+    local result = cmpA:Add(1, 2)
+    print("result", result)
+  
+    local age = cmpA.age -- 获取cmpA组件的age属性
+    cmpA.age = 123 -- 设置cmpA的age属性值为123
+  end
+  return Script -- 返回组件定义的表
+  ```
 
 ## 等待
 
@@ -286,7 +283,7 @@ return Script
 
 ```lua
 self:ThreadWork(function()
-  print("线程启动")
+  print("Start")
 end)
 ```
 
@@ -310,50 +307,44 @@ end)
 
 ### UI与元件的ID
 
-- UI的ID为一串数字（如 `"7618879811305562243-64940"`），元件的ID为 `UI的ID + _序号`（如 `"7618879811305562243-64940_2"`）
-- 删除元件后重新创建，其ID序号会递增（如上述元件重建后变为 `"7618879811305562243-64940_3"`）
+- UI的ID为一串数字（如 `"114514-64940"`），元件的ID为 `UI的ID + _序号`（如 `"114514-64940_2"`）
+- 删除元件后重新创建，其ID序号会递增（如上述元件重建后变为 `"114514-64940_3"`）
 
 ### 元件克隆
 
 元件克隆需要使用 `CustomUI API` 中的函数: `CloneElement`
 
-> 详情查看 `MNDeclaration.d.lua` 文件
-
 克隆元件的ID为 `被克隆元件的ID + #clone + 次数`
 
-- 例如: "7618879811305562243-64940_2#clone1"
+- 例如: "114514-64940_2#clone1"
 
 - 当克隆的元件为 `父元件` 时，对应 `子元件` 也会被克隆
 
 - 例如:
   - 克隆前:
-    - 父元件: "7618879811305562243-64940_2"
-    - 子元件: "7618879811305562243-64940_3"
+    - 父元件: "114514-64940_2"
+    - 子元件: "114514-64940_3"
   - 克隆后:
-    - 父元件: "7618879811305562243-64940_2#clone1"
-    - 子元件: "7618879811305562243-64940_3#clone1"
+    - 父元件: "114514-64940_2#clone1"
+    - 子元件: "114514-64940_3#clone1"
 
 ### 元件创建
 
 元件克隆需要使用 `CustomUI API` 中的函数: `CreateElement`
 
-> 详情查看 `MNDeclaration.d.lua` 文件
-
 创建元件的ID为 `UI的ID + _new + 次数`
 
-- 例如: "7618879811305562243-64940_new1"
+- 例如: "114514-64940_new1"
 
 修改父元件需要使用 `CustomUI API` 中的函数: `ChangeParent`
 
-> 详情查看 `MNDeclaration.d.lua` 文件
-
 ### 元件属性的设置
 
-> 元件属性需要使用 `CustomUI API`，详情查看 `MNDeclaration.d.lua` 文件
+> 元件属性需要使用 `CustomUI API`
 
 ## 日志输出
 
-- 日志的输出使用 `print()` 或 `printError()` 即可
+- 日志的输出使用 `print()` / `printError()` 即可
 
 ## Lua脚本的变量与触发器的变量
 
@@ -365,11 +356,11 @@ end)
 
 - 在触发器中有三种变量类别:
 
-    | 名称 | 说明 |
-    | :-: | :-: |
-    | 公共变量 | 所有玩家共享这个变量 |
-    | 私有变量 | 与玩家关联的、独立存储的个人数据 |
-    | 组件变量 | 组件自带的可配置参数 |
+  | 名称 | 说明 |
+  | :-: | :-: |
+  | 公共变量 | 所有玩家共享这个变量 |
+  | 私有变量 | 与玩家关联的、独立存储的个人数据 |
+  | 组件变量 | 组件自带的可配置参数 |
 
 - 读取触发器变量需要使用 `Data` / `Array` / `Table` / `Map` API
 - 获取触发器变量的ID: 在触发器界面获取
@@ -382,13 +373,13 @@ end)
 
 - 存储中的每个 `值` 都由一个 `键` 索引，可以往里面添加任意值。一个 `Key` 只能对应一个 `Value`，`Value` 类型可以是数值，可以是 `字符串` / `JSON字符串` 等。例如玩家相关数据可如下所示存取:
 
-    | KEY | VALUE |
-    | :-: | :-: |
-    | level | `50` |
-    | attr | `{ "flowers": 100, "level": 6, "vip": 3,"played_count": 13, "label": "超神"}` |
-    | coin | `78000` |
+  | KEY | VALUE |
+  | :-: | :-: |
+  | level | `50` |
+  | attr | `{ "flowers": 100, "level": 6, "vip": 3,"played_count": 13, "label": "超神"}` |
+  | coin | `78000` |
 
-> 通过相同的数据集名称和键（ `Key` ），就可以针对数据进行存/取操作
+> 通过相同的数据集名称和键，就可以针对数据进行存/取操作
 
 #### 排行榜数据
 
@@ -400,24 +391,24 @@ end)
 
 - 排行榜基本格式如下：
 
-    | KEY (playerUin) | VALUE |
-    | :-: | :-: |
-    | 100001 | 114514 |
-    | 100002 | 1919810 |
-    | 100003 | 123 |
+  | KEY (playerUin) | VALUE |
+  | :-: | :-: |
+  | 100001 | 114514 |
+  | 100002 | 1919810 |
+  | 100003 | 123 |
 
 ```mermaid
 graph LR
-    GameMap["游戏 / 地图"] --> RawData["普通数据集 (表)"]
-    GameMap --> OrderedData["有序数据集 (排行榜)"]
+  GameMap["游戏 / 地图"] --> RawData["普通数据集 (表)"]
+  GameMap --> OrderedData["有序数据集 (排行榜)"]
 
-    RawData --> D1["玩家等级整数集"]
-    RawData --> D2["玩家属性字符串数据"]
-    RawData --> More1["..."]
-    
-    OrderedData --> D3["玩家游戏金币排行榜"]
-    OrderedData --> D4["玩家战力排行榜"]
-    OrderedData --> More2["..."]
+  RawData --> D1["玩家等级整数集"]
+  RawData --> D2["玩家属性字符串数据"]
+  RawData --> More1["..."]
+  
+  OrderedData --> D3["玩家游戏金币排行榜"]
+  OrderedData --> D4["玩家战力排行榜"]
+  OrderedData --> More2["..."]
 ```
 
 #### 数据保存的生命周期
@@ -433,17 +424,14 @@ graph LR
 
 - 流程:
 
-    ```mermaid
-    graph LR
-        A["开发者工具"] --> B["触发器"] --> C["变量库"] --> D["全局变量"]
-    ```
+  ```mermaid
+  graph LR
+    A["开发者工具"] --> B["触发器"] --> C["变量库"] --> D["全局变量"]
+  ```
 
 - 类型:
-
-    | 类型 |
-    | :-: |
-    | 排行榜 |
-    | K/V 表 |
+  - 排行榜
+  - K/V 表
 
 - 针对排行榜及表进行 `I/O` 操作，请参考 `Map` API
 
@@ -493,7 +481,6 @@ graph LR
 ##### callback函数示例说明
 
 - UpdateValueAndCallback(...)
-
   - 参数及类型:
 
     | 参数名 | 类型 | PS |
@@ -543,10 +530,10 @@ graph LR
 #### 普通KV存储 VS 全局KV数据并发读写
 
 - 普通:
-    > `普通KV` 存储 `Set` 操作时，执行速度 **更快一些**。直接保存 `Key` 对应的数据，只会有写入时的每分钟请求次数限制。但是在 **多服同时** 对 **同一个** `Key` 进行写数据的时候 **容易造成数据不一致**
+  > `普通KV` 存储 `Set` 操作时，执行速度 **更快一些**。直接保存 `Key` 对应的数据，只会有写入时的每分钟请求次数限制。但是在 **多服同时** 对 **同一个** `Key` 进行写数据的时候 **容易造成数据不一致**
 
 - 全局:
-    > `全局KV` 数据并发读写 ( `UpdateValueAndCallback(...)` ) 执行更慢，因为修改之前会读取 **最新** 的值，然后尝试写入。因为该接口同时受到 `I/O` 的每分钟请求次数 **限制**。另外，它 **第一次操作** 某个 `Key` 时，因为数据 **不存在** 会返回 **空值**，此时依然是在 **callback里面处理**，并提交首次有效数据给底层
+  > `全局KV` 数据并发读写 ( `UpdateValueAndCallback(...)` ) 执行更慢，因为修改之前会读取 **最新** 的值，然后尝试写入。因为该接口同时受到 `I/O` 的每分钟请求次数 **限制**。另外，它 **第一次操作** 某个 `Key` 时，因为数据 **不存在** 会返回 **空值**，此时依然是在 **callback里面处理**，并提交首次有效数据给底层
 
 #### 注意事项
 
@@ -562,51 +549,51 @@ graph LR
 
 - Q: 执行Set操作，出现请求失败
 - A：
-    1. 避免出现服务器 **CD限制**，相同 `Key` 的 `Set操作` **需要** 间隔 `>=6s`，避免同一秒多次 `Set` 相同 `Key` 的情况，导致数据没有保存成功
-    2. 避免 **无变化** 的数据，仍不停去执行 `Set` 操作。给需要保存的数据设置needSave之类的布尔值标签，数据变化了设置为 `true`，定时保存中根据 `needSave` 为 `true`时候发送 `Set请求` 保存，否则没必要发送到服务器
-    3. 避免绑定玩家 行走/碰撞等 高频行为而触发实时读写操作，否则一个玩家有可能一秒内触发数 **百个** 数据读写请求
-    4. 避免触发每分钟请求数 `QPM限制`
-    5. 妥善处理 `Set` 或 `Get` 返回失败的情况，可以创建请求失败列，合理安排时机重试几次，一旦成功就从失败列表移除
+  1. 避免出现服务器 **CD限制**，相同 `Key` 的 `Set操作` **需要** 间隔 `>=6s`，避免同一秒多次 `Set` 相同 `Key` 的情况，导致数据没有保存成功
+  2. 避免 **无变化** 的数据，仍不停去执行 `Set` 操作。给需要保存的数据设置needSave之类的布尔值标签，数据变化了设置为 `true`，定时保存中根据 `needSave` 为 `true`时候发送 `Set请求` 保存，否则没必要发送到服务器
+  3. 避免绑定玩家 行走/碰撞等 高频行为而触发实时读写操作，否则一个玩家有可能一秒内触发数 **百个** 数据读写请求
+  4. 避免触发每分钟请求数 `QPM限制`
+  5. 妥善处理 `Set` 或 `Get` 返回失败的情况，可以创建请求失败列，合理安排时机重试几次，一旦成功就从失败列表移除
 
 - Q: 一个游戏设置多个排行榜
 - A:
-    1. 一个游戏 **可以** 包括多个维度的排行榜，如：`得分排行榜` / `击杀Boss次数排行榜` / `速度排行榜` / `时长排行榜` / `技能点数排行榜` 等
-    2. 如果游戏里有多个排行榜，每个榜的刷新时间 **要错开**
+  1. 一个游戏 **可以** 包括多个维度的排行榜，如：`得分排行榜` / `击杀Boss次数排行榜` / `速度排行榜` / `时长排行榜` / `技能点数排行榜` 等
+  2. 如果游戏里有多个排行榜，每个榜的刷新时间 **要错开**
 
 - Q: 排行榜最多可以设置多少位排名？
 - A:
-    1. 单个排行榜最多可存储1万名
-    2. 建议排行榜展示名次最好不要超过 `TOP30`，**最多** 展示前 `100` 名。展示的名次越多，参与排行的人数越多，越 **影响性能**，导致响应变慢；设计的时候需要做合理的取舍
+  1. 单个排行榜最多可存储1万名
+  2. 建议排行榜展示名次最好不要超过 `TOP30`，**最多** 展示前 `100` 名。展示的名次越多，参与排行的人数越多，越 **影响性能**，导致响应变慢；设计的时候需要做合理的取舍
 
 - Q: 如何合理的进行 `Set` / `Get` 操作?
 - A:
-    1. 避免零值/初始值参与排行
-    2. 避免低于排行榜末位的数据进行 `Set`
-    3. 多维度排行数值可序列化为 `JSON` 存入单个 `K/V`，避免多次拉取
-    4. 多个排行榜可合并为一个 `JSON` 存入 `K/V表`，`Key` 为 `玩家Uin`，`Value` 为 `JSON`:
+  1. 避免零值/初始值参与排行
+  2. 避免低于排行榜末位的数据进行 `Set`
+  3. 多维度排行数值可序列化为 `JSON` 存入单个 `K/V`，避免多次拉取
+  4. 多个排行榜可合并为一个 `JSON` 存入 `K/V表`，`Key` 为 `玩家Uin`，`Value` 为 `JSON`:
 
-        ```lua
-        {"exp": 888999,"lvl": 7,"kmonster": 39}
-        ```
+      ```lua
+      {"exp": 888999,"lvl": 7,"kmonster": 39}
+      ```
 
-    5. 区分模块配置与需持久化的状态数据
+  5. 区分模块配置与需持久化的状态数据
 
 - Q: 配置文件建议不设置到数据储存中
 - A:
-  - 通用配置可以放 `脚本` / 一个 `全局表` 里，没有必要存储在 `K/V表` 里
-  - 例:
+- 通用配置可以放 `脚本` / 一个 `全局表` 里，没有必要存储在 `K/V表` 里
+- 例:
 
-    ```lua
-    "FindMaHongJun_5": { "questName": "FindMaHongJun_5", "questProg": 0, "questProgAll": 1, "questSta": "no" }
-    ```
+  ```lua
+  "FindMaHongJun_5": { "questName": "FindMaHongJun_5", "questProg": 0, "questProgAll": 1, "questSta": "no" }
+  ```
 
-  - 这种可以简化，假设TaskID:10086表示该任务，那么:
+- 这种可以简化，假设TaskID:10086表示该任务，那么:
 
-    ```lua
-    "10086": [0, 1, 0]
-    ```
+  ```lua
+  "10086": [0, 1, 0]
+  ```
 
-    - 数组 `第1个元素` 表示 `questProg`，`第2个元素` 表示 `questProgAll`，`第3个元素` 表示 `questSta`
+  - 数组 `第1个元素` 表示 `questProg`，`第2个元素` 表示 `questProgAll`，`第3个元素` 表示 `questSta`
 
 ### 二维表
 
@@ -757,31 +744,28 @@ Script.propertys = {
     maxValue = 1000,
     format = "%.0f米",
     style = ComponentUIStyle.NumberSlider,
-    tips = "属性作用提示",
     stride = 1,
+    tip = "tip",
   },
   stringAttr = {
     type = Mini.String,
-    default = "您好！",
+    default = "您好",
     displayName = "字符串",
     sort = 2,
     multiLine = false,
     maxLength = 10,
-    tips = "属性作用提示",
   },
   boolAttr = {
     type = Mini.Bool,
     default = true,
     displayName = "布尔值",
     sort = 3,
-    tips = "属性作用提示",
   },
   colorAttr = {
     type = Mini.Color,
     default = 0xFFFFFF,
     displayName = "颜色",
     sort = 4,
-    tips = "属性作用提示",
   },
   vec3Attr = {
     type = Mini.Vec3,
@@ -792,63 +776,54 @@ Script.propertys = {
     format = "%.2f",
     minValue = -10000,
     maxValue = 10000,
-    tips = "属性作用提示",
   },
   mobTypeAttr = {
     type = Mini.MobType,
     default = 3400,
     displayName = "生物类型",
     sort = 6,
-    tips = "属性作用提示",
   },
   blockAttr = {
     type = Mini.Block,
     default = 100,
     displayName = "方块类型",
     sort = 7,
-    tips = "属性作用提示",
   },
   itemAttr = {
     type = Mini.Item,
     default = 100,
     displayName = "道具类型",
     sort = 8,
-    tips = "属性作用提示",
   },
   effectAttr = {
     type = Mini.Effect,
     default = 1051,
     displayName = "特效类型",
     sort = 9,
-    tips = "属性作用提示",
   },
   pictureAttr = {
     type = Mini.Picture,
     default = "0_10001",
     displayName = "图像类型",
     sort = 10,
-    tips = "属性作用提示",
   },
   buffAttr = {
     type = Mini.Buff,
     default = 6002,
     displayName = "状态类型",
     sort = 11,
-    tips = "属性作用提示",
   },
   soundAttr = {
     type = Mini.Sound,
     default = 6002,
     displayName = "音效类型",
     sort = 12,
-    tips = "属性作用提示",
   },
   modelAttr = {
     type = Mini.Model,
     default = "mob_1145",
     displayName = "模型类型",
     sort = 13,
-    tips = "属性作用提示",
   },
 }
 ```
@@ -873,7 +848,7 @@ Script.openFnArgs = {
     params = {Mini.Number, Mini.Number}, -- 参数列表类型
   },
 
-  -- 如果只想让其他的脚本组件访问的话，可以这样配置
+  -- 如果只想让其他的脚本组件访问的话, 可以这样配置
   func = true
 }
 
