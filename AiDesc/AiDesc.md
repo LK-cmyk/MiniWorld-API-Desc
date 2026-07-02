@@ -512,13 +512,9 @@ graph LR
       value = value or {}
       value.updatevalue = 999
       return json.encode(value) -- 需要返回更新设置的最终值 并且序列化结构
-    elseif code == ErrorCode.KV_UPDATE_GET then
-      print("获取到的当前最新的值:", value)
-    elseif code == ErrorCode.OK then
-      print("更新完成")
-    else
-      print("更新失败")
-    end
+    elseif code == ErrorCode.KV_UPDATE_GET then print("获取到的当前最新的值:", value)
+    elseif code == ErrorCode.OK then print("更新完成")
+    else print("更新失败") end
   end
 
   local result = Data.Map:UpdateValueAndCallback(GlobalKV, nil, "GlobalKV_Key2", GlobalKVCallback)
