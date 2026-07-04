@@ -82,14 +82,18 @@ def merge_lua_files(folder_path: str, output_file: str) -> None:
                 0 if content.endswith("\n") else 1
             )  # 统计行数（避免 split 创建临时列表）
 
-            # 去除末尾换行/空白，保证 join 后每个文件之间恰好一个换行
-            merged_parts.append(content.rstrip("\n\r"))
+            if not merged_parts:
+                merged_parts.append(content)
+            else:
+                if not merged_parts[-1].endswith(("\n", "\r")):
+                    merged_parts.append("\n")
+                merged_parts.append(content)
 
         except Exception as e:
             print(f"错误：处理文件 {filename} 时出错 - {e}")
 
     try:
-        result: str = "\n".join(merged_parts)  # 文件之间恰好一个换行
+        result: str = "".join(merged_parts)  # 按文件原始换行情况进行拼接
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(result)
 

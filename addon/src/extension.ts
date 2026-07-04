@@ -44,7 +44,6 @@ function removeDeclarations(context: vscode.ExtensionContext): void {
 
     const index = library.indexOf(typesDir);
     if (index === -1) {
-        vscode.window.showInformationMessage('声明路径不在列表中，无需移除');
         return;
     }
 

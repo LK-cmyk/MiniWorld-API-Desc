@@ -5888,7 +5888,6 @@ function Graphics:CreateBrushByPos(pos, dim, color, showUin, iType, worldId) ret
 --- objId number 图文实例ID
 --- boolean 操作是否成功
 function Graphics:RemoveGraphicsByGraphicsID(objId) return true end
-
 --- Timeline
 --- 剧情动画模块管理接口 Timeline
 local Timeline = {}
