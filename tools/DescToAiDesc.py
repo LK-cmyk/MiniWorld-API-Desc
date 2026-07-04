@@ -24,13 +24,13 @@ def strip_annotations(content: str) -> str:
     Returns:
         处理后的文件内容
     """
-    # 第一步: 仅剔除 @tag 本身 (如 @return → 空, 保留 table)
+    # 仅剔除 @tag 本身 (如 @return → 空, 保留 table)
     content = ANNOTATION_TAG_RE.sub(r"\1", content)
-    # 第二步: 移除 "---" 行中残留的 @ 符号 (描述文字前的 @ 标记)
+    # 移除 "---" 行中残留的 @ 符号 (描述文字前的 @ 标记)
     content = REMOVE_AT_SIGN_RE.sub(lambda m: m.group(0).replace("@", ""), content)
-    # 第三步: 移除无内容的注释行
+    # 移除无内容的注释行
     content = EMPTY_COMMENT_LINE_RE.sub("", content)
-    # 第四步: 处理文件末尾可能残留的无内容注释行 (无换行符的情况)
+    # 处理文件末尾可能残留的无内容注释行 (无换行符的情况)
     content = re.sub(r"^[ \t]*---[ \t]*$", "", content, flags=re.MULTILINE)
     return content
 
@@ -40,9 +40,7 @@ def main() -> None:
     # 读取输入文件
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         content: str = f.read()
-
-    # 移除注释中的 @annotation
-    result: str = strip_annotations(content)
+    result: str = strip_annotations(content)  # 移除注释中的 @annotation
 
     # 写入输出文件
     os.makedirs(OUTPUT_DIR, exist_ok=True)

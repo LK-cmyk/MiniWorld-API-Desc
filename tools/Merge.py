@@ -26,7 +26,7 @@ ORDER_DEFINITION: list[str] = [  # 自定义顺序定义
     "MNChat",  # 聊天
     "MNCustomUI",  # 自定义UI
     "MNGraphics",  # 图形
-    "MNTimeLine",  # 剧情动画
+    "MNTimeline",  # 剧情动画
 ]
 
 
