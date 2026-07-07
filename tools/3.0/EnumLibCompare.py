@@ -6,7 +6,7 @@ import re
 from bs4 import BeautifulSoup, Tag
 
 ENUM_LIB_URL: str = "https://dev-wiki.mini1.cn/ugc-wiki/apis/global.html"
-ENUM_LIB_FILE_PATH: str = os.getcwd() + r"\multiple\MNEnumLib.d.lua"
+ENUM_LIB_FILE_PATH: str = os.getcwd() + r"\multiple\\3.0\MNEnumLib.d.lua"
 CLASS_RE: str = r"--- @class"
 FIELD_RE: str = r"--- @field"
 MINI: list[str] = [
@@ -114,9 +114,7 @@ def analyze_web(url: str) -> dict[str, list[str]]:
     return out_dict
 
 
-def compare_enums(
-    local_enums: dict[str, list[str]], web_enums: dict[str, list[str]]
-) -> list[str]:
+def compare_enums(local_enums: dict[str, list[str]], web_enums: dict[str, list[str]]) -> list[str]:
     """比较本地枚举定义和网页枚举定义之间的差异
     Args:
         local_enums (dict[str, list[str]]): 本地文件中的枚举定义

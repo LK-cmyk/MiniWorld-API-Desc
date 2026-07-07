@@ -109,8 +109,10 @@ def main():
     Returns:
         None: 无返回值
     """
-    folder_path: str = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, "multiple"))  # 输入文件夹路径
-    output_file: str = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, "merged.lua"))  # 输出文件路径
+    folder_path: str = os.path.abspath(
+        os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "multiple", "3.0")
+    )  # 输入文件夹路径
+    output_file: str = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "merged.3.0.lua"))  # 输出文件路径
 
     if not os.path.exists(folder_path):
         print(f"错误：文件夹 '{folder_path}' 不存在")

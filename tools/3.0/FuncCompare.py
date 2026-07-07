@@ -29,13 +29,9 @@ FUNC_URL: list[str] = [  # 函数链接
     "table.html",
     "map.html",
 ]
-FUNC_FILES_PATH: str = os.path.join(os.getcwd(), "multiple")  # 本地声明文件所在目录
-FUNCTION_RE: re.Pattern[str] = re.compile(
-    r"^function\s+([A-Za-z_][\w\.:]*)"
-)  # 匹配函数声明行，捕获函数名（支持冒号和点分隔的形式）
-PAGE_FUNC_RE: re.Pattern[str] = re.compile(
-    r'##\s*([A-Za-z_]\w*)Permalink to "([A-Za-z_]\w*)"'
-)  # 匹配函数标题行，捕获函数名（可能包含 "Permalink to" 的格式）
+FUNC_FILES_PATH: str = os.path.join(os.getcwd(), "multiple", "3.0")  # 本地声明文件所在目录
+FUNCTION_RE: re.Pattern[str] = re.compile(r"^function\s+([A-Za-z_][\w\.:]*)")  # 匹配函数声明行，捕获函数名
+PAGE_FUNC_RE: re.Pattern[str] = re.compile(r'##\s*([A-Za-z_]\w*)Permalink to "([A-Za-z_]\w*)"')  # 匹配函数标题行
 
 
 def init() -> None:

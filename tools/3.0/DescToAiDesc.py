@@ -2,8 +2,8 @@ import os
 import re
 
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
-INPUT_FILE: str = os.path.join(SCRIPT_DIR, "..", "MNDeclaration.d.lua")
-OUTPUT_DIR: str = os.path.join(SCRIPT_DIR, "..", "AiDesc")
+INPUT_FILE: str = os.path.join(SCRIPT_DIR, "..", "..", "MNDeclaration.d.lua")
+OUTPUT_DIR: str = os.path.join(SCRIPT_DIR, "..", "..", "AiDesc")
 OUTPUT_FILE: str = os.path.join(OUTPUT_DIR, "MNAiDesc.txt")
 
 # 匹配 "--- @" 开头的注释行，仅剔除 @tag 本身（如 @return、@param），保留后方类型和描述

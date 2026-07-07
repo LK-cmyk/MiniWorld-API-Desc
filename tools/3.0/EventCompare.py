@@ -4,19 +4,10 @@ import io
 import os
 import re
 
-TRIGGER_EVENT_URL: str = (
-    "https://dev-wiki.mini1.cn/ugc-wiki/apis/triggerevent.html"  # 触发器事件定义页面 URL
-)
-COMPONENT_EVENT_URL: str = (
-    "https://dev-wiki.mini1.cn/ugc-wiki/apis/componentevent.html"  # 组件事件定义页面 URL
-)
-LOCAL_FILE_PATH: str = os.path.join(
-    os.getcwd(), "multiple", "MNEvent.d.lua"  # 本地事件声明文件路径
-)
-
-# 不希望报差异的字段
-IGNORE_WEB_FIELDS: set[str] = {"eventworldid"}
-
+TRIGGER_EVENT_URL: str = "https://dev-wiki.mini1.cn/ugc-wiki/apis/triggerevent.html"  # 触发器事件定义页面 URL
+COMPONENT_EVENT_URL: str = "https://dev-wiki.mini1.cn/ugc-wiki/apis/componentevent.html"  # 组件事件定义页面 URL
+LOCAL_FILE_PATH: str = os.path.join(os.getcwd(), "multiple", "3.0", "MNEvent.d.lua")  # 本地事件声明文件路径
+IGNORE_WEB_FIELDS: set[str] = {"eventworldid"}  # 不希望报差异的字段
 CLASS_RE: str = r"--- @class"
 FIELD_RE: str = r"--- @field"
 
@@ -73,9 +64,7 @@ def analyze_web(url: str) -> dict[str, list[str]]:
 
     # 更稳健的解析：直接在页面文本中查找 TriggerEvent/ObjectEvent/CurEventParam 的条目
     # 只匹配 ASCII 字母/数字/下划线的事件名，避免捕获中文描述
-    pattern: re.Pattern = re.compile(
-        r"(TriggerEvent|ObjectEvent|CurEventParam)\.([A-Za-z0-9_]+)"
-    )
+    pattern: re.Pattern = re.compile(r"(TriggerEvent|ObjectEvent|CurEventParam)\.([A-Za-z0-9_]+)")
     matches: list[tuple[str, str]] = pattern.findall(text)
     if not matches:
         return out_dict
