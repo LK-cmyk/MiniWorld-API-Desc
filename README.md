@@ -3,147 +3,197 @@
 ![GitHub stars](https://img.shields.io/github/stars/LK-cmyk/MiniWorld-API-Desc?style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/LK-cmyk/MiniWorld-API-Desc?style=flat)
 ![License](https://img.shields.io/github/license/LK-cmyk/MiniWorld-API-Desc)
-![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![VS Code](https://img.shields.io/badge/VS%20Code-^1.125.0-blue)
+![Lua](https://img.shields.io/badge/Lua-5.1%2B-yellow)
 
-MiniWorld-API-Desc 是一个面向《迷你世界》UGC 3.0 Lua 开发的 API 声明库与辅助工具集。它提供模块化声明文件、代码片段模板、VS Code 扩展以及一组脚本工具，帮助你在 VS Code 中获得更好的 Lua 语法提示、补全和类型提示。
+《迷你世界》UGC Lua 开发的 API 声明库、代码补全插件与辅助工具集。
 
-## 适用范围
+提供完整的 Lua 类型声明文件，配合 VS Code 的 [Lua 语言服务（sumneko.lua）](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) 获得智能补全、类型提示和参数文档；同时提供事件补全插件、代码片段模板和 API 对比脚本，提升 UGC 组件开发效率。
 
-- 游戏版本：v1.56+
-- Lua 版本：v5.1+
-- UGC 开发套件：v3.0
-- 依赖环境：Python 3.10+，Node.js（用于构建插件）
+## 快速开始
 
-## 项目特点
+### 前置依赖
 
-- 提供完整的 Lua API 声明文件，支持直接用于 VS Code 的 Lua 语言服务
-- 提供单文件和多文件两种接入方式
-- 预置常用代码片段，提升开发效率
-- 配套 VS Code 扩展，可自动添加声明路径
-- 附带对比与合并脚本，便于跟进官方 API 更新
+- [VS Code](https://code.visualstudio.com/)
+- [Lua 语言服务插件（sumneko.lua）](https://marketplace.visualstudio.com/items?itemName=sumneko.lua)
+- Python 3.10+（仅使用工具脚本时需要）
+- Node.js（仅自行构建扩展时需要）
 
-## 目录结构
+### 安装扩展
 
-```text
+从 [GitHub Releases](https://github.com/LK-cmyk/MiniWorld-API-Desc/releases) 下载 `.vsix` 文件，然后在 VS Code 中：
+
+1. 打开扩展面板（`Ctrl+Shift+X`）
+2. 点击右上角 `···` → `Install from VSIX...`
+3. 选择下载的 `.vsix` 文件
+
+安装后按下 `Ctrl+Shift+P`，执行 **MiniWorld API Description: 添加 MiniWorld UGC 3.0 声明** 或 **MiniWorld API Description: 添加 MiniWorld UGC 2.0 声明** 命令即可启用类型提示。
+
+### 首次使用流程
+
+打开任意 `.lua` 文件时，插件会自动检测声明路径是否已配置。若未配置，弹出提示窗口：
+
+| 选项 | 行为 |
+| :-: | :-: |
+| **不添加声明** | 4 小时内不再提示 |
+| **永不提醒** | 永久不再提示 |
+| **添加 2.0 / 3.0 声明** | 弹出范围选择，将声明路径写入指定作用域 |
+
+2.0 与 3.0 声明为互斥关系，不可同时共存。
+
+---
+
+## 插件命令
+
+按下 `Ctrl+Shift+P` 打开命令面板，输入关键词 `MiniWorld` 即可找到以下命令：
+
+| 命令 | 说明 |
+| :-: | :-: |
+| `MiniWorld API Description: 添加 MiniWorld UGC 2.0 声明` | 将 2.0 声明目录添加到 `Lua.workspace.library` |
+| `MiniWorld API Description: 移除 MiniWorld UGC 2.0 声明` | 从配置中移除 2.0 声明目录 |
+| `MiniWorld API Description: 添加 MiniWorld UGC 3.0 声明` | 将 3.0 声明目录添加到 `Lua.workspace.library` |
+| `MiniWorld API Description: 移除 MiniWorld UGC 3.0 声明` | 从配置中移除 3.0 声明目录 |
+
+执行添加/移除命令时，会弹出范围选择窗口：
+
+| 范围 | 说明 |
+| :-: | :-: |
+| **全局 (Global)** | 写入用户设置，所有工作区生效 |
+| **工作区 (Workspace)** | 写入 `.vscode/settings.json`，仅当前工作区生效 |
+| **工作区文件夹 (WorkspaceFolder)** | 写入工作区文件夹设置 |
+
+插件会根据当前各范围的配置状态自动筛选可用选项：添加时仅显示**未包含**该声明的范围，移除时仅显示**已包含**该声明的范围。
+
+---
+
+## 项目结构
+
+```bash
 MiniWorld-API-Desc/
-├── .gitignore  # Git 忽略文件
-├── LICENSE  # 开源协议
-├── pyproject.toml  # Python 依赖管理文件
-├── README.md  # 项目说明文档
-├── MNDeclaration.d.lua  # 全集成声明文件，适合直接导入项目
-├── .vscodeeignore  # VS Code 忽略文件
-├── eslint.config.mjs  # ESLint 配置文件
-├── pcakage.json  # NPM 配置文件
-├── package-lock.json  # NPM 依赖管理文件
-├── pack.ps1  # 打包脚本
-├── tsconfig.json  # TypeScript 配置文件
-├── img/  # 图片存放目录
-│   └── ......  # 图片
-├── AiDesc/  # AI 描述内容，便于喂给智能助手使用
-│   ├── MNAiDesc.txt  # API 描述文件
-│   └── AiDesc.md  # UGC 描述文件
-├── multiple/  # 按模块拆分的声明文件，适合只使用部分模块时加载
-│   └── ......  # 各模块声明文件
-├── template/  # VS Code Lua 代码片段模板存放目录
-│   └── lua.code-snippets  # 代码片段文件
-├── addon/  # VS Code 补全插件
-│   ├── .vscode-test.mjs  # VS Code 测试配置
-│   ├── types/  # 补全文件
-│   └── src/  # 补全插件源码
-└── tools/  # 辅助脚本和比较工具
-    ├── DescToAiDesc.py  # 生成 API 描述文件工具
-    ├── EnumLibCompare.py  # 枚举比较工具
-    ├── EventCompare.py  # 事件比较工具
-    ├── FuncCompare.py  # 函数比较工具
-    └── Merge.py  # 声明文件合并工具
+├── MNDeclaration.d.lua          # 全集成声明文件（单文件接入）
+├── package.json                 # VS Code 扩展清单
+├── tsconfig.json                # TypeScript 编译配置
+├── eslint.config.mjs            # ESLint 配置
+├── pack.ps1                     # 编译打包脚本
+├── .vscodeignore                # 扩展发布忽略规则
+│
+├── addon/                       # VS Code 扩展源码
+│   ├── src/
+│   │   └── extension.ts         # 插件主逻辑
+│   └── types/
+│       ├── 2.0/
+│       │   ├── MNDeclaration.d.lua   # 2.0 声明
+│       │   └── MNEvent.d.json        # 2.0 事件定义（供补全使用）
+│       └── 3.0/
+│           └── MNDeclaration.d.lua   # 3.0 声明
+│
+├── multiple/                    # 按模块拆分的声明文件
+│   ├── 2.0/                     # 28 个模块文件
+│   │   ├── MNGame.d.lua
+│   │   ├── MNPlayer.d.lua
+│   │   ├── MNBlock.d.lua
+│   │   └── ...
+│   └── 3.0/                     # 25 个模块文件
+│       ├── MNGlobalFunc.d.lua
+│       ├── MNComponent.d.lua
+│       ├── MNEvent.d.lua
+│       └── ...
+│
+├── template/
+│   └── lua.code-snippets        # Lua 代码片段（6 个常用模板）
+│
+├── AiDesc/                      # AI 辅助描述文件
+│   └── 3.0/
+│       ├── AiDesc.md            # UGC 3.0 开发指南（面向 AI）
+│       └── MNAiDesc.txt         # API 纯文本描述
+│
+├── tools/                       # Python 工具脚本
+│   ├── 2.0/                     # 2.0 工具集
+│   │   ├── Merge.py
+│   │   ├── FuncCompare.py
+│   │   ├── EventCompare.py
+│   │   └── DescToAiDesc.py
+│   └── 3.0/                     # 3.0 工具集（含枚举比较）
+│       ├── Merge.py
+│       ├── FuncCompare.py
+│       ├── EventCompare.py
+│       ├── EnumLibCompare.py
+│       └── DescToAiDesc.py
+│
+└── img/
+    └── Logo-128px.png           # 插件图标
 ```
 
-## 安装与使用
-
-### 方案1: 使用声明插件
-
-```mermaid
-flowchart TD
-    A[打开 GitHub 仓库 Release 页面] --> B[下载 .vsix 插件文件]
-    B --> C[在 VS Code 中打开扩展面板]
-    C --> D[点击右上角“...”选择 “Install from VSIX”]
-    D --> E[选择已下载的 .vsix 文件并安装]
-    E --> F[安装完成后，在 VS Code 中按下 Ctrl + Shift + P]
-    F --> G[输入框中键入 “MiniWorld: 添加 Lua 声明路径”]
-    G --> H[回车确认]
-    H --> I[完成操作]
-```
-
-### 方案2: 使用声明文件
-
-```mermaid
-sequenceDiagram
-    participant U as 用户
-    participant V as VS Code
-    participant L as Lua 语言服务器
-
-    Note over U: 准备声明文件
-    U->>U: 复制 MNDeclaration.d.lua 或 multiple/ 到项目目录
-
-    Note over U,V: 配置语言服务
-    U->>V: 打开 .vscode/settings.json
-
-    alt 使用单文件声明
-        U->>V: 添加 "./MNDeclaration.d.lua" 到 .vscode/settings.json
-    else 使用多文件声明
-        U->>V: 添加 "./multiple" 到 .vscode/settings.json
-    end
-
-    U->>V: 保存 settings.json
-    U->>V: 重启窗口或重新加载
-    V->>L: 重新加载工作区配置
-    L-->>V: 语言服务已生效
-
-    Note over U,V: 配置代码片段
-    U->>U: 复制 lua.code-snippets 文件
-    U->>V: 放入 .vscode/ 目录
-    V-->>U: 代码片段已可用
-```
-
-### 构建插件
-
-如果你想自行构建这个 VS Code 扩展插件，可以在仓库根目录执行：
-
-```powershell
-./pack.ps1
-```
-
-该脚本会依次完成以下步骤：
-
-- 安装或更新 npm 依赖
-- 编译 TypeScript 源码
-- 运行 ESLint 检查
-- 打包生成 VS Code 插件安装包 `.vsix`
-
-如果只想编译而不打包，可以使用：
-
-```powershell
-./pack.ps1 -CompileOnly
-```
+---
 
 ## 工具脚本
 
-在仓库根目录执行下列命令：
+在仓库根目录运行以下命令（需 Python 3.10+，依赖见 `pyproject.toml`）：
 
-| 命令 | 说明 |
-| :-- | :-- |
-| `python tools/Merge.py` | 将 [multiple](multiple) 下的声明文件按预定义顺序合并为根目录下的 `merged.lua` |
-| `python tools/FuncCompare.py` | 将本地声明函数与在线文档中的函数进行对比 |
-| `python tools/EnumLibCompare.py` | 对比本地枚举声明与在线枚举文档 |
-| `python tools/EventCompare.py` | 对比本地事件声明与在线事件文档 |
-| `python tools/DescToAiDesc.py` | 生成可用于 AI 的说明文本 |
+```bash
+# 声明合并
+python tools/3.0/Merge.py              # 合并 multiple/3.0/ 为 merged.3.0.lua
+python tools/2.0/Merge.py              # 合并 multiple/2.0/ 为 merged.2.0.lua
+
+# API 对比（对比本地声明与官方在线文档）
+python tools/3.0/FuncCompare.py        # 3.0 函数对比
+python tools/3.0/EventCompare.py       # 3.0 事件对比
+python tools/3.0/EnumLibCompare.py     # 3.0 枚举对比
+python tools/2.0/FuncCompare.py        # 2.0 函数对比
+python tools/2.0/EventCompare.py       # 2.0 事件对比
+
+# AI 描述生成
+python tools/3.0/DescToAiDesc.py       # 生成 AiDesc/3.0/MNAiDesc.txt
+python tools/2.0/DescToAiDesc.py       # 生成 AiDesc/2.0/MNAiDesc.txt
+```
+
+---
 
 ## AI 使用建议
 
-可以将 [MNDeclaration.d.lua](MNDeclaration.d.lua)、[AiDesc/AiDesc.md](AiDesc/AiDesc.md) 或 [AiDesc/MNAiDesc.txt](AiDesc/MNAiDesc.txt) 的内容一起提供给 AI，以获得更准确的代码建议。
+将以下文件内容提供给 AI 助手，可帮助其理解 UGC 3.0 API：
+
+- **[MNDeclaration.d.lua](./MNDeclaration.d.lua)** — 完整类型声明，可让 AI 获得准确的 API 签名和参数类型
+- **[AiDesc/3.0/AiDesc.md](./AiDesc/3.0/AiDesc.md)** — UGC 3.0 开发指南，包含脚本规范、事件用法、坐标系、天空盒等开发要点
+- **[AiDesc/3.0/MNAiDesc.txt](./AiDesc/3.0/MNAiDesc.txt)** — 纯文本格式的 API 描述，不含类型注解标记，适合对标记敏感的场景
+
+---
+
+## 自行构建
+
+需要 Node.js 环境。在项目根目录执行：
+
+```powershell
+./pack.ps1 # 完整打包
+./pack.ps1 -CompileOnly # 仅编译，不打包
+./pack.ps1 -SkipLint # 跳过 lint 检查
+./pack.ps1 -SkipInstall # 跳过 npm install
+./pack.ps1 -Clean # 仅清除编译输出
+```
+
+打包完成后会在根目录生成 `.vsix` 文件，可直接安装到 VS Code。
+
+---
+
+## 适用范围
+
+| 项目 | 版本 |
+| :-: | :-: |
+| 《迷你世界》游戏 | v1.56+ |
+| UGC 开发套件 | 3.0 |
+| Python | 3.10+ |
+| VS Code | ^1.125.0 |
+
+---
 
 ## 注意事项
 
-- 该仓库声明文件、模板与扩展仅面向 UGC 3.0
+- 本仓库声明文件、模板与扩展仅面向 **UGC 3.0**
 - 部分接口可能与实际游戏版本存在差异，请以游戏实际行为为准
-- 如发现问题，欢迎提交 Issues 或 Fork 后发起 Pull Request
+- 如发现问题或需要补充 API，欢迎提交 [Issue](https://github.com/LK-cmyk/MiniWorld-API-Desc/issues) 或发起 Pull Request
+
+---
+
+## 许可
+
+[MIT](./LICENSE)
