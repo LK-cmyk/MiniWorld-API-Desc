@@ -8,6 +8,9 @@
 
 《迷你世界》UGC Lua 开发的 API 声明库、代码补全插件与辅助工具集。
 
+> **不再推荐使用声明文件来进行声明，推荐使用声明插件。**  
+> 安装本扩展后，通过 `Ctrl+Shift+P` 执行相应命令即可自动配置声明路径，无需手动操作。
+
 提供完整的 Lua 类型声明文件，配合 VS Code 的 [Lua 语言服务（sumneko.lua）](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) 获得智能补全、类型提示和参数文档；同时提供事件补全插件、代码片段模板和 API 对比脚本，提升 UGC 组件开发效率。
 
 ## 快速开始
@@ -24,7 +27,7 @@
 从 [GitHub Releases](https://github.com/LK-cmyk/MiniWorld-API-Desc/releases) 下载 `.vsix` 文件，然后在 VS Code 中：
 
 1. 打开扩展面板（`Ctrl+Shift+X`）
-2. 点击右上角 `···` → `Install from VSIX...`
+2. 点击右上角 `···` → `Install from VSIX...` (`从 VSIX 安装...`)
 3. 选择下载的 `.vsix` 文件
 
 安装后按下 `Ctrl+Shift+P`，执行 **MiniWorld API Description: 添加 MiniWorld UGC 3.0 声明** 或 **MiniWorld API Description: 添加 MiniWorld UGC 2.0 声明** 命令即可启用类型提示。
@@ -70,56 +73,34 @@
 
 ```bash
 MiniWorld-API-Desc/
-├── MNDeclaration.d.lua          # 全集成声明文件（单文件接入）
 ├── package.json                 # VS Code 扩展清单
 ├── tsconfig.json                # TypeScript 编译配置
 ├── eslint.config.mjs            # ESLint 配置
 ├── pack.ps1                     # 编译打包脚本
 ├── .vscodeignore                # 扩展发布忽略规则
-│
 ├── addon/                       # VS Code 扩展源码
 │   ├── src/
 │   │   └── extension.ts         # 插件主逻辑
-│   └── types/
-│       ├── 2.0/
-│       │   ├── MNDeclaration.d.lua   # 2.0 声明
-│       │   └── MNEvent.d.json        # 2.0 事件定义（供补全使用）
-│       └── 3.0/
-│           └── MNDeclaration.d.lua   # 3.0 声明
-│
+│   └── types/                   # 声明文件
 ├── multiple/                    # 按模块拆分的声明文件
 │   ├── 2.0/                     # 28 个模块文件
-│   │   ├── MNGame.d.lua
-│   │   ├── MNPlayer.d.lua
-│   │   ├── MNBlock.d.lua
-│   │   └── ...
 │   └── 3.0/                     # 25 个模块文件
-│       ├── MNGlobalFunc.d.lua
-│       ├── MNComponent.d.lua
-│       ├── MNEvent.d.lua
-│       └── ...
-│
-├── template/
-│   └── lua.code-snippets        # Lua 代码片段（6 个常用模板）
-│
 ├── AiDesc/                      # AI 辅助描述文件
 │   └── 3.0/
 │       ├── AiDesc.md            # UGC 3.0 开发指南（面向 AI）
 │       └── MNAiDesc.txt         # API 纯文本描述
-│
 ├── tools/                       # Python 工具脚本
 │   ├── 2.0/                     # 2.0 工具集
 │   │   ├── Merge.py
 │   │   ├── FuncCompare.py
 │   │   ├── EventCompare.py
 │   │   └── DescToAiDesc.py
-│   └── 3.0/                     # 3.0 工具集（含枚举比较）
+│   └── 3.0/                     # 3.0 工具集
 │       ├── Merge.py
 │       ├── FuncCompare.py
 │       ├── EventCompare.py
 │       ├── EnumLibCompare.py
 │       └── DescToAiDesc.py
-│
 └── img/
     └── Logo-128px.png           # 插件图标
 ```
@@ -153,7 +134,6 @@ python tools/2.0/DescToAiDesc.py       # 生成 AiDesc/2.0/MNAiDesc.txt
 
 将以下文件内容提供给 AI 助手，可帮助其理解 UGC 3.0 API：
 
-- **[MNDeclaration.d.lua](./MNDeclaration.d.lua)** — 完整类型声明，可让 AI 获得准确的 API 签名和参数类型
 - **[AiDesc/3.0/AiDesc.md](./AiDesc/3.0/AiDesc.md)** — UGC 3.0 开发指南，包含脚本规范、事件用法、坐标系、天空盒等开发要点
 - **[AiDesc/3.0/MNAiDesc.txt](./AiDesc/3.0/MNAiDesc.txt)** — 纯文本格式的 API 描述，不含类型注解标记，适合对标记敏感的场景
 
@@ -180,7 +160,7 @@ python tools/2.0/DescToAiDesc.py       # 生成 AiDesc/2.0/MNAiDesc.txt
 | 项目 | 版本 |
 | :-: | :-: |
 | 《迷你世界》游戏 | v1.56+ |
-| UGC 开发套件 | 3.0 |
+| UGC 开发套件 | 3.0 & 2.0 |
 | Python | 3.10+ |
 | VS Code | ^1.125.0 |
 
@@ -188,7 +168,7 @@ python tools/2.0/DescToAiDesc.py       # 生成 AiDesc/2.0/MNAiDesc.txt
 
 ## 注意事项
 
-- 本仓库声明文件、模板与扩展仅面向 **UGC 3.0**
+- 本仓库声明文件，与扩展仅面向 **UGC 3.0** & **UGC 2.0**，请勿用于其他版本
 - 部分接口可能与实际游戏版本存在差异，请以游戏实际行为为准
 - 如发现问题或需要补充 API，欢迎提交 [Issue](https://github.com/LK-cmyk/MiniWorld-API-Desc/issues) 或发起 Pull Request
 
