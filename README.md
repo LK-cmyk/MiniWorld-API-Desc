@@ -6,6 +6,8 @@
 ![VS Code](https://img.shields.io/badge/VS%20Code-^1.125.0-blue)
 ![Lua](https://img.shields.io/badge/Lua-5.1%2B-yellow)
 
+[![English](https://img.shields.io/badge/English-blue?logo=markdown)](./README.en.md) — [English Version](./README.en.md)
+
 《迷你世界》UGC Lua 开发的 API 声明库、代码补全插件与辅助工具集。
 
 > **不再推荐使用声明文件来进行声明，推荐使用声明插件。**  
