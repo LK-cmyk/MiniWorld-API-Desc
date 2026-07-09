@@ -551,11 +551,11 @@ graph LR
 
 1. `UpdateValueAndCallback(...)` 接口 **无需** 事先设置 `Key` 对应的数据，因为数据 **都在 `callback` 里面提交**，从无到有的第一次数据也是这里提交。这样才能避免同时对同一个 `Key` 的数据操作时，彼此冲突覆盖问题
 2. 非必要慎用 `UpdateValueAndCallback(...)` 接口，**性能降低**。只有业务场景，必须要对同一个 `Key` 的数据进行写操作时，**保证 `唯一性` & `正确性` 的场景和功能时，才推荐使用该接口**
-3. 使用 `UpdateValueAndCallback(...)` 修改过的数据，**请勿使用普通 `SetValueAndBlock` 接口去设置新值**，因为会直接覆盖掉原来数据，**没法保证 `唯一性` & `正确性`，而且有可能导致其它问题**
-4. 对同一个Key，**禁止混用普通 `SetValueAndBlock` & `UpdateValueAndCallback(...)` 去存数据**
+3. 使用 `UpdateValueAndCallback(...)` 修改过的数据，请勿使用普通 `SetValueAndBlock` 接口去设置新值, 因为会直接覆盖掉原来数据, 没法保证 `唯一性` & `正确性`，而且有可能导致其它问题
+4. 对同一个Key, 禁止混用普通 `SetValueAndBlock` & `UpdateValueAndCallback(...)` 去存数据
 5. 此接口只在云服有效，不要单机或联机测试这个接口
-6. 每个 `Key` 只能设置 **一个** 回调，设置后 **不能随意修改**
-7. Update接口操作的数据，其 `Set操作` **只能** 在 `callback` 里面，并采用返回最新 `Value` 进行修改，**千万别基于自己调用Get拿到的数据进行操作，容易导致数据覆盖/出错**
+6. 每个 `Key` 只能设置一个回调，设置后不能随意修改
+7. Update接口操作的数据，其 `Set操作` **只能** 在 `callback` 里面, 并采用返回最新 `Value` 进行修改, 千万别基于自己调用Get拿到的数据进行操作，容易导致数据覆盖/出错
 
 #### 排行榜 & K/V 数据 - Q&A
 

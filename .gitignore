@@ -1,8 +1,11 @@
 .venv
 .vscode/
 __pycache__/
-out
-dist
-node_modules
 .vscode-test/
+out/
+dist/
+node_modules/
+
+# 输出的插件
+
 *.vsix
