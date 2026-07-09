@@ -3,7 +3,7 @@
   "publisher": "LK-cmyk",
   "displayName": "MiniWorld API Description",
   "description": "MiniWorld API Description",
-  "version": "0.5.3",
+  "version": "0.6.1",
   "icon": "img/Logo-128px.png",
   "repository": {
     "type": "git",

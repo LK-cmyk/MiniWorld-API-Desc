@@ -28,6 +28,22 @@ end
 
 - PS: 你的组件表不可设置元表，其他的表可以设置
 
+## OnTick
+
+```lua
+function Script:OnTick(dt)
+  -- 每一Tick都会调用这个函数
+end
+```
+
+## 组件销毁函数
+
+```lua
+function Script:OnDestroy()
+  -- 组件被销毁时执行
+end
+```
+
 ## 其他特性
 
 - UGC 拥有 `goto` 语句
