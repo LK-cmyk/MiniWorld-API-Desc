@@ -4,8 +4,8 @@ import os
 import re
 
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
-INPUT_FILE: str = os.path.join(SCRIPT_DIR, "..", "merged.2.0.lua")
-OUTPUT_DIR: str = os.path.join(SCRIPT_DIR, "..", "AiDesc")
+INPUT_FILE: str = os.path.join(SCRIPT_DIR, "..", "..", "merged.2.0.lua")
+OUTPUT_DIR: str = os.path.join(SCRIPT_DIR, "..", "..", "AiDesc", "2.0")
 OUTPUT_FILE: str = os.path.join(OUTPUT_DIR, "MNAiDesc.2.0.txt")
 
 ANNOTATION_TAG_RE: re.Pattern[str] = re.compile(r"^([ \t]*---[ \t]*)@\w+\b[ \t]*", re.MULTILINE)
@@ -31,7 +31,7 @@ def main() -> None:
     """主函数"""
     if not os.path.exists(INPUT_FILE):
         print(f"输入文件不存在: {INPUT_FILE}")
-        print("请先运行 Merge2.py 生成 merged.2.0.lua 文件")
+        print("请先运行 Merge.py 生成 merged.2.0.lua 文件")
         return
 
     with open(INPUT_FILE, "r", encoding="utf-8") as f:

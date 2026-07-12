@@ -368,7 +368,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const openDocDisposable = vscode.workspace.onDidOpenTextDocument(checkDeclarationsOnOpen);
 
-    // ---------- API 搜索 ----------
+    // API 搜索
     const apiSearchProvider = new ApiSearchProvider(context.extensionUri, context);
     const apiSearchViewDisposable = vscode.window.registerWebviewViewProvider(
         ApiSearchProvider.viewType,
