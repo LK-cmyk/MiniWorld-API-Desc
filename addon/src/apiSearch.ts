@@ -387,68 +387,85 @@ function buildEventDetailFields(fields: ApiField[]): ApiField[] {
 
 // 模糊搜索
 
-/** 字符级模糊匹配（按顺序匹配字符） */
-function fuzzyMatchChar(text: string, query: string): boolean {
-    const lower = text.toLowerCase();
-    const q = query.toLowerCase();
+/** 字符级模糊匹配：text 和 query 均已小写 */
+function fuzzyMatchLower(lowerText: string, lowerQuery: string): boolean {
     let qi = 0;
-    for (let i = 0; i < lower.length && qi < q.length; i++) {
-        if (lower[i] === q[qi]) {qi++;}
+    for (let i = 0; i < lowerText.length && qi < lowerQuery.length; i++) {
+        if (lowerText[i] === lowerQuery[qi]) {qi++;}
     }
-    return qi === q.length;
+    return qi === lowerQuery.length;
 }
 
-/** 计算搜索相关性分数 */
-function scoreItem(item: ApiItem, query: string): number {
-    const q = query.toLowerCase();
-    const name = item.name.toLowerCase();
-    const desc = item.description.toLowerCase();
-    let score = 0;
-
-    // 完全匹配
-    if (name === q) {score += 200;}
-    // 前缀匹配
-    if (name.startsWith(q)) {score += 100;}
-    // 驼峰分词匹配（如 "GP" 匹配 "GetPosition"）
-    const initials = name.replace(/[a-z]/g, '');
-    if (initials.includes(q)) {score += 60;}
-    // 包含匹配
-    if (name.includes(q)) {score += 30;}
-    // 模糊字符匹配
-    if (fuzzyMatchChar(name, q)) {score += 10;}
-    // 参数名匹配
-    if (item.parameters.some(p => fuzzyMatchChar(p.name.toLowerCase(), q))) {score += 8;}
-    // 描述匹配
-    if (fuzzyMatchChar(desc, q)) {score += 5;}
-    // 字段名匹配
-    if (item.fields.some(f => fuzzyMatchChar(f.name.toLowerCase(), q))) {score += 5;}
-
-    // 点号搜索：类名.字段名 匹配
-    const dotIdx = q.indexOf('.');
-    if (dotIdx > 0) {
-        const className = q.substring(0, dotIdx);
-        const fieldName = q.substring(dotIdx + 1);
-        if (fieldName) {
-            if (fuzzyMatchChar(name, className) && item.fields.some(f => fuzzyMatchChar(f.name.toLowerCase(), fieldName))) {
-                score += 150;
-            }
-        }
-    }
-
-    return score;
+/** 字符级模糊匹配（自动小写，性能较 fuzzyMatchLower 差） */
+function fuzzyMatchChar(text: string, query: string): boolean {
+    return fuzzyMatchLower(text.toLowerCase(), query.toLowerCase());
 }
 
 /**
  * 检查点号查询是否匹配（如 "BlockType.Sto" 匹配 BlockType 的 Stone 字段）
+ * lowerItem/className/fieldName 均已小写
  */
-function matchDotQuery(item: ApiItem, q: string): boolean {
-    const dotIdx = q.indexOf('.');
-    if (dotIdx <= 0) {return false;}
-    const className = q.substring(0, dotIdx);
-    const fieldName = q.substring(dotIdx + 1);
+function matchDotQueryLower(
+    li: LowerItem,
+    className: string,
+    fieldName: string,
+): boolean {
     if (!fieldName) {return false;}
-    return fuzzyMatchChar(item.name.toLowerCase(), className) &&
-        item.fields.some(f => fuzzyMatchChar(f.name.toLowerCase(), fieldName));
+    return fuzzyMatchLower(li.lowerName, className) &&
+        li.lowerFields.some(f => fuzzyMatchLower(f.name, fieldName));
+}
+
+/** 预小写化的搜索条目（避免重复 toLowerCase） */
+interface LowerItem {
+    item: ApiItem;
+    lowerName: string;
+    lowerDesc: string;
+    lowerParams: Array<{ name: string; desc: string }>;
+    lowerFields: Array<{ name: string; desc: string }>;
+}
+
+function toLowerItem(item: ApiItem): LowerItem {
+    return {
+        item,
+        lowerName: item.name.toLowerCase(),
+        lowerDesc: item.description.toLowerCase(),
+        lowerParams: item.parameters.map(p => ({
+            name: p.name.toLowerCase(),
+            desc: p.desc.toLowerCase(),
+        })),
+        lowerFields: item.fields.map(f => ({
+            name: f.name.toLowerCase(),
+            desc: f.desc.toLowerCase(),
+        })),
+    };
+}
+
+/** 基于预小写化数据计算分数 */
+function scoreLowerItem(li: LowerItem, q: string): number {
+    const { lowerName: name, lowerDesc: desc, lowerParams, lowerFields } = li;
+    let score = 0;
+
+    if (name === q) {score += 200;}
+    if (name.startsWith(q)) {score += 100;}
+    const initials = name.replace(/[a-z]/g, '');
+    if (initials.includes(q)) {score += 60;}
+    if (name.includes(q)) {score += 30;}
+    if (fuzzyMatchLower(name, q)) {score += 10;}
+    if (lowerParams.some(p => fuzzyMatchLower(p.name, q))) {score += 8;}
+    if (fuzzyMatchLower(desc, q)) {score += 5;}
+    if (lowerFields.some(f => fuzzyMatchLower(f.name, q))) {score += 5;}
+
+    const dotIdx = q.indexOf('.');
+    if (dotIdx > 0) {
+        const className = q.substring(0, dotIdx);
+        const fieldName = q.substring(dotIdx + 1);
+        if (fieldName && fuzzyMatchLower(name, className) &&
+            lowerFields.some(f => fuzzyMatchLower(f.name, fieldName))) {
+            score += 150;
+        }
+    }
+
+    return score;
 }
 
 /** 过滤并排序搜索结果 */
@@ -461,17 +478,13 @@ function searchItems(
 ): { results: ApiItem[]; totalCount: number } {
     let filtered = items;
 
-    // 版本筛选
+    // 版本/模块/类型筛选（这些字段无需小写）
     if (versionFilter !== 'all') {
         filtered = filtered.filter(item => item.version === versionFilter);
     }
-
-    // 模块筛选
     if (moduleFilter !== 'all') {
         filtered = filtered.filter(item => item.module === moduleFilter);
     }
-
-    // 类型筛选
     if (kindFilter !== 'all') {
         filtered = filtered.filter(item => item.kind === kindFilter);
     }
@@ -479,31 +492,33 @@ function searchItems(
     // 文本搜索
     if (query.trim()) {
         const q = query.trim().toLowerCase();
-        filtered = filtered.filter(item => {
-            // 点号查询：类名.字段名
-            if (q.includes('.') && matchDotQuery(item, q)) {return true;}
-            // 常规模糊匹配
-            if (fuzzyMatchChar(item.name.toLowerCase(), q)) {return true;}
-            if (fuzzyMatchChar(item.description.toLowerCase(), q)) {return true;}
-            if (item.parameters.some(p =>
-                fuzzyMatchChar(p.name.toLowerCase(), q) ||
-                fuzzyMatchChar(p.desc.toLowerCase(), q)
-            )) {return true;}
-            if (item.fields.some(f =>
-                fuzzyMatchChar(f.name.toLowerCase(), q) ||
-                fuzzyMatchChar(f.desc.toLowerCase(), q)
-            )) {return true;}
+
+        // 一次性预处理所有条目的小写版本
+        const lowerItems = filtered.map(toLowerItem);
+
+        // 过滤
+        const matched = lowerItems.filter(li => {
+            const { lowerName: name, lowerDesc: desc, lowerParams, lowerFields } = li;
+            if (q.includes('.')) {
+                const dotIdx = q.indexOf('.');
+                if (matchDotQueryLower(li, q.substring(0, dotIdx), q.substring(dotIdx + 1))) {return true;}
+            }
+            if (fuzzyMatchLower(name, q)) {return true;}
+            if (fuzzyMatchLower(desc, q)) {return true;}
+            if (lowerParams.some(p => fuzzyMatchLower(p.name, q) || fuzzyMatchLower(p.desc, q))) {return true;}
+            if (lowerFields.some(f => fuzzyMatchLower(f.name, q) || fuzzyMatchLower(f.desc, q))) {return true;}
             return false;
         });
 
-        // 按相关性排序，同分时按自定义顺序排序
-        filtered.sort((a, b) => {
-            const scoreDiff = scoreItem(b, q) - scoreItem(a, q);
+        // 排序（按分数降序）
+        matched.sort((a, b) => {
+            const scoreDiff = scoreLowerItem(b, q) - scoreLowerItem(a, q);
             if (scoreDiff !== 0) {return scoreDiff;}
-            return customSortCompare(a, b);
+            return customSortCompare(a.item, b.item);
         });
+
+        filtered = matched.map(li => li.item);
     } else {
-        // 无搜索词时按版本 → 模块 → 名称排序（不分种类，避免第1页全是函数）
         filtered.sort((a, b) => {
             const verCmp = versionWeight(a.version) - versionWeight(b.version);
             if (verCmp !== 0) {return verCmp;}
@@ -670,7 +685,7 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
                 let matchedAnyField = false;
                 for (const field of item.fields) {
                     // 有搜索词时只包含匹配的字段
-                    if (q && !fuzzyMatchChar(field.name.toLowerCase(), q) && !fuzzyMatchChar(field.desc.toLowerCase(), q)) {
+                    if (q && !fuzzyMatchLower(field.name.toLowerCase(), q) && !fuzzyMatchLower(field.desc.toLowerCase(), q)) {
                         continue;
                     }
                     matchedAnyField = true;
