@@ -423,7 +423,32 @@ function scoreItem(item: ApiItem, query: string): number {
     // 字段名匹配
     if (item.fields.some(f => fuzzyMatchChar(f.name.toLowerCase(), q))) {score += 5;}
 
+    // 点号搜索：类名.字段名 匹配
+    const dotIdx = q.indexOf('.');
+    if (dotIdx > 0) {
+        const className = q.substring(0, dotIdx);
+        const fieldName = q.substring(dotIdx + 1);
+        if (fieldName) {
+            if (fuzzyMatchChar(name, className) && item.fields.some(f => fuzzyMatchChar(f.name.toLowerCase(), fieldName))) {
+                score += 150;
+            }
+        }
+    }
+
     return score;
+}
+
+/**
+ * 检查点号查询是否匹配（如 "BlockType.Sto" 匹配 BlockType 的 Stone 字段）
+ */
+function matchDotQuery(item: ApiItem, q: string): boolean {
+    const dotIdx = q.indexOf('.');
+    if (dotIdx <= 0) {return false;}
+    const className = q.substring(0, dotIdx);
+    const fieldName = q.substring(dotIdx + 1);
+    if (!fieldName) {return false;}
+    return fuzzyMatchChar(item.name.toLowerCase(), className) &&
+        item.fields.some(f => fuzzyMatchChar(f.name.toLowerCase(), fieldName));
 }
 
 /** 过滤并排序搜索结果 */
@@ -455,6 +480,9 @@ function searchItems(
     if (query.trim()) {
         const q = query.trim().toLowerCase();
         filtered = filtered.filter(item => {
+            // 点号查询：类名.字段名
+            if (q.includes('.') && matchDotQuery(item, q)) {return true;}
+            // 常规模糊匹配
             if (fuzzyMatchChar(item.name.toLowerCase(), q)) {return true;}
             if (fuzzyMatchChar(item.description.toLowerCase(), q)) {return true;}
             if (item.parameters.some(p =>
@@ -1055,39 +1083,47 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
             line-height: 1.5;
             word-break: break-word;
         }
-        .detail-table {
-            width: 100%;
-            border-collapse: collapse;
+        .detail-grid {
             font-size: 12px;
         }
-        .detail-table th {
-            text-align: left;
+        .detail-grid .grid-header {
+            display: flex;
+            gap: 0;
+            padding: 4px 6px;
             opacity: 0.6;
             font-weight: 500;
-            padding: 4px 6px;
             border-bottom: 1px solid var(--border);
         }
-        .detail-table td {
-            padding: 4px 6px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-            word-break: break-word;
+        .detail-grid .grid-header span {
+            flex: 1 1 0;
         }
-        .detail-table tr:hover td {
+        .detail-grid .grid-header .h-name { flex: 0 0 70px; }
+        .detail-grid .grid-header .h-type { flex: 0 0 60px; }
+        .detail-grid .grid-header .h-desc { flex: 1 1 0; }
+
+        .detail-grid .grid-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .detail-grid .grid-row:hover {
             background: var(--list-hover);
         }
-        .detail-table .col-name {
+        .detail-grid .grid-cell {
+            padding: 4px 6px;
+            flex: 1 1 0;
+        }
+        .detail-grid .cell-name {
             font-family: var(--font-mono);
             color: var(--vscode-textLink-foreground, #3794ff);
-            white-space: nowrap;
         }
-        .detail-table .col-type {
+        .detail-grid .cell-type {
             font-family: var(--font-mono);
-            white-space: nowrap;
             opacity: 0.7;
         }
-        .detail-table .col-desc {
+        .detail-grid .cell-desc {
             opacity: 0.8;
+            flex: 2 1 0;
         }
         .detail-source {
             font-size: 11px;
@@ -1339,26 +1375,26 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
                 if (d.parameters && d.parameters.length > 0) {
                     html += \`<div class="detail-section">
                         <div class="detail-section-title">参数</div>
-                        <table class="detail-table">
-                            <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+                        <div class="detail-grid">
+                            <div class="grid-header"><span class="h-name">名称</span><span class="h-type">类型</span><span class="h-desc">说明</span></div>
                     \`;
                     for (const p of d.parameters) {
-                        html += \`<tr><td class="col-name">\${escapeHtml(p.name)}</td><td class="col-type">\${escapeHtml(p.type)}</td><td class="col-desc">\${escapeHtml(p.desc)}</td></tr>\`;
+                        html += \`<div class="grid-row"><span class="grid-cell cell-name">\${escapeHtml(p.name)}</span><span class="grid-cell cell-type">\${escapeHtml(p.type)}</span><span class="grid-cell cell-desc">\${escapeHtml(p.desc)}</span></div>\`;
                     }
-                    html += \`</table></div>\`;
+                    html += \`</div></div>\`;
                 }
 
                 // 返回值
                 if (d.returns && d.returns.length > 0) {
                     html += \`<div class="detail-section">
                         <div class="detail-section-title">返回值</div>
-                        <table class="detail-table">
-                            <tr><th>类型</th><th>说明</th></tr>
+                        <div class="detail-grid">
+                            <div class="grid-header"><span class="h-type">类型</span><span class="h-desc">说明</span></div>
                     \`;
                     for (const r of d.returns) {
-                        html += \`<tr><td class="col-type">\${escapeHtml(r.type)}</td><td class="col-desc">\${escapeHtml(r.desc)}</td></tr>\`;
+                        html += \`<div class="grid-row"><span class="grid-cell cell-type">\${escapeHtml(r.type)}</span><span class="grid-cell cell-desc">\${escapeHtml(r.desc)}</span></div>\`;
                     }
-                    html += \`</table></div>\`;
+                    html += \`</div></div>\`;
                 }
 
                 // 字段（枚举/事件）
@@ -1366,20 +1402,39 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
                     const fieldTitle = d.kind === 'event' ? '事件字段' : '枚举值';
                     html += \`<div class="detail-section">
                         <div class="detail-section-title">\${fieldTitle}</div>
-                        <table class="detail-table">
-                            <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+                        <div class="detail-grid">
+                            <div class="grid-header"><span class="h-name">名称</span><span class="h-type">类型</span><span class="h-desc">说明</span></div>
                     \`;
                     for (const f of d.fields) {
                         const fullName = d.name.includes('.') ? f.name : d.name + '.' + f.name;
-                        html += \`<tr><td class="col-name">\${escapeHtml(fullName)}</td><td class="col-type">\${escapeHtml(f.type)}</td><td class="col-desc">\${escapeHtml(f.desc)}</td></tr>\`;
+                        html += \`<div class="grid-row"><span class="grid-cell cell-name">\${escapeHtml(fullName)}</span><span class="grid-cell cell-type">\${escapeHtml(f.type)}</span><span class="grid-cell cell-desc">\${escapeHtml(f.desc)}</span></div>\`;
                     }
-                    html += \`</table></div>\`;
+                    html += \`</div></div>\`;
                 }
 
                 // 源文件
                 html += \`<div class="detail-source">\${escapeHtml(d.sourceFile)} : \${d.sourceLine}</div>\`;
 
                 detailContent.innerHTML = html;
+
+                // 检测容器宽度，自动切换横排/竖排
+                function adjustDetailLayout() {
+                    const grids = detailContent.querySelectorAll('.detail-grid');
+                    for (const grid of grids) {
+                        const w = grid.offsetWidth;
+                        const rows = grid.querySelectorAll('.grid-row');
+                        const header = grid.querySelector('.grid-header');
+                        if (w < 500) {
+                            for (const row of rows) row.style.flexDirection = 'column';
+                            if (header) header.style.display = 'none';
+                        } else {
+                            for (const row of rows) row.style.flexDirection = 'row';
+                            if (header) header.style.display = '';
+                        }
+                    }
+                }
+                adjustDetailLayout();
+                window.addEventListener('resize', adjustDetailLayout);
             }
 
             // 渲染分页控件
