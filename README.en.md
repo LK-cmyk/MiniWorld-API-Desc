@@ -46,8 +46,6 @@ When you open any `.lua` file, the extension automatically checks whether declar
 
 2.0 and 3.0 declarations are mutually exclusive — they cannot coexist.
 
----
-
 ## Extension Commands
 
 Press `Ctrl+Shift+P` and type `MiniWorld` to find all available commands:
@@ -70,8 +68,6 @@ When running add/remove commands, a scope picker appears:
 | **Workspace Folder** | Write to workspace folder settings |
 
 The extension automatically filters available options based on current config state: add commands only show scopes **not already containing** the declarations; remove commands only show scopes **currently containing** them.
-
----
 
 ## API Search
 
@@ -97,8 +93,6 @@ The **API Search panel** lets you quickly search all MiniWorld APIs directly fro
 ### Shortcuts
 
 Press `Ctrl+K` inside the search input to quickly clear the current query.
-
----
 
 ## Project Structure
 
@@ -136,8 +130,6 @@ MiniWorld-API-Desc/
     └── Logo-128px.png           # Extension icon
 ```
 
----
-
 ## Utility Scripts
 
 Run the following commands from the project root (requires Python 3.10+, dependencies in `pyproject.toml`):
@@ -159,16 +151,12 @@ python tools/3.0/DescToAiDesc.py       # Generate AiDesc/3.0/MNAiDesc.txt
 python tools/2.0/DescToAiDesc.py       # Generate AiDesc/2.0/MNAiDesc.txt
 ```
 
----
-
 ## AI Usage
 
 Provide the following files to an AI assistant to help it understand the UGC 3.0 API:
 
 - **[AiDesc/3.0/AiDesc.md](./AiDesc/3.0/AiDesc.md)** — UGC 3.0 development guide covering script conventions, event usage, coordinate system, skybox, and more
 - **[AiDesc/3.0/MNAiDesc.txt](./AiDesc/3.0/MNAiDesc.txt)** — Plain-text API description without type annotation markers, suitable for markup-sensitive scenarios
-
----
 
 ## Building from Source
 
@@ -184,8 +172,6 @@ Requires Node.js. Run from the project root:
 
 After packaging, a `.vsix` file is generated in the project root, ready to install into VS Code.
 
----
-
 ## Compatibility
 
 | Project | Version |
@@ -195,15 +181,21 @@ After packaging, a `.vsix` file is generated in the project root, ready to insta
 | Python | 3.10+ |
 | VS Code | ^1.125.0 |
 
----
-
 ## Notes
 
 - The declaration files and extension in this repository are designed for **UGC 3.0** & **UGC 2.0** only — do not use with other versions.
 - Some APIs may differ from the actual game behavior; always refer to the game for the final word.
 - If you find issues or need additional APIs, feel free to open an [Issue](https://github.com/LK-cmyk/MiniWorld-API-Desc/issues) or submit a Pull Request.
 
----
+## Star History
+
+<a href="https://www.star-history.com/?repos=LK-cmyk%2FMiniWorld-API-Desc&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=LK-cmyk/MiniWorld-API-Desc&type=date&theme=dark&legend=top-left&sealed_token=-iH9xbwxhzvpzCuOrPjrIwCmi2uemPhf6biWoG4UA0NHHpY6fr_QqM0L8lxPzS4J_APdisJuSPEp8q0qqGDLhu98FUcXLJg9Mvz5cXHlojjYk-AtgrEGl8PXhLtOHe0mW_GUEVo4_0fkDGZX2EQxicPo88CSSP9bysVqe6NNlFwmZR_QVx2XtlzUUOgn" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=LK-cmyk/MiniWorld-API-Desc&type=date&legend=top-left&sealed_token=-iH9xbwxhzvpzCuOrPjrIwCmi2uemPhf6biWoG4UA0NHHpY6fr_QqM0L8lxPzS4J_APdisJuSPEp8q0qqGDLhu98FUcXLJg9Mvz5cXHlojjYk-AtgrEGl8PXhLtOHe0mW_GUEVo4_0fkDGZX2EQxicPo88CSSP9bysVqe6NNlFwmZR_QVx2XtlzUUOgn" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=LK-cmyk/MiniWorld-API-Desc&type=date&legend=top-left&sealed_token=-iH9xbwxhzvpzCuOrPjrIwCmi2uemPhf6biWoG4UA0NHHpY6fr_QqM0L8lxPzS4J_APdisJuSPEp8q0qqGDLhu98FUcXLJg9Mvz5cXHlojjYk-AtgrEGl8PXhLtOHe0mW_GUEVo4_0fkDGZX2EQxicPo88CSSP9bysVqe6NNlFwmZR_QVx2XtlzUUOgn" />
+ </picture>
+</a>
 
 ## License
 
