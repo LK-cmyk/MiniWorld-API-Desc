@@ -1,11 +1,12 @@
-.venv
 .vscode/
 __pycache__/
 .vscode-test/
+
+# 环境
+node_modules/
+.venv/
+
+# 构建产物
+*.vsix
 out/
 dist/
-node_modules/
-
-# 输出的插件
-
-*.vsix

@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspUri}} 'unsafe-inline'; script-src 'nonce-{{nonce}}'; font-src {{cspUri}};">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspUri}} 'unsafe-inline'; script-src 'nonce-{{nonce}}'; font-src {{cspUri}}; img-src {{cspUri}};">
     <title>MiniWorld API 搜索</title>
     <link rel="stylesheet" href="{{cssUri}}">
 </head>
-<body>
+<body
+    data-copy-svg="{{copySvgAttr}}"
+    data-check-svg="{{checkSvgAttr}}"
+    data-search-svg="{{searchSvgAttr}}">
     <!-- 搜索视图 -->
     <div id="searchView">
-        <input type="text" class="search-box" id="searchInput"
-               placeholder="搜索 API 名称、参数、描述… (模糊匹配)" autofocus />
+        <div class="search-wrapper">
+            {{searchSvg}}
+            <input type="text" class="search-box" id="searchInput"
+                   placeholder="搜索 API 名称、参数、描述…" autofocus />
+            <button class="search-box-clear" id="searchClear" title="清空">{{closeSvg}}</button>
+        </div>
 
         <div class="filters">
             <div class="filter-row">
@@ -19,9 +26,12 @@
                 <button class="filter-btn" data-filter="version" data-value="2.0">2.0</button>
                 <button class="filter-btn" data-filter="version" data-value="3.0">3.0</button>
 
-                <select class="filter-select" id="moduleFilter">
-                    <option value="all">全部模块</option>
-                </select>
+                <div class="custom-select" id="moduleFilter">
+                    <button class="filter-btn select-trigger" data-value="all">全部模块</button>
+                    <div class="select-dropdown">
+                        <button class="select-option active" data-value="all">全部模块</button>
+                    </div>
+                </div>
             </div>
 
             <div class="filter-row">
@@ -38,12 +48,15 @@
 
         <div class="results" id="results"></div>
         <div class="pagination" id="pagination"></div>
-        <div class="loading" id="loading">正在加载 API 数据…</div>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">正在加载 API 数据…</div>
+        </div>
     </div>
 
     <!-- 详情视图 -->
     <div id="detailView" class="detail-view hidden">
-        <button class="detail-back" id="detailBack">← 返回搜索</button>
+        <button class="detail-back" id="detailBack">返回搜索</button>
         <div id="detailContent"></div>
     </div>
 

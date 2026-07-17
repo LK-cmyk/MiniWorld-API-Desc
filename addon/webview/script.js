@@ -4,12 +4,22 @@
     const detailView = document.getElementById('detailView');
     const detailContent = document.getElementById('detailContent');
     const detailBack = document.getElementById('detailBack');
+    // SVG 图标内容（从 body data-* 属性读取，直接内联到 HTML）
+    const SVG = {
+        copy: document.body.dataset.copySvg || '',
+        check: document.body.dataset.checkSvg || '',
+        search: document.body.dataset.searchSvg || '',
+    };
+
     const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
     const resultsEl = document.getElementById('results');
     const paginationEl = document.getElementById('pagination');
     const statsEl = document.getElementById('resultCount');
     const loadingEl = document.getElementById('loading');
     const moduleSelect = document.getElementById('moduleFilter');
+    const selectTrigger = moduleSelect.querySelector('.select-trigger');
+    const selectDropdown = moduleSelect.querySelector('.select-dropdown');
 
     let state = {
         version: 'all',
@@ -30,29 +40,84 @@
         if (version === '2.0') {mods = state.modules20;}
         else if (version === '3.0') {mods = state.modules30;}
         else {mods = [...new Set([...state.modules20, ...state.modules30])].sort();}
-        const currentVal = moduleSelect.value;
-        moduleSelect.innerHTML = '<option value="all">全部模块</option>';
+        const currentVal = selectTrigger.dataset.value;
+        selectDropdown.innerHTML = '<button class="select-option active" data-value="all">全部模块</button>';
         for (const mod of mods) {
-            const opt = document.createElement('option');
-            opt.value = mod;
+            const opt = document.createElement('button');
+            opt.className = 'select-option';
+            opt.dataset.value = mod;
             opt.textContent = mod;
-            moduleSelect.appendChild(opt);
+            if (mod === currentVal) opt.classList.add('active');
+            selectDropdown.appendChild(opt);
         }
+        // 重新绑定选项点击事件
+        bindSelectOptions();
         const keep = currentVal !== 'all' && mods.includes(currentVal);
-        moduleSelect.value = keep ? currentVal : 'all';
-        if (!keep) {state.module = 'all';}
+        if (!keep) {
+            selectTrigger.dataset.value = 'all';
+            selectTrigger.textContent = '全部模块';
+            state.module = 'all';
+        }
         // 事件/枚举模式下禁用模块筛选
         if (state.kind === 'event' || state.kind === 'enum') {
-            moduleSelect.disabled = true;
+            moduleSelect.classList.add('disabled');
         } else {
-            moduleSelect.disabled = false;
+            moduleSelect.classList.remove('disabled');
+        }
+        closeDropdown();
+    }
+
+    // 下拉选项点击绑定
+    function bindSelectOptions() {
+        selectDropdown.querySelectorAll('.select-option').forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const value = opt.dataset.value;
+                // 更新触发按钮文字
+                selectTrigger.dataset.value = value;
+                selectTrigger.textContent = opt.textContent;
+                // 更新激活状态
+                selectDropdown.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                state.module = value;
+                closeDropdown();
+                doSearch();
+            });
+        });
+    }
+
+    // 切换下拉展开/收起
+    function toggleDropdown() {
+        if (moduleSelect.classList.contains('disabled')) return;
+        const isOpen = selectDropdown.classList.contains('open');
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
         }
     }
+    function openDropdown() {
+        selectDropdown.classList.add('open');
+        selectTrigger.classList.add('open');
+    }
+    function closeDropdown() {
+        selectDropdown.classList.remove('open');
+        selectTrigger.classList.remove('open');
+    }
+
+    // 点击外部关闭下拉
+    document.addEventListener('click', (e) => {
+        if (!moduleSelect.contains(e.target)) {
+            closeDropdown();
+        }
+    });
 
     // 筛选按钮
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const filter = btn.dataset.filter;
+            // 跳过自定义下拉触发按钮（它共用 filter-btn 样式但没有 data-filter）
+            if (!filter) return;
             const value = btn.dataset.value;
             // 同组按钮反选
             document.querySelectorAll(`.filter-btn[data-filter="${filter}"]`).forEach(b => b.classList.remove('active'));
@@ -67,11 +132,12 @@
                 state.kind = value;
                 // 事件/枚举模式下禁用模块筛选
                 if (value === 'event' || value === 'enum') {
-                    moduleSelect.disabled = true;
-                    moduleSelect.value = 'all';
+                    moduleSelect.classList.add('disabled');
+                    selectTrigger.dataset.value = 'all';
+                    selectTrigger.textContent = '全部模块';
                     state.module = 'all';
                 } else {
-                    moduleSelect.disabled = false;
+                    moduleSelect.classList.remove('disabled');
                 }
             }
 
@@ -79,10 +145,10 @@
         });
     });
 
-    // 模块下拉
-    moduleSelect.addEventListener('change', () => {
-        state.module = moduleSelect.value;
-        doSearch();
+    // 模块下拉：点击触发按钮展开/收起
+    selectTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleDropdown();
     });
 
     // 搜索输入
@@ -95,12 +161,26 @@
         }, 150);
     });
 
+    // 清空按钮
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        state.query = '';
+        searchClear.classList.remove('visible');
+        doSearch();
+        searchInput.focus();
+    });
+    // 搜索框输入时控制清空按钮显隐
+    searchInput.addEventListener('input', () => {
+        searchClear.classList.toggle('visible', searchInput.value.length > 0);
+    });
+
     // Ctrl+K 清空
     searchInput.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'k') {
             e.preventDefault();
             searchInput.value = '';
             state.query = '';
+            searchClear.classList.remove('visible');
             doSearch();
         }
     });
@@ -167,7 +247,7 @@
         // 第 1 行：代码名 + 复制按钮
         let html = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
             <div class="detail-name" style="font-family:var(--font-mono);font-weight:700;font-size:16px;color:var(--vscode-textLink-foreground,#3794ff);word-break:break-all">${escapeHtml(detailDisplayName)}</div>
-            <button class="copy-btn detail-copy-btn" data-copy="${escapeHtml(detailCopyText)}" title="复制名称">📋</button>
+            <button class="copy-btn detail-copy-btn" data-copy="${escapeHtml(detailCopyText)}" title="复制名称">${SVG.copy}</button>
         </div>`;
 
         // 第 2 行：标签
@@ -244,11 +324,47 @@
                 const rows = grid.querySelectorAll('.grid-row');
                 const header = grid.querySelector('.grid-header');
                 if (w < 500) {
-                    for (const row of rows) row.style.flexDirection = 'column';
+                    for (const row of rows) {
+                        row.style.flexDirection = 'column';
+                        // 清除宽模式设置的固定宽度内联样式，恢复默认 flex
+                        const cells = row.querySelectorAll('.grid-cell');
+                        for (const c of cells) {
+                            c.style.flex = '';
+                            c.style.minWidth = '';
+                            c.style.overflow = '';
+                            c.style.textOverflow = '';
+                        }
+                    }
                     if (header) header.style.display = 'none';
                 } else {
                     for (const row of rows) row.style.flexDirection = 'row';
                     if (header) header.style.display = '';
+                }
+            }
+            // 同步表头与行单元格宽度，确保对齐
+            syncGridAlignment();
+        }
+        function syncGridAlignment() {
+            const grids = detailContent.querySelectorAll('.detail-grid');
+            for (const grid of grids) {
+                const header = grid.querySelector('.grid-header');
+                const rows = grid.querySelectorAll('.grid-row');
+                if (!header || rows.length === 0) continue;
+                if (header.style.display === 'none') continue;
+                const headerCells = header.querySelectorAll('span');
+                if (headerCells.length === 0) continue;
+                // 读取表头每个单元格的宽度
+                const widths = Array.from(headerCells).map(cell => cell.offsetWidth);
+                for (const row of rows) {
+                    const cells = row.querySelectorAll('.grid-cell');
+                    cells.forEach((cell, i) => {
+                        if (i < widths.length) {
+                            cell.style.flex = `0 0 ${widths[i]}px`;
+                            cell.style.minWidth = `${widths[i]}px`;
+                            cell.style.overflow = 'hidden';
+                            cell.style.textOverflow = 'ellipsis';
+                        }
+                    });
                 }
             }
         }
@@ -356,7 +472,7 @@
             card.innerHTML = `
                 <div class="result-header">
                     <span class="result-name">${displayName}</span>
-                    <button class="copy-btn result-copy-btn" data-copy="${displayName}" title="复制名称">📋</button>
+                    <button class="copy-btn result-copy-btn" data-copy="${displayName}" title="复制名称">${SVG.copy}</button>
                 </div>
                 <div class="result-tags">
                     <span class="result-kind kind-${item.kind}">${kindLabel}</span>
@@ -364,9 +480,12 @@
                     <span class="result-module">${item.module}</span>
                 </div>
                 ${briefDesc ? '<div class="result-desc">' + escapeHtml(briefDesc) + '</div>' : ''}
-                ${paramsPreview ? '<div class="result-meta">参数: ' + paramsPreview + '</div>' : ''}
+                ${paramsPreview ? '<div class="result-meta">' + paramsPreview + '</div>' : ''}
                 ${metaParts.length > 0 ? '<div class="result-meta">' + metaParts.join(' · ') + '</div>' : ''}
             `;
+            // 错峰淡入动画
+            const idx = resultsEl.children.length;
+            card.style.animationDelay = (idx * 0.03) + 's';
 
             // 复制按钮阻止冒泡，避免触发详情跳转
             const copyBtn = card.querySelector('.result-copy-btn');
@@ -389,8 +508,9 @@
         if (data.results.length === 0) {
             resultsEl.innerHTML = `
                 <div class="empty">
-                    <div class="title">🔍 未找到匹配结果</div>
-                    <div>尝试使用更短的搜索词，或调整筛选条件</div>
+                    <div class="empty-icon">${SVG.search}</div>
+                    <div class="title">未找到匹配结果</div>
+                    <div class="subtitle">尝试使用更短的搜索词，或调整筛选条件</div>
                 </div>
             `;
             paginationEl.innerHTML = '';
@@ -407,24 +527,19 @@
 
     // 复制到剪贴板
     function copyToClipboard(text, btn) {
-        // 使用 Web Clipboard API 直接写入（VS Code webview 支持）
         navigator.clipboard.writeText(text).then(() => {
-            // 按钮反馈：成功
-            const original = btn.textContent;
-            btn.textContent = '✅';
+            btn.innerHTML = SVG.check;
             btn.classList.add('copied');
             setTimeout(() => {
-                btn.textContent = original;
+                btn.innerHTML = SVG.copy;
                 btn.classList.remove('copied');
             }, 1200);
         }).catch(() => {
-            // 降级：尝试通过 postMessage 让 extension 写入
             vscode.postMessage({ type: 'copy', text });
-            const original = btn.textContent;
-            btn.textContent = '✅';
+            btn.innerHTML = SVG.check;
             btn.classList.add('copied');
             setTimeout(() => {
-                btn.textContent = original;
+                btn.innerHTML = SVG.copy;
                 btn.classList.remove('copied');
             }, 1200);
         });
@@ -461,13 +576,16 @@
                 break;
             case 'detailResult':
                 if (msg.error) {
-                    detailContent.innerHTML = '<div class="empty"><div class="title">⚠️ ' + escapeHtml(msg.error) + '</div></div>';
+                    detailContent.innerHTML = '<div class="empty"><div class="empty-icon">' + SVG.search + '</div><div class="title">' + escapeHtml(msg.error) + '</div></div>';
                 } else {
                     renderDetail(msg.detail);
                 }
                 break;
         }
     });
+
+    // 初始清空按钮状态
+    searchClear.classList.toggle('visible', searchInput.value.length > 0);
 
     // 通知扩展已就绪
     vscode.postMessage({ type: 'ready' });

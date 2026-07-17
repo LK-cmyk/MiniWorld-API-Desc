@@ -91,6 +91,7 @@
     "sumneko.lua"
   ],
   "dependencies": {
+    "fuse.js": "^7.5.0",
     "marked": "^18.0.6"
   }
 }

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import Fuse from 'fuse.js';
 
 // 类型定义 
 
@@ -390,108 +391,11 @@ function buildEventDetailFields(fields: ApiField[]): ApiField[] {
     return result;
 }
 
-// 模糊搜索
-
-/** 字符级模糊匹配：text 和 query 均已小写 */
-function fuzzyMatchLower(lowerText: string, lowerQuery: string): boolean {
-    let qi = 0;
-    for (let i = 0; i < lowerText.length && qi < lowerQuery.length; i++) {
-        if (lowerText[i] === lowerQuery[qi]) {qi++;}
-    }
-    return qi === lowerQuery.length;
-}
-
-/** 字符级模糊匹配（自动小写，性能较 fuzzyMatchLower 差） */
-function fuzzyMatchChar(text: string, query: string): boolean {
-    return fuzzyMatchLower(text.toLowerCase(), query.toLowerCase());
-}
+// 模糊搜索（基于 fuse.js）
 
 /**
- * 检查限定名查询（类名.方法名 / 模块:函数名）是否匹配
- * - 函数：className 匹配模块名（lowerModule），methodName 匹配函数名（lowerName）
- * - 枚举/事件：className 匹配条目名（lowerName），methodName 匹配字段名
- * lowerItem/className/methodName 均已小写
+ * 使用 fuse.js 进行模糊搜索，支持多字段加权匹配
  */
-function matchQualifiedQueryLower(
-    li: LowerItem,
-    className: string,
-    methodName: string,
-): boolean {
-    if (!methodName) {return false;}
-    if (li.item.kind === 'function') {
-        return fuzzyMatchLower(li.lowerModule, className) &&
-            fuzzyMatchLower(li.lowerName, methodName);
-    }
-    // 枚举/事件
-    return fuzzyMatchLower(li.lowerName, className) &&
-        li.lowerFields.some(f => fuzzyMatchLower(f.name, methodName));
-}
-
-/** 预小写化的搜索条目（避免重复 toLowerCase） */
-interface LowerItem {
-    item: ApiItem;
-    lowerName: string;
-    lowerModule: string;
-    lowerDesc: string;
-    lowerParams: Array<{ name: string; desc: string }>;
-    lowerFields: Array<{ name: string; desc: string }>;
-}
-
-function toLowerItem(item: ApiItem): LowerItem {
-    return {
-        item,
-        lowerName: item.name.toLowerCase(),
-        lowerModule: item.module.toLowerCase(),
-        lowerDesc: item.description.toLowerCase(),
-        lowerParams: item.parameters.map(p => ({
-            name: p.name.toLowerCase(),
-            desc: p.desc.toLowerCase(),
-        })),
-        lowerFields: item.fields.map(f => ({
-            name: f.name.toLowerCase(),
-            desc: f.desc.toLowerCase(),
-        })),
-    };
-}
-
-/** 基于预小写化数据计算分数 */
-function scoreLowerItem(li: LowerItem, q: string): number {
-    const { lowerName: name, lowerModule: mod, lowerDesc: desc, lowerParams, lowerFields } = li;
-    let score = 0;
-
-    if (name === q) {score += 200;}
-    if (name.startsWith(q)) {score += 100;}
-    const initials = name.replace(/[a-z]/g, '');
-    if (initials.includes(q)) {score += 60;}
-    if (name.includes(q)) {score += 30;}
-    if (fuzzyMatchLower(name, q)) {score += 10;}
-    if (lowerParams.some(p => fuzzyMatchLower(p.name, q))) {score += 8;}
-    if (fuzzyMatchLower(desc, q)) {score += 5;}
-    if (lowerFields.some(f => fuzzyMatchLower(f.name, q))) {score += 5;}
-
-    // 限定名匹配（类名.方法 / 模块:函数）
-    const sepIdx = q.search(/[.:]/);
-    if (sepIdx > 0) {
-        const className = q.substring(0, sepIdx);
-        const methodName = q.substring(sepIdx + 1);
-        if (methodName) {
-            if (li.item.kind === 'function') {
-                if (fuzzyMatchLower(mod, className) && fuzzyMatchLower(name, methodName)) {
-                    score += 150;
-                }
-            } else {
-                if (fuzzyMatchLower(name, className) &&
-                    lowerFields.some(f => fuzzyMatchLower(f.name, methodName))) {
-                    score += 150;
-                }
-            }
-        }
-    }
-
-    return score;
-}
-
-/** 过滤并排序搜索结果 */
 function searchItems(
     items: ApiItem[],
     query: string,
@@ -501,7 +405,7 @@ function searchItems(
 ): { results: ApiItem[]; totalCount: number } {
     let filtered = items;
 
-    // 版本/模块/类型筛选（这些字段无需小写）
+    // 版本/模块/类型筛选
     if (versionFilter !== 'all') {
         filtered = filtered.filter(item => item.version === versionFilter);
     }
@@ -512,95 +416,60 @@ function searchItems(
         filtered = filtered.filter(item => item.kind === kindFilter);
     }
 
-    // 文本搜索
-    if (query.trim()) {
-        // 剥离尾部括号 ()（），如 getPos() → getPos
-        const q = query.trim().toLowerCase().replace(/[（(]\s*[）)]?\s*$/, '');
-
-        // 一次性预处理所有条目的小写版本
-        const lowerItems = filtered.map(toLowerItem);
-
-        // 过滤
-        const matched = lowerItems.filter(li => {
-            const { lowerName: name, lowerDesc: desc, lowerParams, lowerFields } = li;
-            // 限定名查询：类名.方法 或 模块:函数
-            const sepIdx = q.search(/[.:]/);
-            if (sepIdx >= 0) {
-                if (matchQualifiedQueryLower(li, q.substring(0, sepIdx), q.substring(sepIdx + 1))) {return true;}
-            }
-            if (fuzzyMatchLower(name, q)) {return true;}
-            if (fuzzyMatchLower(desc, q)) {return true;}
-            if (lowerParams.some(p => fuzzyMatchLower(p.name, q) || fuzzyMatchLower(p.desc, q))) {return true;}
-            if (lowerFields.some(f => fuzzyMatchLower(f.name, q) || fuzzyMatchLower(f.desc, q))) {return true;}
-            return false;
-        });
-
-        // 排序（按分数降序）
-        matched.sort((a, b) => {
-            const scoreDiff = scoreLowerItem(b, q) - scoreLowerItem(a, q);
-            if (scoreDiff !== 0) {return scoreDiff;}
-            return customSortCompare(a.item, b.item);
-        });
-
-        filtered = matched.map(li => li.item);
-    } else {
+    // 无搜索词时按版本→模块→名称排序
+    if (!query.trim()) {
         filtered.sort((a, b) => {
-            const verCmp = versionWeight(a.version) - versionWeight(b.version);
-            if (verCmp !== 0) {return verCmp;}
+            const verA = a.version === '3.0' ? 0 : 1;
+            const verB = b.version === '3.0' ? 0 : 1;
+            if (verA !== verB) {return verA - verB;}
             const modCmp = a.module.localeCompare(b.module);
             if (modCmp !== 0) {return modCmp;}
             return a.name.localeCompare(b.name);
         });
+        return { results: filtered, totalCount: filtered.length };
     }
 
-    return { results: filtered, totalCount: filtered.length };
-}
+    // 文本搜索：剥离尾部括号 ()（），如 getPos() → getPos
+    const q = query.trim().toLowerCase().replace(/[（(]\s*[）)]?\s*$/, '');
 
-/** 种类权重：函数→枚举→事件 */
-function kindWeight(kind: string): number {
-    switch (kind) {
-        case 'function': return 0;
-        case 'enum': return 1;
-        case 'event': return 2;
-        default: return 3;
-    }
-}
+    const fuse = new Fuse(filtered, {
+        keys: [
+            { name: 'name', weight: 5 },
+            { name: 'module', weight: 2 },
+            { name: 'className', weight: 2 },
+            { name: 'description', weight: 1 },
+            { name: 'parameters.name', weight: 2 },
+            { name: 'parameters.desc', weight: 0.5 },
+            { name: 'fields.name', weight: 2 },
+            { name: 'fields.desc', weight: 0.5 },
+            {
+                name: 'qualifiedName',
+                weight: 4,
+                getFn: (item: ApiItem) => {
+                    const names: string[] = [];
+                    if (item.module) {
+                        names.push(`${item.module}:${item.name}`);
+                        names.push(`${item.module}.${item.name}`);
+                    }
+                    if (item.className) {
+                        names.push(`${item.className}:${item.name}`);
+                        names.push(`${item.className}.${item.name}`);
+                    }
+                    return names;
+                },
+            },
+        ],
+        threshold: 0.3,
+        minMatchCharLength: 1,
+        includeScore: true,
+        shouldSort: true,
+        findAllMatches: true,
+    });
 
-/** 事件类内部顺序：TriggerEvent→ObjectEvent→CurEventParam→其他 */
-function eventClassWeight(name: string): number {
-    if (name === 'TriggerEvent') {return 0;}
-    if (name === 'ObjectEvent') {return 1;}
-    if (name === 'CurEventParam') {return 2;}
-    return 3;
-}
+    const fuseResults = fuse.search(q);
+    const results = fuseResults.map(r => r.item);
 
-/** 版本权重：3.0→2.0 */
-function versionWeight(version: string): number {
-    return version === '3.0' ? 0 : 1;
-}
-
-/** 自定义排序比较器 */
-function customSortCompare(a: ApiItem, b: ApiItem): number {
-    // 1. 种类排序：函数→枚举→事件
-    const kindCmp = kindWeight(a.kind) - kindWeight(b.kind);
-    if (kindCmp !== 0) {return kindCmp;}
-
-    // 2. 事件类内部排序：TriggerEvent→ObjectEvent→CurEventParam
-    if (a.kind === 'event') {
-        const evtCmp = eventClassWeight(a.name) - eventClassWeight(b.name);
-        if (evtCmp !== 0) {return evtCmp;}
-    }
-
-    // 3. 版本排序：3.0→2.0
-    const verCmp = versionWeight(a.version) - versionWeight(b.version);
-    if (verCmp !== 0) {return verCmp;}
-
-    // 4. 模块名排序
-    const modCmp = a.module.localeCompare(b.module);
-    if (modCmp !== 0) {return modCmp;}
-
-    // 5. 名称排序
-    return a.name.localeCompare(b.name);
+    return { results, totalCount: results.length };
 }
 
 // Webview View Provider
@@ -716,8 +585,10 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
                 // 每个字段展开为独立条目
                 let matchedAnyField = false;
                 for (const field of item.fields) {
-                    // 有搜索词时只包含匹配的字段
-                    if (q && !fuzzyMatchLower(field.name.toLowerCase(), q) && !fuzzyMatchLower(field.desc.toLowerCase(), q)) {
+                    // 有搜索词时只包含匹配的字段（简单字符级模糊匹配）
+                    const lowerFieldName = field.name.toLowerCase();
+                    const lowerFieldDesc = field.desc.toLowerCase();
+                    if (q && !lowerFieldName.includes(q) && !lowerFieldDesc.includes(q)) {
                         continue;
                     }
                     matchedAnyField = true;
@@ -921,6 +792,27 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
         const cssUri = webview.asWebviewUri(vscode.Uri.joinPath(webviewDir, 'style.css'));
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(webviewDir, 'script.js'));
 
+        // 读取 SVG 图标文件，直接内联为 <svg> 元素（零外部依赖、无 CSP 问题）
+        const iconDir = path.join(this._extensionUri.fsPath, 'addon', 'webview', 'assets', 'img');
+        const readSvg = (name: string): string => {
+            const filePath = path.join(iconDir, name);
+            try {
+                return fs.readFileSync(filePath, 'utf-8').trim();
+            } catch {
+                return '';
+            }
+        };
+        const searchSvg = readSvg('search.svg');
+        const closeSvg = readSvg('close.svg');
+        const copySvg = readSvg('copy.svg');
+        const checkSvg = readSvg('check.svg');
+
+        // SVG 的 HTML 转义版本（用于 data-* 属性，避免双引号破坏属性结构）
+        const escHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const copySvgAttr = escHtml(copySvg);
+        const checkSvgAttr = escHtml(checkSvg);
+        const searchSvgAttr = escHtml(searchSvg);
+
         // 读取 marked 库并内联到 HTML 中
         const markedPath = path.join(this._extensionUri.fsPath, 'node_modules', 'marked', 'lib', 'marked.umd.js');
         let markedScript = '';
@@ -940,6 +832,15 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
             .replace(/\{\{cspUri\}\}/g, webview.cspSource)
             .replace(/\{\{cssUri\}\}/g, cssUri.toString())
             .replace(/\{\{scriptUri\}\}/g, scriptUri.toString())
+            // 直接内联 SVG（作为 DOM 元素）
+            .replace(/\{\{searchSvg\}\}/g, searchSvg)
+            .replace(/\{\{closeSvg\}\}/g, closeSvg)
+            .replace(/\{\{copySvg\}\}/g, copySvg)
+            .replace(/\{\{checkSvg\}\}/g, checkSvg)
+            // HTML 转义版本（用于 data-* 属性，避免双引号破坏结构）
+            .replace(/\{\{copySvgAttr\}\}/g, copySvgAttr)
+            .replace(/\{\{checkSvgAttr\}\}/g, checkSvgAttr)
+            .replace(/\{\{searchSvgAttr\}\}/g, searchSvgAttr)
             .replace('</head>',
                 `<script nonce="${nonce}">${markedScript}</script>\n</head>`);
 
