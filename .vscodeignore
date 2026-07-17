@@ -25,6 +25,7 @@ node_modules/
 # 文档
 *.md
 complete/*.md
+docs/
 
 # 其他
 .yarnrc
@@ -33,6 +34,5 @@ complete/*.md
 __pycache__/
 tools/
 pyproject.toml
-AiDesc/
-template/
 out/
+.github/

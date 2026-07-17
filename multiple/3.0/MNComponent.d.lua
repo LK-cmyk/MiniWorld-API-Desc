@@ -5,9 +5,7 @@ _G.Component = Component
 
 --- 获取该组件挂载的对象实例
 --- @return nil @挂载对象
-function Component:GetGameObject() 
-    return nil
-end
+function Component:GetGameObject() return nil end
 
 --- 获取组件挂载的对象实例id
 --- @return number @对象实例id
@@ -25,8 +23,7 @@ function Component:AddComponent(componentId) return nil end
 --- 删除在组件所在的对象上的指定组件
 --- @param componentId string @组件ID
 --- @return nil
-function Component:RemoveComponent(componentId)
-end
+function Component:RemoveComponent(componentId) end
 
 --- 获取组件所在对象上的指定组件
 --- @param componentId string @组件ID
@@ -37,28 +34,24 @@ function Component:GetComponent(componentId) return nil end
 --- @param eventId string @消息ID
 --- @param ... any @消息参数
 --- @return nil
-function Component:PushCustomEvent(eventId, ...)
-end
+function Component:PushCustomEvent(eventId, ...) end
 
 --- 发送自定义消息(同步)
 --- @param eventId string @消息ID
 --- @param ... any @消息参数
 --- @return nil
-function Component:PushCustomEventSync(eventId, ...)
-end
+function Component:PushCustomEventSync(eventId, ...) end
 
 --- 监听自定义消息(广播)
 --- @param eventId string @消息ID
 --- @param callback function @回调函数
 --- @return nil
-function Component:AddCustomEvent(eventId, callback)
-end
+function Component:AddCustomEvent(eventId, callback) end
 
 --- 移除自定义事件监听
 --- @param eventId string @消息ID
 --- @return nil
-function Component:RemoveCustomEvent(eventId)
-end
+function Component:RemoveCustomEvent(eventId) end
 
 --- 添加触发事件(该函数只在UI跟世界类型组件有效)
 --- @param eventType number @事件类型
@@ -66,21 +59,18 @@ end
 --- @param filterParam1? any @过滤参数1(缺省参数)
 --- @param filterParam2? any @过滤参数2(缺省参数)
 --- @return nil
-function Component:AddTriggerEvent(eventType, callback, filterParam1, filterParam2)
-end
+function Component:AddTriggerEvent(eventType, callback, filterParam1, filterParam2) end
 
 --- 移除触发事件监听
 --- @param eventType number @事件类型
 --- @return nil
-function Component:RemoveTriggerEvent(eventType)
-end
+function Component:RemoveTriggerEvent(eventType) end
 
 --- 发送对象事件(异步)，只有同个对象上监听的组件才能收到事件
 --- @param eventType string @自定义事件类型
 --- @param ... any @事件内容
 --- @return nil
-function Component:PushEvent(eventType, ...)
-end
+function Component:PushEvent(eventType, ...) end
 
 --- 发送对象事件(同步)，只有同个对象上监听的组件才能收到事件
 --- @param eventType string @自定义事件类型
@@ -91,8 +81,11 @@ function Component:PushEventSync(eventType, ...) return nil end
 --- 监听对象事件(可以监听自定义的，也能监听官方内置对象事件)
 --- @param eventType string|number @事件类型
 --- @param callback function @回调函数
+--- @param priority? number @优先级
+--- @param filtern1? any @过滤参数1
+--- @param filtern2? any @过滤参数2
 --- @return nil
-function Component:AddEvent(eventType, callback) return nil end
+function Component:AddEvent(eventType, callback, priority, filtern1, filtern2) return nil end
 
 --- 移除对象的事件监听
 --- @param eventType string|number @事件类型
