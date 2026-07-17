@@ -19,20 +19,23 @@ pack.ps1
 .vscode-test/
 **/.vscode-test.*
 
-# 依赖（全部为 devDependencies，无需打包）
+# 依赖
 node_modules/
+.venv/
+uv.lock
 
 # 文档
 /*.md
 complete/*.md
 docs/
+addon/README.md
+README.md.bak
+README.en.md
 
 # 其他
 .yarnrc
 *.vsix
-.venv/
 __pycache__/
 tools/
-pyproject.toml
 out/
 .github/
