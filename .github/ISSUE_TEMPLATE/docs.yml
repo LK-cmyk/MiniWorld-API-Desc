@@ -1,7 +1,7 @@
 name: 文档问题 | Docs Issue
 description: 报告文档错误、建议文档改进或提出文档相关问题 | Report document errors, suggest document improvements, or raise document-related questions
 title: "[Docs] "
-labels: docs
+labels: documentation
 assignees: []
 body:
   - type: markdown
