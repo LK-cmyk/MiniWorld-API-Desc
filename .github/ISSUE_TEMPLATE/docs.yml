@@ -1,0 +1,127 @@
+name: 文档问题 | Docs Issue
+description: 报告文档错误、建议文档改进或提出文档相关问题 | Report document errors, suggest document improvements, or raise document-related questions
+title: "[Docs] "
+labels: docs
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提交前请确认：
+
+        * 该问题确实是 **MiniWorld API Desc 文档相关的错误**，而**不是其他原因所导致的问题**。
+        * 已经搜索了现有的 issues 和文档，避免重复报告。
+
+        Before submitting, please confirm:
+
+        * This issue is indeed an **error related to MiniWorld API Desc documentation**, and **not caused by anything else**.
+        * You have searched existing issues and documentation to avoid duplicates.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: 文档类型 | Document Type
+      description: 请选择您要报告的文档类型 | Please select the type of documentation
+      options:
+        - UGC 2.0 声明 | UGC 2.0 Declaration
+        - UGC 3.0 声明 | UGC 3.0 Declaration
+        - miniworld-ugc-20
+        - miniworld-ugc-30
+        - 项目 README | Project README
+        - 其他 | Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: 问题类型 | Issue Type
+      description: 请选择您要报告的问题类型 | Please select the type of issue
+      options:
+        - 文档错误 | Document Error
+        - API文档缺失或不完整 | API Documentation Missing or Incomplete
+        - 示例代码问题 | Example Code Issue
+        - 文档结构建议 | Document Structure Suggestion
+        - 文档描述建议 | Document Description Suggestion
+        - 其他改进建议 | Other Improvement Suggestions
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: 位置 | Location
+      description: 请提供问题出现的具体位置（文件名、行号等） | Please provide the specific location (filename, line number, etc.)
+      placeholder: |
+        例如：
+        - 文件：docs/miniworld-ugc-20/references/API.txt
+        - 行号：第15行
+        - 函数名：Game:getDefString
+        - 章节：2.0版本 - 游戏模块
+
+        For example:
+        - File: docs/miniworld-ugc-20/references/API.txt
+        - Line number: Line 15
+        - Function name: Game:getDefString
+        - Section: 2.0 Version - Game Module
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述 | Description
+      description: 请详细描述您遇到的问题或建议 | Please describe the issue or suggestion in detail
+      placeholder: |
+        请描述：
+        - 问题的具体表现
+        - 期望的正确行为
+        - 如果是错误，请提供正确的内容
+        - 如果是建议，请说明改进原因
+
+        Please describe:
+        - The specific manifestation of the issue
+        - The expected correct behavior
+        - If it's an error, please provide the correct content
+        - If it's a suggestion, please explain the reason for the improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 重现步骤 | Reproduction Steps
+      description: （可选）请提供重现该问题的步骤 | (Optional) Please provide the steps to reproduce the issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 额外信息 | Additional Information
+      description: （可选）提供任何其他相关信息 | (Optional) Provide any other relevant information
+      placeholder: |
+        可以包括：
+        - 相关的错误截图
+        - 参考的其他文档或资源
+        - 您尝试过的解决方案
+        - 环境信息（版本号等）
+
+        You can include:
+        - Screenshots of related errors
+        - References to other documentation or resources
+        - Solutions you have tried
+        - Environment information (version numbers, etc.)
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 确认事项 | Confirmations
+      description: 请确认以下事项 | Please confirm the following items
+      options:
+        - label: 我已经搜索了现有的 issues 和文档 | I have searched existing issues and documentation
+          required: true
+        - label: 我已经阅读了项目的贡献指南 | I have read the project's contribution guidelines
+          required: true
