@@ -5,10 +5,10 @@
     1. 清理旧的编译输出
     2. 安装/更新 npm 依赖
     3. 安装/更新 Python 依赖
-    4. 编译 TypeScript
+    4. 使用 esbuild 编译 TypeScript（单文件打包）
     5. 运行 ESLint 检查
     6. 运行 Python 工具（可选，通过参数控制）
-    7. 打包 VS Code 扩展 (.vsix)
+    7. 打包 VS Code 扩展 (.vsix）
 ===========================================================================
 #>
 
@@ -18,6 +18,7 @@
 param(
     [switch]$SkipInstall, # 跳过 npm install
     [switch]$SkipLint, # 跳过 ESLint
+    [switch]$SkipClean, # 跳过清理步骤
     [switch]$CompileOnly, # 仅编译，不打包
     [switch]$Clean # 仅清除输出目录
 )
@@ -62,7 +63,7 @@ if ($Clean) {
 
 # 1. 安装 npm 依赖
 if (-not $SkipInstall) {
-    Write-Step "[1/4] 安装/更新 npm 依赖..."
+    Write-Step "[1/5] 安装/更新 npm 依赖..."
     Push-Location $ProjectRoot
     try {
         npm install
@@ -75,20 +76,33 @@ if (-not $SkipInstall) {
     Write-WarningMsg "跳过 npm install"
 }
 
-# 2. 编译 TypeScript
-Write-Step "[2/4] 编译 TypeScript..."
+# 2. 清理旧的编译输出
+if (-not $SkipClean) {
+    Write-Step "[2/5] 清理旧的编译输出..."
+    if (Test-Path $OutDir) {
+        Remove-Item -Recurse -Force $OutDir
+        Write-Success "已清理: $OutDir"
+    } else {
+        Write-WarningMsg "输出目录不存在，跳过清理"
+    }
+} else {
+    Write-WarningMsg "跳过清理步骤"
+}
+
+# 3. 使用 esbuild 编译 TypeScript
+Write-Step "[3/5] 使用 esbuild 编译 TypeScript..."
 Push-Location $ProjectRoot
 try {
     npm run compile
-    if ($LASTEXITCODE -ne 0) { throw "TypeScript 编译失败" }
-    Write-Success "TypeScript 编译完成 → $OutDir"
+    if ($LASTEXITCODE -ne 0) { throw "esbuild 编译失败" }
+    Write-Success "esbuild 编译完成 → $OutDir/extension.js（单文件打包，含 sourcemap）"
 } finally {
     Pop-Location
 }
 
-# 3. ESLint 检查
+# 4. ESLint 检查
 if (-not $SkipLint) {
-    Write-Step "[3/4] 运行 ESLint..."
+    Write-Step "[4/5] 运行 ESLint..."
     Push-Location $ProjectRoot
     try {
         npm run lint
@@ -101,14 +115,14 @@ if (-not $SkipLint) {
     Write-WarningMsg "跳过 ESLint"
 }
 
-# 4. 打包 VS Code 扩展
+# 5. 打包 VS Code 扩展
 if ($CompileOnly) {
     Write-Step "编译模式：跳过打包"
     Write-Success "编译完成！输出目录: $OutDir"
     return
 }
 
-Write-Step "[4/4] 打包 VS Code 扩展..."
+Write-Step "[5/5] 打包 VS Code 扩展..."
 Push-Location $ProjectRoot
 try {
     # 检查 vsce 是否可用

@@ -1,13 +1,13 @@
 {
   "name": "miniworld-api-desc",
-  "publisher": "LK-cmyk",
+  "publisher": "UU-cmyk",
   "displayName": "MiniWorld API Description",
   "description": "MiniWorld API Description",
   "version": "0.6.4",
   "icon": "img/Logo-128px.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LK-cmyk/MiniWorld-API-Desc.git"
+    "url": "https://github.com/UU-cmyk/MiniWorld-API-Desc.git"
   },
   "engines": {
     "vscode": "^1.125.0"
@@ -67,8 +67,9 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p .",
-    "watch": "tsc -watch -p .",
+    "compile": "esbuild addon/src/extension.ts --bundle --outfile=addon/out/extension.js --external:vscode --format=cjs --platform=node --target=node20 --sourcemap",
+    "watch": "esbuild addon/src/extension.ts --bundle --outfile=addon/out/extension.js --external:vscode --format=cjs --platform=node --target=node20 --sourcemap --watch",
+    "typecheck": "tsc --noEmit",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint addon/src",
     "test": "vscode-test"
@@ -79,6 +80,7 @@
     "@types/vscode": "^1.125.0",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0",
+    "esbuild": "^0.28.1",
     "eslint": "^10.5.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.1"

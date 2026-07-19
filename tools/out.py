@@ -11,9 +11,15 @@ logging.basicConfig(
 
 # 路径配置
 BASE_DIR = Path(__file__).resolve().parent
-AI_DESC_30_INPUT_PATH = BASE_DIR / ".." / "docs" / "miniworld-ugc-30"
-AI_DESC_20_INPUT_PATH = BASE_DIR / ".." / "docs" / "miniworld-ugc-20"
-OUTPUT_PATH = BASE_DIR / ".." / "out"
+PROJECT_ROOT = BASE_DIR / ".."
+AI_DESC_30_INPUT_PATH = PROJECT_ROOT / "docs" / "miniworld-ugc-30"
+AI_DESC_20_INPUT_PATH = PROJECT_ROOT / "docs" / "miniworld-ugc-20"
+OUTPUT_PATH = PROJECT_ROOT / "out"
+
+# esbuild 编译配置
+ADDON_SRC_ENTRY = PROJECT_ROOT / "addon" / "src" / "extension.ts"
+ADDON_OUT_DIR = PROJECT_ROOT / "addon" / "out"
+ADDON_OUT_FILE = ADDON_OUT_DIR / "extension.js"
 
 
 def ai_desc_30() -> None:
@@ -54,15 +60,62 @@ def ai_desc_20() -> None:
     logging.info("ai-desc-2.0.zip 已生成 -> %s", zip_path)
 
 
+def compile_typescript() -> None:
+    """使用 esbuild 编译 TypeScript"""
+    ADDON_OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    cmd = [
+        "npx.cmd",
+        "esbuild",
+        str(ADDON_SRC_ENTRY),
+        "--bundle",
+        f"--outfile={ADDON_OUT_FILE}",
+        "--external:vscode",
+        "--format=cjs",
+        "--platform=node",
+        "--target=node20",
+        "--sourcemap",
+    ]
+
+    logging.info("开始使用 esbuild 编译 TypeScript...")
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        cwd=str(PROJECT_ROOT),
+    )
+
+    if result.returncode != 0:
+        error_msg = result.stderr.strip() or result.stdout.strip()
+        raise RuntimeError(
+            f"esbuild 编译失败 (返回码 {result.returncode}):\n{error_msg}"
+        )
+
+    logging.info("esbuild 编译完成 → %s", ADDON_OUT_FILE)
+    if result.stderr.strip():
+        logging.info("esbuild 输出: %s", result.stderr.strip())
+
+
 def addon() -> None:
-    """运行 PowerShell 脚本打包 VSIX 插件，并移动到输出目录"""
-    ps_script = BASE_DIR / ".." / "pack.ps1"
+    """使用 esbuild 编译 TS，再运行 PowerShell 脚本打包 VSIX 插件，并移动到输出目录"""
+    ps_script = PROJECT_ROOT / "pack.ps1"
     if not ps_script.exists():
         raise FileNotFoundError(f"PowerShell 脚本未找到: {ps_script}")
 
-    logging.info("开始执行 PowerShell 脚本: %s", ps_script)
+    # 提前用 esbuild 编译，pack.ps1 中跳过重复步骤
+    compile_typescript()
+    logging.info("开始执行 PowerShell 脚本 (跳过安装/清理): %s", ps_script)
     result = subprocess.run(
-        ["powershell", "-ExecutionPolicy", "Bypass", "-File", str(ps_script)],
+        [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(ps_script),
+            "-SkipInstall",
+            "-SkipClean",
+        ],
         capture_output=True,
         text=True,
         encoding="utf-8",
