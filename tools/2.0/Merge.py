@@ -3,11 +3,16 @@
 import os
 
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
-INPUT_DIR: str = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "multiple", "2.0"))
-OUTPUT_FILE: str = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "merged.2.0.lua"))
+INPUT_DIR: str = os.path.abspath(
+    os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "multiple", "2.0")
+)
+OUTPUT_FILE: str = os.path.abspath(
+    os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "out", "merged.2.0.lua")
+)
 
 # 自定义合并顺序
 ORDER_DEFINITION: list[str] = [
+    "MNEnumLib",  # 枚举库
     "MNGame",  # 游戏
     "MNGameRule",  # 游戏规则
     "MNWorld",  # 世界

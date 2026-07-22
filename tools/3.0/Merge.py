@@ -5,7 +5,7 @@ FOLDER_PATH: str = os.path.abspath(
     os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "multiple", "3.0")
 )  # 输入文件夹路径
 OUTPUT_FILE: str = os.path.abspath(
-    os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "merged.3.0.lua")
+    os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "out", "merged.3.0.lua")
 )  # 输出文件路径
 ORDER_DEFINITION: list[str] = [  # 自定义顺序定义
     "MNGlobalFunc",  # 全局函数

@@ -4,7 +4,7 @@ import os
 import re
 
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
-INPUT_FILE: str = os.path.join(SCRIPT_DIR, "..", "..", "merged.2.0.lua")
+INPUT_FILE: str = os.path.join(SCRIPT_DIR, "..", "..", "out", "merged.2.0.lua")
 OUTPUT_DIR: str = os.path.join(
     SCRIPT_DIR, "..", "..", "docs", "miniworld-ugc-20", "references"
 )
