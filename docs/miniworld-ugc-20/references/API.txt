@@ -1,3 +1,569 @@
+--- ErrorCode 错误码
+--- OK number 正确返回
+--- FAILED number 错误返回
+local ErrorCode = {}
+_G.ErrorCode = ErrorCode
+
+--- WorldType 游戏模式
+--- OWTYPE_SINGLE number 单人模式
+--- OWTYPE_CREATE number 多人创造模式
+--- OWTYPE_EXTREMITY number 极限模式
+--- OWTYPE_CREATE_RUNGAME number 由创造模式转的生存
+--- OWTYPE_GAMEMAKER number 自制玩法的编辑模式
+--- OWTYPE_GAMEMAKER_RUN number 自制玩法的运行模式
+--- OWTYPE_FREEMODE number 冒险模式之自由模式
+--- OWTYPE_RECORD number 录像模式
+local WorldType = {}
+_G.WorldType = WorldType
+
+--- TerrainType 游戏地形
+--- TERRAIN_FLAT number 平坦地形
+--- TERRAIN_NORMAL number 随机地形
+local TerrainType = {}
+_G.TerrainType = TerrainType
+
+--- CameraEditState 自定义视角编辑状态
+--- CAMERA_EDIT_STATE_NULL number 空
+--- CAMERA_EDIT_STATE_EDIT number 编辑
+--- CAMERA_EDIT_STATE_TEST number 测试
+local CameraEditState = {}
+_G.CameraEditState = CameraEditState
+
+--- MAPMARK_TYPE 小地图绘图类型
+--- MMARK_LINE number 线形标记
+--- MMARK_RECTANGLE number 矩形标记
+--- MMARK_CIRCLE number 圆形标记
+local MAPMARK_TYPE = {}
+_G.MAPMARK_TYPE = MAPMARK_TYPE
+
+--- EQUIP_SLOT_TYPE 装备部位类型
+--- EQUIP_HEAD number 头
+--- EQUIP_BREAST number 身体
+--- EQUIP_LEGGING number 腿
+--- EQUIP_SHOE number 脚
+--- EQUIP_PIFENG number 披风
+--- EQUIP_WEAPON number 武器
+--- MAX_EQUIP_SLOTS number 最大装备栏
+local EQUIP_SLOT_TYPE = {}
+_G.EQUIP_SLOT_TYPE = EQUIP_SLOT_TYPE
+
+--- MODATTRIB_TYPE 附魔属性类型
+--- MODATTR_MOVE_SPEED number 移动速度
+--- MODATTR_SWIM_SPEED number 游泳速度
+--- MODATTR_JUMP_SPEED number 往上跳的速度
+--- MODATTR_ATTACK_PUNCH number 近程攻击别人时加成的百分比
+--- MODATTR_ATTACK_RANGE number 远程攻击别人时加成的百分比
+--- MODATTR_ATTACK_EXPLODE number 爆炸攻击别人时加成的百分比
+--- MODATTR_ATTACK_FIRE number 火攻击别人时加成的百分比
+--- MODATTR_ATTACK_POISON number 毒攻击别人时加成的百分比
+--- MODATTR_ATTACK_WITHER number 混乱攻击别人时加成的百分比
+--- MODATTR_ATTACK_PLAYER number 攻击玩家时加成的百分比
+--- MODATTR_ATTACK_UNDEAD number 攻击亡灵时加成的百分比
+--- MODATTR_ATTACK_ANIMAL number 攻击动物别人时加成的百分比
+--- MODATTR_DAMAGED_PUNCH number 被近程攻击时加成的百分比
+--- MODATTR_DAMAGED_RANGE number 被远程攻击时加成的百分比
+--- MODATTR_DAMAGED_EXPLODE number 被爆炸攻击时加成的百分比
+--- MODATTR_DAMAGED_FIRE number 被火攻击时加成的百分比
+--- MODATTR_DAMAGED_POISON number 被毒攻击时加成的百分比
+--- MODATTR_DAMAGED_WITHER number 被混乱攻击时加成的百分比
+--- MODATTR_DAMAGED_FALLING number 高处掉下伤害加成的百分比
+--- MODATTR_ARMOR_PUNCH number 近程护甲加点
+--- MODATTR_ARMOR_RANGE number 远程护甲加点
+--- MODATTR_ARMOR_EXPLODE number 爆炸护甲加点
+--- MODATTR_DAMAGE_ABSORB number 吸收伤害
+--- MODATTR_CRITICAL_HIT number 暴击伤害加成
+--- MODATTR_KNOCK number 增加攻击别人的击退距离
+--- MODATTR_KNOCK_RESIST number 减少击退距离
+--- MODATTR_KNOCK_RESIST_PROB number 击退概率抵抗值, 0.2表示有20%概率不被击退
+--- MODATTR_ACTOR_SCALE number 角色大小 0 - 1.0 只针对玩家对象有效
+--- MODATTR_DIG_SPEED number 挖掘速度
+--- MODATTR_LUCK_DIG number 挖掘幸运, 0.2表示增加20%掉落概率
+--- MODATTR_LUCK_KILLMOB number 怪物掉落
+--- MODATTR_VIEW_BRIGHT number 视野亮度 0 - 1.0
+--- MODATTR_OXYGEN_SUPPLY number 氧气提供
+--- MAX_MOB_MODATTR number 怪物最大附魔属性
+--- MAX_MOD_ATTRIB number 最大附魔属性
+--- MAX_PLAYER_MODATTR number 玩家最大附魔属性
+local MODATTRIB_TYPE = {}
+_G.MODATTRIB_TYPE = MODATTRIB_TYPE
+
+--- TEAM_RESULTS 游戏战斗结果
+--- TEAM_RESULTS_NONE number 胜负未定
+--- TEAM_RESULTS_WIN number 胜利
+--- TEAM_RESULTS_LOSE number 失败
+--- TEAM_RESULTS_DOGFALL number 平局
+local TEAM_RESULTS = {}
+_G.TEAM_RESULTS = TEAM_RESULTS
+
+--- GSOUND_TYPE 声音类型
+--- GSOUND_DIG number 挖掘
+--- GSOUND_DESTROY number 破坏
+--- GSOUND_PLACE number 放置
+--- GSOUND_FALLGROUND number 摔落
+--- GSOUND_WALK number 行走
+local GSOUND_TYPE = {}
+_G.GSOUND_TYPE = GSOUND_TYPE
+
+--- ACTORBODY_EFFECT 生物身体特效
+--- BODYFX_HURT number 受伤
+--- BODYFX_FIRE number 燃烧
+--- BODYFX_PORTAL number 传送门
+--- BODYFX_ACCUMFIRE number 火焰累积
+--- BODYFX_DRAGONFIRE number 龙焰
+--- BODYFX_DRAGONSUMMON number 龙召唤
+--- BODYFX_TAME_SUCCEED number 驯服成功
+--- BODYFX_TAME_FAILED number 驯服失败
+--- BODYFX_TAME_FOOD number 驯服食物
+--- BODYFX_TAME_NOFOOD number 无驯服食物
+--- BODYFX_AI_NEEDREEDS number AI需要物品
+--- BODYFX_FEAR number 恐惧
+--- BODYFX_ROLECOLLECT number 角色收集
+--- BODYFX_ROLEJUMP number 角色跳跃
+--- BODYFX_DEADPROTECT number 死亡保护
+--- BODYFX_DRAGONDIE0 number 龙死亡0
+--- BODYFX_DRAGONDIE1 number 龙死亡1
+--- BODYFX_DRAGONDIE2 number 龙死亡2
+--- BODYFX_HORSE_FLY number 马飞行
+--- BODYFX_DISAPPEAR number 消失
+--- BODYFX_HORSE_BENTENG number 马奔腾
+--- BODYFX_DANCE number 跳舞
+--- TOOLFX_JETPACK2 number 喷气背包
+--- BODYFX_INTERACTION number 交互
+--- HUDFX_HEADSHOT number 爆头
+--- HUDFX_NORMALSHOT number 普通射击
+--- BODYFX_MILKING number 挤奶
+--- BODYFX_AI_ANGRY number AI愤怒
+--- BODYFX_AI_SLEEP number AI睡眠
+--- BODYFX_TRANSPORT number 运输
+--- BODYFX_FORBIDDEN number 禁止
+--- BODYFX_CONCEAL number 潜行
+--- BODYFX_WEAPON_FIRE number 野人猎手武器上的火
+--- BODYFX_DIZZY number 眩晕
+--- BODYFX_MAKETROUBLE number 捣乱
+--- BODYFX_TRAINMOVE number 火车移动
+--- BODYFX_AI_HUNGRY number 饥饿
+--- BODYFX_BALL_CHARGE number 蓄力踢球特效
+--- BODYFX_BALL_SHOOT_RELEASE number 射球瞬间爆发特效
+--- BODYFX_ENCH_FALL number 附魔速降
+local ACTORBODY_EFFECT = {}
+_G.ACTORBODY_EFFECT = ACTORBODY_EFFECT
+
+--- OBJ_TYPE 游戏实例类型
+--- OBJTYPE_PLAYER number 玩家
+--- OBJTYPE_CREATURE number 生物(包含怪物、动物、NPC、BOSS等)
+--- OBJTYPE_DROPITEM number 掉落物
+--- OBJTYPE_MISSILE number 投掷物
+local OBJ_TYPE = {}
+_G.OBJ_TYPE = OBJ_TYPE
+
+--- BACKPACK_TYPE 玩家背包类型
+--- SHORTCUT number 快捷栏
+--- INVENTORY number 存储栏
+--- EQUIP number 装备栏
+local BACKPACK_TYPE = {}
+_G.BACKPACK_TYPE = BACKPACK_TYPE
+
+--- BPACK_SINDEX 存储栏起始位
+--- BACKPACK_START_INDEX number 背包栏
+--- SHORTCUT_START_INDEX number 快捷栏
+--- STORAGE_START_INDEX number 储物箱
+--- EQUIP_START_INDEX number 装备栏
+local BPACK_SINDEX = {}
+_G.BPACK_SINDEX = BPACK_SINDEX
+
+--- FACE_DIRECTION 玩家朝向
+--- DIR_NOT_INIT number 未指定
+--- DIR_NEG_X number X反方向
+--- DIR_POS_X number X正方向
+--- DIR_NEG_Z number Z反方向
+--- DIR_POS_Z number Z正方向
+--- DIR_NEG_Y number Y反方向
+--- DIR_POS_Y number Y正方向
+local FACE_DIRECTION = {}
+_G.FACE_DIRECTION = FACE_DIRECTION
+
+--- CREATUREATTR 生物属性枚举
+--- MAX_HP number 最大生命值
+--- CUR_HP number 当前生命值
+--- HP_RECOVER number 生命恢复
+--- MAX_HUNGER number 最大饥饿值
+--- CUR_HUNGER number 当前饥饿值
+--- MAX_OXYGEN number 最大氧气值
+--- CUR_OXYGEN number 当前氧气值
+--- RECOVER_OXYGEN number 氧气恢复速度
+--- WALK_SPEED number 移动速度
+--- RUN_SPEED number 奔跑速度
+--- SWIN_SPEED number 游泳速度
+--- JUMP_POWER number 跳跃力
+--- WEIGHT number 重量
+--- DODGE number 闪避率
+--- ATK_MELEE number 近战攻击
+--- ATK_REMOTE number 远程攻击
+--- DEF_MELEE number 近战防御
+--- DEF_REMOTE number 远程防御
+--- DIMENSION number 模型大小
+--- ATK_PHYSICAL number 物理攻击
+--- ATK_MAGIC number 元素攻击
+--- DEF_PHYSICAL number 物理防御
+--- DEF_MAGIC number 元素防御
+--- ENABLE_MOVE number 可移动
+--- ENABLE_ATTACK number 可攻击
+--- ENABLE_BEATTACKED number 可被攻击
+--- ENABLE_BEKILLED number 可被杀死
+--- ENABLE_PICKUP number 可拾取道具
+--- ENABLE_DEATHDROPITEM number 死亡掉落
+local CREATUREATTR = {}
+_G.CREATUREATTR = CREATUREATTR
+
+--- PLAYERATTR 玩家属性枚举
+--- MAX_HP number 最大生命值
+--- CUR_HP number 当前生命值
+--- HP_RECOVER number 生命恢复
+--- LIFE_NUM number 生命数
+--- MAX_HUNGER number 最大饥饿值
+--- CUR_HUNGER number 当前饥饿值
+--- MAX_OXYGEN number 最大氧气值
+--- CUR_OXYGEN number 当前氧气值
+--- RECOVER_OXYGEN number 氧气恢复速度
+--- WALK_SPEED number 移动速度
+--- RUN_SPEED number 奔跑速度
+--- SNEAK_SPEED number 潜行速度
+--- SWIN_SPEED number 游泳速度
+--- JUMP_POWER number 跳跃力
+--- DODGE number 闪避率
+--- ATK_MELEE number 近战攻击
+--- ATK_REMOTE number 远程攻击
+--- DEF_MELEE number 近战防御
+--- DEF_REMOTE number 远程防御
+--- DIMENSION number 大小
+--- SCORE number 分数
+--- LEVEL number 星星等级
+--- CUR_LEVELEXP number 当前经验
+--- CUR_LEVEL number 当前等级
+--- CUR_STRENGTH number 当前体力值
+--- MAX_STRENGTH number 当前最大体力值
+--- STRENGTH_RECOVER number 当前体力值恢复速度
+--- ATK_PHYSICAL number 物理攻击
+--- ATK_MAGIC number 元素攻击
+--- DEF_PHYSICAL number 物理防御
+--- DEF_MAGIC number 元素防御
+--- ENABLE_MOVE number 可移动
+--- ENABLE_PLACEBLOCK number 可摆放方块
+--- ENABLE_OPERATEBLOCK number 可操作方块
+--- ENABLE_DESTROYBLOCK number 可破坏方块
+--- ENABLE_USEITEM number 可使用道具
+--- ENABLE_ATTACK number 可攻击
+--- ENABLE_BEATTACKED number 可被攻击
+--- ENABLE_BEKILLED number 可被杀死
+--- ENABLE_PICKUP number 可拾取道具
+--- ENABLE_DEATHDROPITEM number 死亡掉落
+--- ENABLE_VEHICLEAUTOFORWARD number 载具自动前行
+--- ENABLE_DISCARDITEM number 可丢弃道具
+--- ITEM_DISABLE_THROW number 道具不可丢弃
+--- ITEM_DISABLE_DROP number 道具不可掉落
+local PLAYERATTR = {}
+_G.PLAYERATTR = PLAYERATTR
+
+--- CREATUREMOTION 生物行为枚举
+--- IDLE number 空闲
+--- STANDBY number 待机
+--- STROLL number 闲逛
+--- ATK_MELEE number 近战攻击
+--- ATK_REMOTE number 远程攻击
+--- FOLLOW number 跟随
+--- SWIM number 游泳
+--- RUN_AWAY number 逃跑
+--- SELF_BOMB number 自爆
+--- BEATTRACTED number 被吸引
+--- COPULATION number 交配
+local CREATUREMOTION = {}
+_G.CREATUREMOTION = CREATUREMOTION
+
+--- PLAYERMOTION 玩家行为枚举
+--- STATIC number 静止
+--- WALK number 行走
+--- RUN number 奔跑
+--- JUMP number 跳跃
+--- JUMP_TWICE number 二段跳
+--- SNEAK number 潜行
+--- FALL_GROUND number 落地
+--- TURNBACK number 转身(已取消)
+--- UP number 上升(已取消)
+--- DOWN number 下降(已取消)
+--- FALL number 下落(已取消)
+local PLAYERMOTION = {}
+_G.PLAYERMOTION = PLAYERMOTION
+
+--- TEAMATTR 队伍属性枚举
+--- PLAYER_NUM number 玩家数量
+--- SCORE number 分数
+local TEAMATTR = {}
+_G.TEAMATTR = TEAMATTR
+
+--- HURTTYPE 伤害类型枚举
+--- MELEE number 近战伤害
+--- REMOTE number 远程伤害
+--- BOMB number 爆炸伤害
+--- BURNING number 燃烧伤害
+--- TOXIN number 毒素伤害
+--- WITHER number 混乱伤害
+--- SUN number 日晒
+--- FALL number 跌落伤害
+--- ANVIL number 被砸中伤害
+--- CACTUS number 仙人掌伤害
+--- ASPHYXIA number 窒息伤害
+--- DROWN number 溺水伤害
+--- SUFFOCATE number 水下生物在空气中窒息伤害
+--- ANTIINJURY number 反伤
+--- LASER number 被激光伤害
+--- MAGIC number 元素伤害
+--- PHYSICS number 物理伤害
+local HURTTYPE = {}
+_G.HURTTYPE = HURTTYPE
+
+--- BLOCKATTR 方块属性枚举
+--- EXPLODE_RESISTANCE number 爆炸抗性
+--- HARDNESS number 硬度
+--- GLISSADE number 滑行惯性
+--- BURNING_SPEED number 燃烧速度
+--- BURNING_PROBABILITY number 燃烧几率
+--- LIGHTNESS number 亮度
+--- ENABLE_DESTROYED number 可破坏
+--- ENABLE_BEOPERATED number 可操作
+--- ENABLE_BEPUSHED number 可被推动
+--- ENABLE_DROPITEM number 可掉落道具
+--- BEPUSHED_DROPITEM number 被推动掉落
+local BLOCKATTR = {}
+_G.BLOCKATTR = BLOCKATTR
+
+--- BLOCKSTATUS 方块状态
+--- ACTIVE number 活跃(被激活)
+--- INACTIVE number 不活跃(未被激活)
+local BLOCKSTATUS = {}
+_G.BLOCKSTATUS = BLOCKSTATUS
+
+--- WEATHERSTATUS 天气状态枚举
+--- SHINE_AND_RAIN number 晴雨交替
+--- SHINE number 晴天
+--- RAIN number 雨天
+local WEATHERSTATUS = {}
+_G.WEATHERSTATUS = WEATHERSTATUS
+
+--- VIEWPORTTYPE 视口方向
+--- MAINVIEW number 主视角
+--- BACKVIEW number 背视角
+--- FRONTVIEW number 正视角
+--- BACK2VIEW number 背视角2
+--- TOPVIEW number 俯视角
+--- CUSTOMVIEW number 自定义视角
+local VIEWPORTTYPE = {}
+_G.VIEWPORTTYPE = VIEWPORTTYPE
+
+--- RESLIBTYPE 模板库类型
+--- NONE number 无
+--- BLOCK number 方块
+--- ITEM number 道具
+--- MONSTER number 生物
+--- PARTICLE number 特效
+--- SOUND number 音效
+local RESLIBTYPE = {}
+_G.RESLIBTYPE = RESLIBTYPE
+
+--- GRAPHICS 图文信息枚举
+--- GRAPHICS_HORNBOOK number 文字板
+--- GRAPHICS_SUSPENDBOOK number 漂浮文字
+--- GRAPHICS_PROGRESS number 进度条
+--- GRAPHICS_ARROW_POS number 箭头指向位置
+--- GRAPHICS_ARROW_ACTOR number 箭头指向生物
+--- GRAPHICS_LINE_POS number 线指向位置
+--- GRAPHICS_LINE_ACTOR number 线指向生物
+--- GRAPHICS_SURFACE_POS number 面指向界面
+--- GRAPHICS_SURFACE_ACTOR number 面指向生物
+--- GRAPHICS_IMAGE number 图片
+local GRAPHICS = {}
+_G.GRAPHICS = GRAPHICS
+
+--- FURNACEID 合成炉枚举
+--- FURNACEID_STONE number 石炉
+--- FURNACEID_IRON number 铁炉
+--- FURNACEID_COPPER number 铜炉
+local FURNACEID = {}
+_G.FURNACEID = FURNACEID
+
+--- STORAGEID 储物箱枚举
+--- STORAGEID_BOX number 储物箱
+--- STORAGEID_BOXROW number 大型储物箱（横）
+--- STORAGEID_BOXCOL number 大型储物箱（竖）
+local STORAGEID = {}
+_G.STORAGEID = STORAGEID
+
+--- SORT 排序枚举
+--- UP number 升序
+--- DOWN number 降序
+local SORT = {}
+_G.SORT = SORT
+
+--- MOVETYPE 移动方式枚举
+--- FLY number 飞行
+--- IDLE number 默认移动方式
+local MOVETYPE = {}
+_G.MOVETYPE = MOVETYPE
+
+--- EVENTDATE 设备时间类型枚举
+--- YEAR number 年
+--- MONTH number 月
+--- DAY number 日
+--- HOUR number 时
+--- MINUTE number 分
+--- SECOND number 秒
+--- TIMESTAMP number 时间戳
+local EVENTDATE = {}
+_G.EVENTDATE = EVENTDATE
+
+--- ITEMATTR 道具属性
+--- ATTACK number 攻击力
+--- STACKMAX number 叠加数
+--- SHORTDEFENSE number 近战防御
+--- LONGDEFENSE number 远程防御
+--- EXPLODEDEFENSE number 爆炸防御
+--- FIREDEFENSE number 燃烧防御
+--- POISONDEFENSE number 毒素防御
+--- WITHERDEFENSE number 混乱防御
+--- DURATION number 耐久度
+--- FIREINTERVAL number 射击间隔
+--- MAGAZINES number 弹夹量
+local ITEMATTR = {}
+_G.ITEMATTR = ITEMATTR
+
+--- DROPMODE 掉落物掉落方式
+--- DISCARDITEM number 丢弃道具
+--- DESTROYBOX number 箱子被破坏掉落
+--- DEFEATMOB number 生物被击败掉落
+--- DESTROYBLOCK number 方块被破坏掉落
+--- SPAWNITEM number 触发器创建
+--- CHANGEPLAYMODE number 掉落物对象转玩法创建
+local DROPMODE = {}
+_G.DROPMODE = DROPMODE
+
+--- ANIMMODE 动作播放方式
+--- ANIM_MODE_LOOP number 循环播放
+--- ANIM_MODE_ONCE number 播放一次
+--- ANIM_MODE_ONCE_STOP number 播放一次完毕,停在末尾
+--- ANIM_MODE_DEFAULT number 表格默认值播放
+local ANIMMODE = {}
+_G.ANIMMODE = ANIMMODE
+
+--- LinearTransformation 线性变换
+--- None number 无动画
+--- Linear number 直线变换
+--- QuadIn number 平方曲线1渐入
+--- QuadOut number 平方曲线2渐出
+--- QuadInOut number 平方曲线3进出
+--- ExpoIn number 指数曲线1渐入
+--- ExpoOut number 指数曲线2渐出
+--- ExpoInOut number 指数曲线3进出
+--- CircIn number 圆曲线1渐入
+--- CircOut number 圆曲线2渐出
+--- CircInOut number 圆曲线3进出
+--- ElasticIn number 弹簧曲线1渐入
+--- ElasticOut number 弹簧曲线2渐出
+--- ElasticInOut number 弹簧曲线3进出
+--- BackIn number 回退曲线1渐入
+--- BackOut number 回退曲线2渐出
+--- BackInOut number 回退曲线3进出
+--- BounceIn number 弹跳曲线1渐入
+--- BounceOut number 弹跳曲线1渐出
+--- BounceInOut number 弹跳曲线1进出
+local LinearTransformation = {}
+_G.LinearTransformation = LinearTransformation
+
+--- SKYBOXMAP 天空盒贴图
+--- SKYMAP number 天空贴图
+--- SUNMAP number 太阳贴图
+--- MOONMAP number 月亮贴图
+local SKYBOXMAP = {}
+_G.SKYBOXMAP = SKYBOXMAP
+
+--- SKYBOXCOLOR 天空盒颜色
+--- TOPCOLOR number 天空顶部颜色
+--- MIDDLECOLOR number 天空腰部颜色
+--- BOTTOMCOLOR number 天空底部颜色
+--- LIGHTCOLOR number 天空光照颜色
+--- ENVCOLOR number 环境光颜色
+--- SUNCOLOR number 太阳颜色
+--- MOONCOLOR number 月亮颜色
+--- CLOUDCOLOR number 云颜色
+--- FOGCOLOR number 雾颜色
+local SKYBOXCOLOR = {}
+_G.SKYBOXCOLOR = SKYBOXCOLOR
+
+--- SKYBOXATTR 天空盒参数
+--- SUNSCALE number 太阳大小
+--- MOONSCALE number 月亮大小
+--- STARDENSITY number 星星密度
+--- CLOUDSPEED number 云的运动速度
+--- CLOUDENSITY number 云的密度
+--- CLOUDHIGH number 云的高度
+--- FOGREMINDIS number 雾的最近距离
+--- FOGREMAXDIS number 雾的最远距离
+--- TEMPLATE number 模板
+local SKYBOXATTR = {}
+_G.SKYBOXATTR = SKYBOXATTR
+
+--- SKYBOXPARTICLE 天空盒环境粒子参数
+--- STRENGTH number 强度
+--- RANGE number 范围
+--- SPEED number 速度
+--- RANDOMNESS number 运动不规则度
+local SKYBOXPARTICLE = {}
+_G.SKYBOXPARTICLE = SKYBOXPARTICLE
+
+--- SKYBOXFILTER 天空盒滤镜参数
+--- CONTRAST number 对比度
+--- SATURATION number 饱和度
+--- FLOOD number 泛光强度
+--- EXPOSURE number 曝光强度
+--- VOLUMELIGHT number 体积光强度
+--- GAMMA number 伽马强度
+--- DEPTH number 景深强度
+--- COLOR number 滤镜颜色
+--- LUT number 色彩校正
+--- TEMPLATE number 滤镜模板
+local SKYBOXFILTER = {}
+_G.SKYBOXFILTER = SKYBOXFILTER
+
+--- CameraModel 摄像机属性
+--- MoveFollow number 跟随角色移动
+--- RotateFollow number 跟随角色旋转
+--- Autoindent number 阻挡后自动缩进
+--- RelativeRotate number 相对人物旋转
+--- RoleTranslucent number 角色半透
+local CameraModel = {}
+_G.CameraModel = CameraModel
+
+--- CameraRotate 摄像机旋转模式
+--- AllDir number 全方向
+--- OnlyYaw number 仅左右
+--- OnlyPitch number 仅上下
+--- NoTurn number 无法转动
+local CameraRotate = {}
+_G.CameraRotate = CameraRotate
+
+--- MiniShopPage 开发者商店页面类型
+--- Item number 道具购买
+--- Skin number 皮肤
+--- Convert number 兑换
+--- Welfare number 福利
+--- MiniVip number 大会员
+local MiniShopPage = {}
+_G.MiniShopPage = MiniShopPage
+
+--- QQMUSICOP QQ音乐操作类型
+--- PAUSE number 暂停
+--- RESUME number 恢复
+--- STOP number 停止
+local QQMUSICOP = {}
+_G.QQMUSICOP = QQMUSICOP
 --- Game
 --- 游戏模块管理接口 Game
 local Game = {}
