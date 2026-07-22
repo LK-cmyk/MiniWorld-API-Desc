@@ -97,9 +97,9 @@ function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): ApiItem
             // 收集 @class 下方的 @field 行
             let j = i + 1;
             while (j < lines.length) {
-                const fieldMatch = lines[j].match(/^---\s*@field (\w+)\s+(\w+)\s*@(.+)$/);
+                const fieldMatch = lines[j].match(/^---\s*@field (\w+)\s+(\w+)(?:\s*@([\s\S]*))?$/);
                 if (fieldMatch) {
-                    const rawDesc = fieldMatch[3].trim();
+                    const rawDesc = fieldMatch[3] ? fieldMatch[3].trim() : '';
                     if (isEventFile) {
                         // 解析 3.0 事件参数：描述 {param1:说明, param2:说明, ...}
                         const parsed = parseEventFieldDesc(rawDesc);
@@ -176,6 +176,18 @@ function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): ApiItem
                         name: paramMatch[1],
                         type: paramMatch[2],
                         desc: paramMatch[3].trim(),
+                    });
+                    j--;
+                    continue;
+                }
+
+                // @param name type  (无描述)
+                const paramSimple = commentLine.match(/^---\s*@param (\w+)\s+(\w+(?:\s*\|\s*\w+)*)$/);
+                if (paramSimple) {
+                    params.unshift({
+                        name: paramSimple[1],
+                        type: paramSimple[2],
+                        desc: '',
                     });
                     j--;
                     continue;
@@ -262,6 +274,40 @@ function scanAllApis(multipleDir: string): ApiItem[] {
     }
 
     return all;
+}
+
+/**
+ * 构建类型引用映射：找出哪些类（如 CurEventParam）通过 @field 引用了其他类（如 EventDate）
+ * 用于在搜索结果中显示完整路径名称，如 CurEventParam.EventDate.hour
+ */
+function buildTypeRefMap(items: ApiItem[]): Map<string, Array<{ parentName: string; fieldName: string; sourceFile: string }>> {
+    const refMap = new Map<string, Array<{ parentName: string; fieldName: string; sourceFile: string }>>();
+
+    for (const item of items) {
+        if (item.kind !== 'enum' && item.kind !== 'event') { continue; }
+        if (item.fields.length === 0) { continue; }
+
+        for (const field of item.fields) {
+            // 检查 field.type 是否匹配另一个同文件中的条目名称（且该条目也有子字段）
+            const referenced = items.find(i =>
+                i.name === field.type &&
+                i.sourceFile === item.sourceFile &&
+                i.fields.length > 0
+            );
+            if (referenced) {
+                if (!refMap.has(field.type)) {
+                    refMap.set(field.type, []);
+                }
+                refMap.get(field.type)!.push({
+                    parentName: item.name,
+                    fieldName: field.name,
+                    sourceFile: item.sourceFile,
+                });
+            }
+        }
+    }
+
+    return refMap;
 }
 
 /**
@@ -478,6 +524,8 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
     public static readonly viewType = 'miniworld.apiSearchView';
     private _view?: vscode.WebviewView;
     private _allItems: ApiItem[] = [];
+    /** 类型引用映射：子类型名 → { 父类名, 字段名, 源文件 } */
+    private _typeRefMap: Map<string, Array<{ parentName: string; fieldName: string; sourceFile: string }>> = new Map();
 
     constructor(
         private readonly _extensionUri: vscode.Uri,
@@ -485,6 +533,7 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
     ) {
         const multipleDir = context.asAbsolutePath(path.join('multiple'));
         this._allItems = scanAllApis(multipleDir);
+        this._typeRefMap = buildTypeRefMap(this._allItems);
     }
 
     /** 刷新数据（用于重新加载） */
@@ -494,6 +543,7 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
         const baseDir = path.join(multipleDir, 'multiple');
         if (fs.existsSync(baseDir)) {
             this._allItems = scanAllApis(baseDir);
+            this._typeRefMap = buildTypeRefMap(this._allItems);
         }
         if (this._view) {
             this._sendInitData();
@@ -562,11 +612,39 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
     }
 
     private _handleSearch(query: string, version: string, module: string, kind: string): void {
-        const { results, totalCount } = searchItems(this._allItems, query, version, module, kind);
+        let { results } = searchItems(this._allItems, query, version, module, kind);
         const q = query.trim().toLowerCase();
 
+        // 对于点号分隔的查询（如 "EventDate.hour"），fuse.js 的模糊匹配无法将长查询
+        // 匹配到字段名较短的条目上，导致 CurEventParam / EventDate 等条目丢失。
+        // 此处补充搜索：找出字段名/描述匹配任一查询片段的条目。
+        const querySegments = q ? q.split('.').filter(Boolean) : [];
+        if (querySegments.length > 1) {
+            const seenKeys = new Set(results.map(r => `${r.name}:${r.sourceFile}:${r.sourceLine}`));
+            const additional: ApiItem[] = [];
+            for (const item of this._allItems) {
+                const key = `${item.name}:${item.sourceFile}:${item.sourceLine}`;
+                if (seenKeys.has(key)) { continue; }
+                // 应用筛选条件
+                if (version !== 'all' && item.version !== version) { continue; }
+                if (module !== 'all' && item.module !== module) { continue; }
+                if (kind !== 'all' && item.kind !== kind) { continue; }
+                // 检查字段名/描述是否匹配任一查询片段
+                if (item.fields.some(f => {
+                    const ln = f.name.toLowerCase();
+                    const ld = f.desc.toLowerCase();
+                    return querySegments.some(s => ln.includes(s) || ld.includes(s));
+                })) {
+                    additional.push(item);
+                }
+            }
+            if (additional.length > 0) {
+                results = [...results, ...additional];
+            }
+        }
+
         // 将枚举/事件的字段展开为单独条目
-        const expanded: Array<{
+        let expanded: Array<{
             name: string; kind: string; module: string; version: string;
             description: string; paramCount: number; returnCount: number; fieldCount: number;
             sourceFile: string; sourceLine: number;
@@ -584,16 +662,37 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
             if ((item.kind === 'enum' || item.kind === 'event') && item.fields.length > 0 && !isJsonEvent) {
                 // 每个字段展开为独立条目
                 let matchedAnyField = false;
+
+                // 检查当前类型是否被其他类通过 @field 引用（如 EventDate 被 CurEventParam 引用）
+                const parents = this._typeRefMap.get(item.name);
+                const parentRef = parents?.find(p => p.sourceFile === item.sourceFile);
+
+                // 将查询按点号拆分为多个片段，支持逐段匹配（如 "EventDate.hour" 匹配 hour 字段）
+                const querySegments = q ? q.split('.').filter(Boolean) : [];
+
                 for (const field of item.fields) {
                     // 有搜索词时只包含匹配的字段（简单字符级模糊匹配）
                     const lowerFieldName = field.name.toLowerCase();
                     const lowerFieldDesc = field.desc.toLowerCase();
                     if (q && !lowerFieldName.includes(q) && !lowerFieldDesc.includes(q)) {
-                        continue;
+                        // 对于点号分隔的查询，检查是否任一字段名片段匹配
+                        const segmentMatch = querySegments.some(seg =>
+                            lowerFieldName.includes(seg) || lowerFieldDesc.includes(seg)
+                        );
+                        if (!segmentMatch) {
+                            continue;
+                        }
                     }
                     matchedAnyField = true;
+
+                    // 如果该类型是子结构（被父类引用），使用父路径作为前缀
+                    // 如 EventDate.hour → CurEventParam.EventDate.hour
+                    const prefix = parentRef
+                        ? `${parentRef.parentName}.${parentRef.fieldName}`
+                        : item.name;
+
                     expanded.push({
-                        name: `${item.name}.${field.name}`,
+                        name: `${prefix}.${field.name}`,
                         kind: item.kind,
                         module: item.module,
                         version: item.version,
@@ -610,7 +709,8 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
                 }
                 // 如果字段全部被过滤（搜索词不匹配任何字段），至少保留类本身
                 // 但隐藏事件父类（TriggerEvent / CurEventParam / ObjectEvent）
-                if (!matchedAnyField && !hiddenEventParents.has(item.name)) {
+                // 以及被父类引用的子结构类型（如 EventDate）
+                if (!matchedAnyField && !hiddenEventParents.has(item.name) && !parentRef) {
                     expanded.push({
                         name: item.name,
                         kind: item.kind,
@@ -647,6 +747,14 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
                     fields: [],
                 });
             }
+        }
+
+        // 过滤冗余的中间父级路径：若同时存在 "A.B" 和 "A.B.C"，则 "A.B" 是冗余的
+        if (expanded.length > 1) {
+            const expandedNames = new Set(expanded.map(e => e.name));
+            expanded = expanded.filter(e =>
+                !Array.from(expandedNames).some(n => n !== e.name && n.startsWith(e.name + '.'))
+            );
         }
 
         // 保留字段展开后的总数
@@ -716,9 +824,20 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
         if (!item) {
             const dotIdx = msg.name.lastIndexOf('.');
             if (dotIdx > 0) {
-                const parentName = msg.name.substring(0, dotIdx);
-                const fieldName = msg.name.substring(dotIdx + 1);
-                const parent = this._allItems.find(i => i.name === parentName && i.sourceFile === msg.sourceFile);
+                let parentName = msg.name.substring(0, dotIdx);
+                let fieldName = msg.name.substring(dotIdx + 1);
+                let parent = this._allItems.find(i => i.name === parentName && i.sourceFile === msg.sourceFile);
+
+                // 处理嵌套路径如 CurEventParam.EventDate.hour → 取倒数第二段作为类名
+                if (!parent) {
+                    const parts = msg.name.split('.');
+                    if (parts.length >= 3) {
+                        parentName = parts[parts.length - 2];
+                        fieldName = parts[parts.length - 1];
+                        parent = this._allItems.find(i => i.name === parentName && i.sourceFile === msg.sourceFile);
+                    }
+                }
+
                 if (parent) {
                     item = parent;
                     fieldDetail = parent.fields.find(f => f.name === fieldName);
@@ -745,14 +864,19 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
             // 对整个条目（分组事件 / 事件类）展开子事件列表及参数
             detailFields = buildEventDetailFields(item.fields);
         } else if (fieldDetail) {
-            // 单个展开的字段条目（如 TriggerEvent.GameStart）
-            // 只显示事件参数，不显示事件名本身
-            detailFields = [];
+            // 单个展开的字段条目（如 EventDate.hour）
+            // 始终展示字段本身的名称、类型和描述
+            detailFields = [{
+                name: fieldDetail.name,
+                type: fieldDetail.type.startsWith('event|') ? 'event' : fieldDetail.type,
+                desc: fieldDetail.desc,
+            }];
+            // 如果是事件类型，额外展开子参数
             if (fieldDetail.type.startsWith('event|')) {
                 try {
                     const eventInfo = JSON.parse(fieldDetail.type.substring(6));
                     for (const [pn, pd] of Object.entries(eventInfo)) {
-                        detailFields.push({ name: pn, type: 'any', desc: pd as string });
+                        detailFields.push({ name: `  ${pn}`, type: 'any', desc: pd as string });
                     }
                 } catch { /* ignore */ }
             }
