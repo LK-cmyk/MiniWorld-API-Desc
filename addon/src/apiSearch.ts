@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as crypto from 'crypto';
 import Fuse from 'fuse.js';
 
 // 类型定义 
@@ -63,7 +64,8 @@ function parseEventFieldDesc(raw: string): { cleanDesc: string; eventInfo: Recor
 
     // 解析 key:value 对，支持 key:value 和 key:描述文本（含逗号、冒号）
     // 思路：按逗号分割，但值中也可能含逗号，故用正则逐个提取
-    const paramRegex = /(\w[\w.]*)\s*:\s*([^,]+?)(?=\s*,\s*\w[\w.]*\s*:|$)/g;
+    // 负向前瞻：值部分允许逗号，仅在遇到 ", key:" 模式时停止
+    const paramRegex = /(\w[\w.]*)\s*:\s*((?:(?!\s*,\s*\w[\w.]*\s*:).)*?)(?=\s*,\s*\w[\w.]*\s*:|$)/g;
     let m: RegExpExecArray | null;
     while ((m = paramRegex.exec(paramsStr)) !== null) {
         eventInfo[m[1].trim()] = m[2].trim();
@@ -265,18 +267,17 @@ async function scanAllApis(multipleDir: string): Promise<ApiItem[]> {
             }
         }
 
-        // 额外解析 2.0 的 MNEvent.d.json
+        // 额外解析 2.0 的 MNEvent.d.json（该文件仅 2.0 目录下有）
         const jsonEventPath = path.join(dir, 'MNEvent.d.json');
         try {
             await fs.promises.access(jsonEventPath);
-        } catch {
-            continue;
-        }
-        try {
             const items = await parseJsonEvents(jsonEventPath, version);
             all.push(...items);
         } catch (err) {
-            console.warn(`解析失败: ${jsonEventPath}`, err);
+            // ENOENT 表示文件不存在（3.0 目录），这不是错误，静默跳过
+            if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
+                console.warn(`解析失败: ${jsonEventPath}`, err);
+            }
         }
     }
 
@@ -290,17 +291,28 @@ async function scanAllApis(multipleDir: string): Promise<ApiItem[]> {
 function buildTypeRefMap(items: ApiItem[]): Map<string, Array<{ parentName: string; fieldName: string; sourceFile: string }>> {
     const refMap = new Map<string, Array<{ parentName: string; fieldName: string; sourceFile: string }>>();
 
+    // 预构建索引：sourceFile → (name → item)，将 O(n²) 降为 O(n)
+    const sourceIndex = new Map<string, Map<string, ApiItem>>();
+    for (const item of items) {
+        if (item.fields.length === 0) { continue; }
+        let nameMap = sourceIndex.get(item.sourceFile);
+        if (!nameMap) {
+            nameMap = new Map();
+            sourceIndex.set(item.sourceFile, nameMap);
+        }
+        nameMap.set(item.name, item);
+    }
+
     for (const item of items) {
         if (item.kind !== 'enum' && item.kind !== 'event') { continue; }
         if (item.fields.length === 0) { continue; }
 
+        const nameMap = sourceIndex.get(item.sourceFile);
+        if (!nameMap) { continue; }
+
         for (const field of item.fields) {
             // 检查 field.type 是否匹配另一个同文件中的条目名称（且该条目也有子字段）
-            const referenced = items.find(i =>
-                i.name === field.type &&
-                i.sourceFile === item.sourceFile &&
-                i.fields.length > 0
-            );
+            const referenced = nameMap.get(field.type);
             if (referenced) {
                 if (!refMap.has(field.type)) {
                     refMap.set(field.type, []);
@@ -440,6 +452,9 @@ function buildEventDetailFields(fields: ApiField[]): ApiField[] {
 
 // 模糊搜索（基于 fuse.js）
 
+/** Fuse 实例缓存 key = items 引用 + filter 组合，仅在过滤条件或数据源变化时重建索引 */
+const _fuseCache = new Map<string, { fuse: Fuse<ApiItem>; itemsRef: ApiItem[] }>();
+
 /**
  * 使用 fuse.js 进行模糊搜索，支持多字段加权匹配
  */
@@ -479,39 +494,48 @@ function searchItems(
     // 文本搜索：剥离尾部括号 ()（），如 getPos() → getPos
     const q = query.trim().toLowerCase().replace(/[（(]\s*[）)]?\s*$/, '');
 
-    const fuse = new Fuse(filtered, {
-        keys: [
-            { name: 'name', weight: 5 },
-            { name: 'module', weight: 2 },
-            { name: 'className', weight: 2 },
-            { name: 'description', weight: 1 },
-            { name: 'parameters.name', weight: 2 },
-            { name: 'parameters.desc', weight: 0.5 },
-            { name: 'fields.name', weight: 2 },
-            { name: 'fields.desc', weight: 0.5 },
-            {
-                name: 'qualifiedName',
-                weight: 4,
-                getFn: (item: ApiItem) => {
-                    const names: string[] = [];
-                    if (item.module) {
-                        names.push(`${item.module}:${item.name}`);
-                        names.push(`${item.module}.${item.name}`);
-                    }
-                    if (item.className) {
-                        names.push(`${item.className}:${item.name}`);
-                        names.push(`${item.className}.${item.name}`);
-                    }
-                    return names;
+    // 从缓存获取或新建 Fuse 实例（避免每次按键都重建索引）
+    const cacheKey = `${versionFilter}|${moduleFilter}|${kindFilter}`;
+    let fuse: Fuse<ApiItem>;
+    const cached = _fuseCache.get(cacheKey);
+    if (cached && cached.itemsRef === items) {
+        fuse = cached.fuse;
+    } else {
+        fuse = new Fuse(filtered, {
+            keys: [
+                { name: 'name', weight: 5 },
+                { name: 'module', weight: 2 },
+                { name: 'className', weight: 2 },
+                { name: 'description', weight: 1 },
+                { name: 'parameters.name', weight: 2 },
+                { name: 'parameters.desc', weight: 0.5 },
+                { name: 'fields.name', weight: 2 },
+                { name: 'fields.desc', weight: 0.5 },
+                {
+                    name: 'qualifiedName',
+                    weight: 4,
+                    getFn: (item: ApiItem) => {
+                        const names: string[] = [];
+                        if (item.module) {
+                            names.push(`${item.module}:${item.name}`);
+                            names.push(`${item.module}.${item.name}`);
+                        }
+                        if (item.className) {
+                            names.push(`${item.className}:${item.name}`);
+                            names.push(`${item.className}.${item.name}`);
+                        }
+                        return names;
+                    },
                 },
-            },
-        ],
-        threshold: 0.3,
-        minMatchCharLength: 1,
-        includeScore: true,
-        shouldSort: true,
-        findAllMatches: true,
-    });
+            ],
+            threshold: 0.3,
+            minMatchCharLength: 1,
+            includeScore: true,
+            shouldSort: true,
+            findAllMatches: true,
+        });
+        _fuseCache.set(cacheKey, { fuse, itemsRef: items });
+    }
 
     const fuseResults = fuse.search(q);
     const results = fuseResults.map(r => r.item);
@@ -542,24 +566,38 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
     public async init(): Promise<void> {
         if (this._initialized) { return; }
         const multipleDir = this._context.asAbsolutePath(path.join('multiple'));
-        this._allItems = await scanAllApis(multipleDir);
-        this._typeRefMap = buildTypeRefMap(this._allItems);
+        try {
+            this._allItems = await scanAllApis(multipleDir);
+            this._typeRefMap = buildTypeRefMap(this._allItems);
+        } catch (err) {
+            console.error('API 数据加载失败，下次 init() 会重试', err);
+            this._allItems = [];
+            this._typeRefMap = new Map();
+            return; // 失败时不标记 _initialized，后续调用可重试
+        }
         this._initialized = true;
     }
 
     /** 刷新数据（用于重新加载） */
     public async refresh(): Promise<void> {
-        const multipleDir = (vscode.extensions.getExtension('LK-cmyk.miniworld-api-desc')
-            ?.extensionPath ?? this._extensionUri.fsPath);
-        const baseDir = path.join(multipleDir, 'multiple');
+        const baseDir = this._context.asAbsolutePath(path.join('multiple'));
         try {
             await fs.promises.access(baseDir);
             this._allItems = await scanAllApis(baseDir);
+            _fuseCache.clear();
             this._typeRefMap = buildTypeRefMap(this._allItems);
             this._initialized = true;
-        } catch { /* 目录不存在则跳过 */ }
-        if (this._view) {
-            this._sendInitData();
+            if (this._view) {
+                this._sendInitData();
+            }
+        } catch (err) {
+            console.error('refresh 失败，保留旧数据', err);
+            if (this._view) {
+                this._view.webview.postMessage({
+                    type: 'loadError',
+                    message: 'API 数据刷新失败，已保留上次的数据',
+                });
+            }
         }
     }
 
@@ -766,11 +804,19 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
         }
 
         // 过滤冗余的中间父级路径：若同时存在 "A.B" 和 "A.B.C"，则 "A.B" 是冗余的
+        // 利用排序后前缀相邻的特性将 O(n²) 降为 O(n log n)
         if (expanded.length > 1) {
-            const expandedNames = new Set(expanded.map(e => e.name));
-            expanded = expanded.filter(e =>
-                !Array.from(expandedNames).some(n => n !== e.name && n.startsWith(e.name + '.'))
-            );
+            const sorted = [...expanded].sort((a, b) => a.name.localeCompare(b.name));
+            const filtered: typeof expanded = [];
+            for (let i = 0; i < sorted.length; i++) {
+                const cur = sorted[i];
+                // 如果下一个条目以 cur.name + '.' 开头，则 cur 是冗余前缀
+                const next = sorted[i + 1];
+                if (!next || !next.name.startsWith(cur.name + '.')) {
+                    filtered.push(cur);
+                }
+            }
+            expanded = filtered;
         }
 
         // 保留字段展开后的总数
@@ -784,15 +830,6 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
             results: limited,
             totalCount: expandedTotal,
             shownCount: limited.length,
-        });
-    }
-
-    private _openFile(filePath: string, line: number): void {
-        const uri = vscode.Uri.file(filePath);
-        vscode.workspace.openTextDocument(uri).then(doc => {
-            vscode.window.showTextDocument(doc, {
-                selection: new vscode.Range(line - 1, 0, line - 1, 0),
-            });
         });
     }
 
@@ -917,12 +954,7 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
     }
 
     private _getNonce(): string {
-        let text = '';
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 64; i++) {
-            text += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return text;
+        return crypto.randomBytes(48).toString('base64url');
     }
 
     private async _getHtmlContent(webview: vscode.Webview): Promise<string> {

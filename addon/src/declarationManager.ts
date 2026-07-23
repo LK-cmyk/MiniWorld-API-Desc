@@ -290,6 +290,17 @@ export function registerDeclarationCommands(context: vscode.ExtensionContext): v
         })
     );
 
+    // 注册命令：重置声明提示（清除"永不提醒"和冷却期）
+    disposables.push(
+        vscode.commands.registerCommand('complete.resetDeclarationPrompt', async () => {
+            skipForeverCached = false;
+            skipUntilCached = 0;
+            await context.globalState.update(SKIP_FOREVER_KEY, undefined);
+            await context.globalState.update(SKIP_PROMPT_KEY, undefined);
+            vscode.window.showInformationMessage('声明提示已重置，下次打开 Lua 文件时将重新询问');
+        })
+    );
+
     // 打开 Lua 文件时检查声明状态并提示添加
     disposables.push(
         vscode.workspace.onDidOpenTextDocument(
