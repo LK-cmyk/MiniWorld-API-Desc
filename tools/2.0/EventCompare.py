@@ -1,27 +1,27 @@
 """对比 2.0 MNEvent.d.json 与 2.0 网页事件文档的事件名称和参数差异"""
 
 import json
-import os
 import re
 import sys
-import io
 from pathlib import Path
-from collections import defaultdict
 
 import requests
 from bs4 import BeautifulSoup
 
-EVENT_URL: str = "https://dev-wiki.mini1.cn/wiki/673b36173ffc6baf0859d391"
-SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
-JSON_PATH: str = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir, os.pardir, "multiple", "2.0", "MNEvent.d.json"))
-IGNORE_PARAMS: set[str] = {"eventworldid"}  # 对比时忽略的参数字段名
-# x, y, z 在网页中通常共用同一个描述（如"方块坐标"），视为同组
-COORD_PARAMS: set[str] = {"x", "y", "z"}
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from common.io_utils import init_stdout
+from common.compare import build_summary
+from common.config import (
+    EVENT_URL_20,
+    MULTIPLE_20_DIR,
+    IGNORE_EVENT_PARAMS,
+    COORD_PARAMS,
+)
 
-def init() -> None:
-    """初始化输出编码"""
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+EVENT_URL = EVENT_URL_20
+JSON_PATH = str(MULTIPLE_20_DIR / "MNEvent.d.json")
+IGNORE_PARAMS = IGNORE_EVENT_PARAMS
 
 
 def load_json_events(path: str) -> dict[str, dict]:
@@ -109,17 +109,20 @@ def compare_event_names(
     only_web = sorted(web_names - json_names)
 
     if not only_json and not only_web:
-        lines.append("事件名称完全一致，无差异。")
+        lines.append("  ✓ 事件名称完全一致")
         return lines
 
+    lines.append("[事件名称]")
     if only_json:
-        lines.append(f"仅在本地 JSON 存在的事件（{len(only_json)} 个）：")
-        for name in only_json:
-            lines.append(f"  - {name}")
+        count = len(only_json)
+        items = ", ".join(only_json[:10])
+        suffix = f" ... 等 {count} 项" if count > 10 else ""
+        lines.append(f"  仅在本地 ({count}): {items}{suffix}")
     if only_web:
-        lines.append(f"仅在网页存在的事件（{len(only_web)} 个）：")
-        for name in only_web:
-            lines.append(f"  - {name}")
+        count = len(only_web)
+        items = ", ".join(only_web[:10])
+        suffix = f" ... 等 {count} 项" if count > 10 else ""
+        lines.append(f"  仅在网页 ({count}): {items}{suffix}")
 
     return lines
 
@@ -135,15 +138,14 @@ def compare_event_params(
     """
     lines: list[str] = []
     common = sorted(set(json_events) & set(web_events))
+    has_any_diff = False
 
     for name in common:
         json_info = json_events[name].get("event_info", {}) or {}
         web_params = web_events[name].get("params", [])
         web_param_desc = web_events[name].get("param_desc", {})
 
-        # JSON 参数名集合
         json_param_set = set(json_info.keys())
-        # 网页参数名集合（过滤忽略项）
         web_param_set = {p for p in web_params if p.lower() not in IGNORE_PARAMS}
 
         only_json = sorted(json_param_set - web_param_set)
@@ -151,92 +153,80 @@ def compare_event_params(
         common_params = sorted(json_param_set & web_param_set)
 
         if not only_json and not only_web:
-            # 参数名完全一致时，检查描述是否一致
             desc_diffs: list[str] = []
 
-            # 判断 x,y,z 是否全部在双方参数中（即坐标参数齐全）
             has_all_coords = COORD_PARAMS.issubset(json_param_set & web_param_set)
-            # 获取网页侧坐标的描述基准（取 x 的描述作为 x/y/z 的标准）
             coord_ref_desc = web_param_desc.get("x", "") if has_all_coords else None
 
             for p in common_params:
                 j_desc = json_info.get(p, "")
-                # 对于 y/z，使用网页 x 的描述作为比较基准
                 if has_all_coords and p in COORD_PARAMS and p != "x":
                     w_desc = coord_ref_desc or ""
                 else:
                     w_desc = web_param_desc.get(p, "")
                 if j_desc != w_desc:
-                    # 网页描述为空 → 网页不提供该参数的独立描述，不以差异报告
                     if not w_desc:
                         continue
-                    desc_diffs.append(f"    参数 {p}: 本地描述「{j_desc}」≠ 网页描述「{w_desc}」")
+                    desc_diffs.append(
+                        f"    参数 {p}: 本地「{j_desc}」≠ 网页「{w_desc}」"
+                    )
             if not desc_diffs:
-                continue  # 完全一致，跳过
-            lines.append(f"[{name}] 参数描述差异：")
+                continue
+            lines.append(f"[{name}]")
             lines.extend(desc_diffs)
+            has_any_diff = True
         else:
-            lines.append(f"[{name}] 参数差异：")
+            lines.append(f"[{name}]")
             if only_json:
-                lines.append(f"  仅在本地 JSON 的参数：{', '.join(only_json)}")
+                lines.append(f"  仅在本地 ({len(only_json)}): {', '.join(only_json)}")
             if only_web:
-                lines.append(f"  仅在网页的参数：{', '.join(only_web)}")
+                lines.append(f"  仅在网页 ({len(only_web)}): {', '.join(only_web)}")
+            has_any_diff = True
 
+    if not has_any_diff:
+        lines.append("  ✓ 所有共同事件的参数完全一致")
     return lines
 
 
 def main() -> None:
-    init()
+    init_stdout()
 
-    # 加载本地 JSON
-    print(f"加载本地 JSON: {JSON_PATH}")
     json_events = load_json_events(JSON_PATH)
     if not json_events:
         return
-    print(f"  本地 JSON 共 {len(json_events)} 个事件\n")
 
-    # 抓取网页
-    print(f"抓取网页: {EVENT_URL}")
     html = fetch_page(EVENT_URL)
     if not html:
         return
     web_events = parse_web_events(html)
-    print(f"  网页共解析到 {len(web_events)} 个事件\n")
+
+    common_set = sorted(set(json_events) & set(web_events))
+    only_json_set = sorted(set(json_events) - set(web_events))
+    only_web_set = sorted(set(web_events) - set(json_events))
+
+    # 统计摘要（放在最前）
+    summary = build_summary(
+        "事件对比",
+        len(json_events),
+        len(web_events),
+        len(common_set),
+        len(only_json_set),
+        len(only_web_set),
+    )
+    for line in summary:
+        print(line)
 
     # 事件名称对比
-    print("=" * 60)
-    print("一、事件名称对比")
-    print("=" * 60)
+    print()
     name_diff = compare_event_names(json_events, web_events)
     for line in name_diff:
         print(line)
 
     # 参数对比
     print()
-    print("=" * 60)
-    print("二、共同事件的参数对比")
-    print("=" * 60)
     param_diff = compare_event_params(json_events, web_events)
-    if param_diff:
-        for line in param_diff:
-            print(line)
-    else:
-        print("所有共同事件的参数完全一致，无差异。")
-
-    # 统计摘要
-    common = sorted(set(json_events) & set(web_events))
-    only_json = sorted(set(json_events) - set(web_events))
-    only_web = sorted(set(web_events) - set(json_events))
-
-    print()
-    print("=" * 60)
-    print("统计摘要")
-    print("=" * 60)
-    print(f"  本地 JSON 事件数: {len(json_events)}")
-    print(f"  网页事件数: {len(web_events)}")
-    print(f"  共同事件数: {len(common)}")
-    print(f"  仅在本地 JSON: {len(only_json)}")
-    print(f"  仅在网页: {len(only_web)}")
+    for line in param_diff:
+        print(line)
 
 
 if __name__ == "__main__":

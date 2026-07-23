@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common.io_utils import init_stdout
 from common.lua_parser import get_function_names
-from common.compare import compare_funcs
+from common.compare import compare_funcs, build_summary
 from common.config import FUNC_URLS_20, MULTIPLE_20_DIR, WEB_FILTER_BLACKLIST_20
 
 FUNC_URLS = FUNC_URLS_20
@@ -86,6 +86,10 @@ def main() -> None:
         return
 
     all_diff: list[str] = []
+    local_count = 0
+    web_count = 0
+    only_local_count = 0
+    only_web_count = 0
 
     # 收集本地所有 .d.lua 文件
     local_files: list[str] = sorted(
@@ -108,32 +112,41 @@ def main() -> None:
                 break
 
         if matched_url:
-            print(f"正在抓取 {module_name} 文档...")
+            print(f"抓取 {module_name} ...")
             web_funcs = analyze_web(matched_url)
+            local_count += 1
+            web_count += 1
         else:
-            all_diff.append(f"[{module_name}] 未配置网页文档 URL，仅显示本地函数。")
+            all_diff.append(f"[{module_name}]  ⚠ 未配置网页文档 URL")
+            local_count += 1
+            only_local_count += 1
+            continue
 
         diff = compare_funcs(local_funcs, web_funcs, module_name)
-        if diff:
-            all_diff.extend(diff)
-        else:
-            all_diff.append(f"[{module_name}] 本地与网页函数一致。")
+        all_diff.extend(diff)
 
-    print("\n" + "=" * 60)
-    print("函数差异对比结果:")
-    print("=" * 60)
+        # 统计计数
+        if local_funcs and not web_funcs:
+            only_local_count += 1
+        elif web_funcs and not local_funcs:
+            only_web_count += 1
+
+    print()
+    summary = build_summary(
+        "函数对比",
+        local_count,
+        web_count,
+        local_count
+        - only_local_count
+        - (local_count - web_count if local_count > web_count else 0),
+        only_local_count,
+        only_web_count,
+    )
+    for line in summary:
+        print(line)
+    print()
     for line in all_diff:
         print(line)
-
-    only_local_count = sum(
-        1
-        for l in all_diff
-        if l.startswith("  - ")
-        and "仅在本地" in all_diff[max(0, all_diff.index(l) - 1)]
-    )
-    print(f"\n总计: {len(local_files)} 个模块")
-    if only_local_count:
-        print(f"提示: 本地中存在但网页中未找到的函数，可能是本地扩展的自定义函数。")
 
 
 if __name__ == "__main__":

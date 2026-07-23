@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common.io_utils import init_stdout
 from common.lua_parser import get_enum_definitions
-from common.compare import compare_enums
+from common.compare import compare_enums, build_summary
 from common.config import ENUM_URL_20, MULTIPLE_20_DIR, SKIP_ENUM_CLASSES_20
 
 ENUM_LIB_URL = ENUM_URL_20
@@ -103,19 +103,32 @@ def main() -> None:
 
     print(f"分析本地文件: {ENUM_LIB_FILE_PATH}")
     local_enums = get_enum_definitions(ENUM_LIB_FILE_PATH)
-    print(f"  本地共 {len(local_enums)} 个枚举类\n")
+    print(f"  本地共 {len(local_enums)} 个枚举类")
 
     print(f"抓取维基页面: {ENUM_LIB_URL}")
     web_enums = analyze_web(ENUM_LIB_URL)
-    print(f"  网页共 {len(web_enums)} 个枚举类\n")
+    print(f"  网页共 {len(web_enums)} 个枚举类")
 
     diff_lines = compare_enums(local_enums, web_enums, skip_classes={"BLOCKID"})
 
-    if not diff_lines:
-        print("没有不同之处，枚举定义完全一致")
-        return
+    local_set = set(local_enums)
+    web_set = set(web_enums)
+    common = local_set & web_set
+    only_local = local_set - web_set
+    only_web = web_set - local_set
 
-    print("发现的差异：")
+    print()
+    summary = build_summary(
+        "枚举对比",
+        len(local_enums),
+        len(web_enums),
+        len(common),
+        len(only_local),
+        len(only_web),
+    )
+    for line in summary:
+        print(line)
+    print()
     for line in diff_lines:
         print(line)
 

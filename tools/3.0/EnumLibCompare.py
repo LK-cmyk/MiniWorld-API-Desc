@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common.io_utils import init_stdout
 from common.lua_parser import get_enum_definitions
-from common.compare import compare_enums
+from common.compare import compare_enums, build_summary
 from common.config import ENUM_URL_30, MULTIPLE_30_DIR, MINI_FIELDS_30
 
 ENUM_LIB_URL = ENUM_URL_30
@@ -48,24 +48,24 @@ def analyze_web(url: str) -> dict[str, list[str]]:
         if not first_cell or not first_cell.text:
             continue
 
-        first_text = first_cell.text.strip()
+        first_text: str = first_cell.text.strip()
         if "." not in first_text:
             continue
 
-        class_name = first_text.split(".", 1)[0]
+        class_name: str = first_text.split(".", 1)[0]
         current_fields: list[str] = []
         for field in tbody.find_all("tr"):
             field_cell: Tag | None = field.td
             if not field_cell or not field_cell.text:
                 continue
-            field_text = field_cell.text.strip()
+            field_text: str = field_cell.text.strip()
             if "." not in field_text:
                 continue
             current_fields.append(field_text.split(".", 1)[1])
 
         # 合并同名类的字段，去重
         if class_name in out_dict:
-            existing = out_dict[class_name]
+            existing: list[str] = out_dict[class_name]
             for f in current_fields:
                 if f not in existing:
                     existing.append(f)
@@ -88,11 +88,24 @@ def main() -> None:
         skip_fields={"Mini": MINI_FIELDS},
     )
 
-    if not diff_lines:
-        print("没有不同之处，枚举定义完全一致")
-        return
+    local_set = set(local_enums) - {"Mini"}
+    web_set = set(web_enums) - {"Mini"}
+    common = local_set & web_set
+    only_local = local_set - web_set
+    only_web = web_set - local_set
 
-    print("发现的差异：")
+    print()
+    summary = build_summary(
+        "枚举对比",
+        len(local_set),
+        len(web_set),
+        len(common),
+        len(only_local),
+        len(only_web),
+    )
+    for line in summary:
+        print(line)
+    print()
     for line in diff_lines:
         print(line)
 

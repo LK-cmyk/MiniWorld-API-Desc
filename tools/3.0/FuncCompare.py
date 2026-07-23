@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from common.io_utils import init_stdout
 from common.lua_parser import get_function_names
-from common.compare import compare_funcs
+from common.compare import compare_funcs, build_summary
 from common.config import (
     FUNC_URL_30_PREFIX,
     FUNC_URL_30_LIST,
@@ -96,6 +96,11 @@ def main() -> None:
     """主程序：对比本地声明和网页 API 文档函数"""
     init_stdout()
     all_diff: list[str] = []
+    local_count = 0
+    web_count = 0
+    only_local_count = 0
+    only_web_count = 0
+
     for url in FUNC_URL:
         module_name = module_name_from_url(url)
         local_path = local_file_for_module(module_name)
@@ -103,18 +108,32 @@ def main() -> None:
         local_funcs: set[str] = set()
         if os.path.exists(local_path):
             local_funcs = get_function_names(local_path)
+            local_count += 1
         else:
-            all_diff.append(f"[{module_name}] 本地文件不存在: {local_path}")
-        diff = compare_funcs(local_funcs, web_funcs, module_name)
-        if diff:
-            all_diff.extend(diff)
-        else:
-            all_diff.append(f"[{module_name}] 本地与网页函数一致。")
+            all_diff.append(f"[{module_name}]  ⚠ 本地文件不存在")
+        web_count += 1
 
-    if not all_diff:
-        print("没有发现差异，所有函数一致。")
-        return
-    print("函数差异对比结果:")
+        diff = compare_funcs(local_funcs, web_funcs, module_name)
+        all_diff.extend(diff)
+
+        if local_funcs and not web_funcs:
+            only_local_count += 1
+        elif web_funcs and not local_funcs:
+            only_web_count += 1
+
+    common_count = local_count - only_local_count
+    print()
+    summary = build_summary(
+        "函数对比",
+        local_count,
+        web_count,
+        common_count,
+        only_local_count,
+        only_web_count,
+    )
+    for line in summary:
+        print(line)
+    print()
     for line in all_diff:
         print(line)
 

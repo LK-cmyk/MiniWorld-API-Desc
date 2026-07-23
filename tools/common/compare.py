@@ -1,4 +1,37 @@
-"""通用对比逻辑：函数名差异、枚举定义差异"""
+"""通用对比逻辑：函数名差异、枚举定义差异
+
+统一输出格式说明：
+  [SectionName]                      ← 章节标题
+    仅在本地 (n): item1, item2       ← 本地独有（逗号分隔）
+    仅在网页 (n): item1, item2       ← 网页独有（逗号分隔）
+  [SectionName]  ✓ 完全一致          ← 无差异
+  [SectionName]  ⚠ 仅在本地（网页未收录）  ← 整节仅本地有
+  [SectionName]  ⚠ 仅在网页（本地未收录）  ← 整节仅网页有
+"""
+
+SEP: str = "─" * 60
+
+
+def _fmt_set(items: list[str]) -> str:
+    """将列表格式化为带计数的逗号分隔字符串"""
+    count = len(items)
+    return (
+        f"({count}): {', '.join(items)}"
+        if count <= 10
+        else f"({count}): {', '.join(items[:5])} ... 等 {count} 项"
+    )
+
+
+def _wrap(
+    items: list[str], label_local: str = "本地", label_web: str = "网页"
+) -> list[str]:
+    """生成统一格式的差异行"""
+    lines: list[str] = []
+    if items[0]:
+        lines.append(f"  仅在{label_local} {_fmt_set(items[0])}")
+    if items[1]:
+        lines.append(f"  仅在{label_web} {_fmt_set(items[1])}")
+    return lines
 
 
 def compare_funcs(
@@ -16,22 +49,36 @@ def compare_funcs(
     """
     diff_lines: list[str] = []
     if not local_funcs and not web_funcs:
-        diff_lines.append(f"[{module_name}] 未找到本地函数，也未提取到网页函数。")
+        diff_lines.append(f"[{module_name}]  ⚠ 未找到任何函数")
         return diff_lines
     if not local_funcs:
-        diff_lines.append(f"[{module_name}] 本地文件未解析到函数或本地文件缺失。")
+        diff_lines.append(f"[{module_name}]  ⚠ 仅在网页（本地未收录）")
+        # 但仍列出网页独有函数
+        only_web = sorted(web_funcs)
+        diff_lines.extend(_wrap([[], only_web], "本地", "网页"))
+        return diff_lines
     if not web_funcs:
-        diff_lines.append(
-            f"[{module_name}] 网页未解析到函数，请检查文档页面或解析规则。"
-        )
+        diff_lines.append(f"[{module_name}]  ⚠ 仅在本地（网页未收录）")
+        only_local = sorted(local_funcs)
+        diff_lines.extend(_wrap([only_local, []], "本地", "网页"))
+        return diff_lines
+
     only_local = sorted(local_funcs - web_funcs)
     only_web = sorted(web_funcs - local_funcs)
-    if only_local:
-        diff_lines.append(f"[{module_name}] 仅在本地存在函数:")
-        diff_lines.extend(f"  - {name}" for name in only_local)
-    if only_web:
-        diff_lines.append(f"[{module_name}] 仅在网页存在函数:")
-        diff_lines.extend(f"  - {name}" for name in only_web)
+
+    if not only_local and not only_web:
+        diff_lines.append(f"[{module_name}]  ✓ 完全一致")
+        return diff_lines
+
+    no_local = not local_funcs
+    no_web = not web_funcs
+    if no_local:
+        diff_lines.append(f"[{module_name}]  ⚠ 仅在网页（本地未收录）")
+    elif no_web:
+        diff_lines.append(f"[{module_name}]  ⚠ 仅在本地（网页未收录）")
+    else:
+        diff_lines.append(f"[{module_name}]")
+    diff_lines.extend(_wrap([only_local, only_web], "本地", "网页"))
     return diff_lines
 
 
@@ -78,21 +125,54 @@ def compare_enums(
 
         if class_name not in local_enums:
             if class_name not in skip_web_only_classes:
-                diff_lines.append(f"此class只在网页: {class_name}")
+                diff_lines.append(f"[{class_name}]  ⚠ 仅在网页（本地未收录）")
             continue
         if class_name not in web_enums:
             if class_name not in skip_local_only_classes:
-                diff_lines.append(f"此class只在本地: {class_name}")
+                diff_lines.append(f"[{class_name}]  ⚠ 仅在本地（网页未收录）")
             continue
 
         only_local: list[str] = sorted(local_fields - web_fields)
         only_web: list[str] = sorted(web_fields - local_fields)
 
-        if only_local or only_web:
-            diff_lines.append(f"Class: {class_name}")
-            for field in only_web:
-                diff_lines.append(f"  此field只在网页: {field}")
-            for field in only_local:
-                diff_lines.append(f"  此field只在本地: {field}")
+        if not only_local and not only_web:
+            continue  # 完全一致不输出
+        diff_lines.append(f"[{class_name}]")
+        diff_lines.extend(_wrap([only_local, only_web], "本地", "网页"))
 
     return diff_lines
+
+
+def build_summary(
+    title: str,
+    local_count: int,
+    web_count: int,
+    common_count: int,
+    only_local_count: int,
+    only_web_count: int,
+) -> list[str]:
+    """构建统一的统计摘要行列表
+
+    Args:
+        title: 摘要标题（如 "函数对比"、"枚举对比"）
+        local_count: 本地实体数
+        web_count: 网页实体数
+        common_count: 共同实体数
+        only_local_count: 仅本地实体数
+        only_web_count: 仅网页实体数
+
+    Returns:
+        格式化的统计摘要行列表
+    """
+    lines = [
+        SEP,
+        f"  {title}",
+        SEP,
+        f"  本地:     {local_count:>4}",
+        f"  网页:     {web_count:>4}",
+        f"  共同:     {common_count:>4}",
+        f"  仅本地:   {only_local_count:>4}",
+        f"  仅网页:   {only_web_count:>4}",
+        SEP,
+    ]
+    return lines
