@@ -23,8 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('miniworld.apiSearch.focus', () => {
             vscode.commands.executeCommand('workbench.view.extension.miniworld-api-search');
         }),
-        vscode.commands.registerCommand('miniworld.apiSearch.refresh', () => {
-            apiSearchProvider.refresh();
+        vscode.commands.registerCommand('miniworld.apiSearch.refresh', async () => {
+            await apiSearchProvider.refresh();
         }),
     );
 }

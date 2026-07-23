@@ -11,6 +11,8 @@ const SKIP_HOURS = 4;
 // 内存中的跳过标记，防止 globalState 异步写入延迟导致重复弹出提示
 let skipUntilCached = 0;
 let skipForeverCached = false;
+/** 标记当前是否已有提示框在显示，防止快速打开多个文件时堆叠 */
+let isPromptPending = false;
 
 function getTypesDir20(context: vscode.ExtensionContext): string {
     return context.asAbsolutePath(path.join('addon', 'types', '2.0'));
@@ -38,6 +40,7 @@ function addDeclarations(typesDir: string, version: string = '', target: vscode.
     }
 
     const luaConfig = vscode.workspace.getConfiguration(LUA_CONFIG_SECTION);
+    const inspected = luaConfig.inspect<string[]>(LIBRARY_KEY);
     const library = luaConfig.get<string[]>(LIBRARY_KEY, []);
 
     const normalizedTypesDir = normalizePath(typesDir);
@@ -57,29 +60,52 @@ function addDeclarations(typesDir: string, version: string = '', target: vscode.
         return Promise.resolve();
     }
 
+    // 仅获取目标作用域的原始值，避免将合并值写入特定作用域
+    const targetArray = getScopeArray(inspected, target);
+
     return Promise.resolve(
-        luaConfig.update(LIBRARY_KEY, [...library, typesDir], target)
+        luaConfig.update(LIBRARY_KEY, [...targetArray, typesDir], target)
     )
         .then(() => void vscode.window.showInformationMessage(`MiniWorld UGC ${version} 声明文件添加成功！`))
         .catch((err: Error) => void vscode.window.showErrorMessage(`添加失败: ${err.message}`));
 }
 
+/** 从 inspect 结果中提取指定作用域的原始数组 */
+function getScopeArray(inspected: { globalValue?: string[]; workspaceValue?: string[]; workspaceFolderValue?: string[] } | undefined, target: vscode.ConfigurationTarget): string[] {
+    if (!inspected) {
+        return [];
+    }
+    switch (target) {
+        case vscode.ConfigurationTarget.Global:
+            return inspected.globalValue ?? [];
+        case vscode.ConfigurationTarget.Workspace:
+            return inspected.workspaceValue ?? [];
+        case vscode.ConfigurationTarget.WorkspaceFolder:
+            return inspected.workspaceFolderValue ?? [];
+        default:
+            return [];
+    }
+}
+
 function removeDeclarations(typesDir: string, version: string = '', target: vscode.ConfigurationTarget = vscode.ConfigurationTarget.Global): Promise<void> {
     if (!fs.existsSync(typesDir)) {
-        vscode.window.showErrorMessage(`声明目录不存在: ${typesDir}`);
-        return Promise.resolve();
+        vscode.window.showWarningMessage(`声明目录不存在，将尝试清理残留配置: ${typesDir}`);
     }
 
     const luaConfig = vscode.workspace.getConfiguration(LUA_CONFIG_SECTION);
-    const library = luaConfig.get<string[]>(LIBRARY_KEY, []);
+    const inspected = luaConfig.inspect<string[]>(LIBRARY_KEY);
+
+    // 仅获取目标作用域的原始值，避免从合并值中移除导致跨作用域误删
+    const targetArray = getScopeArray(inspected, target);
 
     const normalizedTypesDir = normalizePath(typesDir);
-    const index = library.findIndex(entry => normalizePath(entry) === normalizedTypesDir);
+    const index = targetArray.findIndex(entry => normalizePath(entry) === normalizedTypesDir);
     if (index === -1) {
+        vscode.window.showInformationMessage(`MiniWorld UGC ${version} 声明路径不在该作用域中，无需移除`);
         return Promise.resolve();
     }
 
-    const newLibrary = [...library];
+    const newLibrary = [...targetArray];
     newLibrary.splice(index, 1);
 
     return Promise.resolve(
@@ -182,6 +208,11 @@ function checkDeclarationsOnOpen(document: vscode.TextDocument, context: vscode.
         return;
     }
 
+    // 已有提示框在显示时不再重复弹出
+    if (isPromptPending) {
+        return;
+    }
+
     const options: (vscode.QuickPickItem & { action: string })[] = [
         { label: '不添加声明', description: '4 小时内不再提示', action: 'none' },
         { label: '永不提醒', description: '不再显示此提示', action: 'never' },
@@ -189,10 +220,12 @@ function checkDeclarationsOnOpen(document: vscode.TextDocument, context: vscode.
         { label: '添加 3.0 声明', description: `添加 ${dir30}`, action: '30' },
     ];
 
+    isPromptPending = true;
     vscode.window.showQuickPick(options, {
         placeHolder: '检测到未添加 MiniWorld UGC 声明，是否添加？',
         ignoreFocusOut: true,
-    }).then((selected) => {
+    }).then(async (selected) => {
+        isPromptPending = false;
         if (!selected) {
             return;
         }
@@ -200,10 +233,10 @@ function checkDeclarationsOnOpen(document: vscode.TextDocument, context: vscode.
         if (selected.action === 'none') {
             // 4 小时内不再提示（先更新内存缓存，再异步写入持久化）
             skipUntilCached = Date.now() + SKIP_HOURS * 60 * 60 * 1000;
-            context.globalState.update(SKIP_PROMPT_KEY, skipUntilCached);
+            await context.globalState.update(SKIP_PROMPT_KEY, skipUntilCached);
         } else if (selected.action === 'never') {
             skipForeverCached = true;
-            context.globalState.update(SKIP_FOREVER_KEY, true);
+            await context.globalState.update(SKIP_FOREVER_KEY, true);
         } else if (selected.action === '20') {
             addDeclarations(dir20, '2.0');
         } else if (selected.action === '30') {

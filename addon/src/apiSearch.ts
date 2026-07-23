@@ -75,9 +75,9 @@ function parseEventFieldDesc(raw: string): { cleanDesc: string; eventInfo: Recor
 /**
  * 从 `.d.lua` 文件中解析出所有 API 条目
  */
-function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): ApiItem[] {
+async function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): Promise<ApiItem[]> {
     const items: ApiItem[] = [];
-    const content = fs.readFileSync(filePath, 'utf-8');
+    const content = await fs.promises.readFile(filePath, 'utf-8');
     const lines = content.split(/\r?\n/);
     const baseName = path.basename(filePath);
     // 去掉前缀 "MN" 和后缀，作为模块名
@@ -215,8 +215,8 @@ function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): ApiItem
                 // 纯描述行（累积为完整 Markdown，从下往上遍历故向前插入）
                 const descMatch = commentLine.match(/^--- (.+)$/);
                 if (descMatch && !descMatch[1].startsWith('@') && !descMatch[1].startsWith('class ')) {
-                    const line = descMatch[1].trim();
-                    description = line + (description ? '\n' + description : '');
+                    const descLine = descMatch[1].trim();
+                    description = descLine + (description ? '\n' + description : '');
                 }
                 j--;
             }
@@ -244,17 +244,21 @@ function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): ApiItem
 /**
  * 扫描整个目录，解析所有 API
  */
-function scanAllApis(multipleDir: string): ApiItem[] {
+async function scanAllApis(multipleDir: string): Promise<ApiItem[]> {
     const all: ApiItem[] = [];
 
     for (const version of ['2.0', '3.0'] as const) {
         const dir = path.join(multipleDir, version);
-        if (!fs.existsSync(dir)) {continue;}
-        const files = fs.readdirSync(dir).filter(f => f.endsWith('.d.lua') || f.endsWith('.lua'));
+        try {
+            await fs.promises.access(dir);
+        } catch {
+            continue;
+        }
+        const files = (await fs.promises.readdir(dir)).filter(f => f.endsWith('.d.lua') || f.endsWith('.lua'));
         for (const file of files) {
             const filePath = path.join(dir, file);
             try {
-                const items = parseLuaDeclarations(filePath, version);
+                const items = await parseLuaDeclarations(filePath, version);
                 all.push(...items);
             } catch (err) {
                 console.warn(`解析失败: ${filePath}`, err);
@@ -263,13 +267,16 @@ function scanAllApis(multipleDir: string): ApiItem[] {
 
         // 额外解析 2.0 的 MNEvent.d.json
         const jsonEventPath = path.join(dir, 'MNEvent.d.json');
-        if (fs.existsSync(jsonEventPath)) {
-            try {
-                const items = parseJsonEvents(jsonEventPath, version);
-                all.push(...items);
-            } catch (err) {
-                console.warn(`解析失败: ${jsonEventPath}`, err);
-            }
+        try {
+            await fs.promises.access(jsonEventPath);
+        } catch {
+            continue;
+        }
+        try {
+            const items = await parseJsonEvents(jsonEventPath, version);
+            all.push(...items);
+        } catch (err) {
+            console.warn(`解析失败: ${jsonEventPath}`, err);
         }
     }
 
@@ -314,9 +321,9 @@ function buildTypeRefMap(items: ApiItem[]): Map<string, Array<{ parentName: stri
  * 解析事件 JSON 文件（如 2.0 的 MNEvent.d.json）
  * 按第二个点号前的部分分组，如 "Game.AnyPlayer.EnterGame" → 组名 "Game.AnyPlayer"
  */
-function parseJsonEvents(filePath: string, version: '2.0' | '3.0'): ApiItem[] {
+async function parseJsonEvents(filePath: string, version: '2.0' | '3.0'): Promise<ApiItem[]> {
     const items: ApiItem[] = [];
-    const raw = fs.readFileSync(filePath, 'utf-8');
+    const raw = await fs.promises.readFile(filePath, 'utf-8');
     const parsed = JSON.parse(raw) as Record<string, { desc?: string; event_info?: Record<string, string> }>;
 
     // 按第二个点号前的部分分组
@@ -369,12 +376,6 @@ function parseJsonEvents(filePath: string, version: '2.0' | '3.0'): ApiItem[] {
         // 模块名取第一个点号前的部分
         const dotIdx = groupName.indexOf('.');
         const module = dotIdx > 0 ? groupName.substring(0, dotIdx) : 'Event';
-
-        const fields: ApiField[] = group.subEvents.map(se => ({
-            name: se.name,
-            type: 'event',
-            desc: se.desc,
-        }));
 
         // 将完整子事件数据序列化存储到每个 field 中（detail 页用）
         // 用分隔符编码 event_info，避免修改 ApiField 接口
@@ -524,38 +525,53 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
     public static readonly viewType = 'miniworld.apiSearchView';
     private _view?: vscode.WebviewView;
     private _allItems: ApiItem[] = [];
+    private _initialized = false;
     /** 类型引用映射：子类型名 → { 父类名, 字段名, 源文件 } */
     private _typeRefMap: Map<string, Array<{ parentName: string; fieldName: string; sourceFile: string }>> = new Map();
+    private _context: vscode.ExtensionContext;
 
     constructor(
         private readonly _extensionUri: vscode.Uri,
         context: vscode.ExtensionContext,
     ) {
-        const multipleDir = context.asAbsolutePath(path.join('multiple'));
-        this._allItems = scanAllApis(multipleDir);
+        // 构造函数中不执行同步 I/O，改为异步延迟加载
+        this._context = context;
+    }
+
+    /** 异步初始化，加载并解析所有 API 数据 */
+    public async init(): Promise<void> {
+        if (this._initialized) { return; }
+        const multipleDir = this._context.asAbsolutePath(path.join('multiple'));
+        this._allItems = await scanAllApis(multipleDir);
         this._typeRefMap = buildTypeRefMap(this._allItems);
+        this._initialized = true;
     }
 
     /** 刷新数据（用于重新加载） */
-    public refresh(): void {
+    public async refresh(): Promise<void> {
         const multipleDir = (vscode.extensions.getExtension('LK-cmyk.miniworld-api-desc')
             ?.extensionPath ?? this._extensionUri.fsPath);
         const baseDir = path.join(multipleDir, 'multiple');
-        if (fs.existsSync(baseDir)) {
-            this._allItems = scanAllApis(baseDir);
+        try {
+            await fs.promises.access(baseDir);
+            this._allItems = await scanAllApis(baseDir);
             this._typeRefMap = buildTypeRefMap(this._allItems);
-        }
+            this._initialized = true;
+        } catch { /* 目录不存在则跳过 */ }
         if (this._view) {
             this._sendInitData();
         }
     }
 
-    resolveWebviewView(
+    async resolveWebviewView(
         webviewView: vscode.WebviewView,
         _context: vscode.WebviewViewResolveContext,
         _token: vscode.CancellationToken,
-    ): void {
+    ): Promise<void> {
         this._view = webviewView;
+
+        // 确保数据已加载
+        await this.init();
 
         webviewView.webview.options = {
             enableScripts: true,
@@ -566,7 +582,7 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
             ],
         };
 
-        webviewView.webview.html = this._getHtmlContent(webviewView.webview);
+        webviewView.webview.html = await this._getHtmlContent(webviewView.webview);
 
         webviewView.webview.onDidReceiveMessage(msg => {
             switch (msg.type) {
@@ -909,27 +925,29 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
         return text;
     }
 
-    private _getHtmlContent(webview: vscode.Webview): string {
+    private async _getHtmlContent(webview: vscode.Webview): Promise<string> {
         const nonce = this._getNonce();
 
         const webviewDir = vscode.Uri.joinPath(this._extensionUri, 'addon', 'webview');
         const cssUri = webview.asWebviewUri(vscode.Uri.joinPath(webviewDir, 'style.css'));
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(webviewDir, 'script.js'));
 
-        // 读取 SVG 图标文件，直接内联为 <svg> 元素（零外部依赖、无 CSP 问题）
+        // 异步读取 SVG 图标文件，直接内联为 <svg> 元素（零外部依赖、无 CSP 问题）
         const iconDir = path.join(this._extensionUri.fsPath, 'addon', 'webview', 'assets', 'img');
-        const readSvg = (name: string): string => {
+        const readSvg = async (name: string): Promise<string> => {
             const filePath = path.join(iconDir, name);
             try {
-                return fs.readFileSync(filePath, 'utf-8').trim();
+                return (await fs.promises.readFile(filePath, 'utf-8')).trim();
             } catch {
                 return '';
             }
         };
-        const searchSvg = readSvg('search.svg');
-        const closeSvg = readSvg('close.svg');
-        const copySvg = readSvg('copy.svg');
-        const checkSvg = readSvg('check.svg');
+        const [searchSvg, closeSvg, copySvg, checkSvg] = await Promise.all([
+            readSvg('search.svg'),
+            readSvg('close.svg'),
+            readSvg('copy.svg'),
+            readSvg('check.svg'),
+        ]);
 
         // SVG 的 HTML 转义版本（用于 data-* 属性，避免双引号破坏属性结构）
         const escHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -937,19 +955,19 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider {
         const checkSvgAttr = escHtml(checkSvg);
         const searchSvgAttr = escHtml(searchSvg);
 
-        // 读取 marked 库并内联到 HTML 中
+        // 异步读取 marked 库并内联到 HTML 中
         const markedPath = path.join(this._extensionUri.fsPath, 'node_modules', 'marked', 'lib', 'marked.umd.js');
         let markedScript = '';
-        if (fs.existsSync(markedPath)) {
-            markedScript = fs.readFileSync(markedPath, 'utf-8');
-        } else {
+        try {
+            markedScript = await fs.promises.readFile(markedPath, 'utf-8');
+        } catch {
             console.warn('marked 库未找到，将使用降级方案');
             // 降级方案：提供一个空的 marked polyfill
             markedScript = 'window.marked={parse:function(t){return t},parseInline:function(t){return t}};';
         }
 
         const htmlPath = vscode.Uri.joinPath(webviewDir, 'search.html');
-        let html = fs.readFileSync(htmlPath.fsPath, 'utf-8');
+        let html = await fs.promises.readFile(htmlPath.fsPath, 'utf-8');
 
         html = html
             .replace(/\{\{nonce\}\}/g, nonce)
