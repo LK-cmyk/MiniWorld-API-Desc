@@ -5,6 +5,10 @@
 ![License](https://img.shields.io/github/license/LK-cmyk/MiniWorld-API-Desc)
 ![VS Code](https://img.shields.io/badge/VS%20Code-^1.125.0-blue)
 ![Lua](https://img.shields.io/badge/Lua-5.1%2B-yellow)
+<br>
+
+![UGC 3.0](https://img.shields.io/badge/UGC-3.0-blue)
+![UGC 2.0](https://img.shields.io/badge/UGC-2.0-blue)
 
 [![Chinese Version README](https://img.shields.io/badge/Chinese-README-blue?logo=markdown)](./README.md)
 
