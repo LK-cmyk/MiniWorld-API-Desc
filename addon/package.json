@@ -89,9 +89,10 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --target=node20 --sourcemap",
+    "compile:test": "tsc -p tsconfig.test.json",
     "watch": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --target=node20 --sourcemap --watch",
     "typecheck": "tsc --noEmit",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "npm run compile && npm run compile:test && npm run lint",
     "lint": "eslint src",
     "test": "vscode-test",
     "install:worker": "cd ../server && npm install",

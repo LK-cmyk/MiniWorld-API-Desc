@@ -103,20 +103,18 @@ function parseLuaDefinitions(raw: string): Map<string, EventDefinition> {
     return definitions;
 }
 
-/** 解析 LuaDoc `@field` 的 `{name:type,name2:type2}` 形式参数列表 */
+/** 解析 LuaDoc `@field` 的 `{name:说明, x,y,z:说明}` 形式参数列表 */
 function parseEventInfoParams(rawParams: string | undefined): Record<string, string> {
     const eventInfo: Record<string, string> = {};
     if (!rawParams) {
         return eventInfo;
     }
 
-    for (const part of rawParams.split(/,\s*(?=\w+(?:,\w+)*:)/)) {
-        const separator = part.indexOf(':');
-        if (separator === -1) {
-            continue;
-        }
-        const value = part.slice(separator + 1).trim();
-        for (const name of part.slice(0, separator).split(',')) {
+    // 参数形如 `blockid:方块类型, x,y,z:事件位置`；分组名共享同一个说明
+    const paramRe = /([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)\s*:\s*([^,]*)/g;
+    for (const match of rawParams.matchAll(paramRe)) {
+        const value = match[2].trim();
+        for (const name of match[1].split(',')) {
             const trimmed = name.trim();
             if (trimmed) {
                 eventInfo[trimmed] = value;
@@ -124,6 +122,69 @@ function parseEventInfoParams(rawParams: string | undefined): Record<string, str
         }
     }
     return eventInfo;
+}
+
+/**
+ * 从整份源码中反查某个命名回调注册到了哪些 3.0 事件。
+ * 命名回调不参与 LuaLS 的泛型推断，这里通过 `AddEvent/AddTriggerEvent` 的第二个参数反向匹配。
+ */
+export function findEventKeysForFunction(source: string, functionName: string): string[] {
+    const shortName = functionName.split(/[.:]/).pop();
+    if (!shortName) {
+        return [];
+    }
+
+    const regRe = /Add(?:Trigger)?Event\s*\(\s*(TriggerEvent|ObjectEvent)\.(\w+)\s*,\s*([\w.:]+)/g;
+    const keys = new Set<string>();
+    for (const match of source.matchAll(regRe)) {
+        const refName = match[3].split(/[.:]/).pop();
+        if (refName === shortName) {
+            keys.add(`${match[1]}.${match[2]}`);
+        }
+    }
+    return Array.from(keys);
+}
+
+/** 找到光标所在（最近的）命名函数及其参数名 */
+function findEnclosingFunction(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+): { name: string; params: string[]; line: number } | null {
+    for (let lineNo = position.line; lineNo >= 0; lineNo--) {
+        const match = /^\s*(?:local\s+)?function\s+([\w.:]+)\s*\(([^)]*)\)/.exec(
+            document.lineAt(lineNo).text,
+        );
+        if (!match) {
+            continue;
+        }
+        const params = match[2].split(',').map(part => {
+            const name = /^\s*([A-Za-z_]\w*)/.exec(part);
+            return name ? name[1] : '';
+        }).filter(Boolean);
+        return { name: match[1], params, line: lineNo };
+    }
+    return null;
+}
+
+/** 从函数上方的 `--- @param <name> EventInfo.<Class>.<Event>` 注解反查事件键 */
+export function findAnnotatedEventKeysForParam(
+    lines: readonly string[],
+    functionLine: number,
+    paramName: string,
+): string[] {
+    const escaped = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`^\\s*---\\s*@param\\s+${escaped}\\s+EventInfo\\.(\\w+)\\.(\\w+)\\b`);
+
+    for (let i = functionLine - 1; i >= 0 && i >= functionLine - 30; i--) {
+        if (!/^\s*---/.test(lines[i])) {
+            break;
+        }
+        const match = re.exec(lines[i]);
+        if (match) {
+            return [`${match[1]}.${match[2]}`];
+        }
+    }
+    return [];
 }
 
 /** 构建事件的 Markdown 文档（描述 + 参数表） */
@@ -143,6 +204,33 @@ function buildEventDocumentation(definition: EventDefinition): vscode.MarkdownSt
     const md = new vscode.MarkdownString(sections.join('\n\n'));
     md.isTrusted = true;
     return md;
+}
+
+/** 构建命名回调里的事件字段补全项（按字段名去重） */
+function buildEventFieldItems(eventKeys: string[]): vscode.CompletionItem[] {
+    const items: vscode.CompletionItem[] = [];
+    const seen = new Set<string>();
+
+    for (const eventKey of eventKeys) {
+        const definition = state.definitions.get(eventKey);
+        if (!definition?.event_info) {
+            continue;
+        }
+        for (const [name, desc] of Object.entries(definition.event_info)) {
+            if (seen.has(name)) {
+                continue;
+            }
+            seen.add(name);
+            const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Field);
+            item.detail = `any · ${desc || definition.desc || `EventInfo.${eventKey}`}`;
+            item.documentation = buildEventDocumentation(definition);
+            items.push(item);
+        }
+    }
+
+    const labelOf = (item: vscode.CompletionItem): string =>
+        typeof item.label === 'string' ? item.label : item.label.label;
+    return items.sort((a, b) => labelOf(a).localeCompare(labelOf(b)));
 }
 
 /** 构建 2.0 模式的补全项（键为完整事件名，补全后自动包裹长括号） */
@@ -202,7 +290,8 @@ function getClassItems(className: EventClass30): vscode.CompletionItem[] {
 
 type CompletionContext =
     | { kind: '2.0' }
-    | { kind: '3.0'; className: EventClass30 };
+    | { kind: '3.0'; className: EventClass30 }
+    | { kind: 'event-field'; eventKeys: string[] };
 
 /**
  * 判断光标前的补全上下文。
@@ -238,6 +327,48 @@ function getCompletionContext(
     }
 
     return { kind: '2.0' };
+}
+
+/** 汇总某个函数参数可能对应的 3.0 事件键（注册语句 + LuaDoc 注解） */
+function resolveEventKeysForParam(
+    document: vscode.TextDocument,
+    fn: { name: string; line: number },
+    paramName: string,
+): string[] {
+    const source = document.getText();
+    const keys = new Set([
+        ...findEventKeysForFunction(source, fn.name),
+        ...findAnnotatedEventKeysForParam(source.split(/\r?\n/), fn.line, paramName),
+    ]);
+    return Array.from(keys);
+}
+
+/**
+ * 识别命名回调里的 `event.` / `e.` 补全上下文。
+ * 通过光标所在函数的参数名和该函数被注册到的事件反查字段列表。
+ */
+function getEventFieldContext(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+    mode: '2.0' | '3.0',
+): CompletionContext | null {
+    if (mode !== '3.0') {
+        return null;
+    }
+
+    const textBefore = document.lineAt(position.line).text.substring(0, position.character);
+    const memberMatch = /(?:^|[^\w])([A-Za-z_]\w*)\.$/.exec(textBefore);
+    if (!memberMatch) {
+        return null;
+    }
+
+    const fn = findEnclosingFunction(document, position);
+    if (!fn || !fn.params.includes(memberMatch[1])) {
+        return null;
+    }
+
+    const eventKeys = resolveEventKeysForParam(document, fn, memberMatch[1]);
+    return eventKeys.length > 0 ? { kind: 'event-field', eventKeys } : null;
 }
 
 /**
@@ -300,7 +431,8 @@ export function registerEventCompletion(context: vscode.ExtensionContext): vscod
                         return undefined;
                     }
 
-                    const ctx = getCompletionContext(document, position, state.mode);
+                    const ctx = getCompletionContext(document, position, state.mode)
+                        ?? getEventFieldContext(document, position, state.mode);
                     if (ctx === null) {
                         return undefined;
                     }
@@ -310,10 +442,63 @@ export function registerEventCompletion(context: vscode.ExtensionContext): vscod
                     if (ctx.kind === '2.0') {
                         return new vscode.CompletionList(state.flatItems ?? [], false);
                     }
+                    if (ctx.kind === 'event-field') {
+                        return new vscode.CompletionList(buildEventFieldItems(ctx.eventKeys), false);
+                    }
                     return new vscode.CompletionList(getClassItems(ctx.className), false);
                 },
             },
             '.',
+        ),
+    );
+
+    disposables.push(
+        vscode.languages.registerHoverProvider(
+            { language: 'lua' },
+            {
+                provideHover(document, position) {
+                    if (state.mode !== '3.0' || !state.ready) {
+                        return undefined;
+                    }
+
+                    const wordRange = document.getWordRangeAtPosition(position, /[A-Za-z_]\w*/);
+                    if (!wordRange) {
+                        return undefined;
+                    }
+                    const fieldName = document.getText(wordRange);
+                    const beforeWord = document.lineAt(wordRange.start.line).text.substring(
+                        0,
+                        wordRange.start.character,
+                    );
+                    const memberMatch = /([A-Za-z_]\w*)\.$/.exec(beforeWord);
+                    if (!memberMatch) {
+                        return undefined;
+                    }
+
+                    const fn = findEnclosingFunction(document, wordRange.start);
+                    if (!fn || !fn.params.includes(memberMatch[1])) {
+                        return undefined;
+                    }
+
+                    const details = new Set<string>();
+                    for (const eventKey of resolveEventKeysForParam(document, fn, memberMatch[1])) {
+                        const definition = state.definitions.get(eventKey);
+                        const desc = definition?.event_info?.[fieldName];
+                        if (desc) {
+                            details.add(desc);
+                        }
+                    }
+                    if (details.size === 0) {
+                        return undefined;
+                    }
+
+                    const md = new vscode.MarkdownString(
+                        `**${fieldName}** · \`any\`\n\n${Array.from(details).join('\n')}`,
+                    );
+                    md.isTrusted = true;
+                    return new vscode.Hover(md, wordRange);
+                },
+            },
         ),
     );
 

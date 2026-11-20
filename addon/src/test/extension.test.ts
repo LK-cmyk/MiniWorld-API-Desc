@@ -5,7 +5,8 @@ import * as path from 'path';
 
 import * as vscode from 'vscode';
 
-import { buildClassCompletionItems, buildEventCompletionItems, parseEventDefinitions, parseLuaEventDefinitions } from '../eventCompletion';
+import { buildClassCompletionItems, buildEventCompletionItems, findAnnotatedEventKeysForParam, findEventKeysForFunction, parseEventDefinitions, parseLuaEventDefinitions } from '../eventCompletion';
+import { parseLuaDeclarations } from '../apiSearch';
 
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
@@ -55,7 +56,63 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(definitions.size, 3);
 		assert.strictEqual(definitions.get('TriggerEvent.GameStart')?.desc, '游戏创建');
 		assert.strictEqual(definitions.get('TriggerEvent.PlayerClickBlock')?.event_info?.x, '事件位置');
+		assert.strictEqual(definitions.get('TriggerEvent.PlayerClickBlock')?.event_info?.y, '事件位置');
+		assert.strictEqual(definitions.get('TriggerEvent.PlayerClickBlock')?.event_info?.z, '事件位置');
 		assert.strictEqual(definitions.get('ObjectEvent.PlayerClickBlock')?.desc, '组件点击');
+	});
+
+	test('parses 3.0 event fields with dotted event table types for sidebar search', async () => {
+		const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'miniworld-search-event-'));
+		const filePath = path.join(tempDir, 'MNEvent.d.lua');
+		fs.writeFileSync(filePath, [
+			'--- @class TriggerEvent @触发器事件枚举',
+			'--- @field GameStart EventInfo.TriggerEvent.GameStart @游戏创建 {}',
+			'--- @field PlayerClickBlock EventInfo.TriggerEvent.PlayerClickBlock @点击方块 {blockid:方块类型, x,y,z:事件位置}',
+			'local TriggerEvent = {}',
+		].join('\n'));
+
+		const items = await parseLuaDeclarations(filePath, '3.0');
+
+		assert.strictEqual(items.length, 1);
+		assert.strictEqual(items[0].kind, 'event');
+		assert.strictEqual(items[0].fields.length, 2);
+		assert.strictEqual(items[0].fields[0].name, 'GameStart');
+		assert.ok(items[0].fields[1].type.startsWith('event|'));
+		const eventInfo = JSON.parse(items[0].fields[1].type.substring(6));
+		assert.strictEqual(eventInfo.blockid, '方块类型');
+		assert.strictEqual(eventInfo.x, '事件位置');
+	});
+
+	test('resolves event keys from named callback registrations', () => {
+		const source = [
+			'local s = {}',
+			'function s:test(e)',
+			'  print(e.)',
+			'end',
+			'function s:OnStart()',
+			'  s:AddEvent(TriggerEvent.BlockAdd, self.test)',
+			'  s:AddTriggerEvent(ObjectEvent.BlockAdd, s.test)',
+			'end',
+		].join('\n');
+
+		assert.deepStrictEqual(findEventKeysForFunction(source, 's:test'), [
+			'TriggerEvent.BlockAdd',
+			'ObjectEvent.BlockAdd',
+		]);
+		assert.deepStrictEqual(findEventKeysForFunction(source, 's:missing'), []);
+	});
+
+	test('resolves event keys from event table parameter annotations', () => {
+		const lines = [
+			'local s = {}',
+			'',
+			'--- @param e EventInfo.TriggerEvent.BlockAdd',
+			'function s:test(e)',
+			'end',
+		];
+
+		assert.deepStrictEqual(findAnnotatedEventKeysForParam(lines, 3, 'e'), ['TriggerEvent.BlockAdd']);
+		assert.deepStrictEqual(findAnnotatedEventKeysForParam(lines, 3, 'other'), []);
 	});
 
 	test('builds 3.0 completion items filtered by event class', () => {

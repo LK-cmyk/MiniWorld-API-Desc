@@ -63,13 +63,15 @@ const ID_DOWNLOAD_TYPES: IdCategory[] = ['item', 'actor', 'buff'];
 
 // 模块级正则常量（避免热路径中重复创建 RegExp）
 const RE_CLASS_LINE = /^---\s*@class (\w+)\s*@?(.*)$/;
-const RE_FIELD_LINE = /^---\s*@field (\w+)\s+(\w+)(?:\s*@([\s\S]*))?$/;
+// 类型可能是 `any`、`EventInfo.TriggerEvent.GameStart`、`fun(event: T)`、`table {x: number}` 等，
+// 统一按「非空白字符 + 可选说明」解析，避免带点号/函数签名/结构体的类型被漏掉。
+const RE_FIELD_LINE = /^---\s*@field (\w+)\s+(\S+)(?:\s+@([\s\S]*))?$/;
 const RE_OTHER_ANNOTATION = /^---\s*@/;
 const RE_FUNC_LINE = /(?:function\s+(?:(\w+):)?(\w+)\s*\(|(\w+)\s*=\s*function\s*\()/;
-const RE_PARAM_FULL = /^---\s*@param (\w+)\s+(\w+(?:\s*\|\s*\w+)*)\s*@(.+)$/;
-const RE_PARAM_SIMPLE = /^---\s*@param (\w+)\s+(\w+(?:\s*\|\s*\w+)*)$/;
-const RE_RETURN_FULL = /^---\s*@return (\w+(?:\s*,\s*\w+)*)\s*@(.+)$/;
-const RE_RETURN_SIMPLE = /^---\s*@return (\w+(?:\s*,\s*\w+)*)$/;
+const RE_PARAM_FULL = /^---\s*@param (\w+)\s+(.+?)\s+@(.+)$/;
+const RE_PARAM_SIMPLE = /^---\s*@param (\w+)\s+(.+)$/;
+const RE_RETURN_FULL = /^---\s*@return (.+?)\s+@(.+)$/;
+const RE_RETURN_SIMPLE = /^---\s*@return (.+)$/;
 const RE_DESC_LINE = /^--- (.+)$/;
 
 // 模块级常量集合（避免每次搜索都新建 Set）
@@ -100,18 +102,24 @@ function parseEventFieldDesc(raw: string): { cleanDesc: string; eventInfo: Recor
     const paramsStr = raw.substring(braceStart + 1, braceEnd);
     const eventInfo: Record<string, string> = {};
 
-    // 用正则逐个提取 key:value，值中可含逗号，仅在遇到 ", key:" 时停止
-    const paramRegex = /(\w[\w.]*)\s*:\s*((?:(?!\s*,\s*\w[\w.]*\s*:).)*?)(?=\s*,\s*\w[\w.]*\s*:|$)/g;
+    // 参数形如 `blockid:方块类型, x,y,z:事件位置`；分组名共享同一个说明
+    const paramRegex = /([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)\s*:\s*([^,]*)/g;
     let m: RegExpExecArray | null;
     while ((m = paramRegex.exec(paramsStr)) !== null) {
-        eventInfo[m[1].trim()] = m[2].trim();
+        const desc = m[2].trim();
+        for (const name of m[1].split(',')) {
+            const trimmed = name.trim();
+            if (trimmed) {
+                eventInfo[trimmed] = desc;
+            }
+        }
     }
 
     return { cleanDesc: cleanDesc || raw, eventInfo: Object.keys(eventInfo).length > 0 ? eventInfo : null };
 }
 
 /** 从 `.d.lua` 文件解析出所有 API 条目 */
-async function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): Promise<ApiItem[]> {
+export async function parseLuaDeclarations(filePath: string, version: '2.0' | '3.0'): Promise<ApiItem[]> {
     const items: ApiItem[] = [];
     const content = await fs.promises.readFile(filePath, 'utf-8');
     const lines = content.split(/\r?\n/);
@@ -276,7 +284,9 @@ async function scanAllApis(multipleDir: string): Promise<ApiItem[]> {
         } catch {
             continue;
         }
-        const files = (await fs.promises.readdir(dir)).filter(f => f.endsWith('.d.lua') || f.endsWith('.lua'));
+        // MNEventTable.d.lua 只是给 LuaLS 用的事件回调参数表，不是 API 文档，不进侧栏索引
+        const files = (await fs.promises.readdir(dir))
+            .filter(f => (f.endsWith('.d.lua') || f.endsWith('.lua')) && f !== 'MNEventTable.d.lua');
         for (const file of files) {
             const filePath = path.join(dir, file);
             try {

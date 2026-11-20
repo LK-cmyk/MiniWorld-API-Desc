@@ -1,178 +1,178 @@
 --- @class TriggerEvent @触发器事件枚举
---- @field GroupWeatherChanged any @当地形组的天气改变 {weathergroupid:事件中的天气组}
---- @field GameStart any @游戏创建 {}
---- @field GameHour any @游戏时间 {hour:小时, second:分钟, ticks:游戏刻}
---- @field MinitimerChange any @任意计时器改变 {}
---- @field CraftEnd any @配方合成完毕 {craftid:事件中的配方ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field FurnaceBegin any @当熔炼开始 {furanceid:事件中的熔炼ID, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field FurnaceEnd any @当熔炼结束 {furanceid:事件中的熔炼ID, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field PlayerRevive any @玩家复活 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerMoveOneBlockSize any @玩家移动 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerSelectShortcut any @玩家选中快捷栏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerInvateFriend any @玩家邀请好友 {eventobjid:触发事件的对象, x,y,z:事件中的位置, toobjid:事件中的目标对象, eventworldid:事件中的星球}
---- @field GameAnyPlayerEnterGame any @当玩家进入游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field GameAnyPlayerLeaveGame any @当玩家离开游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中的星球}
---- @field GameAnyPlayerVictory any @当玩家游戏胜利 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field GameAnyPlayerDefeat any @当玩家游戏失败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerClickBlock any @当玩家点击任意方块 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field PlayerClickPlayer any @当玩家点击任意玩家 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickMob any @当玩家点击任意生物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickProjectile any @当玩家点击任意投掷物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickDropItem any @当玩家点击任意掉落物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickEntity any @当玩家点击任意实体 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerInputKeyClick any @当任意玩家点击按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerInputKeyDown any @当任意玩家按下按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerInputKeyUp any @当任意玩家抬起按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerInputKeyOnPress any @当任意玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerNewInputContent any @玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerGunAction any @当玩家持枪状态改变时 {eventobjid:触发事件的对象, gunAction:枪械动作, gunState:枪械状态, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerUseBullet any @当玩家持枪单次开火时 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球, itemnum:事件中的道具数量}
---- @field PlayerMotionStateChange any @当玩家进入运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
---- @field PlayerMotionStateChangeEnd any @当玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
---- @field PlayerAddItem any @当玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerUseItem any @当玩家开始使用道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerChargeItemBegin any @当玩家开始蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerConsumeItem any @当玩家消耗道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerPickUpItem any @当玩家拾取道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerDiscardItem any @当玩家丢弃道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerChargeItemEnd any @当玩家结束蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerShortcutChange any @当玩家的快捷栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerShortcutAddItem any @当玩家的快捷栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerShortcutRemItem any @当玩家的快捷栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerBackPackChange any @当玩家的背包栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerBackPackAddItem any @当玩家的背包栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerBackPackRemItem any @当玩家的背包栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerEquipChange any @当玩家的装备栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerEquipAddItem any @当玩家的装备栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerEquipRemItem any @当玩家的装备栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerEquipOn any @当玩家穿上装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerEquipOff any @当玩家脱下装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field BlockAdd any @方块被创建 {blockid:事件中的方块类型, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockRemove any @当方块被破坏 {blockid:事件中的方块类型, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockDigBegin any @当方块被挖掘 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockDigEnd any @当方块被挖掘完毕 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockDigCancel any @当方块被挖掘中断 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockTrigger any @当方块开关状态发生改变 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockChangeColor any @当方块颜色发生改变 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockChangeDir any @当方块方向发生改变 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockContainerChange any @当储存容器内发生改变 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockContainerPutIn any @当储存容器内放入道具 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field BlockContainerTakeOut any @当储存容器内取出道具 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field UILostFocus any @玩家在界面输入字符串 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UISpineComplete any @当前界面的元件动画装载器播放完毕 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIShow any @当前界面被打开 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIHide any @当前界面被关闭 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIButtonClick any @当前界面的元件被点击 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIButtonTouchBegin any @当前界面的元件被按下 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIButtonTouchEnd any @当前界面的元件被抬起 {CustomUI:事件中的界面, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIButtonLongPress any @当前界面的元件被长按 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIGLoader3DTouchClick any @当前界面的元件被点击 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIGLoader3DTouchBegin any @当前界面的元件被按下 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIGLoader3DTouchEnd any @当前界面的元件被抬起 {CustomUI:事件中的界面, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIGLoader3DLongPress any @当前界面的元件被长按 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIScrollPaneTouchBegin any @滑动容器触摸开始 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIScrollPaneTouchEnd any @滑动容器触摸结束 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field UIScrollPaneScrollEnd any @滑动容器滚动结束 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
---- @field ParticlePosOnCreate any @当特效创建在任意位置 {effectid:事件中的特效, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field ParticleObjectOnCreate any @当特效创建在任意对象 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ParticlePlayerOnCreate any @当特效创建在任意玩家 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ParticleMobOnCreate any @当特效创建在任意生物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ParticleProjectileOnCreate any @当特效创建在任意投掷物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ParticleItemOnCreate any @当特效创建在任意掉落物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ParticleEntityOnCreate any @当特效创建在任意实体 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field DeveloperBuyItem any @任意玩家购买或提取开发者商店道具 {itemid:事件中的道具类型, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
---- @field PlayerCollideToPlayer any @当任意玩家和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerCollideToMob any @当任意玩家和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerCollideToMissile any @当任意玩家和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerCollideToDropItem any @当任意玩家和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerCollideToEntity any @当任意玩家和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerCollideToAreaObj any @当任意玩家和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobCollideToPlayer any @当任意生物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobCollideToMob any @当任意生物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobCollideToMissile any @当任意生物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobCollideToDropItem any @当任意生物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobCollideToEntity any @当任意生物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobCollideToAreaObj any @当任意生物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCollideToPlayer any @当任意投掷物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCollideToMob any @当任意投掷物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCollideToMissile any @当任意投掷物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCollideToDropItem any @当任意投掷物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCollideToEntity any @当任意投掷物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCollideToAreaObj any @当任意投掷物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field DropItemCollideToPlayer any @当任意掉落物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field DropItemCollideToMob any @当任意掉落物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field DropItemCollideToMissile any @当任意掉落物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field DropItemCollideToDropItem any @当任意掉落物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field DropItemCollideToEntity any @当任意掉落物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field DropItemCollideToAreaObj any @当任意掉落物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field EntityCollideToPlayer any @当任意实体和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field EntityCollideToMob any @当任意实体和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field EntityCollideToMissile any @当任意实体和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field EntityCollideToDropItem any @当任意实体和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field EntityCollideToEntity any @当任意实体和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field EntityCollideToAreaObj any @当任意实体和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field AreaObjCollideToPlayer any @当任意区域和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field AreaObjCollideToMob any @当任意区域和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field AreaObjCollideToMissile any @当任意区域和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field AreaObjCollideToDropItem any @当任意区域和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field AreaObjCollideToEntity any @当任意区域和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field AreaObjCollideToAreaObj any @当任意区域和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerAreaIn any @当任意玩家进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerAreaOut any @当任意玩家离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobAreaIn any @当任意生物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobAreaOut any @当任意生物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MissileAreaIn any @当任意投掷物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MissileAreaOut any @当任意投掷物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field DropItemAreaIn any @当任意掉落物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field DropItemAreaOut any @当任意掉落物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field EntityAreaIn any @当任意实体进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field EntityAreaOut any @当任意实体离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field AreaObjAreaIn any @当任意区域进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field AreaObjAreaOut any @当任意区域离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobCreate any @当任意生物被创建 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field EntityCreate any @当任意实体被创建 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field AreaObjCreate any @当任意区域被创建 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerBeHurt any @当任意玩家受到伤害 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerDie any @当任意玩家被击败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobBeHurt any @当任意生物受到伤害 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobDie any @当任意生物被击败 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerAttack any @当任意玩家开始攻击 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerAttackHit any @当任意玩家攻击命中 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerDefeatActor any @当任意玩家击败目标 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerDamageActor any @当任意玩家造成伤害 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobAttack any @当任意生物开始攻击 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobAttackHit any @当任意生物攻击命中 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobBeat any @当任意生物击败目标 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobDamage any @当任意生物造成伤害 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerAddBuff any @当任意玩家获得状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerRemoveBuff any @当任意玩家失去状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobAddBuff any @当任意生物获得状态 {actorid:触发事件的生物类型, buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobRemoveBuff any @当任意生物失去状态 {actorid:触发事件的生物类型, buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerChangeAttr any @当任意玩家的属性改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playerattr:玩家属性, playerattrval:玩家属性值, eventworldid:事件中星球}
---- @field MobChangeAttr any @当任意生物的属性改变 {actorattr:生物属性, actorattrval:生物属性值, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ActorPickupActor any @当角色举起角色 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, pickupType:举起或放下类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerAttrStateChange any @当任意玩家权限发生改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field MobAttrStateChange any @当任意生物权限发生改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerMountActor any @当任意玩家骑乘坐骑/载具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobMountActor any @当任意生物骑乘坐骑/载具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerDismountActor any @当任意玩家取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MobDismountActor any @当任意生物取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field MissileCreate any @投掷物创建 {eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ProjectileHitBlock any @当投掷物击中任意方块 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ProjectileHitPlayer any @当投掷物击中任意玩家 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ProjectileHitMob any @当投掷物击中任意生物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ProjectileHitProj any @当投掷物击中任意投掷物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ProjectileHitItem any @当投掷物击中任意掉落物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ProjectileHitEntity any @当投掷物击中任意实体 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ItemCreate any @当掉落物创建 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field DropItemPickup any @当掉落物被拾取 {eventobjid:触发事件的对象, x,y,z:事件中的位置, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field ItemDisappear any @当掉落物消失 {eventobjid:触发事件的对象, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerOpenInnerView any @当玩家打开内置界面 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
---- @field PlayerCloseInnerView any @当玩家关闭内置界面 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
---- @field MobModelChange any @当生物的主模型改变 {eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
---- @field PlayerModelChange any @当玩家的主模型改变 {eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
---- @field TimelineStart any @当剧情动画开始 {eventobjid:触发事件的对象}
---- @field TimelineStop any @当剧情动画结束 {eventobjid:触发事件的对象}
+--- @field GroupWeatherChanged EventInfo.TriggerEvent.GroupWeatherChanged @当地形组的天气改变 {weathergroupid:事件中的天气组}
+--- @field GameStart EventInfo.TriggerEvent.GameStart @游戏创建 {}
+--- @field GameHour EventInfo.TriggerEvent.GameHour @游戏时间 {hour:小时, second:分钟, ticks:游戏刻}
+--- @field MinitimerChange EventInfo.TriggerEvent.MinitimerChange @任意计时器改变 {}
+--- @field CraftEnd EventInfo.TriggerEvent.CraftEnd @配方合成完毕 {craftid:事件中的配方ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field FurnaceBegin EventInfo.TriggerEvent.FurnaceBegin @当熔炼开始 {furanceid:事件中的熔炼ID, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field FurnaceEnd EventInfo.TriggerEvent.FurnaceEnd @当熔炼结束 {furanceid:事件中的熔炼ID, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field PlayerRevive EventInfo.TriggerEvent.PlayerRevive @玩家复活 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerMoveOneBlockSize EventInfo.TriggerEvent.PlayerMoveOneBlockSize @玩家移动 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerSelectShortcut EventInfo.TriggerEvent.PlayerSelectShortcut @玩家选中快捷栏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerInvateFriend EventInfo.TriggerEvent.PlayerInvateFriend @玩家邀请好友 {eventobjid:触发事件的对象, x,y,z:事件中的位置, toobjid:事件中的目标对象, eventworldid:事件中的星球}
+--- @field GameAnyPlayerEnterGame EventInfo.TriggerEvent.GameAnyPlayerEnterGame @当玩家进入游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field GameAnyPlayerLeaveGame EventInfo.TriggerEvent.GameAnyPlayerLeaveGame @当玩家离开游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中的星球}
+--- @field GameAnyPlayerVictory EventInfo.TriggerEvent.GameAnyPlayerVictory @当玩家游戏胜利 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field GameAnyPlayerDefeat EventInfo.TriggerEvent.GameAnyPlayerDefeat @当玩家游戏失败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerClickBlock EventInfo.TriggerEvent.PlayerClickBlock @当玩家点击任意方块 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field PlayerClickPlayer EventInfo.TriggerEvent.PlayerClickPlayer @当玩家点击任意玩家 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickMob EventInfo.TriggerEvent.PlayerClickMob @当玩家点击任意生物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickProjectile EventInfo.TriggerEvent.PlayerClickProjectile @当玩家点击任意投掷物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickDropItem EventInfo.TriggerEvent.PlayerClickDropItem @当玩家点击任意掉落物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickEntity EventInfo.TriggerEvent.PlayerClickEntity @当玩家点击任意实体 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerInputKeyClick EventInfo.TriggerEvent.PlayerInputKeyClick @当任意玩家点击按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerInputKeyDown EventInfo.TriggerEvent.PlayerInputKeyDown @当任意玩家按下按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerInputKeyUp EventInfo.TriggerEvent.PlayerInputKeyUp @当任意玩家抬起按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerInputKeyOnPress EventInfo.TriggerEvent.PlayerInputKeyOnPress @当任意玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerNewInputContent EventInfo.TriggerEvent.PlayerNewInputContent @玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerGunAction EventInfo.TriggerEvent.PlayerGunAction @当玩家持枪状态改变时 {eventobjid:触发事件的对象, gunAction:枪械动作, gunState:枪械状态, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerUseBullet EventInfo.TriggerEvent.PlayerUseBullet @当玩家持枪单次开火时 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球, itemnum:事件中的道具数量}
+--- @field PlayerMotionStateChange EventInfo.TriggerEvent.PlayerMotionStateChange @当玩家进入运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- @field PlayerMotionStateChangeEnd EventInfo.TriggerEvent.PlayerMotionStateChangeEnd @当玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- @field PlayerAddItem EventInfo.TriggerEvent.PlayerAddItem @当玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerUseItem EventInfo.TriggerEvent.PlayerUseItem @当玩家开始使用道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerChargeItemBegin EventInfo.TriggerEvent.PlayerChargeItemBegin @当玩家开始蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerConsumeItem EventInfo.TriggerEvent.PlayerConsumeItem @当玩家消耗道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerPickUpItem EventInfo.TriggerEvent.PlayerPickUpItem @当玩家拾取道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerDiscardItem EventInfo.TriggerEvent.PlayerDiscardItem @当玩家丢弃道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerChargeItemEnd EventInfo.TriggerEvent.PlayerChargeItemEnd @当玩家结束蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerShortcutChange EventInfo.TriggerEvent.PlayerShortcutChange @当玩家的快捷栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerShortcutAddItem EventInfo.TriggerEvent.PlayerShortcutAddItem @当玩家的快捷栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerShortcutRemItem EventInfo.TriggerEvent.PlayerShortcutRemItem @当玩家的快捷栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerBackPackChange EventInfo.TriggerEvent.PlayerBackPackChange @当玩家的背包栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerBackPackAddItem EventInfo.TriggerEvent.PlayerBackPackAddItem @当玩家的背包栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerBackPackRemItem EventInfo.TriggerEvent.PlayerBackPackRemItem @当玩家的背包栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerEquipChange EventInfo.TriggerEvent.PlayerEquipChange @当玩家的装备栏发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerEquipAddItem EventInfo.TriggerEvent.PlayerEquipAddItem @当玩家的装备栏放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerEquipRemItem EventInfo.TriggerEvent.PlayerEquipRemItem @当玩家的装备栏取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerEquipOn EventInfo.TriggerEvent.PlayerEquipOn @当玩家穿上装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerEquipOff EventInfo.TriggerEvent.PlayerEquipOff @当玩家脱下装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field BlockAdd EventInfo.TriggerEvent.BlockAdd @方块被创建 {blockid:事件中的方块类型, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockRemove EventInfo.TriggerEvent.BlockRemove @当方块被破坏 {blockid:事件中的方块类型, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockDigBegin EventInfo.TriggerEvent.BlockDigBegin @当方块被挖掘 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockDigEnd EventInfo.TriggerEvent.BlockDigEnd @当方块被挖掘完毕 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockDigCancel EventInfo.TriggerEvent.BlockDigCancel @当方块被挖掘中断 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockTrigger EventInfo.TriggerEvent.BlockTrigger @当方块开关状态发生改变 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockChangeColor EventInfo.TriggerEvent.BlockChangeColor @当方块颜色发生改变 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockChangeDir EventInfo.TriggerEvent.BlockChangeDir @当方块方向发生改变 {actorid:触发事件的生物类型, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockContainerChange EventInfo.TriggerEvent.BlockContainerChange @当储存容器内发生改变 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockContainerPutIn EventInfo.TriggerEvent.BlockContainerPutIn @当储存容器内放入道具 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field BlockContainerTakeOut EventInfo.TriggerEvent.BlockContainerTakeOut @当储存容器内取出道具 {blockid:事件中的方块类型, eventworldid:事件中的星球, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field UILostFocus EventInfo.TriggerEvent.UILostFocus @玩家在界面输入字符串 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UISpineComplete EventInfo.TriggerEvent.UISpineComplete @当前界面的元件动画装载器播放完毕 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIShow EventInfo.TriggerEvent.UIShow @当前界面被打开 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIHide EventInfo.TriggerEvent.UIHide @当前界面被关闭 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIButtonClick EventInfo.TriggerEvent.UIButtonClick @当前界面的元件被点击 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIButtonTouchBegin EventInfo.TriggerEvent.UIButtonTouchBegin @当前界面的元件被按下 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIButtonTouchEnd EventInfo.TriggerEvent.UIButtonTouchEnd @当前界面的元件被抬起 {CustomUI:事件中的界面, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIButtonLongPress EventInfo.TriggerEvent.UIButtonLongPress @当前界面的元件被长按 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIGLoader3DTouchClick EventInfo.TriggerEvent.UIGLoader3DTouchClick @当前界面的元件被点击 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIGLoader3DTouchBegin EventInfo.TriggerEvent.UIGLoader3DTouchBegin @当前界面的元件被按下 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIGLoader3DTouchEnd EventInfo.TriggerEvent.UIGLoader3DTouchEnd @当前界面的元件被抬起 {CustomUI:事件中的界面, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIGLoader3DLongPress EventInfo.TriggerEvent.UIGLoader3DLongPress @当前界面的元件被长按 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIScrollPaneTouchBegin EventInfo.TriggerEvent.UIScrollPaneTouchBegin @滑动容器触摸开始 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIScrollPaneTouchEnd EventInfo.TriggerEvent.UIScrollPaneTouchEnd @滑动容器触摸结束 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field UIScrollPaneScrollEnd EventInfo.TriggerEvent.UIScrollPaneScrollEnd @滑动容器滚动结束 {CustomUI:事件中的界面, content:事件中的字符串, customdata:自定义字符串数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, uielement:事件中的元件, eventworldid:事件中星球}
+--- @field ParticlePosOnCreate EventInfo.TriggerEvent.ParticlePosOnCreate @当特效创建在任意位置 {effectid:事件中的特效, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field ParticleObjectOnCreate EventInfo.TriggerEvent.ParticleObjectOnCreate @当特效创建在任意对象 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ParticlePlayerOnCreate EventInfo.TriggerEvent.ParticlePlayerOnCreate @当特效创建在任意玩家 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ParticleMobOnCreate EventInfo.TriggerEvent.ParticleMobOnCreate @当特效创建在任意生物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ParticleProjectileOnCreate EventInfo.TriggerEvent.ParticleProjectileOnCreate @当特效创建在任意投掷物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ParticleItemOnCreate EventInfo.TriggerEvent.ParticleItemOnCreate @当特效创建在任意掉落物 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ParticleEntityOnCreate EventInfo.TriggerEvent.ParticleEntityOnCreate @当特效创建在任意实体 {effectid:事件中的特效, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field DeveloperBuyItem EventInfo.TriggerEvent.DeveloperBuyItem @任意玩家购买或提取开发者商店道具 {itemid:事件中的道具类型, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- @field PlayerCollideToPlayer EventInfo.TriggerEvent.PlayerCollideToPlayer @当任意玩家和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerCollideToMob EventInfo.TriggerEvent.PlayerCollideToMob @当任意玩家和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerCollideToMissile EventInfo.TriggerEvent.PlayerCollideToMissile @当任意玩家和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerCollideToDropItem EventInfo.TriggerEvent.PlayerCollideToDropItem @当任意玩家和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerCollideToEntity EventInfo.TriggerEvent.PlayerCollideToEntity @当任意玩家和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerCollideToAreaObj EventInfo.TriggerEvent.PlayerCollideToAreaObj @当任意玩家和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobCollideToPlayer EventInfo.TriggerEvent.MobCollideToPlayer @当任意生物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobCollideToMob EventInfo.TriggerEvent.MobCollideToMob @当任意生物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobCollideToMissile EventInfo.TriggerEvent.MobCollideToMissile @当任意生物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobCollideToDropItem EventInfo.TriggerEvent.MobCollideToDropItem @当任意生物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobCollideToEntity EventInfo.TriggerEvent.MobCollideToEntity @当任意生物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobCollideToAreaObj EventInfo.TriggerEvent.MobCollideToAreaObj @当任意生物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCollideToPlayer EventInfo.TriggerEvent.MissileCollideToPlayer @当任意投掷物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCollideToMob EventInfo.TriggerEvent.MissileCollideToMob @当任意投掷物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCollideToMissile EventInfo.TriggerEvent.MissileCollideToMissile @当任意投掷物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCollideToDropItem EventInfo.TriggerEvent.MissileCollideToDropItem @当任意投掷物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCollideToEntity EventInfo.TriggerEvent.MissileCollideToEntity @当任意投掷物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCollideToAreaObj EventInfo.TriggerEvent.MissileCollideToAreaObj @当任意投掷物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field DropItemCollideToPlayer EventInfo.TriggerEvent.DropItemCollideToPlayer @当任意掉落物和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field DropItemCollideToMob EventInfo.TriggerEvent.DropItemCollideToMob @当任意掉落物和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field DropItemCollideToMissile EventInfo.TriggerEvent.DropItemCollideToMissile @当任意掉落物和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field DropItemCollideToDropItem EventInfo.TriggerEvent.DropItemCollideToDropItem @当任意掉落物和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field DropItemCollideToEntity EventInfo.TriggerEvent.DropItemCollideToEntity @当任意掉落物和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field DropItemCollideToAreaObj EventInfo.TriggerEvent.DropItemCollideToAreaObj @当任意掉落物和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field EntityCollideToPlayer EventInfo.TriggerEvent.EntityCollideToPlayer @当任意实体和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field EntityCollideToMob EventInfo.TriggerEvent.EntityCollideToMob @当任意实体和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field EntityCollideToMissile EventInfo.TriggerEvent.EntityCollideToMissile @当任意实体和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field EntityCollideToDropItem EventInfo.TriggerEvent.EntityCollideToDropItem @当任意实体和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field EntityCollideToEntity EventInfo.TriggerEvent.EntityCollideToEntity @当任意实体和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field EntityCollideToAreaObj EventInfo.TriggerEvent.EntityCollideToAreaObj @当任意实体和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field AreaObjCollideToPlayer EventInfo.TriggerEvent.AreaObjCollideToPlayer @当任意区域和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field AreaObjCollideToMob EventInfo.TriggerEvent.AreaObjCollideToMob @当任意区域和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field AreaObjCollideToMissile EventInfo.TriggerEvent.AreaObjCollideToMissile @当任意区域和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field AreaObjCollideToDropItem EventInfo.TriggerEvent.AreaObjCollideToDropItem @当任意区域和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field AreaObjCollideToEntity EventInfo.TriggerEvent.AreaObjCollideToEntity @当任意区域和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field AreaObjCollideToAreaObj EventInfo.TriggerEvent.AreaObjCollideToAreaObj @当任意区域和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerAreaIn EventInfo.TriggerEvent.PlayerAreaIn @当任意玩家进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerAreaOut EventInfo.TriggerEvent.PlayerAreaOut @当任意玩家离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobAreaIn EventInfo.TriggerEvent.MobAreaIn @当任意生物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobAreaOut EventInfo.TriggerEvent.MobAreaOut @当任意生物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MissileAreaIn EventInfo.TriggerEvent.MissileAreaIn @当任意投掷物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MissileAreaOut EventInfo.TriggerEvent.MissileAreaOut @当任意投掷物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field DropItemAreaIn EventInfo.TriggerEvent.DropItemAreaIn @当任意掉落物进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field DropItemAreaOut EventInfo.TriggerEvent.DropItemAreaOut @当任意掉落物离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field EntityAreaIn EventInfo.TriggerEvent.EntityAreaIn @当任意实体进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field EntityAreaOut EventInfo.TriggerEvent.EntityAreaOut @当任意实体离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field AreaObjAreaIn EventInfo.TriggerEvent.AreaObjAreaIn @当任意区域进入区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field AreaObjAreaOut EventInfo.TriggerEvent.AreaObjAreaOut @当任意区域离开区域 {areaid:事件中的区域ID, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobCreate EventInfo.TriggerEvent.MobCreate @当任意生物被创建 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field EntityCreate EventInfo.TriggerEvent.EntityCreate @当任意实体被创建 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field AreaObjCreate EventInfo.TriggerEvent.AreaObjCreate @当任意区域被创建 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerBeHurt EventInfo.TriggerEvent.PlayerBeHurt @当任意玩家受到伤害 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerDie EventInfo.TriggerEvent.PlayerDie @当任意玩家被击败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobBeHurt EventInfo.TriggerEvent.MobBeHurt @当任意生物受到伤害 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobDie EventInfo.TriggerEvent.MobDie @当任意生物被击败 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerAttack EventInfo.TriggerEvent.PlayerAttack @当任意玩家开始攻击 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerAttackHit EventInfo.TriggerEvent.PlayerAttackHit @当任意玩家攻击命中 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerDefeatActor EventInfo.TriggerEvent.PlayerDefeatActor @当任意玩家击败目标 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerDamageActor EventInfo.TriggerEvent.PlayerDamageActor @当任意玩家造成伤害 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobAttack EventInfo.TriggerEvent.MobAttack @当任意生物开始攻击 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobAttackHit EventInfo.TriggerEvent.MobAttackHit @当任意生物攻击命中 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobBeat EventInfo.TriggerEvent.MobBeat @当任意生物击败目标 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobDamage EventInfo.TriggerEvent.MobDamage @当任意生物造成伤害 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerAddBuff EventInfo.TriggerEvent.PlayerAddBuff @当任意玩家获得状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerRemoveBuff EventInfo.TriggerEvent.PlayerRemoveBuff @当任意玩家失去状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobAddBuff EventInfo.TriggerEvent.MobAddBuff @当任意生物获得状态 {actorid:触发事件的生物类型, buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobRemoveBuff EventInfo.TriggerEvent.MobRemoveBuff @当任意生物失去状态 {actorid:触发事件的生物类型, buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerChangeAttr EventInfo.TriggerEvent.PlayerChangeAttr @当任意玩家的属性改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playerattr:玩家属性, playerattrval:玩家属性值, eventworldid:事件中星球}
+--- @field MobChangeAttr EventInfo.TriggerEvent.MobChangeAttr @当任意生物的属性改变 {actorattr:生物属性, actorattrval:生物属性值, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ActorPickupActor EventInfo.TriggerEvent.ActorPickupActor @当角色举起角色 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, pickupType:举起或放下类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerAttrStateChange EventInfo.TriggerEvent.PlayerAttrStateChange @当任意玩家权限发生改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field MobAttrStateChange EventInfo.TriggerEvent.MobAttrStateChange @当任意生物权限发生改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerMountActor EventInfo.TriggerEvent.PlayerMountActor @当任意玩家骑乘坐骑/载具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobMountActor EventInfo.TriggerEvent.MobMountActor @当任意生物骑乘坐骑/载具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerDismountActor EventInfo.TriggerEvent.PlayerDismountActor @当任意玩家取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MobDismountActor EventInfo.TriggerEvent.MobDismountActor @当任意生物取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field MissileCreate EventInfo.TriggerEvent.MissileCreate @投掷物创建 {eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ProjectileHitBlock EventInfo.TriggerEvent.ProjectileHitBlock @当投掷物击中任意方块 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ProjectileHitPlayer EventInfo.TriggerEvent.ProjectileHitPlayer @当投掷物击中任意玩家 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ProjectileHitMob EventInfo.TriggerEvent.ProjectileHitMob @当投掷物击中任意生物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ProjectileHitProj EventInfo.TriggerEvent.ProjectileHitProj @当投掷物击中任意投掷物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ProjectileHitItem EventInfo.TriggerEvent.ProjectileHitItem @当投掷物击中任意掉落物 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ProjectileHitEntity EventInfo.TriggerEvent.ProjectileHitEntity @当投掷物击中任意实体 {actorid:触发事件的生物类型, defaultvalue:自定义数值数据, eventobjid:触发事件的对象, helperobjid:辅助对象ID, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ItemCreate EventInfo.TriggerEvent.ItemCreate @当掉落物创建 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field DropItemPickup EventInfo.TriggerEvent.DropItemPickup @当掉落物被拾取 {eventobjid:触发事件的对象, x,y,z:事件中的位置, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field ItemDisappear EventInfo.TriggerEvent.ItemDisappear @当掉落物消失 {eventobjid:触发事件的对象, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerOpenInnerView EventInfo.TriggerEvent.PlayerOpenInnerView @当玩家打开内置界面 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- @field PlayerCloseInnerView EventInfo.TriggerEvent.PlayerCloseInnerView @当玩家关闭内置界面 {CustomUI:事件中的界面, eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- @field MobModelChange EventInfo.TriggerEvent.MobModelChange @当生物的主模型改变 {eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- @field PlayerModelChange EventInfo.TriggerEvent.PlayerModelChange @当玩家的主模型改变 {eventobjid:触发事件的对象, x,y,z:事件中的位置, eventworldid:事件中的星球}
+--- @field TimelineStart EventInfo.TriggerEvent.TimelineStart @当剧情动画开始 {eventobjid:触发事件的对象}
+--- @field TimelineStop EventInfo.TriggerEvent.TimelineStop @当剧情动画结束 {eventobjid:触发事件的对象}
 local TriggerEvent = {}
 _G.TriggerEvent = TriggerEvent
 
@@ -204,76 +204,76 @@ local CurEventParam = {}
 _G.CurEventParam = CurEventParam
 
 --- @class ObjectEvent @组件事件枚举
---- @field OnPropertyChange any @当对象的属性发生改变 {}
---- @field PlayerEnterGame any @当此玩家进入游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerLeaveGame any @当此玩家离开游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中的星球}
---- @field PlayerVictory any @当此玩家游戏胜利 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerDefeat any @当此玩家游戏失败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerClickBlock any @当此玩家点击任意方块 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
---- @field PlayerClickPlayer any @当此玩家点击任意玩家 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickMob any @当此玩家点击任意生物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickProjectile any @当此玩家点击任意投掷物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickDropItem any @当此玩家点击任意掉落物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerClickEntity any @当此玩家点击任意实体 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerInputKeyClick any @当此玩家点击按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerInputKeyDown any @当此玩家按下按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerInputKeyUp any @当此玩家抬起按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerInputKeyOnPress any @当此玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
---- @field PlayerNewInputContent any @此玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ObjectMotionStateChangeEnd any @当此玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
---- @field ObjectMotionStateChange any @当此玩家运动状态发生改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
---- @field PlayerAddItem any @当此玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerUseItem any @当此玩家开始使用道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerChargeItemBegin any @当此玩家开始蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerConsumeItem any @当此玩家消耗道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerPickUpItem any @当此玩家拾取道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field PlayerChargeItemEnd any @当此玩家结束蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerShortcutChange any @当此玩家快捷栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerShortcutAddItem any @当此玩家快捷栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerShortcutRemItem any @当此玩家快捷栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerBackPackChange any @当此玩家背包栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerBackPackAddItem any @当此玩家背包栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerBackPackRemItem any @当此玩家背包栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerEquipChange any @当此玩家装备栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerEquipAddItem any @当此玩家装备栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerEquipRemItem any @当此玩家装备栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerEquipOn any @当此玩家穿上装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerEquipOff any @当此玩家脱下装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field PlayerRevive any @此玩家复活 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerMoveOneBlockSize any @此玩家移动 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field PlayerInvateFriend any @此玩家邀请好友 {eventobjid:触发事件的对象, x,y,z:事件中的位置, toobjid:事件中的目标对象, eventworldid:事件中的星球}
---- @field PlayerSelectShortcut any @此玩家选中快捷栏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
---- @field BlockAdd any @此类方块被创建 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球}
---- @field BlockClicked any @当此类方块被被点击 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
---- @field BlockRemove any @当此类方块被被破坏 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
---- @field BlockDigBegin any @当此类方块被被挖掘 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
---- @field BlockDigEnd any @当此类方块被被挖掘完毕 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
---- @field BlockDigCancel any @当此类方块被被挖掘中断 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
---- @field OnInteract any @当此类方块开关状态发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
---- @field BlockChangeColor any @当此类方块颜色发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
---- @field BlockChangeDir any @当此类方块方向发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
---- @field BlockContainerChange any @当储存容器内发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
---- @field BlockContainerPutIn any @当储存容器内放入道具 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
---- @field BlockContainerTakeOut any @当储存容器内取出道具 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
---- @field ObjectPlayAnim any @当此对象播放动画时 {eventobjid:触发事件的对象, actorid:触发事件的生物类型, x,y,z:事件中的位置, anim:事件中的动作, eventworldid:事件中的星球}
---- @field ObjectCollideByPlayer any @当此角色和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectCollideByMob any @当此角色和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectCollideByMissile any @当此角色和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectCollideByDropItem any @当此角色和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectCollideByEntity any @当此角色和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectCollideByAreaObj any @当此角色和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectBeClick any @此角色被玩家点击 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectBeHurt any @当此角色受到伤害 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectDie any @当此角色被击败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ObjectAttack any @当此角色开始攻击 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ObjectAttackHit any @当此角色攻击命中 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectDefeat any @当此角色击败目标 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectDamage any @当此角色造成伤害 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectAddBuff any @当此角色获得状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ObjectRemoveBuff any @当此角色失去状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ObjectAttrStateChange any @当此角色权限改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
---- @field ObjectChangeAttr any @当此角色属性改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playerattr:玩家属性, playerattrval:玩家属性值, eventworldid:事件中星球}
---- @field ObjectMountActor any @此角色骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
---- @field ObjectDismountActor any @此角色取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field OnPropertyChange EventInfo.ObjectEvent.OnPropertyChange @当对象的属性发生改变 {}
+--- @field PlayerEnterGame EventInfo.ObjectEvent.PlayerEnterGame @当此玩家进入游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerLeaveGame EventInfo.ObjectEvent.PlayerLeaveGame @当此玩家离开游戏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中的星球}
+--- @field PlayerVictory EventInfo.ObjectEvent.PlayerVictory @当此玩家游戏胜利 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerDefeat EventInfo.ObjectEvent.PlayerDefeat @当此玩家游戏失败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerClickBlock EventInfo.ObjectEvent.PlayerClickBlock @当此玩家点击任意方块 {blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球, x:事件中位置X, y:事件中位置Y, z:事件中位置Z}
+--- @field PlayerClickPlayer EventInfo.ObjectEvent.PlayerClickPlayer @当此玩家点击任意玩家 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickMob EventInfo.ObjectEvent.PlayerClickMob @当此玩家点击任意生物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickProjectile EventInfo.ObjectEvent.PlayerClickProjectile @当此玩家点击任意投掷物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickDropItem EventInfo.ObjectEvent.PlayerClickDropItem @当此玩家点击任意掉落物 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerClickEntity EventInfo.ObjectEvent.PlayerClickEntity @当此玩家点击任意实体 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerInputKeyClick EventInfo.ObjectEvent.PlayerInputKeyClick @当此玩家点击按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerInputKeyDown EventInfo.ObjectEvent.PlayerInputKeyDown @当此玩家按下按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerInputKeyUp EventInfo.ObjectEvent.PlayerInputKeyUp @当此玩家抬起按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerInputKeyOnPress EventInfo.ObjectEvent.PlayerInputKeyOnPress @当此玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
+--- @field PlayerNewInputContent EventInfo.ObjectEvent.PlayerNewInputContent @此玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ObjectMotionStateChangeEnd EventInfo.ObjectEvent.ObjectMotionStateChangeEnd @当此玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- @field ObjectMotionStateChange EventInfo.ObjectEvent.ObjectMotionStateChange @当此玩家运动状态发生改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
+--- @field PlayerAddItem EventInfo.ObjectEvent.PlayerAddItem @当此玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerUseItem EventInfo.ObjectEvent.PlayerUseItem @当此玩家开始使用道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerChargeItemBegin EventInfo.ObjectEvent.PlayerChargeItemBegin @当此玩家开始蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerConsumeItem EventInfo.ObjectEvent.PlayerConsumeItem @当此玩家消耗道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerPickUpItem EventInfo.ObjectEvent.PlayerPickUpItem @当此玩家拾取道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field PlayerChargeItemEnd EventInfo.ObjectEvent.PlayerChargeItemEnd @当此玩家结束蓄力道具 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerShortcutChange EventInfo.ObjectEvent.PlayerShortcutChange @当此玩家快捷栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerShortcutAddItem EventInfo.ObjectEvent.PlayerShortcutAddItem @当此玩家快捷栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerShortcutRemItem EventInfo.ObjectEvent.PlayerShortcutRemItem @当此玩家快捷栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerBackPackChange EventInfo.ObjectEvent.PlayerBackPackChange @当此玩家背包栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerBackPackAddItem EventInfo.ObjectEvent.PlayerBackPackAddItem @当此玩家背包栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerBackPackRemItem EventInfo.ObjectEvent.PlayerBackPackRemItem @当此玩家背包栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerEquipChange EventInfo.ObjectEvent.PlayerEquipChange @当此玩家装备栏的发生改变 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerEquipAddItem EventInfo.ObjectEvent.PlayerEquipAddItem @当此玩家装备栏的放入道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerEquipRemItem EventInfo.ObjectEvent.PlayerEquipRemItem @当此玩家装备栏的取出道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerEquipOn EventInfo.ObjectEvent.PlayerEquipOn @当此玩家穿上装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerEquipOff EventInfo.ObjectEvent.PlayerEquipOff @当此玩家脱下装备 {ShortCutIdx:事件中的快捷栏, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field PlayerRevive EventInfo.ObjectEvent.PlayerRevive @此玩家复活 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerMoveOneBlockSize EventInfo.ObjectEvent.PlayerMoveOneBlockSize @此玩家移动 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerInvateFriend EventInfo.ObjectEvent.PlayerInvateFriend @此玩家邀请好友 {eventobjid:触发事件的对象, x,y,z:事件中的位置, toobjid:事件中的目标对象, eventworldid:事件中的星球}
+--- @field PlayerSelectShortcut EventInfo.ObjectEvent.PlayerSelectShortcut @此玩家选中快捷栏 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
+--- @field BlockAdd EventInfo.ObjectEvent.BlockAdd @此类方块被创建 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, eventworldid:事件中的星球}
+--- @field BlockClicked EventInfo.ObjectEvent.BlockClicked @当此类方块被被点击 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- @field BlockRemove EventInfo.ObjectEvent.BlockRemove @当此类方块被被破坏 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- @field BlockDigBegin EventInfo.ObjectEvent.BlockDigBegin @当此类方块被被挖掘 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- @field BlockDigEnd EventInfo.ObjectEvent.BlockDigEnd @当此类方块被被挖掘完毕 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- @field BlockDigCancel EventInfo.ObjectEvent.BlockDigCancel @当此类方块被被挖掘中断 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventobjid:触发事件的对象, actorid:触发事件的生物类型, eventworldid:事件中的星球}
+--- @field OnInteract EventInfo.ObjectEvent.OnInteract @当此类方块开关状态发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
+--- @field BlockChangeColor EventInfo.ObjectEvent.BlockChangeColor @当此类方块颜色发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
+--- @field BlockChangeDir EventInfo.ObjectEvent.BlockChangeDir @当此类方块方向发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, eventworldid:事件中的星球}
+--- @field BlockContainerChange EventInfo.ObjectEvent.BlockContainerChange @当储存容器内发生改变 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
+--- @field BlockContainerPutIn EventInfo.ObjectEvent.BlockContainerPutIn @当储存容器内放入道具 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
+--- @field BlockContainerTakeOut EventInfo.ObjectEvent.BlockContainerTakeOut @当储存容器内取出道具 {x,y,z:事件中的位置, blockid:事件中的方块类型, itemid:事件中的道具类型, eventworldid:事件中的星球}
+--- @field ObjectPlayAnim EventInfo.ObjectEvent.ObjectPlayAnim @当此对象播放动画时 {eventobjid:触发事件的对象, actorid:触发事件的生物类型, x,y,z:事件中的位置, anim:事件中的动作, eventworldid:事件中的星球}
+--- @field ObjectCollideByPlayer EventInfo.ObjectEvent.ObjectCollideByPlayer @当此角色和任意玩家碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectCollideByMob EventInfo.ObjectEvent.ObjectCollideByMob @当此角色和任意生物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectCollideByMissile EventInfo.ObjectEvent.ObjectCollideByMissile @当此角色和任意投掷物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectCollideByDropItem EventInfo.ObjectEvent.ObjectCollideByDropItem @当此角色和任意掉落物碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectCollideByEntity EventInfo.ObjectEvent.ObjectCollideByEntity @当此角色和任意实体碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectCollideByAreaObj EventInfo.ObjectEvent.ObjectCollideByAreaObj @当此角色和任意区域碰撞开始 {EventObjType:事件对象类型, ToolObjType:工具对象类型, actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectBeClick EventInfo.ObjectEvent.ObjectBeClick @此角色被玩家点击 {actorid:触发事件的生物类型, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectBeHurt EventInfo.ObjectEvent.ObjectBeHurt @当此角色受到伤害 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, hurttype:伤害类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectDie EventInfo.ObjectEvent.ObjectDie @当此角色被击败 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ObjectAttack EventInfo.ObjectEvent.ObjectAttack @当此角色开始攻击 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ObjectAttackHit EventInfo.ObjectEvent.ObjectAttackHit @当此角色攻击命中 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectDefeat EventInfo.ObjectEvent.ObjectDefeat @当此角色击败目标 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectDamage EventInfo.ObjectEvent.ObjectDamage @当此角色造成伤害 {defaultvalue:自定义数值数据, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, hurtlv:事件中的伤害值, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectAddBuff EventInfo.ObjectEvent.ObjectAddBuff @当此角色获得状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ObjectRemoveBuff EventInfo.ObjectEvent.ObjectRemoveBuff @当此角色失去状态 {buff:状态数据, buffid:事件中的状态效果, bufflvl:状态等级, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ObjectAttrStateChange EventInfo.ObjectEvent.ObjectAttrStateChange @当此角色权限改变 {attstateType:权限类型, attstateValue:权限值, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field ObjectChangeAttr EventInfo.ObjectEvent.ObjectChangeAttr @当此角色属性改变 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playerattr:玩家属性, playerattrval:玩家属性值, eventworldid:事件中星球}
+--- @field ObjectMountActor EventInfo.ObjectEvent.ObjectMountActor @此角色骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
+--- @field ObjectDismountActor EventInfo.ObjectEvent.ObjectDismountActor @此角色取消骑乘 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, targetactorid:事件中的目标生物类型, toobjid:事件中的目标对象, eventworldid:事件中星球}
 local ObjectEvent = {}
 _G.ObjectEvent = ObjectEvent

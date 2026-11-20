@@ -54,15 +54,16 @@ function Component:AddCustomEvent(eventId, callback) end
 function Component:RemoveCustomEvent(eventId) end
 
 --- 添加触发事件(该函数只在UI跟世界类型组件有效)
---- @param eventType number @事件类型
---- @param callback function @回调函数
+--- @generic T
+--- @param eventType T @事件类型
+--- @param callback fun(event: T) @回调函数
 --- @param filterParam1? any @过滤参数1(缺省参数)
 --- @param filterParam2? any @过滤参数2(缺省参数)
 --- @return nil
 function Component:AddTriggerEvent(eventType, callback, filterParam1, filterParam2) end
 
 --- 移除触发事件监听
---- @param eventType number @事件类型
+--- @param eventType any @事件类型
 --- @return nil
 function Component:RemoveTriggerEvent(eventType) end
 
@@ -79,8 +80,9 @@ function Component:PushEvent(eventType, ...) end
 function Component:PushEventSync(eventType, ...) return nil end
 
 --- 监听对象事件(可以监听自定义的，也能监听官方内置对象事件)
---- @param eventType string|number @事件类型
---- @param callback function @回调函数
+--- @generic T
+--- @param eventType T @事件类型
+--- @param callback fun(event: T) @回调函数
 --- @param priority? number @优先级
 --- @param filtern1? any @过滤参数1
 --- @param filtern2? any @过滤参数2
@@ -88,7 +90,7 @@ function Component:PushEventSync(eventType, ...) return nil end
 function Component:AddEvent(eventType, callback, priority, filtern1, filtern2) return nil end
 
 --- 移除对象的事件监听
---- @param eventType string|number @事件类型
+--- @param eventType any @事件类型
 --- @return nil
 function Component:RemoveEvent(eventType) return nil end
 

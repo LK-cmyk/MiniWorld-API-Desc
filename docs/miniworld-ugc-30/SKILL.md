@@ -143,6 +143,25 @@ end
 return Script
 ```
 
+### Event Table Types
+
+Every official event has a callback table type named `EventInfo.<EventClass>.<EventName>`, for example `EventInfo.TriggerEvent.PlayerClickBlock`. Inline callbacks infer this type from the event constant, so event fields such as `event.blockid` get completion and type checks:
+
+```lua
+self:AddTriggerEvent(TriggerEvent.PlayerClickBlock, function(event)
+  print(event.blockid, event.eventobjid)
+end)
+```
+
+For a named callback function, the extension offers field completion and hover descriptions by looking up which event the callback is registered to (for example `self:AddEvent(TriggerEvent.BlockAdd, self.test)`), or by reading an explicit `EventInfo.*` parameter annotation. LuaLS type checking does not infer named callback parameters, so annotate the `event` parameter explicitly when you need type checks:
+
+```lua
+--- @param event EventInfo.TriggerEvent.PlayerClickBlock
+function Script:OnPlayerClickBlock(event)
+  print(event.blockid, event.eventobjid)
+end
+```
+
 ## Broadcast Messages: Send / Subscribe / Unsubscribe
 
 - **Message ID**: You must first define the message (broadcast) in the trigger UI to obtain the system-generated ID.
