@@ -54,7 +54,7 @@ MiniWorld API Description 是一个 VS Code 扩展，主要用于：
 
 ### 3. 事件补全
 
-在 `ScriptSupportEvent([=[...]=])` 等场景中，扩展会提供对应版本的事件补全；`TriggerEvent.` / `ObjectEvent.` 后也可以补全 3.0 事件字段。
+在 `ScriptSupportEvent:registerEvent([=[...]=], callback)` 等场景中，扩展会提供对应版本的事件名补全；`TriggerEvent.` / `ObjectEvent.` 后也可以补全 3.0 事件字段。两个版本的命名回调都支持事件参数字段补全与悬浮说明：3.0 从 `AddEvent/AddTriggerEvent` 反查，2.0 从 `ScriptSupportEvent:registerEvent` 反查。
 
 ### 4. 缓存管理
 

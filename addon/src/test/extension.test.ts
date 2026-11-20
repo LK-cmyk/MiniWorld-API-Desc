@@ -102,6 +102,21 @@ suite('Extension Test Suite', () => {
 		assert.deepStrictEqual(findEventKeysForFunction(source, 's:missing'), []);
 	});
 
+	test('resolves 2.0 event keys from ScriptSupportEvent registrations', () => {
+		const source = [
+			'local function click(e)',
+			'  print(e.blockid)',
+			'end',
+			'ScriptSupportEvent:registerEvent([=[Player.ClickBlock]=], click)',
+			"ScriptSupportEvent:registerEvent('Game.Hour', click)",
+		].join('\n');
+
+		assert.deepStrictEqual(findEventKeysForFunction(source, 'click'), [
+			'Player.ClickBlock',
+			'Game.Hour',
+		]);
+	});
+
 	test('resolves event keys from event table parameter annotations', () => {
 		const lines = [
 			'local s = {}',

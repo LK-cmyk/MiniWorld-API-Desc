@@ -125,8 +125,10 @@ function parseEventInfoParams(rawParams: string | undefined): Record<string, str
 }
 
 /**
- * 从整份源码中反查某个命名回调注册到了哪些 3.0 事件。
- * 命名回调不参与 LuaLS 的泛型推断，这里通过 `AddEvent/AddTriggerEvent` 的第二个参数反向匹配。
+ * 从整份源码中反查某个命名回调注册到了哪些事件。
+ * - 3.0：`AddEvent/AddTriggerEvent(TriggerEvent.X, callback)`
+ * - 2.0：`ScriptSupportEvent:registerEvent([=[A.B]=], callback)`
+ * 命名回调不参与 LuaLS 的泛型推断，这里用第二个参数做反向匹配。
  */
 export function findEventKeysForFunction(source: string, functionName: string): string[] {
     const shortName = functionName.split(/[.:]/).pop();
@@ -134,14 +136,22 @@ export function findEventKeysForFunction(source: string, functionName: string): 
         return [];
     }
 
-    const regRe = /Add(?:Trigger)?Event\s*\(\s*(TriggerEvent|ObjectEvent)\.(\w+)\s*,\s*([\w.:]+)/g;
     const keys = new Set<string>();
-    for (const match of source.matchAll(regRe)) {
-        const refName = match[3].split(/[.:]/).pop();
-        if (refName === shortName) {
+
+    const reg30Re = /Add(?:Trigger)?Event\s*\(\s*(TriggerEvent|ObjectEvent)\.(\w+)\s*,\s*([\w.:]+)/g;
+    for (const match of source.matchAll(reg30Re)) {
+        if (match[3].split(/[.:]/).pop() === shortName) {
             keys.add(`${match[1]}.${match[2]}`);
         }
     }
+
+    const reg20Re = /ScriptSupportEvent\s*:\s*registerEvent\s*\(\s*(?:\[=*\[|['"])([\w.]+)(?:\]=*\]|['"])\s*,\s*([\w.:]+)/g;
+    for (const match of source.matchAll(reg20Re)) {
+        if (match[2].split(/[.:]/).pop() === shortName) {
+            keys.add(match[1]);
+        }
+    }
+
     return Array.from(keys);
 }
 
@@ -329,7 +339,7 @@ function getCompletionContext(
     return { kind: '2.0' };
 }
 
-/** 汇总某个函数参数可能对应的 3.0 事件键（注册语句 + LuaDoc 注解） */
+/** 汇总某个函数参数可能对应的事件键（注册语句 + LuaDoc 注解） */
 function resolveEventKeysForParam(
     document: vscode.TextDocument,
     fn: { name: string; line: number },
@@ -352,10 +362,6 @@ function getEventFieldContext(
     position: vscode.Position,
     mode: '2.0' | '3.0',
 ): CompletionContext | null {
-    if (mode !== '3.0') {
-        return null;
-    }
-
     const textBefore = document.lineAt(position.line).text.substring(0, position.character);
     const memberMatch = /(?:^|[^\w])([A-Za-z_]\w*)\.$/.exec(textBefore);
     if (!memberMatch) {
@@ -457,7 +463,7 @@ export function registerEventCompletion(context: vscode.ExtensionContext): vscod
             { language: 'lua' },
             {
                 provideHover(document, position) {
-                    if (state.mode !== '3.0' || !state.ready) {
+                    if (state.mode === 'off' || !state.ready) {
                         return undefined;
                     }
 
