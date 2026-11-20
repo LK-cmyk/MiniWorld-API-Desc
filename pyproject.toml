@@ -12,5 +12,15 @@ dependencies = [
     "click>=8.5.0",
 ]
 
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tools", "tools.*"]
+exclude = ["addon*", "declarations*", "docs*", "img*", "out*", "server*"]
+namespaces = false
+
 [tool.black]
 line-length = 140

@@ -8,6 +8,7 @@
 __pycache__/
 .venv/
 *.pyc
+*.egg-info/
 
 # Node.js 环境
 node_modules/
