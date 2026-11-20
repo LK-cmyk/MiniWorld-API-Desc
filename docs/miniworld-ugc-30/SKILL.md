@@ -396,6 +396,138 @@ To change an element's parent, use the `ChangeParent` function from the `CustomU
 
 > Element properties must be set through the `CustomUI API`.
 
+## Display Boards
+
+A **display board** is like an electronic sign placed in the game world. It can show text, images, progress bars, or a custom UI screen. Typical uses: a welcome sign at the map entrance, a poster outside a shop, an HP bar above a creature, or a clickable button in the scene. Display boards exist in both 2.0 and 3.0, but the two versions use isolated objects and runtimes — never mix old 2.0 board IDs/interfaces with 3.0 boards.
+
+### What Is New in 3.0
+
+1. Boards can display a **UI screen** and support **click interaction**.
+2. A board can be **attached to an object** and follow its movement.
+3. A board can show **different content to different players** ("thousands of faces").
+
+### Objects, Components, and Content
+
+| Term | Meaning | Responsible For |
+| :-- | :-- | :-- |
+| Object | The thing you can select in the scene | Position, rotation, scale, parent/child relations |
+| Display Board Component | A small "screen" mounted on an object | Display mode, width/height, color, and which content to show |
+| Display Content | What the screen shows | Text, image, progress bar, or a UI screen |
+
+You can use the official display-board templates, or attach a display board component to an object. The component can be used together with model, effect, and other components.
+
+### Display-Board UI vs Normal 2D UI
+
+| Type | Displayed Where | Examples |
+| :-- | :-- | :-- |
+| Normal 2D UI | On the player's screen | Backpack, menu |
+| Display-board UI | On a scene object's display board | Wall operation panel, shop button |
+
+The board's **screen** spatial mode means the panel faces the camera — it is **not** pinned to a screen corner; the board still has its corresponding scene object.
+
+### Content Types
+
+`DisplayBoardContentType` selects what a board shows. Four official templates exist (text, image, progress bar, UI screen) and can be placed from the resource library or the place-object menu.
+
+| Type | Can Show | Note |
+| :-- | :-- | :-- |
+| `Image` | Posters, maps, icons | Fill mode affects letterboxing, cropping and distortion |
+| `Text` | Welcome messages, rules, hints | Adjust layout when there is a lot of text, or it may be cut off |
+| `Progress` | HP, energy, quest progress | Does **not** read game data automatically — update it with a trigger or script |
+| `Interface` | A custom UI combining text, images and buttons | Select the UI first, then configure interaction and click actions |
+
+### General Properties (the Whole Board)
+
+#### Size and Position
+- Object position / rotation; board **width** and **height**; object **scale**.
+- Width/height and scale are **not equivalent**. Width, height, or the horizontal/vertical effective scale being `0` folds the board (invisible and non-interactive); restoring a positive value shows it again. In scene mode the base width/height is in meters, range `0`–`128`.
+
+#### Spatial Mode
+| Mode | Effect | Good For |
+| :-- | :-- | :-- |
+| Scene | Placed in the world by the object's orientation | Wall posters, roadside signs |
+| Screen (near big, far small) | Always faces the camera; apparent size shrinks with distance | Creature HP bars, scene hints |
+| Screen (fixed size) | Always faces the camera; size independent of distance | Markers that must stay legible |
+
+In screen modes the object's rotation is still saved, but it does not change the board's facing.
+
+#### Color, Opacity, and Lighting
+- Background color, overall color (tints text/images too — start with white to see original colors), background opacity, overall opacity (`0` = fully transparent, `100` = fully opaque), lighting mode (lit vs self-illuminated), emissive intensity (`0`–`2`, greater than `1` gives an HDR effect).
+- To keep only floating text: set **background opacity to 0** and **overall opacity to 100**.
+- Self-illumination describes how the board itself looks; it does not light up the surroundings.
+
+#### Display Range and Back Face
+- Default visible flag; display-distance limit (out of range hides the board; reappears on return) — `1`–`64`, default `30`.
+- Back face: transparent / show background / show content / show content mirrored. Two-sided display only works and takes effect in **scene** mode.
+
+### Content Properties
+
+#### Text
+Input content (multi-line), auto size (scale text to fit — manual font size is ignored when enabled), font size, color, horizontal/vertical alignment, line/character spacing, stroke and stroke color, shadow style and offset, and rich text. Rich text does **not** support hyperlinks this version, and images are limited to the image library.
+
+#### Image
+Choose an image, then set its fill mode (`ImageFillType`): `Fill` (keep ratio, crop edges), `Fit` (keep ratio, may letterbox), `Stretch` (fill, may distort), `Tile` (repeat).
+
+#### Progress Bar
+Min / max / current value (`min` must be less than `max`); bar or ring type (`UIProgressType`); direction (`UIBarProgressDirection` for bars, `UIRowProgressDirection` for rings); progress/background images (`ImageFillType`) or solid colors (`DisplayBoardColorAttr`); value style (percentage / current-per-max / current / max / hidden); font size, color and alignment (progress-bar text does not support auto size).
+
+Example: `min = 0`, `max = 100`, `current = 75` shows three quarters filled. For an HP bar, link the current value to the creature's current HP and the max value to its maximum HP.
+
+#### Interface (Custom UI)
+The "interface selection" decides which custom UI to display; with none selected, only an empty background shows. Build the UI's text/buttons in the UI editor and modify controls at runtime with interface-related actions. Keep the board's width/height close to the UI canvas ratio to avoid visible stretching.
+
+### Interaction
+A board can be a click target, has its own **response distance** (how close the player must be to click — different from the display-distance limit), and supports **response highlight** (brightness changes while aimed at in crosshair mode).
+
+### Runtime Modification: Triggers and Scripts
+
+| What to Change | Where |
+| :-- | :-- |
+| Board component general properties | Set Object → Display Board Component → Properties (subject to the actual property list) |
+| Per-type content properties (progress value, text, image) | Graphics & Text → Display Board actions |
+| Controls inside a custom UI | Interface-related actions |
+
+There is **no** dedicated `DisplayBoard*` function in this version's Lua declarations. Runtime changes go through general interfaces: object attribute APIs (`Actor:SetAttr` / `Actor:GetAttr`, see `MNActor`) with the `DisplayBoard*` attribute enums, and the `CustomUI` family for interface content. Always check the actual editor property list for available items.
+
+**"Interface" parameter targets.** Interface-changing actions accept two kinds of target:
+- A **2D UI ID** — targets a normal 2D interface.
+- An **object ID** — targets the custom UI carried by that object's display board. The object must have a display board component whose content is a custom UI; plain objects, text boards and progress boards do not qualify.
+
+Distinguish three IDs: the **UI resource ID** (which design to show), the **object ID** (which board to operate on), and the **control ID** (which button/text inside to change). When several boards share one UI, use the object ID to tell them apart.
+
+**Per-player content.** The same board can have different content, some properties, and visible/hidden state per player; interface state is also maintained per player. Watch the action's "player / player group" parameter. A "current all players" change only affects players present at that moment — players joining later need an update on join or refresh. Object position, rotation and scale are global object state and must not be used as per-player settings.
+
+### Display Board Enum Reference
+
+From `MNEnumLib.d.lua`:
+
+| Enum | Purpose | Fields |
+| :-- | :-- | :-- |
+| `DisplayBoardContentType` | Content type | `Image`, `Text`, `Progress`, `Interface` |
+| `DisplayBoardAutoSize` | Text auto size | `ScaleText`, `None` |
+| `DisplayBoardColorAttr` | Color attributes | `Background`, `All`, `Text`, `Progress`, `ProgressBackground` |
+| `DisplayBoardImgAttr` | Image attributes | `Image`, `ProgressImg`, `ProgressBackground` |
+| `DisplayBoardNumAttr` | Numeric attributes | `ProgressCurVal`, `ProgressMinVal`, `ProgressMaxVal`, `ProgressCurAnaMaxVal`, `Width`, `Height`, `FontSize`, `AllAlpha`, `BackgroundAlpha`, `Light`, `VisibleLen`, `ResponseDistance` |
+| `UIProgressType` | Progress bar type | `Bar`, `Ring` |
+| `UIBarProgressDirection` | Bar direction | `LeftToRight`, `RightToLeft`, `TopToBottom`, `BottomToTop` |
+| `UIRowProgressDirection` | Ring direction | `Clockwise`, `CounterClockwise` |
+| `ImageFillType` | Image fill mode | `Fill`, `Fit`, `Stretch`, `Tile` |
+| `ViedoPlayMode` | Board video playback (spelling is official) | `Repeat`, `Once` |
+
+### Display Board Troubleshooting
+
+| Symptom | Check |
+| :-- | :-- |
+| Board completely invisible | Default visible flag, overall opacity, width/height and scale being 0, display distance, or standing behind the board |
+| Changing font size has no effect | Auto size → scale text is enabled |
+| Image distorted or edges cropped | Fill mode is stretch/fill; try fit |
+| Progress bar does not follow HP | Read HP with a trigger and keep updating the value |
+| Interface board shows only a background | No custom UI selected in "interface selection" |
+| Button visible but not clickable | Click switch, response distance, control really is a button, click event enabled |
+| Modified the wrong interface | "Interface" parameter should be the target board's object ID, and the control ID must be correct |
+| Only one player sees the change | Action's player scope is set to that player only |
+| Rotating the board has no effect | Board is in an auto-face-camera screen mode |
+
 ## Log Output
 
 Use `print()` or `printError()` for log output.
