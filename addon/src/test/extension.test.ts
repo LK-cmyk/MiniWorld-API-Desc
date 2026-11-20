@@ -5,8 +5,9 @@ import * as path from 'path';
 
 import * as vscode from 'vscode';
 
-import { buildClassCompletionItems, buildEventCompletionItems, findAnnotatedEventKeysForParam, findEventKeysForFunction, parseEventDefinitions, parseLuaEventDefinitions } from '../eventCompletion';
+import { buildClassCompletionItems, buildEventCompletionItems, findAnnotatedEventKeysForParam, findAnnotationInsertLine, findEventKeysForFunction, parseEventDefinitions, parseLuaEventDefinitions } from '../eventCompletion';
 import { parseLuaDeclarations } from '../apiSearch';
+import { findScriptTableVariables, parseComponentMethods } from '../scriptTable';
 
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
@@ -83,6 +84,61 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(eventInfo.x, '事件位置');
 	});
 
+	test('extracts Component methods with full signatures', () => {
+		const raw = [
+			'--- @class Component',
+			'--- 组件管理接口 Component',
+			'local Component = {}',
+			'',
+			'--- 监听对象事件',
+			'--- @param eventType any @事件类型',
+			'--- @param callback function @回调函数',
+			'--- @return nil',
+			'function Component:AddEvent(eventType, callback, ...) return nil end',
+			'',
+			'--- @class Player',
+			'--- @return number @坐标',
+			'function Player:getPos() return 0 end',
+		].join('\n');
+
+		const methods = parseComponentMethods(raw);
+
+		assert.strictEqual(methods.size, 1);
+		assert.ok(methods.has('AddEvent'));
+		assert.strictEqual(methods.get('AddEvent')!.signature, 'AddEvent(eventType, callback, ...)');
+		assert.ok(methods.get('AddEvent')!.detailLines.some(l => l.includes('监听对象事件')));
+		assert.ok(methods.get('AddEvent')!.detailLines.some(l => l.includes('@param eventType')));
+		assert.ok(!methods.has('getPos'));
+	});
+
+	test('finds script return tables local s = {} ... return s', () => {
+		const source = [
+			'local s = {}',
+			'',
+			'function s:OnStart()',
+			'    s:AddEvent(TriggerEvent.BlockAdd, self.test)',
+			'end',
+			'',
+			'return s',
+		].join('\n');
+		const tables = findScriptTableVariables(source);
+
+		assert.deepStrictEqual(Array.from(tables), ['s']);
+	});
+
+	test('finds script table declared with empty body on one line', () => {
+		const source = ['local script = {}', 'return script'].join('\n');
+		assert.deepStrictEqual(Array.from(findScriptTableVariables(source)), ['script']);
+	});
+
+	test('ignores non-return local tables', () => {
+		const source = ['local helper = {}', 'local s = {}', 'return s'].join('\n');
+		const tables = findScriptTableVariables(source);
+
+		assert.deepStrictEqual(Array.from(tables), ['s']);
+		assert.ok(!tables.has('helper'));
+	});
+
 	test('resolves event keys from named callback registrations', () => {
 		const source = [
 			'local s = {}',
@@ -128,6 +184,28 @@ suite('Extension Test Suite', () => {
 
 		assert.deepStrictEqual(findAnnotatedEventKeysForParam(lines, 3, 'e'), ['TriggerEvent.BlockAdd']);
 		assert.deepStrictEqual(findAnnotatedEventKeysForParam(lines, 3, 'other'), []);
+		assert.deepStrictEqual(
+			findAnnotatedEventKeysForParam(
+				['--- @param e EventInfo.Player_ClickBlock', 'function f(e)', 'end'],
+				1,
+				'e',
+			),
+			['Player.ClickBlock'],
+		);
+	});
+
+	test('inserts event parameter annotations at the end of existing doc comments', () => {
+		const lines = [
+			'local s = {}',
+			'',
+			'--- 测试回调',
+			'--- @return number',
+			'function s:test(e)',
+			'end',
+		];
+
+		assert.strictEqual(findAnnotationInsertLine(lines, 4), 2);
+		assert.strictEqual(findAnnotationInsertLine(lines, 0), 0);
 	});
 
 	test('builds 3.0 completion items filtered by event class', () => {

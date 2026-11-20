@@ -153,7 +153,7 @@ self:AddTriggerEvent(TriggerEvent.PlayerClickBlock, function(event)
 end)
 ```
 
-For a named callback function, the extension offers field completion and hover descriptions by looking up which event the callback is registered to (for example `self:AddEvent(TriggerEvent.BlockAdd, self.test)`), or by reading an explicit `EventInfo.*` parameter annotation. LuaLS type checking does not infer named callback parameters, so annotate the `event` parameter explicitly when you need type checks:
+For a named callback function, the extension offers field completion and hover descriptions by looking up which event the callback is registered to (for example `self:AddEvent(TriggerEvent.BlockAdd, self.test)`), or by reading an explicit `EventInfo.*` parameter annotation. LuaLS type checking does not infer named callback parameters, so it shows the field as `unknown` until the parameter is annotated. Use the Quick Fix on `event.blockid` to insert the annotation, or write it explicitly when you need type checks:
 
 ```lua
 --- @param event EventInfo.TriggerEvent.PlayerClickBlock

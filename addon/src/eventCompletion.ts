@@ -176,14 +176,33 @@ function findEnclosingFunction(
     return null;
 }
 
-/** 从函数上方的 `--- @param <name> EventInfo.<Class>.<Event>` 注解反查事件键 */
+/** 找到函数注解应插入的行（已有连续 --- 注释则插在注释块末尾） */
+export function findAnnotationInsertLine(lines: readonly string[], functionLine: number): number {
+    let line = functionLine;
+    while (line > 0 && /^\s*---/.test(lines[line - 1])) {
+        line--;
+    }
+    return line;
+}
+
+/** 把事件键转换成注解里使用的 EventInfo 类名（2.0 的事件名点号用下划线表示） */
+function eventInfoClassName(eventKey: string, mode: '2.0' | '3.0'): string {
+    return mode === '2.0'
+        ? `EventInfo.${eventKey.replace(/\./g, '_')}`
+        : `EventInfo.${eventKey}`;
+}
+
+/**
+ * 从函数上方的 `--- @param <name> EventInfo.*` 注解反查事件键。
+ * 兼容 3.0 的 `EventInfo.TriggerEvent.X` 和 2.0 的 `EventInfo.Player_ClickBlock`。
+ */
 export function findAnnotatedEventKeysForParam(
     lines: readonly string[],
     functionLine: number,
     paramName: string,
 ): string[] {
     const escaped = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const re = new RegExp(`^\\s*---\\s*@param\\s+${escaped}\\s+EventInfo\\.(\\w+)\\.(\\w+)\\b`);
+    const re = new RegExp(`^\\s*---\\s*@param\\s+${escaped}\\s+EventInfo\\.(\\w+(?:\\.\\w+)*)\\b`);
 
     for (let i = functionLine - 1; i >= 0 && i >= functionLine - 30; i--) {
         if (!/^\s*---/.test(lines[i])) {
@@ -191,7 +210,8 @@ export function findAnnotatedEventKeysForParam(
         }
         const match = re.exec(lines[i]);
         if (match) {
-            return [`${match[1]}.${match[2]}`];
+            const name = match[1];
+            return [name.includes('.') ? name : name.replace(/_/g, '.')];
         }
     }
     return [];
@@ -455,6 +475,67 @@ export function registerEventCompletion(context: vscode.ExtensionContext): vscod
                 },
             },
             '.',
+        ),
+    );
+
+    disposables.push(
+        vscode.languages.registerCodeActionsProvider(
+            { language: 'lua' },
+            {
+                provideCodeActions(document, range) {
+                    if (state.mode === 'off' || !state.ready) {
+                        return [];
+                    }
+
+                    const wordRange = document.getWordRangeAtPosition(range.start, /[A-Za-z_]\w*/);
+                    if (!wordRange) {
+                        return [];
+                    }
+                    const beforeWord = document.lineAt(wordRange.start.line).text.substring(
+                        0,
+                        wordRange.start.character,
+                    );
+                    const memberMatch = /([A-Za-z_]\w*)\.$/.exec(beforeWord);
+                    if (!memberMatch) {
+                        return [];
+                    }
+
+                    const fn = findEnclosingFunction(document, wordRange.start);
+                    if (!fn || !fn.params.includes(memberMatch[1])) {
+                        return [];
+                    }
+
+                    const paramName = memberMatch[1];
+                    const lines = document.getText().split(/\r?\n/);
+                    if (findAnnotatedEventKeysForParam(lines, fn.line, paramName).length > 0) {
+                        return [];
+                    }
+
+                    const indent = /^\s*/.exec(document.lineAt(fn.line).text)?.[0] ?? '';
+                    const insertLine = findAnnotationInsertLine(lines, fn.line);
+                    const actions: vscode.CodeAction[] = [];
+                    for (const eventKey of resolveEventKeysForParam(document, fn, paramName)) {
+                        if (!state.definitions.has(eventKey)) {
+                            continue;
+                        }
+                        const className = eventInfoClassName(eventKey, state.mode === '2.0' ? '2.0' : '3.0');
+                        const action = new vscode.CodeAction(
+                            `为 ${paramName} 添加 ${className} 类型注解`,
+                            vscode.CodeActionKind.QuickFix,
+                        );
+                        const edit = new vscode.WorkspaceEdit();
+                        edit.insert(
+                            document.uri,
+                            new vscode.Position(insertLine, 0),
+                            `${indent}--- @param ${paramName} ${className}\n`,
+                        );
+                        action.edit = edit;
+                        actions.push(action);
+                    }
+                    return actions;
+                },
+            },
+            { providedCodeActionKinds: [vscode.CodeActionKind.QuickFix] },
         ),
     );
 

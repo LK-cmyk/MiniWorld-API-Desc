@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { ApiSearchProvider } from './apiSearch';
 import { registerDeclarationCommands } from './declarationManager';
 import { registerEventCompletion } from './eventCompletion';
+import { registerScriptTable } from './scriptTable';
 
 const OUTPUT_CHANNEL_NAME = 'MiniWorld API Desc';
 
@@ -13,6 +14,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
     registerModule(context, log, '声明管理', () => registerDeclarationCommands(context));
     registerModule(context, log, '事件补全', () => registerEventCompletion(context));
+    registerModule(context, log, '脚本表组件方法', () => registerScriptTable(context));
     registerApiSearch(context, log);
 }
 

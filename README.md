@@ -54,7 +54,9 @@ MiniWorld API Description 是一个 VS Code 扩展，主要用于：
 
 ### 3. 事件补全
 
-在 `ScriptSupportEvent:registerEvent([=[...]=], callback)` 等场景中，扩展会提供对应版本的事件名补全；`TriggerEvent.` / `ObjectEvent.` 后也可以补全 3.0 事件字段。两个版本的命名回调都支持事件参数字段补全与悬浮说明：3.0 从 `AddEvent/AddTriggerEvent` 反查，2.0 从 `ScriptSupportEvent:registerEvent` 反查。
+在 `ScriptSupportEvent:registerEvent([=[...]=], callback)` 等场景中，扩展会提供对应版本的事件名补全；`TriggerEvent.` / `ObjectEvent.` 后也可以补全 3.0 事件字段。两个版本的命名回调都支持事件参数字段补全与悬浮说明：3.0 从 `AddEvent/AddTriggerEvent` 反查，2.0 从 `ScriptSupportEvent:registerEvent` 反查。在 `e.xxx` 上还可通过快速修复插入 `--- @param e EventInfo.<事件名>` 注解，让 LuaLS 显示字段类型（2.0 的事件名点号会写成下划线，如 `EventInfo.Player_ClickBlock`）。
+
+对于 `local s = {} ... return s` 这类脚本返回表（3.0），扩展会识别 `s` 为组件对象：输入 `s:` / `s.` 可补全 `Component` 的方法（`AddEvent`、`GetGameObject` 等），悬浮在方法名上会显示参数与说明。此项由扩展提供，无需在源码中添加 `--- @type Component` 注解。
 
 ### 4. 缓存管理
 
