@@ -465,3 +465,25 @@ function Player:GetMiniCurrency(objId, iType) return 0 end
 --- @param enhanceIndex number @强化方向索引(1~8)
 --- @return boolean @是否激活
 function Player:IsHandWeaponSpellEnhancementActive(playerId, enhanceIndex) return true end
+
+--- 移除玩家
+--- @param objid number @玩家Uin
+--- @return boolean @是否成功
+function Player:KickPlayer(objid) return true end
+
+--- 获取当前武器弹匣内剩余子弹数
+--- @param uin number @玩家Uin
+--- @return number @子弹数
+function Player:GunGetMagazine(uin) return 0 end
+
+--- 进入枪械状态
+--- @param objid number @玩家Uin
+--- @param state number @枪械状态(GunActionState)
+--- @return boolean @是否设置成功
+function Player:EnterGunState(objid, state) return true end
+
+--- 离开枪械状态
+--- @param objid number @玩家Uin
+--- @param state number @枪械状态(GunActionState)
+--- @return boolean @是否设置成功
+function Player:LevelGunState(objid, state) return true end

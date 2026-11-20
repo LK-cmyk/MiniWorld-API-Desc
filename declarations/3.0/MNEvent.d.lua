@@ -26,6 +26,7 @@
 --- @field PlayerInputKeyOnPress any @当任意玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
 --- @field PlayerNewInputContent any @玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
 --- @field PlayerGunAction any @当玩家持枪状态改变时 {eventobjid:触发事件的对象, gunAction:枪械动作, gunState:枪械状态, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- @field PlayerUseBullet any @当玩家持枪单次开火时 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球, itemnum:事件中的道具数量}
 --- @field PlayerMotionStateChange any @当玩家进入运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
 --- @field PlayerMotionStateChangeEnd any @当玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
 --- @field PlayerAddItem any @当玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}

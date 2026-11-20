@@ -360,6 +360,9 @@ _G.BlockStatus = BlockStatus
 --- Sandduststorm number 沙尘暴
 --- Tempest number 暴风雨
 --- Blizzard number 暴风雪
+--- MeteorShower number 流星雨
+--- Aurora number 极光天
+--- VoidFog number 虚空浓雾
 local GroupWeatherType = {}
 _G.GroupWeatherType = GroupWeatherType
 
@@ -462,6 +465,7 @@ _G.WorkeStage = WorkeStage
 --- Image number 图片
 --- Brush number 笔刷
 --- NavPathPos number 寻路引导线-指向位置
+--- Bubble number 气泡
 local GraphicsType = {}
 _G.GraphicsType = GraphicsType
 
@@ -687,6 +691,7 @@ _G.RelativeCampType = RelativeCampType
 --- AnimView number 动作列表界面
 --- MiniMap number 小地图
 --- MiniShop number 官方商城界面
+--- AdventureHandBook number 冒险手册界面
 local InnerPopUpview = {}
 _G.InnerPopUpview = InnerPopUpview
 
@@ -1154,6 +1159,23 @@ _G.GunAttr = GunAttr
 --- RainForestLake number 迷拉星雨林湖泊
 --- AirShipPlain number 铁穹平原
 --- AirShipFleet number 铁穹舰队
+--- MushroomPlain number 荧菇平原（内层）
+--- StarLakeLake number 星辉湖泊（内层子biome）
+--- MushroomForest number 菇林（内层子biome）
+--- StarForest number 星之森林（中层）
+--- StarForestEdge number 碎岛边境（星影森林边缘子地形）
+--- CrystalIsland number 晶簇浮岛（外层，环形轨道分布的特色浮岛）
+--- ShatteredIsles number 破碎离岛（外层主地形，离散散布的小浮岛群；原 BIOME_BRIDGE 改名）
+--- MushroomHills number 荧菇丘陵（内层子地形）
+--- MushroomPlainEdge number 荧菇平原边缘（内层最外环）
+--- CloverStream number 四叶草溪（内层子地形）
+--- RuneRelic number 符光遗迹（内层 patch 子地形）
+--- StarForestHills number 星影森林丘陵（中层 patch）
+--- DarkWoods number 昏暗树林（中层 patch）
+--- CatDogVillage number 猫狗村（中层 patch）
+--- CorruptededRuins number 腐化遗岛（外层 Boss 区域，环形轨道上的特殊大浮岛）
+--- MushroomVillage number 蘑菇村（内层 patch）
+--- Void number 星尘之境虚空（纯空壳：不建块/不刷植被/动物/矿）
 local BiomeType = {}
 _G.BiomeType = BiomeType
 
@@ -1259,6 +1281,13 @@ _G.AvtPart = AvtPart
 --- Size number 尺寸
 --- ScrollPosition number 滚动容器位置
 --- GlobalPos number 绝对位置
+--- ProgressImg number 进度条前景图标
+--- ProgressBackground number 进度条背景图标
+--- FontSize number 字号
+--- ProgressMinValue number 进度条最小值
+--- ProgressMaxValue number 进度条最大值
+--- ProgressCurrentValue number 进度条当前值
+--- ProgressCurrentAndMaxValue number 进度条当前值和最大值
 local ElementAttr = {}
 _G.ElementAttr = ElementAttr
 
@@ -1316,6 +1345,88 @@ _G.AreaCloneType = AreaCloneType
 --- Carried number 被举起着
 local RolePickupType = {}
 _G.RolePickupType = RolePickupType
+
+--- GunActionState 枪械状态
+--- Fire number 腰射开火
+--- Aim number 瞄准待机
+--- Reload number 腰射空仓换弹
+--- Inspect number 检视
+local GunActionState = {}
+_G.GunActionState = GunActionState
+
+--- DisplayBoardAutoSize 显示板文字自动大小
+--- ScaleText number 根据显示板尺寸缩放文字
+--- None number 不自动缩放文字
+local DisplayBoardAutoSize = {}
+_G.DisplayBoardAutoSize = DisplayBoardAutoSize
+
+--- DisplayBoardColorAttr 显示板颜色属性
+--- Background number 背景颜色
+--- All number 整体颜色
+--- Text number 文字板颜色
+--- Progress number 进度条颜色
+--- ProgressBackground number 进度条背景颜色
+local DisplayBoardColorAttr = {}
+_G.DisplayBoardColorAttr = DisplayBoardColorAttr
+
+--- DisplayBoardContentType 显示板内容类型
+--- Image number 图片显示板
+--- Text number 文字显示板
+--- Progress number 进度条显示板
+--- Interface number 自定义UI显示板
+local DisplayBoardContentType = {}
+_G.DisplayBoardContentType = DisplayBoardContentType
+
+--- DisplayBoardImgAttr 显示板图片属性
+--- Image number 图片板图片
+--- ProgressImg number 进度板图片
+--- ProgressBackground number 进度板背景图片
+local DisplayBoardImgAttr = {}
+_G.DisplayBoardImgAttr = DisplayBoardImgAttr
+
+--- DisplayBoardNumAttr 显示板数值属性
+--- ProgressCurVal number 进度板当前值
+--- ProgressMinVal number 进度板最小值
+--- ProgressMaxVal number 进度板最大值
+--- ProgressCurAnaMaxVal number 进度板当前值和最大值
+--- Width number 显示板宽度
+--- Height number 显示板高度
+--- FontSize number 文字板字体大小
+--- AllAlpha number 整体透明度
+--- BackgroundAlpha number 背景透明度
+--- Light number 亮光
+--- VisibleLen number 可见距离
+--- ResponseDistance number 响应距离
+local DisplayBoardNumAttr = {}
+_G.DisplayBoardNumAttr = DisplayBoardNumAttr
+
+--- ImageFillType UI图片填充方式
+--- Fill number 裁切填充
+--- Fit number 等比适配
+--- Stretch number 拉伸填充
+--- Tile number 平铺填充
+local ImageFillType = {}
+_G.ImageFillType = ImageFillType
+
+--- UIProgressType 显示板进度条类型
+--- Bar number 条形进度条
+--- Ring number 环形进度条
+local UIProgressType = {}
+_G.UIProgressType = UIProgressType
+
+--- UIBarProgressDirection UI进度条方向
+--- LeftToRight number 从左到右
+--- RightToLeft number 从右到左
+--- TopToBottom number 从上到下
+--- BottomToTop number 从下到上
+local UIBarProgressDirection = {}
+_G.UIBarProgressDirection = UIBarProgressDirection
+
+--- UIRowProgressDirection UI环形进度条方向
+--- Clockwise number 顺时针
+--- CounterClockwise number 逆时针
+local UIRowProgressDirection = {}
+_G.UIRowProgressDirection = UIRowProgressDirection
 --- Data
 --- 普通变量数据管理接口 - Data
 local Data = {
@@ -1867,6 +1978,7 @@ function Component:RemoveCloudSeverEvent(eventType) return nil end
 --- PlayerInputKeyOnPress any 当任意玩家长按按键 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, vkey:事件中的按键, eventworldid:事件中星球}
 --- PlayerNewInputContent any 玩家发送聊天信息 {content:事件中的字符串, eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
 --- PlayerGunAction any 当玩家持枪状态改变时 {eventobjid:触发事件的对象, gunAction:枪械动作, gunState:枪械状态, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球}
+--- PlayerUseBullet any 当玩家持枪单次开火时 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, eventworldid:事件中星球, itemnum:事件中的道具数量}
 --- PlayerMotionStateChange any 当玩家进入运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
 --- PlayerMotionStateChangeEnd any 当玩家离开运动状态 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, playermotion:玩家行为动作, eventworldid:事件中星球}
 --- PlayerAddItem any 当玩家获得道具 {eventobjid:触发事件的对象, x:事件中位置X, y:事件中位置Y, z:事件中位置Z, itemid:事件中的道具类型, itemix:事件中的格子ID, itemnum:事件中的道具数量, eventworldid:事件中星球}
@@ -4228,6 +4340,28 @@ function Player:GetMiniCurrency(objId, iType) return 0 end
 --- enhanceIndex number 强化方向索引(1~8)
 --- boolean 是否激活
 function Player:IsHandWeaponSpellEnhancementActive(playerId, enhanceIndex) return true end
+
+--- 移除玩家
+--- objid number 玩家Uin
+--- boolean 是否成功
+function Player:KickPlayer(objid) return true end
+
+--- 获取当前武器弹匣内剩余子弹数
+--- uin number 玩家Uin
+--- number 子弹数
+function Player:GunGetMagazine(uin) return 0 end
+
+--- 进入枪械状态
+--- objid number 玩家Uin
+--- state number 枪械状态(GunActionState)
+--- boolean 是否设置成功
+function Player:EnterGunState(objid, state) return true end
+
+--- 离开枪械状态
+--- objid number 玩家Uin
+--- state number 枪械状态(GunActionState)
+--- boolean 是否设置成功
+function Player:LevelGunState(objid, state) return true end
 --- Monster
 --- 生物模块管理接口 Monster
 local Monster = {}
@@ -5062,438 +5196,504 @@ _G.Chat = Chat
 --- playerId number 玩家ID
 --- boolean 是否发送成功
 function Chat:SendSystemMsg(content, playerId) return true end
----CustomUI
----界面模块管理接口 - CustomUI
+--- CustomUI
+--- 界面模块管理接口 - CustomUI
 local CustomUI = {}
 _G.CustomUI = CustomUI
 
----设置文本元件内容
----boolean
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----text string 文本内容
----animId? number 动画ID(缺省参数)
----time? number 动画时长(缺省参数)
----mode? number 播放模式(缺省参数)
+--- 设置文本元件内容
+--- boolean
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- text string 文本内容
+--- animId? number 动画ID(缺省参数)
+--- time? number 动画时长(缺省参数)
+--- mode? number 播放模式(缺省参数)
 function CustomUI:SetText(playerId, uiId, elementId, text, animId, time, mode) return true end
 
----设置元件图案纹理
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----url string 图案纹理ID
+--- 设置元件图案纹理
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- url string 图案纹理ID
 function CustomUI:SetTexture(playerId, uiId, elementId, url) return true end
 
----设置元件大小
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----width number 元件宽度
----heigth number 元件高度
+--- 设置元件图案纹理 (URL图标)
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- url string 图案纹理链接
+function CustomUI:SetUrlIcon(playerId, uiId, elementId, url) return true end
+
+--- 设置元件大小
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- width number 元件宽度
+--- heigth number 元件高度
 function CustomUI:SetSize(playerId, uiId, elementId, width, heigth) return true end
 
----设置文本元件字体大小
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----size number 字体大小
+--- 设置元件位置绑定角色
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- actorId number 绑定的角色ID
+--- offset table 相对偏移(含x,y,z字段)
+function CustomUI:SetPositionBindActor(playerId, uiId, elementId, actorId, offset) return true end
+
+--- 移除元件位置绑定角色
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+function CustomUI:RemovePositionBindActor(playerId, uiId, elementId) return true end
+
+--- 设置元件位置绑定方块
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- blockPos table 方块坐标(含x,y,z字段)
+function CustomUI:SetPositionBandBlock(playerId, uiId, elementId, blockPos) return true end
+
+--- 移除元件位置绑定方块
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+function CustomUI:RemovePositionBandBlock(playerId, uiId, elementId) return true end
+
+--- 设置系统设置按钮是否显示
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- visible boolean 是否显示
+function CustomUI:SetSysSettingBtnVisible(playerId, visible) return true end
+
+--- 获取元件属性值
+--- any 成功时返回元件属性值，失败返回nil
+--- playerId number 玩家ID
+--- elementId string 元件ID
+--- attrIdx number 属性枚举(ElementAttr)
+function CustomUI:GetElementAttrValue(playerId, elementId, attrIdx) return nil end
+
+--- 获取界面属性值
+--- any 成功时返回界面属性值，失败返回nil
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- attrIdx number 属性枚举(ElementAttr)
+function CustomUI:GetUIViewAttrValue(playerId, uiId, attrIdx) return nil end
+
+--- 设置文本元件字体大小
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- size number 字体大小
 function CustomUI:SetFontSize(playerId, uiId, elementId, size) return true end
 
----设置元件颜色
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----color number 颜色值(0xFFFFFF)
+--- 设置元件颜色
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- color number 颜色值(0xFFFFFF)
 function CustomUI:SetColor(playerId, uiId, elementId, color) return true end
 
----显示元件
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----effectid? number 动画ID(缺省参数)
----time? number 动画时长(缺省参数)
+--- 显示元件
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- effectid? number 动画ID(缺省参数)
+--- time? number 动画时长(缺省参数)
 function CustomUI:ShowElement(playerId, uiId, elementId, effectid, time) return true end
 
----隐藏元件
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----effectid? number 动画ID(缺省参数)
----time? number 动画时长(缺省参数)
+--- 隐藏元件
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- effectid? number 动画ID(缺省参数)
+--- time? number 动画时长(缺省参数)
 function CustomUI:HideElement(playerId, uiId, elementId, effectid, time) return true end
 
----旋转元件
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----rotate number 旋转角度
+--- 旋转元件
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- rotate number 旋转角度
 function CustomUI:RotateElement(playerId, uiId, elementId, rotate) return true end
 
----设置元件透明度
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----alpha number 透明度(0-100)
+--- 设置元件透明度
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- alpha number 透明度(0-100)
 function CustomUI:SetAlpha(playerId, uiId, elementId, alpha) return true end
 
----设置状态
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----pageIndex number 状态值
----easeType number 缓动类型枚举(Easing)
----time? number 动画时长(缺省函数)
+--- 设置状态
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- pageIndex number 状态值
+--- easeType number 缓动类型枚举(Easing)
+--- time? number 动画时长(缺省函数)
 function CustomUI:SetState(playerId, uiId, elementId, pageIndex, easeType, time) return true end
 
----设置元件位置
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----x number X坐标
----y number Y坐标
+--- 设置元件位置
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- x number X坐标
+--- y number Y坐标
 function CustomUI:SetPosition(playerId, uiId, elementId, x, y) return true end
 
----设置模型装载器的模型缩放
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----x number X缩放
----y number Y缩放
+--- 设置模型装载器的模型缩放
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- x number X缩放
+--- y number Y缩放
 function CustomUI:SetScale(playerId, uiId, elementId, x, y) return true end
 
----获取道具类型图标
----string|nil 成功时返回道具图标的资源标识符
----itemId number|string 道具ID
+--- 获取道具类型图标
+--- string|nil 成功时返回道具图标的资源标识符
+--- itemId number|string 道具ID
 function CustomUI:GetItemIcon(itemId) return "" end
 
----获取生物图标
----string|nil 成功时返回生物图标的资源标识符
----objId number 生物ID
+--- 获取生物图标
+--- string|nil 成功时返回生物图标的资源标识符
+--- objId number 生物ID
 function CustomUI:GetMonsterObjIcon(objId) return "" end
 
----获取生物类型图标
----string|nil 成功时返回生物类型图标的资源标识符
----actor number|string 生物类型ID
+--- 获取生物类型图标
+--- string|nil 成功时返回生物类型图标的资源标识符
+--- actor number|string 生物类型ID
 function CustomUI:GetMonsterIcon(actor) return "" end
 
----获取状态图标
----string|nil 成功时返回状态图标的资源标识符
----buffId number 状态ID
+--- 获取状态图标
+--- string|nil 成功时返回状态图标的资源标识符
+--- buffId number 状态ID
 function CustomUI:GetStatusIcon(buffId) return "" end
 
 
----获取方块类型图标
----string|nil 成功时返回方块类型图标的资源标识符
----blockId number|string 方块类型ID
+--- 获取方块类型图标
+--- string|nil 成功时返回方块类型图标的资源标识符
+--- blockId number|string 方块类型ID
 function CustomUI:GetBlockIcon(blockId) return "" end
 
----获取玩家当前角色图标
----string|nil 成功时返回玩家当前角色图标的资源标识符
----playerId number 玩家ID
+--- 获取玩家当前角色图标
+--- string|nil 成功时返回玩家当前角色图标的资源标识符
+--- playerId number 玩家ID
 function CustomUI:GetRoleIcon(playerId) return "" end
 
----获取玩家当前角色图标
----string|nil 成功时返回玩家当前角色头像的资源标识符
----playerId number 玩家ID
+--- 获取玩家当前角色图标
+--- string|nil 成功时返回玩家当前角色头像的资源标识符
+--- playerId number 玩家ID
 function CustomUI:GetRoleHeadIcon(playerId) return "" end
 
----获取玩家快捷栏图标
----string|nil 成功时返回玩家快捷栏图标的资源标识符
----playerId number 玩家ID
----ix number 快捷栏索引(1-8)
+--- 获取玩家快捷栏图标
+--- string|nil 成功时返回玩家快捷栏图标的资源标识符
+--- playerId number 玩家ID
+--- ix number 快捷栏索引(1-8)
 function CustomUI:GetShortcutIcon(playerId, ix) return "" end
 
----元件平滑移动到指定位置
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----x number 目标X坐标
----y number 目标Y坐标
+--- 元件平滑移动到指定位置
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- x number 目标X坐标
+--- y number 目标Y坐标
 function CustomUI:SmoothMoveTo(playerId, uiId, elementId, time, x, y) return true end
 
----元件平滑移动相对距离
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----x number X坐标
----y number Y坐标
+--- 元件平滑移动相对距离
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- x number X坐标
+--- y number Y坐标
 function CustomUI:SmoothMoveBy(playerId, uiId, elementId, time, x, y) return true end
 
----元件平滑改变到指定宽度和高度
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----w number 目标宽度
----h number 目标高度
+--- 元件平滑改变到指定宽度和高度
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- w number 目标宽度
+--- h number 目标高度
 function CustomUI:SmoothScaleTo(playerId, uiId, elementId, time, w, h) return true end
 
----元件平滑改变相对宽度和高度
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----w number 宽度
----h number 高度
+--- 元件平滑改变相对宽度和高度
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- w number 宽度
+--- h number 高度
 function CustomUI:SmoothScaleBy(playerId, uiId, elementId, time, w, h) return true end
 
----元件平滑改变相对缩放大小（子节点也会改变大小）
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----x number X缩放
----y number Y缩放
----delayTime number 延迟时间
----easeType number 缓动类型枚举(Easing)
+--- 元件平滑改变相对缩放大小（子节点也会改变大小）
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- x number X缩放
+--- y number Y缩放
+--- delayTime number 延迟时间
+--- easeType number 缓动类型枚举(Easing)
 function CustomUI:SmoothScaleByEx(playerId, uiId, elementId, time, x, y, delayTime, easeType) return true end
 
----元件平滑旋转到指定角度
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----angle number 目标角度
+--- 元件平滑旋转到指定角度
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- angle number 目标角度
 function CustomUI:SmoothRotateTo(playerId, uiId, elementId, time, angle) return true end
 
----元件平滑旋转相对角度
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长(>0)
----angle number 角度
+--- 元件平滑旋转相对角度
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长(>0)
+--- angle number 角度
 function CustomUI:SmoothRotateBy(playerId, uiId, elementId, time, angle) return true end
 
----元件播放动画
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----animId number 动画ID
----time number 动画时长(>0)
----mode number 播放模式枚举(AnimMode)
----easeType number 缓动类型枚举(Easing)
----delayTime number 延迟时间
----endValue number 动画结束值
+--- 元件播放动画
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- animId number 动画ID
+--- time number 动画时长(>0)
+--- mode number 播放模式枚举(AnimMode)
+--- easeType number 缓动类型枚举(Easing)
+--- delayTime number 延迟时间
+--- endValue number 动画结束值
 function CustomUI:PlayElementAnim(playerId, uiId, elementId, animId, time, mode, easeType, delayTime, endValue) return true end
 
----元件停止动画
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----iType number 类型(lement-如果为0就是停止所有的UI的动效，1就是停止elementid对应的UI动效)
+--- 元件停止动画
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- iType number 类型(lement-如果为0就是停止所有的UI的动效，1就是停止elementid对应的UI动效)
 function CustomUI:StopAnim(playerId, uiId, elementId, iType) return true end
 
----设置装载器的模型（调用道具实例的模型：模型名称填"ItemInstance_道具实例id"）
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----modelName string 模型名称
+--- 设置装载器的模型（调用道具实例的模型：模型名称填"ItemInstance_道具实例id"）
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- modelName string 模型名称
 function CustomUI:SetLoaderModel(playerId, uiId, elementId, modelName) return true end
 
----设置装载器的模型缩放
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----modelScale number 模型缩放值
+--- 设置装载器的模型缩放
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- modelScale number 模型缩放值
 function CustomUI:SetLoaderModelScale(playerId, uiId, elementId, modelScale) return true end
 
----设置装载器的模型方向
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----yaw number 水平角度(角度制)
+--- 设置装载器的模型方向
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- yaw number 水平角度(角度制)
 function CustomUI:SetLoaderModelDir(playerId, uiId, elementId, yaw) return true end
 
----设置装载器的模型位置
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----x number X坐标
----y number Y坐标
----z number Z坐标
+--- 设置装载器的模型位置
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- x number X坐标
+--- y number Y坐标
+--- z number Z坐标
 function CustomUI:SetLoaderModelPosition(playerId, uiId, elementId, x, y, z) return true end
 
----滑动列表跳转到某位置
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----x number 目标X坐标
----y number 目标Y坐标
+--- 滑动列表跳转到某位置
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- x number 目标X坐标
+--- y number 目标Y坐标
 function CustomUI:TurnSliderToPos(playerId, uiId, elementId, x, y) return true end
 
----设置滑动列表的滑动方式
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----dir number 滑动方向(0:水平，1:垂直, 2:自由)
+--- 设置滑动列表的滑动方式
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- dir number 滑动方向(0:水平，1:垂直, 2:自由)
 function CustomUI:SetSliderDir(playerId, uiId, elementId, dir) return true end
 
----设置滑动条的图片
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----url string 图片资源ID
+--- 设置滑动条的图片
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- url string 图片资源ID
 function CustomUI:SetSliderBarImg(playerId, uiId, elementId, url) return true end
 
----设置元件相对位置
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----v number 水平偏移枚举(HorizontalOffset)
----xOffset number X方向数值
----xUnits number 像素单位枚举(PixelUnits)
----h number 垂直偏移枚举(VerticalOffset)
----yOffset number Y方向数值
----yUnits number 像素单位枚举(PixelUnits)
+--- 设置元件相对位置
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- v number 水平偏移枚举(HorizontalOffset)
+--- xOffset number X方向数值
+--- xUnits number 像素单位枚举(PixelUnits)
+--- h number 垂直偏移枚举(VerticalOffset)
+--- yOffset number Y方向数值
+--- yUnits number 像素单位枚举(PixelUnits)
 function CustomUI:SetRelationPosition(playerId, uiId, elementId, v, xOffset, xUnits, h, yOffset, yUnits) return true end
 
----设置元件相对大小
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----width number 宽度数值
----widthUnits number 宽度单位枚举(PixelUnits)
----heigth number 高度数值
----heigthUnits number 高度单位枚举(PixelUnits)
+--- 设置元件相对大小
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- width number 宽度数值
+--- widthUnits number 宽度单位枚举(PixelUnits)
+--- heigth number 高度数值
+--- heigthUnits number 高度单位枚举(PixelUnits)
 function CustomUI:SetRelationSize(playerId, uiId, elementId, width, widthUnits, heigth, heigthUnits) return true end
 
----动态创建元件
----string 成功时返回元件ID
----playerId number 玩家ID
----uiId string 界面ID
----elementType number 元件类型枚举(ElementType)
+--- 动态创建元件
+--- string 成功时返回元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementType number 元件类型枚举(ElementType)
 function CustomUI:CreateElement(playerId, uiId, elementType) return "" end
 
----克隆元件
----string 成功时返回元件ID
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 目标元件ID
+--- 克隆元件
+--- string 成功时返回元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 目标元件ID
 function CustomUI:CloneElement(playerId, uiId, elementId) return "" end
 
----修改元件父元件
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----parentElementId string 父元件ID
+--- 修改元件父元件
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- parentElementId string 父元件ID
 function CustomUI:ChangeParent(playerId, uiId, elementId, parentElementId) return true end
 
----设置玩家界面进度条的值
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----iType number 类型枚举(ProgressType)
----value number 设定值
+--- 设置玩家界面进度条的值
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- iType number 类型枚举(ProgressType)
+--- value number 设定值
 function CustomUI:SetProgressBarValue(playerId, uiId, elementId, iType, value) return true end
 
----获取玩家界面进度条的值
----number, number, number 成功时返回最小值，最大值，当前值
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----iType number 类型枚举(ProgressType)
+--- 获取玩家界面进度条的值
+--- number, number, number 成功时返回最小值，最大值，当前值
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- iType number 类型枚举(ProgressType)
 function CustomUI:GetProgressBarValue(playerId, uiId, elementId, iType) return 0, 0, 0 end
 
----设置玩家界面进度条的纹理
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----iType number 类型枚举(ProgressType)
----url string 纹理资源ID 
+--- 设置玩家界面进度条的纹理
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- iType number 类型枚举(ProgressType)
+--- url string 纹理资源ID 
 function CustomUI:SetProgressBarResId(playerId, uiId, elementId, iType, url) return true end
 
----进度条文本平滑计时
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----bVal number 开始值
----eVal number 结束值
----time number 动画时长
+--- 进度条文本平滑计时
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- bVal number 开始值
+--- eVal number 结束值
+--- time number 动画时长
 function CustomUI:SmoothChangeProgress(playerId, uiId, elementId, bVal, eVal, time) return true end
 
----设置动画元件动画ID
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----animId number 动画ID
----animIndex number 动画序列
----playMode number 播放模式枚举(ViedoPlayMode)
+--- 设置动画元件动画ID
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- animId number 动画ID
+--- animIndex number 动画序列
+--- playMode number 播放模式枚举(ViedoPlayMode)
 function CustomUI:SetSpineAnimID(playerId, uiId, elementId, animId, animIndex, playMode) return true end
 
----进度条文本平滑增加计时
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
----time number 动画时长
----pType number 类型枚举(1.增加, 2.减少. 3.变化至)
----value number 变化值
+--- 进度条文本平滑增加计时
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- time number 动画时长
+--- pType number 类型枚举(1.增加, 2.减少. 3.变化至)
+--- value number 变化值
 function CustomUI:SmoothIncreaseProgress(playerId, uiId, elementId, time, pType, value) return true end
 
----设置伤害文本
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----elementId string 元件ID
----objId number 目标对象ID
----text string 文本内容
----color number 颜色
----offsetX number X偏移
----offsetY number Y偏移
----moveX number 移动X
----moveY number 移动Y
----showTime number 显示时间
----moveX2 number 移动X2
----moveY2 number 移动Y2
----showTime2 number 显示时间2
+--- 设置伤害文本
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- elementId string 元件ID
+--- objId number 目标对象ID
+--- text string 文本内容
+--- color number 颜色
+--- offsetX number X偏移
+--- offsetY number Y偏移
+--- moveX number 移动X
+--- moveY number 移动Y
+--- showTime number 显示时间
+--- moveX2 number 移动X2
+--- moveY2 number 移动Y2
+--- showTime2 number 显示时间2
 function CustomUI:SetFloatDamageTxt(playerId, elementId, objId, text, color, offsetX, offsetY, moveX, moveY, showTime, moveX2, moveY2, showTime2) return true end
 
----获取客机屏幕分辨率
----number, number 返回屏幕大小(width, height)
+--- 获取客机屏幕分辨率
+--- number, number 返回屏幕大小(width, height)
 function CustomUI:GetScreenSize(playerId) return 0, 0 end
 
----删除UI元件
----boolean 成功返回True, 失败返回False
----playerId number 玩家ID
----uiId string 界面ID
----elementId string 元件ID
+--- 删除UI元件
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 function CustomUI:DeleteElement(playerId, uiId, elementId) return true end
+
+--- 设置信标地图类型
+--- boolean 成功返回True, 失败返回False
+--- playerId number 玩家ID
+--- elementId string 元件ID
+--- mapType number 信标地图类型枚举(BeaconMapType)
+function CustomUI:SetBeaconMapType(playerId, elementId, mapType) return true end
 
 --- 设置信标位置
 --- boolean 成功返回True, 失败返回False

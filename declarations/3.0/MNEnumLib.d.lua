@@ -279,6 +279,9 @@ _G.BlockStatus = BlockStatus
 --- @field Sandduststorm number @沙尘暴
 --- @field Tempest number @暴风雨
 --- @field Blizzard number @暴风雪
+--- @field MeteorShower number @流星雨
+--- @field Aurora number @极光天
+--- @field VoidFog number @虚空浓雾
 local GroupWeatherType = {}
 _G.GroupWeatherType = GroupWeatherType
 
@@ -381,6 +384,7 @@ _G.WorkeStage = WorkeStage
 --- @field Image number @图片
 --- @field Brush number @笔刷
 --- @field NavPathPos number @寻路引导线-指向位置
+--- @field Bubble number @气泡
 local GraphicsType = {}
 _G.GraphicsType = GraphicsType
 
@@ -606,6 +610,7 @@ _G.RelativeCampType = RelativeCampType
 --- @field AnimView number @动作列表界面
 --- @field MiniMap number @小地图
 --- @field MiniShop number @官方商城界面
+--- @field AdventureHandBook number @冒险手册界面
 local InnerPopUpview = {}
 _G.InnerPopUpview = InnerPopUpview
 
@@ -1073,6 +1078,23 @@ _G.GunAttr = GunAttr
 --- @field RainForestLake number @迷拉星雨林湖泊
 --- @field AirShipPlain number @铁穹平原
 --- @field AirShipFleet number @铁穹舰队
+--- @field MushroomPlain number @荧菇平原（内层）
+--- @field StarLakeLake number @星辉湖泊（内层子biome）
+--- @field MushroomForest number @菇林（内层子biome）
+--- @field StarForest number @星之森林（中层）
+--- @field StarForestEdge number @碎岛边境（星影森林边缘子地形）
+--- @field CrystalIsland number @晶簇浮岛（外层，环形轨道分布的特色浮岛）
+--- @field ShatteredIsles number @破碎离岛（外层主地形，离散散布的小浮岛群；原 BIOME_BRIDGE 改名）
+--- @field MushroomHills number @荧菇丘陵（内层子地形）
+--- @field MushroomPlainEdge number @荧菇平原边缘（内层最外环）
+--- @field CloverStream number @四叶草溪（内层子地形）
+--- @field RuneRelic number @符光遗迹（内层 patch 子地形）
+--- @field StarForestHills number @星影森林丘陵（中层 patch）
+--- @field DarkWoods number @昏暗树林（中层 patch）
+--- @field CatDogVillage number @猫狗村（中层 patch）
+--- @field CorruptededRuins number @腐化遗岛（外层 Boss 区域，环形轨道上的特殊大浮岛）
+--- @field MushroomVillage number @蘑菇村（内层 patch）
+--- @field Void number @星尘之境虚空（纯空壳：不建块/不刷植被/动物/矿）
 local BiomeType = {}
 _G.BiomeType = BiomeType
 
@@ -1178,6 +1200,13 @@ _G.AvtPart = AvtPart
 --- @field Size number @尺寸
 --- @field ScrollPosition number @滚动容器位置
 --- @field GlobalPos number @绝对位置
+--- @field ProgressImg number @进度条前景图标
+--- @field ProgressBackground number @进度条背景图标
+--- @field FontSize number @字号
+--- @field ProgressMinValue number @进度条最小值
+--- @field ProgressMaxValue number @进度条最大值
+--- @field ProgressCurrentValue number @进度条当前值
+--- @field ProgressCurrentAndMaxValue number @进度条当前值和最大值
 local ElementAttr = {}
 _G.ElementAttr = ElementAttr
 
@@ -1235,3 +1264,85 @@ _G.AreaCloneType = AreaCloneType
 --- @field Carried number @被举起着
 local RolePickupType = {}
 _G.RolePickupType = RolePickupType
+
+--- @class GunActionState @枪械状态
+--- @field Fire number @腰射开火
+--- @field Aim number @瞄准待机
+--- @field Reload number @腰射空仓换弹
+--- @field Inspect number @检视
+local GunActionState = {}
+_G.GunActionState = GunActionState
+
+--- @class DisplayBoardAutoSize @显示板文字自动大小
+--- @field ScaleText number @根据显示板尺寸缩放文字
+--- @field None number @不自动缩放文字
+local DisplayBoardAutoSize = {}
+_G.DisplayBoardAutoSize = DisplayBoardAutoSize
+
+--- @class DisplayBoardColorAttr @显示板颜色属性
+--- @field Background number @背景颜色
+--- @field All number @整体颜色
+--- @field Text number @文字板颜色
+--- @field Progress number @进度条颜色
+--- @field ProgressBackground number @进度条背景颜色
+local DisplayBoardColorAttr = {}
+_G.DisplayBoardColorAttr = DisplayBoardColorAttr
+
+--- @class DisplayBoardContentType @显示板内容类型
+--- @field Image number @图片显示板
+--- @field Text number @文字显示板
+--- @field Progress number @进度条显示板
+--- @field Interface number @自定义UI显示板
+local DisplayBoardContentType = {}
+_G.DisplayBoardContentType = DisplayBoardContentType
+
+--- @class DisplayBoardImgAttr @显示板图片属性
+--- @field Image number @图片板图片
+--- @field ProgressImg number @进度板图片
+--- @field ProgressBackground number @进度板背景图片
+local DisplayBoardImgAttr = {}
+_G.DisplayBoardImgAttr = DisplayBoardImgAttr
+
+--- @class DisplayBoardNumAttr @显示板数值属性
+--- @field ProgressCurVal number @进度板当前值
+--- @field ProgressMinVal number @进度板最小值
+--- @field ProgressMaxVal number @进度板最大值
+--- @field ProgressCurAnaMaxVal number @进度板当前值和最大值
+--- @field Width number @显示板宽度
+--- @field Height number @显示板高度
+--- @field FontSize number @文字板字体大小
+--- @field AllAlpha number @整体透明度
+--- @field BackgroundAlpha number @背景透明度
+--- @field Light number @亮光
+--- @field VisibleLen number @可见距离
+--- @field ResponseDistance number @响应距离
+local DisplayBoardNumAttr = {}
+_G.DisplayBoardNumAttr = DisplayBoardNumAttr
+
+--- @class ImageFillType @UI图片填充方式
+--- @field Fill number @裁切填充
+--- @field Fit number @等比适配
+--- @field Stretch number @拉伸填充
+--- @field Tile number @平铺填充
+local ImageFillType = {}
+_G.ImageFillType = ImageFillType
+
+--- @class UIProgressType @显示板进度条类型
+--- @field Bar number @条形进度条
+--- @field Ring number @环形进度条
+local UIProgressType = {}
+_G.UIProgressType = UIProgressType
+
+--- @class UIBarProgressDirection @UI进度条方向
+--- @field LeftToRight number @从左到右
+--- @field RightToLeft number @从右到左
+--- @field TopToBottom number @从上到下
+--- @field BottomToTop number @从下到上
+local UIBarProgressDirection = {}
+_G.UIBarProgressDirection = UIBarProgressDirection
+
+--- @class UIRowProgressDirection @UI环形进度条方向
+--- @field Clockwise number @顺时针
+--- @field CounterClockwise number @逆时针
+local UIRowProgressDirection = {}
+_G.UIRowProgressDirection = UIRowProgressDirection
