@@ -4,7 +4,7 @@
   "displayName": "MiniWorld API Description",
   "description": "MiniWorld API Description",
   "icon": "img/addon-icon.png",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/UU-cmyk/MiniWorld-API-Desc.git"
