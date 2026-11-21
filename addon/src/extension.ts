@@ -4,6 +4,7 @@ import { ApiSearchProvider } from './apiSearch';
 import { registerDeclarationCommands } from './declarationManager';
 import { registerEventCompletion } from './eventCompletion';
 import { registerScriptTable } from './scriptTable';
+import { registerCacheCleanup } from './documentCache';
 
 const OUTPUT_CHANNEL_NAME = 'MiniWorld API Desc';
 
@@ -11,6 +12,8 @@ export function activate(context: vscode.ExtensionContext): void {
     const log = vscode.window.createOutputChannel(OUTPUT_CHANNEL_NAME);
     context.subscriptions.push(log);
     log.appendLine('MiniWorld API Desc 完成插件已激活');
+
+    context.subscriptions.push(registerCacheCleanup());
 
     registerModule(context, log, '声明管理', () => registerDeclarationCommands(context));
     registerModule(context, log, '事件补全', () => registerEventCompletion(context));
@@ -51,6 +54,7 @@ function registerApiSearch(context: vscode.ExtensionContext, log: vscode.OutputC
     };
 
     context.subscriptions.push(
+        provider,
         vscode.window.registerWebviewViewProvider(ApiSearchProvider.viewType, provider),
         vscode.commands.registerCommand('miniworld.apiSearch.focus', () => {
             void vscode.commands.executeCommand('workbench.view.extension.miniworld-api-search');

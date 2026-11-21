@@ -856,14 +856,22 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider, vscode.Dis
 
         webviewView.webview.html = await this._getHtmlContent(webviewView.webview);
 
-        // 注册消息处理器
-        const msgDisposable = webviewView.webview.onDidReceiveMessage(msg => this._onMessage(msg));
-        this._disposables.push(msgDisposable);
-        webviewView.onDidDispose(() => {
-            msgDisposable.dispose();
-            // 仅清理 view 引用，不清理数据（用户可能重新打开）
-            this._view = undefined;
-        });
+        // 注册消息处理器。监听器按「单次视图」收集，视图销毁时即时释放，
+        // 避免反复折叠/展开侧栏时实例级 _disposables 无限累积。
+        const viewDisposables: vscode.Disposable[] = [];
+        viewDisposables.push(
+            webviewView.webview.onDidReceiveMessage(msg => this._onMessage(msg)),
+        );
+        viewDisposables.push(
+            webviewView.onDidDispose(() => {
+                for (const d of viewDisposables) {
+                    try { d.dispose(); } catch { /* ignore */ }
+                }
+                viewDisposables.length = 0;
+                // 仅清理 view 引用，不清理数据（用户可能重新打开）
+                this._view = undefined;
+            }),
+        );
 
         // 异步加载数据后推送 init 数据
         void this.init().then(() => {
@@ -871,24 +879,61 @@ export class ApiSearchProvider implements vscode.WebviewViewProvider, vscode.Dis
         });
     }
 
-    private _onMessage(msg: any): void {
+    /** 校验并归一化 Webview 入站消息；非法消息返回 null 并静默忽略。
+     * Webview 与扩展之间是信任边界，不校验会让畸形数据（如 pageSize=0、
+     * 非字符串 text）引发 Infinity 分页或未处理的 Promise rejection。 */
+    private _normalizeMessage(msg: unknown): Record<string, unknown> | null {
+        if (!msg || typeof msg !== 'object' || Array.isArray(msg)) {
+            return null;
+        }
+        return msg as Record<string, unknown>;
+    }
+
+    private _onMessage(rawMsg: unknown): void {
+        const msg = this._normalizeMessage(rawMsg);
+        if (!msg || typeof msg.type !== 'string') {
+            return;
+        }
+        const str = (value: unknown, fallback = ''): string =>
+            typeof value === 'string' ? value : fallback;
+        const num = (value: unknown, fallback: number): number =>
+            typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+
         switch (msg.type) {
             case 'ready':
                 // init 未完成时不推送空数据，避免闪现“未找到匹配结果”；
                 // init 完成后由 resolveWebviewView 的 init().then() 统一推送
                 if (this._initialized) { this._sendInitData(); }
                 break;
-            case 'search':
-                this._handleSearch(msg.query, msg.version, msg.module, msg.kind, msg.page ?? 1, msg.pageSize ?? 25);
+            case 'search': {
+                // pageSize 归一化到 [1, 100]，避免 0 → Infinity、极大值架空分页
+                const pageSize = Math.min(Math.max(1, Math.floor(num(msg.pageSize, 25))), 100);
+                const page = Math.max(1, Math.floor(num(msg.page, 1)));
+                this._handleSearch(
+                    str(msg.query), str(msg.version), str(msg.module), str(msg.kind),
+                    page, pageSize,
+                );
                 break;
+            }
             case 'showDetail':
-                this._handleShowDetail(msg);
-                break;
-            case 'copy':
-                vscode.env.clipboard.writeText(msg.text).then(() => {
-                    vscode.window.showInformationMessage(`已复制: ${msg.text}`);
+                this._handleShowDetail({
+                    name: str(msg.name),
+                    sourceFile: str(msg.sourceFile),
+                    sourceLine: num(msg.sourceLine, 0),
+                    kind: str(msg.kind),
                 });
                 break;
+            case 'copy': {
+                const text = str(msg.text);
+                if (!text) {
+                    break;
+                }
+                void vscode.env.clipboard.writeText(text).then(
+                    () => { void vscode.window.showInformationMessage(`已复制: ${text}`); },
+                    error => { console.warn('复制到剪贴板失败', error); },
+                );
+                break;
+            }
             case 'getIds':
                 // 仅在版本过期时重新推送
                 this._sendIdData();

@@ -2,7 +2,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-import { COMPLETION_MODE_SETTING, getCompletionMode, type CompletionMode } from './completionMode';
+import {
+    COMPLETION_MODE_SETTING,
+    getCompletionMode,
+    getEffectiveCompletionMode,
+    getScopeValue,
+    type CompletionMode,
+} from './completionMode';
 
 const LUA_CONFIG_SECTION = 'Lua';
 const LIBRARY_KEY = 'workspace.library';
@@ -54,71 +60,15 @@ function scopePriority(target: vscode.ConfigurationTarget): number {
     }
 }
 
-/** 从 inspect 结果中提取指定作用域的原始数组 */
+/** 从 inspect 结果中提取指定作用域的原始数组（复用共享的泛型取值） */
 function getScopeArray(inspected: { globalValue?: string[]; workspaceValue?: string[]; workspaceFolderValue?: string[] } | undefined, target: vscode.ConfigurationTarget): string[] {
-    if (!inspected) {
-        return [];
-    }
-    switch (target) {
-        case vscode.ConfigurationTarget.Global:
-            return inspected.globalValue ?? [];
-        case vscode.ConfigurationTarget.Workspace:
-            return inspected.workspaceValue ?? [];
-        case vscode.ConfigurationTarget.WorkspaceFolder:
-            return inspected.workspaceFolderValue ?? [];
-        default:
-            return [];
-    }
+    return getScopeValue<string[]>(inspected, target) ?? [];
 }
 
 function arraysEqual(a: string[], b: string[]): boolean {
     return a.length === b.length && a.every((value, index) => value === b[index]);
 }
 
-
-/** 用于读取有效配置的作用域（包含 WorkspaceFolder 以兼容旧版本设置） */
-const ALL_SCOPES: vscode.ConfigurationTarget[] = [
-    vscode.ConfigurationTarget.WorkspaceFolder,
-    vscode.ConfigurationTarget.Workspace,
-    vscode.ConfigurationTarget.Global,
-];
-
-/** 当前生效的 miniworld.completion 设置信息（按作用域优先级取最高者） */
-interface EffectiveCompletionMode {
-    mode: CompletionMode;
-    scope: vscode.ConfigurationTarget | null;
-}
-
-/** 按作用域优先级判断当前生效的补全模式来源 */
-function getEffectiveCompletionMode(): EffectiveCompletionMode {
-    const config = vscode.workspace.getConfiguration();
-    const inspected = config.inspect<string>(COMPLETION_MODE_SETTING);
-
-    for (const target of ALL_SCOPES) {
-        const raw = getScopeStringValue(inspected, target);
-        if (raw === '2.0' || raw === '3.0' || raw === 'off') {
-            return { mode: raw, scope: target };
-        }
-    }
-    return { mode: '2.0', scope: null };
-}
-
-/** 从 inspect 结果中提取指定作用域的原始字符串值 */
-function getScopeStringValue(inspected: { globalValue?: string; workspaceValue?: string; workspaceFolderValue?: string } | undefined, target: vscode.ConfigurationTarget): string | undefined {
-    if (!inspected) {
-        return undefined;
-    }
-    switch (target) {
-        case vscode.ConfigurationTarget.Global:
-            return inspected.globalValue;
-        case vscode.ConfigurationTarget.Workspace:
-            return inspected.workspaceValue;
-        case vscode.ConfigurationTarget.WorkspaceFolder:
-            return inspected.workspaceFolderValue;
-        default:
-            return undefined;
-    }
-}
 
 /** 选择补全模式设置的作用域（始终列出工作区和全局） */
 async function pickConfigurationTarget(version: '2.0' | '3.0'): Promise<vscode.ConfigurationTarget | undefined> {

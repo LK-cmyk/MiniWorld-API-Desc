@@ -2,7 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-import { COMPLETION_MODE_SETTING } from './completionMode';
+import { COMPLETION_MODE_SETTING, getCompletionMode } from './completionMode';
+import { cached, sourceOf } from './documentCache';
 
 /** 3.0 组件方法声明文件（2.0 无独立 Component 声明，故仅 3.0 支持） */
 const COMPONENT_FILE_30 = path.join('declarations', '3.0', 'MNComponent.d.lua');
@@ -108,15 +109,19 @@ function getComponentFile(context: vscode.ExtensionContext): string {
     return fs.existsSync(bundled) ? bundled : path.resolve(context.extensionPath, '..', COMPONENT_FILE_30);
 }
 
+/** 当前文档的脚本表变量集合（按文档版本缓存） */
+function scriptTablesOf(document: vscode.TextDocument): Set<string> {
+    return cached(document, 'scriptTables', snapshot => findScriptTableVariables(snapshot.source));
+}
+
 /** 识别光标前 `<脚本表>[.:]` 的接收者，返回脚本表名 */
 function scriptTableReceiverBefore(document: vscode.TextDocument, offset: number): string | null {
-    const text = document.getText();
-    const before = text.substring(0, offset);
+    const before = sourceOf(document).substring(0, offset);
     const match = /([A-Za-z_]\w*)\s*[.:]$/.exec(before);
     if (!match) {
         return null;
     }
-    return findScriptTableVariables(text).has(match[1]) ? match[1] : null;
+    return scriptTablesOf(document).has(match[1]) ? match[1] : null;
 }
 
 /** 取得光标所在组件方法调用的方法名（形如 s:AddEvent / s.AddEvent） */
@@ -129,10 +134,9 @@ function componentMethodAt(document: vscode.TextDocument, position: vscode.Posit
     if (!methods.has(method)) {
         return null;
     }
-    const text = document.getText();
-    const before = text.substring(0, document.offsetAt(wordRange.start));
+    const before = sourceOf(document).substring(0, document.offsetAt(wordRange.start));
     const match = /([A-Za-z_]\w*)\s*[.:]$/.exec(before);
-    if (!match || !findScriptTableVariables(text).has(match[1])) {
+    if (!match || !scriptTablesOf(document).has(match[1])) {
         return null;
     }
     return { receiver: match[1], method, range: wordRange };
@@ -145,9 +149,19 @@ function componentMethodAt(document: vscode.TextDocument, position: vscode.Posit
 export function registerScriptTable(context: vscode.ExtensionContext): vscode.Disposable[] {
     const disposables: vscode.Disposable[] = [];
 
+    let loadSeq = 0;
     const load = async (): Promise<void> => {
+        const seq = ++loadSeq;
+        // 仅 3.0 需要组件方法，避免切到 2.0/off 时无谓读盘
+        if (getCompletionMode() !== '3.0') {
+            methods.clear();
+            return;
+        }
         try {
             const raw = await fs.promises.readFile(getComponentFile(context), 'utf8');
+            if (seq !== loadSeq) {
+                return;
+            }
             const parsed = parseComponentMethods(raw);
             methods.clear();
             for (const [name, method] of parsed) {
@@ -167,7 +181,7 @@ export function registerScriptTable(context: vscode.ExtensionContext): vscode.Di
         }),
     );
 
-    const isActive = (): boolean => vscode.workspace.getConfiguration().get<string>(COMPLETION_MODE_SETTING, '2.0') === '3.0' && methods.size > 0;
+    const isActive = (): boolean => getCompletionMode() === '3.0' && methods.size > 0;
 
     disposables.push(
         vscode.languages.registerCompletionItemProvider(

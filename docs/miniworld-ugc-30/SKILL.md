@@ -11,7 +11,7 @@ description: Mini World UGC 3.0 Lua scripting reference. Use this skill whenever
 - `Trigger` refers to the graphical programming system of `UGC 3.0`.
 - `Cloud Server` refers to the official server allocated to UGC content.
 - MiniUGC's Lua is based on Lua 5.1.
-- For specific interfaces, refer to `MNDeclaration.d.lua` or `MNAiDesc.txt`.
+- For specific interfaces, refer to `MNDeclaration.d.lua` or `references/API.txt`.
 
 ## Script Boilerplate
 

@@ -34,7 +34,7 @@ from common.config import (
     WORKER_UPLOAD_TYPES,
 )
 from common.lua_parser import get_enum_definitions, get_function_names
-from common.merge import merge_lua_files
+from common.merge import get_ordered_files, merge_lua_files
 from common.annotation import strip_annotations
 from common.models import CompareResult, DescResult, MergeResult, Summary, UploadResult
 from common.parsers_20 import (
@@ -94,6 +94,7 @@ def run_func_compare(version: str) -> Optional[CompareResult]:
     all_diff: list[str] = []
     local_count = 0
     web_count = 0
+    common_count = 0
     only_local_count = 0
     only_web_count = 0
 
@@ -133,6 +134,7 @@ def run_func_compare(version: str) -> Optional[CompareResult]:
             local_funcs, web_funcs = _apply_20_skip_filters(module_name, local_funcs, web_funcs)
             diff, stats = compare_funcs(local_funcs, web_funcs, module_name)
             all_diff.extend(diff)
+            common_count += stats.common
             only_local_count += stats.only_local
             only_web_count += stats.only_web
 
@@ -151,14 +153,18 @@ def run_func_compare(version: str) -> Optional[CompareResult]:
 
             diff, stats = compare_funcs(local_funcs, web_funcs, module_name)
             all_diff.extend(diff)
+            common_count += stats.common
             only_local_count += stats.only_local
             only_web_count += stats.only_web
 
+    # 统一为函数级口径：本地 = 共同 + 仅本地，网页 = 共同 + 仅网页
+    local_count = common_count + only_local_count
+    web_count = common_count + only_web_count
     summary = Summary(
         title="函数对比",
         local_count=local_count,
         web_count=web_count,
-        common_count=local_count - only_local_count,
+        common_count=common_count,
         only_local_count=only_local_count,
         only_web_count=only_web_count,
     )
@@ -193,8 +199,6 @@ def run_enum_compare(version: str) -> Optional[CompareResult]:
             web_enums,
             skip_classes=skip_classes,
         )
-        local_set = set(local_enums) - skip_classes
-        web_set = set(web_enums) - skip_classes
     else:
         diff_lines, stats = compare_enums(
             local_enums,
@@ -203,18 +207,17 @@ def run_enum_compare(version: str) -> Optional[CompareResult]:
             skip_local_only_classes={"Mini"},
             skip_fields={"Mini": MINI_FIELDS_30},
         )
-        local_set = set(local_enums) - {"Mini"}
-        web_set = set(web_enums) - {"Mini"}
 
-    common = local_set & web_set
-
+    # 统一为字段级口径：本地 = 共同 + 仅本地，网页 = 共同 + 仅网页
+    only_local = stats.only_local
+    only_web = stats.only_web
     summary = Summary(
         title="枚举对比",
-        local_count=len(local_set),
-        web_count=len(web_set),
-        common_count=len(common),
-        only_local_count=stats.only_local,
-        only_web_count=stats.only_web,
+        local_count=stats.common + only_local,
+        web_count=stats.common + only_web,
+        common_count=stats.common,
+        only_local_count=only_local,
+        only_web_count=only_web,
     )
     return CompareResult(summary=summary, details=diff_lines)
 
@@ -383,11 +386,22 @@ def run_merge(version: str) -> MergeResult:
     if not input_dir.exists():
         return MergeResult(success=False, error=f"文件夹 '{input_dir}' 不存在")
 
-    merge_lua_files(str(input_dir), str(output_file), order)
+    outcome = merge_lua_files(str(input_dir), str(output_file), order)
+
+    if outcome.skipped_files:
+        return MergeResult(
+            success=False,
+            error=f"合并失败：{len(outcome.skipped_files)} 个文件读取失败: "
+                  + ", ".join(outcome.skipped_files),
+            output_file=str(output_file),
+            skipped_files=outcome.skipped_files,
+        )
 
     if output_file.exists() and output_file.stat().st_size > 0:
         return MergeResult(
             success=True,
+            files_merged=len(get_ordered_files(str(input_dir), order)),
+            total_lines=outcome.total_lines,
             output_file=str(output_file),
         )
     else:

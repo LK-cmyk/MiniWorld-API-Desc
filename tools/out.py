@@ -6,6 +6,8 @@ import os
 import logging
 from pathlib import Path
 
+from common.runner import run_desc, run_merge
+
 # 配置日志
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -102,8 +104,26 @@ def addon() -> None:
     logging.info("VSIX 文件已移动到 %s", dest_dir / vsix_name)
 
 
+def build_generated() -> None:
+    """打包前先根据当前声明重新生成 merged 与 API.txt，避免把过期数据打进产物。
+
+    任一版本合并/转换失败即中止，不继续打包。
+    """
+    for version in ("2.0", "3.0"):
+        merge_result = run_merge(version)
+        if not merge_result.success:
+            raise RuntimeError(f"{version} 合并失败: {merge_result.error}")
+        logging.info("%s 声明合并完成 -> %s", version, merge_result.output_file)
+
+        desc_result = run_desc(version)
+        if not desc_result.success:
+            raise RuntimeError(f"{version} 转 AI 描述失败: {desc_result.error}")
+        logging.info("%s API.txt 生成完成 -> %s", version, desc_result.output_file)
+
+
 def main() -> None:
     try:
+        build_generated()
         ai_desc_20()
         ai_desc_30()
         addon()

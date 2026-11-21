@@ -11,6 +11,8 @@
     python tools/main.py compare all
     python tools/main.py merge --version 2.0
     python tools/main.py desc --version 3.0
+    python tools/main.py gen-event-table --version 3.0
+    python tools/main.py verify
     python tools/main.py all
     python tools/main.py list
     python tools/main.py upload --type item --file out/data.json
@@ -31,7 +33,14 @@ from rich.table import Table
 from typer.core import TyperGroup
 
 from common.io_utils import init_stdout, logger
-from common.models import CompareResult, DescResult, MergeResult, UploadResult
+from common.event_table import generate_event_table
+from common.models import (
+    CompareResult,
+    DescResult,
+    MergeResult,
+    UploadResult,
+    VerifyResult,
+)
 from common.runner import (
     COMPARE_TYPES,
     VERSIONS,
@@ -42,6 +51,7 @@ from common.runner import (
     run_merge,
     run_upload,
 )
+from common.verify import verify_generated
 
 _TOOLS_DIR: Path = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
@@ -55,6 +65,8 @@ python tools/main.py compare all
 python tools/main.py compare all --output report.txt
 python tools/main.py merge --version 2.0
 python tools/main.py desc --version 3.0
+python tools/main.py gen-event-table --version 3.0
+python tools/main.py verify
 python tools/main.py all
 python tools/main.py list
 python tools/main.py upload --type item --file out/data.json"""
@@ -248,6 +260,39 @@ def run_desc_cmd(version: str) -> int:
     return 0 if result.success else 1
 
 
+def _format_verify_result(result: VerifyResult) -> None:
+    """格式化输出生成产物校验结果"""
+    for item in result.items:
+        mark = "[green]✓[/]" if item.ok else "[red]✗[/]"
+        console.print(f"{mark} {item.name}: {item.detail}")
+    if result.success:
+        console.print("[green]✓[/] 所有生成产物均为最新")
+    else:
+        console.print(f"[red]✗[/] {len(result.failed)} 项产物已过期，请重新生成后再提交")
+
+
+def run_verify_cmd() -> int:
+    """校验所有生成产物是否与源声明一致"""
+    print_section_header("生成产物一致性校验")
+    result = verify_generated()
+    _format_verify_result(result)
+    return 0 if result.success else 1
+
+
+def run_gen_event_table_cmd(version: str) -> int:
+    """从事件源数据生成 MNEventTable.d.lua"""
+    print_section_header(f"生成 {version} 事件参数表")
+    result = generate_event_table(version)
+    if result.success:
+        console.print(
+            f"[green]✓[/] 已生成: [bold]{result.output_file}[/] "
+            f"({result.event_count} 事件 / {result.field_count} 字段)"
+        )
+        return 0
+    console.print(f"[red]✗[/] 生成失败: {result.error}")
+    return 1
+
+
 def run_upload_cmd(
     kind: str,
     file: str,
@@ -285,6 +330,11 @@ def run_list() -> None:
 
     for ver in VERSIONS:
         table.add_row("转换", f"desc --version {ver}", f"{ver} 转 AI 描述文件")
+    table.add_row("", "", "")
+
+    for ver in VERSIONS:
+        table.add_row("事件表", f"gen-event-table --version {ver}", f"从事件源数据生成 {ver} MNEventTable.d.lua")
+    table.add_row("校验", "verify", "校验所有生成产物是否与源声明一致")
     table.add_row("", "", "")
 
     table.add_row("批量", "all", "批量运行所有对比")
@@ -398,6 +448,26 @@ def all_cmd(
 ) -> None:
     """批量运行所有版本的差异对比"""
     raise typer.Exit(run_all(output))
+
+
+@app.command("gen-event-table")
+def gen_event_table_cmd(
+    version: str = typer.Option(
+        ...,
+        "--version",
+        "-v",
+        help="API 版本（2.0/3.0）",
+    ),
+) -> None:
+    """从事件源数据生成 MNEventTable.d.lua"""
+    validate_choice(version, VERSIONS, "版本")
+    raise typer.Exit(run_gen_event_table_cmd(version))
+
+
+@app.command()
+def verify() -> None:
+    """校验所有生成产物是否与源声明一致（漂移检测）"""
+    raise typer.Exit(run_verify_cmd())
 
 
 @app.command()

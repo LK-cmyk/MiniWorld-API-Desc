@@ -20,6 +20,7 @@ class DiffStats:
 
     only_local: int = 0
     only_web: int = 0
+    common: int = 0
 
 
 def _fmt_set(items: list[str]) -> str:
@@ -74,6 +75,7 @@ def compare_funcs(local_funcs: set[str], web_funcs: set[str], module_name: str) 
     only_web: list[str] = sorted(web_funcs - local_funcs)
     stats.only_local = len(only_local)
     stats.only_web = len(only_web)
+    stats.common = len(local_funcs & web_funcs)
 
     if not only_local and not only_web:
         diff_lines.append(f"[{module_name}]  ✓ 完全一致")
@@ -141,6 +143,7 @@ def compare_enums(
         only_web: list[str] = sorted(web_fields - local_fields)
         stats.only_local += len(only_local)
         stats.only_web += len(only_web)
+        stats.common += len(local_fields & web_fields)
 
         if not only_local and not only_web:
             continue

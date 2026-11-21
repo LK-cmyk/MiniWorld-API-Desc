@@ -1530,192 +1530,192 @@ local Actor = {}
 _G.Actor = Actor
 
 --- 检测是否为玩家
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:isPlayer(objid) return 0 end
+function Actor:isPlayer(objId) return 0 end
 
 --- 检测是否为怪物
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:isMob(objid) return 0 end
+function Actor:isMob(objId) return 0 end
 
 --- 获取对象类型
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和对象类型
-function Actor:getObjType(objid) return 0, 0 end
+function Actor:getObjType(objId) return 0, 0 end
 
 --- 是否在空中
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:isInAir(objid) return 0 end
+function Actor:isInAir(objId) return 0 end
 
 --- 获取actor位置
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number, number, number 成功返回 ErrorCode.OK 和 x,y,z 坐标
-function Actor:getPosition(objid) return 0, 0, 0, 0 end
+function Actor:getPosition(objId) return 0, 0, 0, 0 end
 
 --- 设置actor位置
---- objid number 对象ID
+--- objId number 对象ID
 --- x number 目标X坐标
 --- y number 目标Y坐标
 --- z number 目标Z坐标
 --- number 成功返回 ErrorCode.OK
-function Actor:setPosition(objid, x, y, z) return 0 end
+function Actor:setPosition(objId, x, y, z) return 0 end
 
 --- 跳跃
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:jump(objid) return 0 end
+function Actor:jump(objId) return 0 end
 
---- 杀死自己
---- objid number 对象ID
+--- 击败对象
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:killSelf(objid) return 0 end
+function Actor:killSelf(objId) return 0 end
 
 --- 获取当前朝向
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和朝向值
-function Actor:getCurPlaceDir(objid) return 0, 0 end
+function Actor:getCurPlaceDir(objId) return 0, 0 end
 
 --- 向目标行动者移动
---- self_objid number 执行动作的对象ID
---- target_objid number 目标对象ID
+--- self_objId number 执行动作的对象ID
+--- target_objId number 目标对象ID
 --- speed number 移动速度
 --- number 成功返回 ErrorCode.OK
-function Actor:tryMoveToActor(self_objid, target_objid, speed) return 0 end
+function Actor:tryMoveToActor(self_objId, target_objId, speed) return 0 end
 
 --- 向目标位置移动
---- objid number 对象ID
+--- objId number 对象ID
 --- x number 目标X坐标
 --- y number 目标Y坐标
 --- z number 目标Z坐标
 --- speed number 移动速度
 --- number 成功返回 ErrorCode.OK
-function Actor:tryMoveToPos(objid, x, y, z, speed) return 0 end
+function Actor:tryMoveToPos(objId, x, y, z, speed) return 0 end
 
 --- 增加当前生命量
---- objid number 对象ID
+--- objId number 对象ID
 --- hp number 血量值
 --- number 成功返回 ErrorCode.OK
-function Actor:addHP(objid, hp) return 0 end
+function Actor:addHP(objId, hp) return 0 end
 
 --- 获取当前生命量
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和生命值
-function Actor:getHP(objid) return 0, 0 end
+function Actor:getHP(objId) return 0, 0 end
 
 --- 获取最大生命量
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和最大生命值
-function Actor:getMaxHP(objid) return 0, 0 end
+function Actor:getMaxHP(objId) return 0, 0 end
 
 --- 增加当前氧气值
---- objid number 对象ID
+--- objId number 对象ID
 --- oxygen number 氧气值
 --- number 成功返回 ErrorCode.OK
-function Actor:addOxygen(objid, oxygen) return 0 end
+function Actor:addOxygen(objId, oxygen) return 0 end
 
 --- 获取当前氧气值
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和氧气值
-function Actor:getOxygen(objid) return 0, 0 end
+function Actor:getOxygen(objId) return 0, 0 end
 
 --- 增加装备附魔
---- objid number 对象ID
+--- objId number 对象ID
 --- slot number 装备栏ID
 --- enchantId number 附魔ID
 --- enchantLevel number 附魔等级
 --- number 成功返回 ErrorCode.OK
-function Actor:addEnchant(objid, slot, enchantId, enchantLevel) return 0 end
+function Actor:addEnchant(objId, slot, enchantId, enchantLevel) return 0 end
 
 --- 移除装备附魔
---- objid number 对象ID
+--- objId number 对象ID
 --- slot number 装备栏ID
 --- enchantId number 附魔ID
 --- number 成功返回 ErrorCode.OK
-function Actor:removeEnchant(objid, slot, enchantId) return 0 end
+function Actor:removeEnchant(objId, slot, enchantId) return 0 end
 
 --- 寻找附近方块
---- objid number 对象ID
---- blockid number 方块ID
+--- objId number 对象ID
+--- blockId number 方块ID
 --- blockRange number 搜索范围
---- number, number, number, number 成功返回 ErrorCode.OK 和 x,y,z 坐标
-function Actor:findNearestBlock(objid, blockid, blockRange) return 0, 0, 0, 0 end
+--- number, number, number, number 成功返回 ErrorCode.OK & x,y,z 坐标
+function Actor:findNearestBlock(objId, blockId, blockRange) return 0, 0, 0, 0 end
 
 --- 设置actor原地旋转偏移角度
---- objid number 对象ID
+--- objId number 对象ID
 --- yaw number 偏移角度
 --- number 成功返回 ErrorCode.OK
-function Actor:setFaceYaw(objid, yaw) return 0 end
+function Actor:setFaceYaw(objId, yaw) return 0 end
 
 --- 获取actor原地旋转偏移角度
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和偏移角度
-function Actor:getFaceYaw(objid) return 0, 0 end
+function Actor:getFaceYaw(objId) return 0, 0 end
 
 --- 转动actor横向偏移角度
---- objid number 对象ID
+--- objId number 对象ID
 --- offset number 转动角度
 --- number 成功返回 ErrorCode.OK
-function Actor:turnFaceYaw(objid, offset) return 0 end
+function Actor:turnFaceYaw(objId, offset) return 0 end
 
 --- 设置actor视角仰望角度
---- objid number 对象ID
+--- objId number 对象ID
 --- pitch number 仰望角度
 --- number 成功返回 ErrorCode.OK
-function Actor:setFacePitch(objid, pitch) return 0 end
+function Actor:setFacePitch(objId, pitch) return 0 end
 
 --- 获取actor视角仰望角度
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和仰望角度
-function Actor:getFacePitch(objid) return 0, 0 end
+function Actor:getFacePitch(objId) return 0, 0 end
 
 --- 转动actor仰望偏移角度
---- objid number 对象ID
+--- objId number 对象ID
 --- offset number 转动角度
 --- number 成功返回 ErrorCode.OK
-function Actor:turnFacePitch(objid, offset) return 0 end
+function Actor:turnFacePitch(objId, offset) return 0 end
 
 --- 对象播放特效
---- objid number 对象ID
+--- objId number 对象ID
 --- type number 特效类型
 --- number 成功返回 ErrorCode.OK
-function Actor:playBodyEffect(objid, type) return 0 end
+function Actor:playBodyEffect(objId, type) return 0 end
 
 --- 对象停止特效
---- objid number 对象ID
+--- objId number 对象ID
 --- type number 特效类型
 --- number 成功返回 ErrorCode.OK
-function Actor:stopBodyEffect(objid, type) return 0 end
+function Actor:stopBodyEffect(objId, type) return 0 end
 
 --- 播放文件特效
---- objid number 对象ID
+--- objId number 对象ID
 --- filename string 文件名
 --- sync boolean 同步
 --- number 成功返回 ErrorCode.OK
-function Actor:playBodyEffectByFile(objid, filename, sync) return 0 end
+function Actor:playBodyEffectByFile(objId, filename, sync) return 0 end
 
 --- 停止文件特效
---- objid number 对象ID
+--- objId number 对象ID
 --- filename string 文件名
 --- number 成功返回 ErrorCode.OK
-function Actor:stopBodyEffectByFile(objid, filename) return 0 end
+function Actor:stopBodyEffectByFile(objId, filename) return 0 end
 
 --- 播放声音
---- objid number 对象ID
+--- objId number 对象ID
 --- name string 声音名称
 --- volume number 音量
 --- pitch number 音调
 --- flag number 参数
 --- number 成功返回 ErrorCode.OK
-function Actor:playSound(objid, name, volume, pitch, flag) return 0 end
+function Actor:playSound(objId, name, volume, pitch, flag) return 0 end
 
 --- 播放声音(特定类型)
---- objid number 对象ID
+--- objId number 对象ID
 --- name string 声音名称
 --- type number 指定类型
 --- number 成功返回 ErrorCode.OK
-function Actor:playSoundSpecial(objid, name, type) return 0 end
+function Actor:playSoundSpecial(objId, name, type) return 0 end
 
 --- 清除生物ID为actorid的生物
 --- actorid number 生物ID
@@ -1724,284 +1724,296 @@ function Actor:playSoundSpecial(objid, name, type) return 0 end
 function Actor:clearActorWithId(actorid, bkill) return 0 end
 
 --- 设置伤害类型
---- objid number 对象ID
+--- objId number 对象ID
 --- attacktype number 伤害类型
 --- number 成功返回 ErrorCode.OK
-function Actor:setAttackType(objid, attacktype) return 0 end
+function Actor:setAttackType(objId, attacktype) return 0 end
 
 --- 设置免疫伤害类型
---- objid number 对象ID
+--- objId number 对象ID
 --- immunetype number 伤害类型
 --- isadd boolean 是否开启
 --- number 成功返回 ErrorCode.OK
-function Actor:setImmuneType(objid, immunetype, isadd) return 0 end
+function Actor:setImmuneType(objId, immunetype, isadd) return 0 end
 
 --- 登上、脱离载具
---- objid number 对象ID
---- mountobjid number 被骑乘对象ID
+--- objId number 对象ID
+--- mountobjId number 被骑乘对象ID
 --- posindex number 骑乘位
 --- number 成功返回 ErrorCode.OK
-function Actor:mountActor(objid, mountobjid, posindex) return 0 end
+function Actor:mountActor(objId, mountobjId, posindex) return 0 end
 
 --- 设置生物行为属性状态
---- objid number 对象ID
+--- objId number 对象ID
 --- actionattr number 属性类型
 --- switch boolean 是否开启
 --- number 成功返回 ErrorCode.OK
-function Actor:setActionAttrState(objid, actionattr, switch) return 0 end
+function Actor:setActionAttrState(objId, actionattr, switch) return 0 end
 
 --- 获取生物特殊属性的状态
---- objid number 对象ID
+--- objId number 对象ID
 --- actionattr number 属性类型
 --- number, boolean 成功返回 ErrorCode.OK 和状态
-function Actor:getActionAttrState(objid, actionattr) return 0, false end
+function Actor:getActionAttrState(objId, actionattr) return 0, false end
 
 --- 寻路到目标位置
---- objid number 对象ID
+--- objId number 对象ID
 --- x number 目标X坐标
 --- y number 目标Y坐标
 --- z number 目标Z坐标
 --- cancontrol boolean 是否可控制
 --- showtip boolean 是否显示路线提示
 --- number 成功返回 ErrorCode.OK
-function Actor:tryNavigationToPos(objid, x, y, z, cancontrol, showtip) return 0 end
+function Actor:tryNavigationToPos(objId, x, y, z, cancontrol, showtip) return 0 end
 
 --- 在资源库里随机创建一个生物
 --- number, number 成功返回 ErrorCode.OK 和生物ID
 function Actor:randomActorID() return 0, 0 end
 
 --- 获取骑乘生物的objid
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和骑乘对象ID
-function Actor:getRidingActorObjId(objid) return 0, 0 end
+function Actor:getRidingActorObjId(objId) return 0, 0 end
 
 --- 在指定对象身上播放粒子特效
---- objid number 对象ID
+--- objId number 对象ID
 --- particleId number 特效ID
 --- scale number 特效大小
 --- ptme number 时长(秒)
 --- number 成功返回 ErrorCode.OK
-function Actor:playBodyEffectById(objid, particleId, scale, ptme) return 0 end
+function Actor:playBodyEffectById(objId, particleId, scale, ptme) return 0 end
 
 --- 停止指定对象身上的粒子特效
---- objid number 对象ID
+--- objId number 对象ID
 --- particleId number 特效ID
 --- number 成功返回 ErrorCode.OK
-function Actor:stopBodyEffectById(objid, particleId) return 0 end
+function Actor:stopBodyEffectById(objId, particleId) return 0 end
 
 --- 设置指定对象身上的特效大小
---- objid number 对象ID
+--- objId number 对象ID
 --- particleId number 特效ID
 --- scale number 特效大小
 --- number 成功返回 ErrorCode.OK
-function Actor:setBodyEffectScale(objid, particleId, scale) return 0 end
+function Actor:setBodyEffectScale(objId, particleId, scale) return 0 end
 
 --- 在指定对象身上播放音效
---- objid number 对象ID
+--- objId number 对象ID
 --- soundId number 音效ID
 --- volume number 音量
 --- pitch number 音调
 --- isLoop boolean 是否循环播放
 --- number 成功返回 ErrorCode.OK
-function Actor:playSoundEffectById(objid, soundId, volume, pitch, isLoop) return 0 end
+function Actor:playSoundEffectById(objId, soundId, volume, pitch, isLoop) return 0 end
 
 --- 停止指定对象身上的音效
---- objid number 对象ID
+--- objId number 对象ID
 --- soundId number 音效ID
 --- number 成功返回 ErrorCode.OK
-function Actor:stopSoundEffectById(objid, soundId) return 0 end
+function Actor:stopSoundEffectById(objId, soundId) return 0 end
 
 --- 给对象附加一个速度
---- objid number 对象ID
+--- objId number 对象ID
 --- x number X方向速度
 --- y number Y方向速度
 --- z number Z方向速度
 --- number 成功返回 ErrorCode.OK
-function Actor:appendSpeed(objid, x, y, z) return 0 end
+function Actor:appendSpeed(objId, x, y, z) return 0 end
 
 --- 获取actor朝向
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number, number, number 成功返回 ErrorCode.OK 和方向值
-function Actor:getFaceDirection(objid) return 0, 0, 0, 0 end
+function Actor:getFaceDirection(objId) return 0, 0, 0, 0 end
 
 --- 通过局部坐标方向计算绝对方向
---- objid number 对象ID
+--- objId number 对象ID
 --- vx number 局部X方向
 --- vy number 局部Y方向
 --- vz number 局部Z方向
 --- number, table 成功返回 ErrorCode.OK 和方向表
-function Actor:calcDirectionByDirection(objid, vx, vy, vz) return 0, {} end
+function Actor:calcDirectionByDirection(objId, vx, vy, vz) return 0, {} end
 
 --- 通过局部球坐标方向计算绝对方向
---- objid number 对象ID
+--- objId number 对象ID
 --- yaw number 局部水平偏移
 --- pitch number 局部垂直偏移
 --- number, table 成功返回 ErrorCode.OK 和方向表
-function Actor:calcDirectionByAngle(objid, yaw, pitch) return 0, {} end
+function Actor:calcDirectionByAngle(objId, yaw, pitch) return 0, {} end
 
 --- 通过局部坐标方向计算绝对正方向
---- objid number 对象ID
+--- objId number 对象ID
 --- vx number 局部X方向
 --- vy number 局部Y方向
 --- vz number 局部Z方向
 --- number, table 成功返回 ErrorCode.OK 和方向表
-function Actor:calcDirectionByYawDirection(objid, vx, vy, vz) return 0, {} end
+function Actor:calcDirectionByYawDirection(objId, vx, vy, vz) return 0, {} end
 
 --- 通过局部球坐标方向计算绝对正方向
---- objid number 对象ID
+--- objId number 对象ID
 --- yaw number 局部水平偏移
 --- pitch number 局部垂直偏移
 --- number, table 成功返回 ErrorCode.OK 和方向表
-function Actor:calcDirectionByYawAngle(objid, yaw, pitch) return 0, {} end
+function Actor:calcDirectionByYawAngle(objId, yaw, pitch) return 0, {} end
 
 --- 获取眼睛高度
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number 成功返回 ErrorCode.OK 和高度
-function Actor:getEyeHeight(objid) return 0, 0 end
+function Actor:getEyeHeight(objId) return 0, 0 end
 
 --- 获取眼睛位置
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number, number, number 成功返回 ErrorCode.OK 和 x,y,z 坐标
-function Actor:getEyePosition(objid) return 0, 0, 0, 0 end
+function Actor:getEyePosition(objId) return 0, 0, 0, 0 end
 
 --- 获取身体尺寸
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number, number 成功返回 ErrorCode.OK 和宽、高
-function Actor:getBodySize(objid) return 0, 0, 0 end
+function Actor:getBodySize(objId) return 0, 0, 0 end
 
 --- 播放动作
---- objid number 对象ID
+--- objId number 对象ID
 --- actid number 动作ID
 --- number 成功返回 ErrorCode.OK
-function Actor:playAct(objid, actid) return 0 end
+function Actor:playAct(objId, actid) return 0 end
 
 --- 设置昵称显示
---- objid number 对象ID
+--- objId number 对象ID
 --- bshow boolean 是否显示
 --- number 成功返回 ErrorCode.OK
-function Actor:shownickname(objid, bshow) return 0 end
+function Actor:shownickname(objId, bshow) return 0 end
 
 --- 设置昵称
---- objid number 对象ID
+--- objId number 对象ID
 --- nickname string 名称
 --- number 成功返回 ErrorCode.OK
-function Actor:setnickname(objid, nickname) return 0 end
+function Actor:setnickname(objId, nickname) return 0 end
 
 --- 获取Actor的外观
---- objid number 对象ID
+--- objId number 对象ID
 --- number, string 成功返回 ErrorCode.OK 和外观名称
-function Actor:getActorFacade(objid) return 0, "" end
+function Actor:getActorFacade(objId) return 0, "" end
 
 --- 改变Actor外观
---- objid number 对象ID
+--- objId number 对象ID
 --- modelName string 外观名称
 --- number 成功返回 ErrorCode.OK
-function Actor:changeCustomModel(objid, modelName) return 0 end
+function Actor:changeCustomModel(objId, modelName) return 0 end
 
 --- 恢复生物外观
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:recoverinitialModel(objid) return 0 end
+function Actor:recoverinitialModel(objId) return 0 end
 
 --- 增加指定BUFF
---- objid number 对象ID
+--- objId number 对象ID
 --- buffid number BUFF ID
 --- bufflv number BUFF 等级
 --- customticks number 持续时间
 --- number 成功返回 ErrorCode.OK
-function Actor:addBuff(objid, buffid, bufflv, customticks) return 0 end
+function Actor:addBuff(objId, buffid, bufflv, customticks) return 0 end
 
 --- 是否已经有了指定BUFF
---- objid number 对象ID
+--- objId number 对象ID
 --- buffid number BUFF ID
 --- number, boolean 成功返回 ErrorCode.OK 和布尔值
-function Actor:hasBuff(objid, buffid) return 0, false end
+function Actor:hasBuff(objId, buffid) return 0, false end
 
 --- 移除指定BUFF
---- objid number 对象ID
+--- objId number 对象ID
 --- buffid number BUFF ID
 --- number 成功返回 ErrorCode.OK
-function Actor:removeBuff(objid, buffid) return 0 end
+function Actor:removeBuff(objId, buffid) return 0 end
 
 --- 清除全部BUFF
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:clearAllBuff(objid) return 0 end
+function Actor:clearAllBuff(objId) return 0 end
 
 --- 清除全部减益BUFF
---- objid number 对象ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK
-function Actor:clearAllBadBuff(objid) return 0 end
+function Actor:clearAllBadBuff(objId) return 0 end
 
 --- 获取已有BUFF
---- objid number 对象ID
+--- objId number 对象ID
 --- number, number, table 成功返回 ErrorCode.OK、BUFF 数量、BUFF ID 数组
-function Actor:getBuffList(objid) return 0, 0, {} end
+function Actor:getBuffList(objId) return 0, 0, {} end
 
 --- 获取BUFF剩余tick
---- objid number 对象ID
+--- objId number 对象ID
 --- buffid number BUFF ID
 --- number, number 成功返回 ErrorCode.OK 和剩余 tick
-function Actor:getBuffLeftTick(objid, buffid) return 0, 0 end
+function Actor:getBuffLeftTick(objId, buffid) return 0, 0 end
 
 --- 获取随机外观id字符串
 --- number, string 成功返回 ErrorCode.OK 和外观ID
 function Actor:randomFacadeID() return 0, "" end
 
 --- 使玩家对生物或玩家造成伤害
---- objidA number 攻击者对象ID
---- objidB number 被攻击者对象ID
+--- objIdA number 攻击者对象ID
+--- objIdB number 被攻击者对象ID
 --- hp number 伤害数值
 --- attackType number 伤害类型
 --- number 成功返回 ErrorCode.OK
-function Actor:playerHurt(objidA, objidB, hp, attackType) return 0 end
+function Actor:playerHurt(objIdA, objIdB, hp, attackType) return 0 end
 
 --- 使玩家伤害区域内的目标
---- objidA number 攻击者对象ID
+--- objIdA number 攻击者对象ID
 --- areaid number 区域ID
 --- hp number 伤害数值
 --- attackType number 伤害类型
 --- number 成功返回 ErrorCode.OK
-function Actor:playerHurtArea(objidA, areaid, hp, attackType) return 0 end
+function Actor:playerHurtArea(objIdA, areaid, hp, attackType) return 0 end
 
 --- 使生物对生物或玩家造成伤害
---- objidA number 攻击者对象ID
---- objidB number 被攻击者对象ID
+--- objIdA number 攻击者对象ID
+--- objIdB number 被攻击者对象ID
 --- hp number 伤害数值
 --- attackType number 伤害类型
 --- number 成功返回 ErrorCode.OK
-function Actor:actorHurt(objidA, objidB, hp, attackType) return 0 end
+function Actor:actorHurt(objIdA, objIdB, hp, attackType) return 0 end
 
 --- 使生物伤害区域内的目标
---- objidA number 攻击者对象ID
+--- objIdA number 攻击者对象ID
 --- areaid number 区域ID
 --- hp number 伤害数值
 --- attackType number 伤害类型
 --- number 成功返回 ErrorCode.OK
-function Actor:actorHurtArea(objidA, areaid, hp, attackType) return 0 end
+function Actor:actorHurtArea(objIdA, areaid, hp, attackType) return 0 end
 
 --- 获取actor位置
---- objid number 对象ID
+--- objId number 对象ID
 --- number, table 成功返回 ErrorCode.OK 和坐标表
-function Actor:getPositionV2(objid) return 0, {} end
+function Actor:getPositionV2(objId) return 0, {} end
 
 --- 设置对象朝向
---- objid number 对象ID
+--- objId number 对象ID
 --- x number X方向
 --- y number Y方向
 --- z number Z方向
 --- number 成功返回 ErrorCode.OK
-function Actor:setFaceDirection(objid, x, y, z) return 0 end
+function Actor:setFaceDirection(objId, x, y, z) return 0 end
 
 --- 改变对象为指定玩家ID的皮肤外观
---- objid number 对象ID
+--- objId number 对象ID
 --- uin number 玩家Uin
 --- number 成功返回 ErrorCode.OK
-function Actor:ChangePlayerSkin(objid, uin) return 0 end
+function Actor:ChangePlayerSkin(objId, uin) return 0 end
 --- Player
 --- 玩家模块管理接口 Player
 local Player = {}
 _G.Player = Player
+
+--- 打开一个UI界面
+--- objid number 玩家ID
+--- uiname string 自定义界面的UIID
+--- number 成功返回 ErrorCode.OK
+function Player:openUIView(objid, uiname) return 0 end
+
+--- 隐藏一个UI界面
+--- objid number 玩家ID
+--- uiname string 自定义界面的UIID
+--- number 成功返回 ErrorCode.OK
+function Player:hideUIView(objid, uiname) return 0 end
 
 --- 玩家属性获取
 --- objid number 玩家ID
@@ -2812,274 +2824,216 @@ function Item:playAct(objid, animid, playmode) return 0 end
 local Backpack = {}
 _G.Backpack = Backpack
 
+--- 获取道具背包栏ID范围 (起始ID~结束ID)
+--- barType number 背包类型枚举 (1快捷栏 2储存栏 3装备栏)
+--- number, number, number 状态码, 起始ID, 结束ID
+function Backpack:getBackpackBarIDRange(barType) return 0, 0, 0 end
+
+--- 获取道具背包栏大小
+--- barType number 背包类型枚举 (1快捷栏 2储存栏 3装备栏)
+--- number, number 状态码, 背包栏大小
+function Backpack:getBackpackBarSize(barType) return 0, 0 end
+
 --- 设置背包格道具
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- gridid number 格子ID
---- itemid number|string 道具类型
+--- itemId number 道具类型
 --- num number 道具数量(默认1)
 --- boolean 是否成功
-function Backpack:SetGridItem(playerid, gridid, itemid, num) return true end
+function Backpack:setGridItem(playerId, gridid, itemId, num) return true end
 
 --- 移除背包格内一定数量道具
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- gridid number 格子ID
 --- num number 道具数量(默认全部移除)
 --- boolean 是否成功
-function Backpack:RemoveGridItem(playerid, gridid, num) return true end
+function Backpack:removeGridItem(playerId, gridid, num) return true end
 
 --- 移除背包内一定数量道具,通过道具ID移除,默认全部移除
---- playerid number 玩家ID
---- itemid number|string 道具类型
+--- playerId number 玩家ID
+--- itemId number 道具类型
 --- num number 道具数量
 --- number 移除数量(ret and ret>0 成功)
-function Backpack:RemoveGridItemByItemID(playerid, itemid, num) return 0 end
+function Backpack:removeGridItemByItemID(playerId, itemId, num) return 0 end
 
 --- 清空指定背包栏
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- bartype number 背包栏类型
 --- boolean 是否成功
-function Backpack:ClearPack(playerid, bartype) return true end
+function Backpack:clearPack(playerId, bartype) return true end
 
 --- 清空全部背包(包含背包栏、快捷栏、装备栏)
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- boolean 是否成功
-function Backpack:ClearAllPack(playerid) return true end
+function Backpack:clearAllPack(playerId) return true end
 
 --- 移动背包道具,默认全部转移
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- gridsrc number 源格子ID
 --- griddst number 移动至的目标格子ID
 --- num number 道具数量(默认全部)
 --- boolean 是否成功
-function Backpack:MoveGridItem(playerid, gridsrc, griddst, num) return true end
+function Backpack:moveGridItem(playerId, gridsrc, griddst, num) return true end
 
 --- 交换背包道具
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- grid1 number 格子1 ID
 --- grid2 number 格子2 ID
 --- boolean 是否成功
-function Backpack:SwapGridItem(playerid, grid1, grid2) return true end
+function Backpack:swapGridItem(playerId, grid1, grid2) return true end
 
 --- 背包(包含背包栏、快捷栏)是否有足够的空间存放一定数量的道具
---- playerid number 玩家ID
---- itemid number|string 道具类型
+--- playerId number 玩家ID
+--- itemId number 道具类型
 --- num number 道具数量(默认1)
 --- boolean 是否成功
-function Backpack:EnoughSpaceForItem(playerid, itemid, num) return true end
+function Backpack:enoughSpaceForItem(playerId, itemId, num) return true end
 
 --- 计算背包(包含背包栏、快捷栏)能存放的道具剩余总数量
---- playerid number 玩家ID
---- itemid number|string 道具类型
+--- playerId number 玩家ID
+--- itemId number 道具类型
 --- number 可以存放的数量
-function Backpack:CalcSpaceNumForItem(playerid, itemid) return 0 end
+function Backpack:calcSpaceNumForItem(playerId, itemId) return 0 end
+
+--- 获取道具背包栏有效格ID列表(道具已存在)，背包格ID数组
+--- playerId number 玩家ID
+--- barType number 背包栏类型
+--- number, number, number 状态码, 数量, 背包格ID数组
+function Backpack:getBackpackBarValidList(playerId, barType) return 0, 0, 0 end
+
+--- 获取道具背包栏已拥有道具，道具ID数组
+--- playerId number 玩家ID
+--- barType number 背包栏类型
+--- number, number, number 状态码, 数量, 背包格ID数组
+function Backpack:getBackpackBarItemList(playerId, barType) return 0, 0, 0 end
 
 --- 检测背包是否持有某个道具
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- bartype number 背包栏类型
---- itemid number|string 道具类型
+--- itemId number 道具类型
 --- boolean 是否成功
-function Backpack:HasItemByBackpackBar(playerid, bartype, itemid) return true end
+function Backpack:hasItemByBackpackBar(playerId, bartype, itemId) return true end
 
 --- 获取背包持有某个道具总数量,同时返回装有道具的背包格数组
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- bartype number 背包栏类型
---- itemid number|string 道具类型
+--- itemId number 道具类型
 --- number,table 道具数量,格子ID数组
-function Backpack:GetItemNumByBackpackBar(playerid, bartype, itemid) return 0, {} end
+function Backpack:getItemNumByBackpackBar(playerId, bartype, itemId) return 0, {} end
 
---- 获取背包持有某个道具总数量,同时返回装有道具的背包格数组
---- playerid number 玩家ID
---- itemid number|string 道具类型
---- isAddEquip boolean 是否添加装备栏(默认True)
---- number,table 道具数量,格子ID数组
-function Backpack:GetItemNum(playerid, itemid, isAddEquip) return 0, {} end
-
---- 获取背包格道具ID(返回itemid, num)
---- playerid number 玩家ID
+--- 获取背包格道具ID(返回itemId, num)
+--- playerId number 玩家ID
 --- gridid number 格子ID
 --- number,number 道具类型,道具数量(无道具 数量是0 itemid是0)
-function Backpack:GetGridItemID(playerid, gridid) return 0, 0 end
+function Backpack:getGridItemID(playerId, gridid) return 0, 0 end
 
 --- 获取背包格道具名称
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- gridid number 格子ID
 --- string 道具名称
-function Backpack:GetGridItemName(playerid, gridid) return "" end
+function Backpack:getGridItemName(playerId, gridid) return "" end
 
 --- 添加道具到背包
---- playerid number 玩家ID
---- itemid number|string 道具类型
+--- playerId number 玩家ID
+--- itemId number 道具类型
 --- num number 道具数量
---- prioritytype number 优先快捷栏还是背包栏:1优先快捷栏 2优先背包栏(默认1)
+--- priorityType number 优先快捷栏还是背包栏:1优先快捷栏 2优先背包栏(默认1)
 --- number 成功添加的数量
-function Backpack:AddItem(playerid, itemid, num, prioritytype) return 0 end
+function Backpack:addItem(playerId, itemId, num, priorityType) return 0 end
 
 --- 丢弃背包某个格子里的道具
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- gridid number 格子ID
 --- num number 道具数量
 --- ablePick boolean 能否拾取
 --- boolean 是否成功
-function Backpack:DiscardItem(playerid, gridid, num, ablePick) return true end
-
---- 丢弃背包某个格子里的道具
---- playerid number 玩家ID
---- itemid number|string 道具ID
---- boolean 是否成功
-function Backpack:DiscardItemByID(playerid, itemid) return true end
+function Backpack:discardItem(playerId, gridid, num, ablePick) return true end
 
 --- 玩家穿上装备
---- playerid number 玩家ID
---- itemid number|string 道具类型
---- frompos number 格子ID(可不传,如果不为nil 则必须和itemid一致)
+--- playerId number 玩家ID
+--- itemId number 道具类型
+--- frompos number 格子ID (可不传, 如果不为`nil` 则必须和`itemId`一致)
 --- boolean 是否成功
-function Backpack:ActEquipUpByResID(playerid, itemid, frompos) return true end
+function Backpack:actEquipUpByResID(playerId, itemId, frompos) return true end
 
 --- 玩家脱下装备栏装备
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- grid number 装备栏ID
---- grid2 number 目标格子ID(可不传,如果不为nil 则必须是空格子)
+--- grid2 number 目标格子ID (可不传,如果不为`nil` 则必须是空格子)
 --- boolean 是否成功
-function Backpack:ActEquipOffByEquipID(playerid, grid, grid2) return true end
+function Backpack:actEquipOffByEquipID(playerId, grid, grid2) return true end
 
 --- 销毁装备
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- grid number 装备栏ID
 --- boolean 是否成功
-function Backpack:ActDestructEquip(playerid, grid) return true end
+function Backpack:actDestructEquip(playerId, grid) return true end
 
---- 创建道具到玩家背包
---- playerid number 玩家ID
---- itemid number 道具类型
---- num number 道具数量
---- ipos number 优先存放的位置
---- any 操作结果
-function Backpack:CreateItem(playerid, itemid, num, ipos) return nil end
+--- 设置快捷栏指定道具上播放特效
+--- objid number 玩家ID
+--- itemId number 道具类型
+--- effectId number 特效ID
+--- scale number 特效缩放
+--- number 状态码
+function Backpack:PlayShortCutItemEffect(objid, itemId, effectId, scale) return 0 end
 
---- 在手持道具上播放特效
---- playerid number 玩家ID
---- effectid number 特效ID
---- offset table 偏移量
---- rot table 旋转
---- scale table 缩放
---- boolean 是否成功
-function Backpack:PlayShortCutIxParticle(playerid, effectid, offset, rot, scale) return true end
+--- 设置手持栏道具上播放特效
+--- objid number 玩家ID
+--- effectId number 特效ID
+--- scale number 特效缩放
+--- number 状态码
+function Backpack:PlayShortCutIxEffect(objid, effectId, scale) return 0 end
 
---- 停止手持道具上播放特效
---- playerid number 玩家ID
---- effectid number 特效ID
---- boolean 是否成功
-function Backpack:StopShortCutIxEffect(playerid, effectid) return true end
+--- 停止快捷栏指定道具上播放特效
+--- objid number 玩家ID
+--- itemId number 道具类型
+--- effectId number 特效ID
+--- number 状态码
+function Backpack:StopShortCutItemEffect(objid, itemId, effectId) return 0 end
 
---- 设置玩家快捷栏上某种类型道具手持特效
---- playerid number 玩家ID
---- itemid number 道具类型
---- effectid number 特效ID
---- boolean 是否成功
-function Backpack:PlayShortCutItemParticle(playerid, itemid, effectid) return true end
+--- 停止手持栏道具上播放特效
+--- objid number 玩家ID
+--- effectId number 特效ID
+--- number 状态码
+function Backpack:StopShortCutIxEffect(objid, effectId) return 0 end
 
---- 删除玩家快捷栏上某种类型道具手持特效
---- playerid number 玩家ID
---- itemid number 道具类型
---- effectid number 特效ID
---- boolean 是否成功
-function Backpack:StopShortCutItemEffect(playerid, itemid, effectid) return true end
+--- 创建装备
+--- objid number 玩家ID
+--- resId number 装备ID
+--- number 状态码
+function Backpack:actCreateEquip(objid, resId) return 0 end
 
---- 批量获取背包和快捷栏格子信息数据
---- playerid number 玩家ID
---- begingridId number 开始格子id
---- endgridId number 结束格子id
---- any 格子信息数据
-function Backpack:GetGridInfos(playerid, begingridId, endgridId) return nil end
+--- 获取背包格道具耐久度 (返回`durcur`, `durmax`)
+--- `0`为储存栏的第1格，`0`-`29`储存栏，`1000`-`1007`快捷栏，`8000`-`8004`装备栏
+--- playerId number 玩家ID
+--- gridId number 格子ID
+--- number, number, number 状态码, 当前耐久度, 最大耐久度
+function Backpack:getGridDurability(playerId, gridId) return 0, 0, 0 end
 
---- 加载背包和快捷栏格子信息数据
---- playerid number 玩家ID
---- gridinfo string 格子信息
---- boolean 是否成功
-function Backpack:LoadGridInfos(playerid, gridinfo) return true end
+--- 获取背包格道具附魔，返回附魔ID数组
+--- playerId number 玩家ID
+--- gridId number 格子ID
+--- number, number, table 状态码, 附魔数量, 附魔ID数组
+function Backpack:getGridEnchantList(playerId, gridId) return 0, 0, {} end
 
---- 解析格子信息数据
---- str string GetGridInfos打包字符串
---- table 解析后的数据
-function Backpack:DecodeGridInfo(str) return {} end
+--- 获取背包某个格子的道具数量
+--- playerId number 玩家ID
+--- gridId number 格子ID
+--- number, number 状态码, 道具数量
+function Backpack:getGridNum(playerId, gridId) return 0, 0 end
 
---- 将解析的格子信息数据打包
---- infos table DecodeGridInfo解析后的数据
---- string 打包后的字符串
-function Backpack:EncodeTableGridInfo(infos) return "" end
+--- 获取背包格道具堆叠数 (返回`curstack`, `maxstack`)
+--- playerId number 玩家ID
+--- gridId number 格子ID
+--- number, number, number 状态码, 当前堆叠数, 最大堆叠数
+function Backpack:getGridStack(playerId, gridId) return 0, 0, 0 end
 
---- 设置背包和快捷栏格子锁定状态
---- playerid number 玩家ID
---- begingridId number 开始格子id
---- endgridId number 结束格子id
---- lock boolean true锁定 false打开
---- boolean 是否成功
-function Backpack:SetGridsLock(playerid, begingridId, endgridId, lock) return true end
-
---- 批量清理背包格子数据
---- playerid number 玩家ID
---- begingridId number 开始格子id
---- endgridId number 结束格子id
---- boolean 是否成功
-function Backpack:ClearGrids(playerid, begingridId, endgridId) return true end
-
---- 设置背包格子数量
---- playerid number 玩家ID
---- num number 数量暂定范围(0-100)
---- boolean 是否成功
-function Backpack:SetBackPackNum(playerid, num) return true end
-
---- 获取指定背包中所有道具实例
---- playerid number 玩家ID
---- bartype number 背包栏类型
---- table 道具实例ID数组
-function Backpack:GetAllBackPackInstanceIds(playerid, bartype) return {} end
-
---- 在玩家的背包内创建一个道具实例
---- playerid number 玩家ID
---- itemid number|string 道具id
---- gridIndex number 格子索引
---- string 道具实例ID
-function Backpack:CreateItemInstInBackpack(playerid, itemid, gridIndex) return "" end
-
---- 在玩家的背包内创建一把实例化的枪械
---- playerid number 玩家ID
---- itemid number|string 道具id
---- gridIndex number 格子索引
---- string 道具实例ID
-function Backpack:CreateGunInBackpack(playerid, itemid, gridIndex) return "" end
-
---- 根据背包索引获取道具实例id
---- playerid number 玩家ID
---- gridIndex number 格子索引
---- string 道具实例id
-function Backpack:GetInstIdByGridIndex(playerid, gridIndex) return "" end
-
---- 获取背包所有实例化的枪械
---- playerid number 玩家ID
---- table 实例id数组
-function Backpack:GetGunInstIdInBackpack(playerid) return {} end
-
---- 获取背包格子是否锁定
---- playerid number 玩家ID
---- gridIndex number 格子索引
---- boolean 是否锁定(参数错误返回true)
-function Backpack:IsLock(playerid, gridIndex) return true end
-
---- 获取背包格子属性
---- playerid number 玩家ID
---- gridid number 格子ID
---- attr number 属性类型
---- number 属性值
-function Backpack:GetGridAttr(playerid, gridid, attr) return 0 end
-
---- 设置背包格子属性
---- playerid number 玩家ID
---- gridid number 格子ID
---- attr number 属性类型
---- value number 属性值
---- boolean 是否成功
-function Backpack:SetGridAttr(playerid, gridid, attr, value) return true end
+--- 获取背包道具工具类型
+--- 返回值: `-1`非道具 / `1`斧 / `2`镐 / `3`铲 / `4`锄 / `6`剑 / `7`弓 / `14`投掷
+--- playerId number 玩家ID
+--- gridId number 格子ID
+--- number, number 状态码, 工具类型
+function Backpack:getGridToolType(playerId, gridId) return 0, 0 end
 --- Area
 --- 区域模块管理接口 Area
 local Area = {}
@@ -3098,9 +3052,9 @@ function Area:createAreaRect(pos, dim) return 0, 0 end
 function Area:createAreaRectByRange(posBeg, posEnd) return 0, 0 end
 
 --- 销毁区域
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number 成功返回 ErrorCode.OK
-function Area:destroyArea(areaid) return 0 end
+function Area:destroyArea(areaId) return 0 end
 
 --- 通过位置查找区域
 --- pos table 位置{x,y,z}
@@ -3108,87 +3062,87 @@ function Area:destroyArea(areaid) return 0 end
 function Area:getAreaByPos(pos) return 0, 0 end
 
 --- 区域偏移
---- areaid number 区域ID
+--- areaId number 区域ID
 --- x number 向右偏移距离
 --- y number 向上偏移距离
 --- z number 向前偏移距离
 --- number, number 成功返回 ErrorCode.OK 和新的区域ID
-function Area:offsetArea(areaid, x, y, z) return 0, 0 end
+function Area:offsetArea(areaId, x, y, z) return 0, 0 end
 
 --- 扩大区域(产生新的区域)
---- areaid number 区域ID
+--- areaId number 区域ID
 --- x number 左右扩充距离
 --- y number 上下扩充距离
 --- z number 前后扩充距离
 --- number, number 成功返回 ErrorCode.OK 和新的区域ID
-function Area:expandArea(areaid, x, y, z) return 0, 0 end
+function Area:expandArea(areaId, x, y, z) return 0, 0 end
 
 --- 获取区域中间点
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number, table 成功返回 ErrorCode.OK 和中心位置{x,y,z}
-function Area:getAreaCenter(areaid) return 0, {} end
+function Area:getAreaCenter(areaId) return 0, {} end
 
 --- 获取区域各边长
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number, number, number, number 成功返回 ErrorCode.OK 和各方向边长
-function Area:getAreaRectLength(areaid) return 0, 0, 0, 0 end
+function Area:getAreaRectLength(areaId) return 0, 0, 0, 0 end
 
 --- 获取区域范围
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number, table, table 成功返回 ErrorCode.OK, 起点坐标和终点坐标
-function Area:getAreaRectRange(areaid) return 0, {}, {} end
+function Area:getAreaRectRange(areaId) return 0, {}, {} end
 
 --- 随机区域内位置
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number, table 成功返回 ErrorCode.OK 和随机位置{x,y,z}
-function Area:getRandomPos(areaid) return 0, {} end
+function Area:getRandomPos(areaId) return 0, {} end
 
 --- 检测obj是否在区域内
---- areaid number 区域ID
---- objid number 对象ID
+--- areaId number 区域ID
+--- objId number 对象ID
 --- number 成功返回 ErrorCode.OK(在区域内)
-function Area:objInArea(areaid, objid) return 0 end
+function Area:objInArea(areaId, objId) return 0 end
 
 --- 检测区域内是否有某个方块
---- areaid number 区域ID
---- blockid number 方块ID
+--- areaId number 区域ID
+--- blockId number 方块ID
 --- number 成功返回 ErrorCode.OK(包含该方块)
-function Area:blockInArea(areaid, blockid) return 0 end
+function Area:blockInArea(areaId, blockId) return 0 end
 
 --- 位置是否在区域内
 --- pos table 位置{x,y,z}
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number 成功返回 ErrorCode.OK(在区域内)
-function Area:posInArea(pos, areaid) return 0 end
+function Area:posInArea(pos, areaId) return 0 end
 
 --- 获取区域中的所有玩家
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number, table 成功返回 ErrorCode.OK 和玩家列表
-function Area:getAreaPlayers(areaid) return 0, {} end
+function Area:getAreaPlayers(areaId) return 0, {} end
 
 --- 获取区域中的所有生物
---- areaid number 区域ID
+--- areaId number 区域ID
 --- number, table 成功返回 ErrorCode.OK 和生物列表
-function Area:getAreaCreatures(areaid) return 0, {} end
+function Area:getAreaCreatures(areaId) return 0, {} end
 
 --- 用方块填充区域
---- areaid number 区域ID
---- blockid number 方块ID
+--- areaId number 区域ID
+--- blockId number 方块ID
 --- face number 方块朝向(0西 1东 2南 3北 4下 5上)
 --- number 成功返回 ErrorCode.OK
-function Area:fillBlock(areaid, blockid, face) return 0 end
+function Area:fillBlock(areaId, blockId, face) return 0 end
 
 --- 清空区域内全部方块
---- areaid number 区域ID
---- blockid number 方块ID
+--- areaId number 区域ID
+--- blockId number 方块ID
 --- number 成功返回 ErrorCode.OK
-function Area:clearAllBlock(areaid, blockid) return 0 end
+function Area:clearAllBlock(areaId, blockId) return 0 end
 
 --- 复制区域内方块到另一个区域
---- areaid number 区域ID
+--- areaId number 区域ID
 --- deststartpos table 目标起始位置{x,y,z}
 --- number 成功返回 ErrorCode.OK
-function Area:cloneArea(areaid, deststartpos) return 0 end
+function Area:cloneArea(areaId, deststartpos) return 0 end
 
 --- 传入两个坐标列表，得到相加后的位置
 --- srcpos table 源位置{x,y,z}
@@ -3197,19 +3151,19 @@ function Area:cloneArea(areaid, deststartpos) return 0 end
 function Area:getPosOffset(srcpos, dim) return 0, {} end
 
 --- 替换方块类型为新的方块类型
---- areaid number 区域ID
---- srcblockid number 被替换的方块ID
---- destblockid number 替换为的方块ID
+--- areaId number 区域ID
+--- srcblockId number 被替换的方块ID
+--- destblockId number 替换为的方块ID
 --- face number 方块朝向(0西 1东 2南 3北 4下 5上)
 --- number 成功返回 ErrorCode.OK
-function Area:replaceAreaBlock(areaid, srcblockid, destblockid, face) return 0 end
+function Area:replaceAreaBlock(areaId, srcblockId, destblockId, face) return 0 end
 
 --- 区域范围内有方块
---- blockid number 方块ID
+--- blockId number 方块ID
 --- posbeg table 起点{x,y,z}
 --- posend table 终点{x,y,z}
 --- number 成功返回 ErrorCode.OK(包含该方块)
-function Area:blockInAreaRange(blockid, posbeg, posend) return 0 end
+function Area:blockInAreaRange(blockId, posbeg, posend) return 0 end
 
 --- 获取区域范围内全部对象
 --- posbegin table 起点{x,y,z}
@@ -3240,17 +3194,17 @@ function Area:getAllCreaturesInAreaRange(posbegin, posend) return 0, {} end
 --- 用方块填充区域范围
 --- posbeg table 起点{x,y,z}
 --- posend table 终点{x,y,z}
---- blockid number 方块ID
+--- blockId number 方块ID
 --- face number 朝向(0西 1东 2南 3北 4下 5上)
 --- number 成功返回 ErrorCode.OK
-function Area:fillBlockAreaRange(posbeg, posend, blockid, face) return 0 end
+function Area:fillBlockAreaRange(posbeg, posend, blockId, face) return 0 end
 
 --- 清空区域范围内方块
 --- posbeg table 起点{x,y,z}
 --- posend table 终点{x,y,z}
---- blockid number 方块ID
+--- blockId number 方块ID
 --- number 成功返回 ErrorCode.OK
-function Area:clearAllBlockAreaRange(posbeg, posend, blockid) return 0 end
+function Area:clearAllBlockAreaRange(posbeg, posend, blockId) return 0 end
 
 --- 复制区域范围内方块到另一个区域
 --- posbeg table 起点{x,y,z}
@@ -3262,18 +3216,18 @@ function Area:cloneAreaRange(posbeg, posend, deststartpos) return 0 end
 --- 替换区域范围方块
 --- posbeg table 起点{x,y,z}
 --- posend table 终点{x,y,z}
---- srcblockid number 被替换的方块ID
---- destblockid number 替换为的方块ID
+--- srcblockId number 被替换的方块ID
+--- destblockId number 替换为的方块ID
 --- face number 朝向(0西 1东 2南 3北 4下 5上)
 --- number 成功返回 ErrorCode.OK
-function Area:replaceAreaRangeBlock(posbeg, posend, srcblockid, destblockid, face) return 0 end
+function Area:replaceAreaRangeBlock(posbeg, posend, srcblockId, destblockId, face) return 0 end
 
 --- 破坏区域范围方块
 --- posbeg table 起点{x,y,z}
 --- posend table 终点{x,y,z}
---- blockid number 破坏的方块ID
+--- blockId number 破坏的方块ID
 --- number 成功返回 ErrorCode.OK
-function Area:DestroyBlockAreaRange(posbeg, posend, blockid) return 0 end
+function Area:DestroyBlockAreaRange(posbeg, posend, blockId) return 0 end
 --- Buff
 --- 状态模块管理接口 Buff
 local Buff = {}
@@ -3281,75 +3235,72 @@ _G.Buff = Buff
 
 --- 给对象附加效果
 --- objId number 对象ID
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- customticks? number 效果持续时间 **(-1表示默认配置，0表示无限)**
 --- boolean 成功返回true，失败返回false
-function Buff:AddBuff(objId, buffId, customticks) return true end
+function Buff:addBuff(objId, buffId, customticks) return true end
 
 --- 给对象移除指定效果
 --- objId number 对象ID
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- boolean 成功返回true，失败返回false
-function Buff:RemoveBuff(objId, buffId) return true end
+function Buff:removeBuff(objId, buffId) return true end
 
 --- 给对象清除所有效果
 --- objId number 对象ID
 --- boolean 成功返回true，失败返回false
-function Buff:ClearAllBuff(objId) return true end
+function Buff:clearAllBuff(objId) return true end
 
 --- 为对象清除所有负面效果
 --- objId number 对象ID
 --- boolean 成功返回true，失败返回false
-function Buff:ClearAllBadBuff(objId) return true end
-
---- 为对象清除所有有益效果
---- objId number 对象ID
---- boolean 成功返回true，失败返回false
-function Buff:ClearAllGoodBuff(objId) return true end
+function Buff:clearAllBadBuff(objId) return true end
 
 --- 判断对象身上是否有指定效果
 --- objId number 对象ID
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- bufflv number 效果等级
 --- boolean 成功返回true，失败返回false
-function Buff:HasBuff(objId, buffId, bufflv) return true end
+function Buff:hasBuff(objId, buffId, bufflv) return true end
 
 --- 获取对象身上效果列表
 --- objId number 对象ID
 --- number, table 效果数量, 效果ID数组
-function Buff:GetBuffList(objId) return 0, {} end
+function Buff:getBuffList(objId) return 0, {} end
 
 --- 获取对象身上指定效果数量
 --- objId number 对象ID
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- number 数量
-function Buff:GetBuffNumByBuffid(objId, buffId) return 0 end
+function Buff:getBuffNumByBuffid(objId, buffId) return 0 end
 
 --- 获取对象身上指定效果剩余时间
 --- objId number 对象ID
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- number 剩余时间 **(秒，0表示永久)**
-function Buff:GetBuffLeftTime(objId, buffId) return 0 end
+function Buff:getBuffLeftTime(objId, buffId) return 0 end
 
 --- 获取状态效果名称
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- string 效果名称
 function Buff:GetBuffDefName(buffId) return "" end
 
 --- 获取状态效果描述
---- buffId number|string 效果ID
+--- buffId number 效果ID
 --- string 状态效果描述
 function Buff:GetBuffDefDesc(buffId) return "" end
 
---- 替换已有状态
+--- 获取对象身上状态效果名称
 --- objId number 对象ID
---- buffsrc number|string 源状态ID
---- buffsrclv number 源状态等级
---- buffdst number|string 目标状态
---- buffdstlv number 目标状态等级
---- customticks number 持续时间
---- boolean 成功返回true，失败返回false
-function Buff:ReplaceBuff(objId, buffsrc, buffsrclv, buffdst, buffdstlv, customticks) return true end
+--- buffId number 效果ID
+--- number, string 状态码, 效果名称
+function Buff:getBuffName(objId, buffId) return 0, "" end
+
+--- 获取对象身上指定效果的索引位置 (从1开始)
+--- objId number 对象ID
+--- buffId number 效果ID
+--- number, number 状态码, 索引位置
+function Buff:getBuffIndex(objId, buffId) return 0, 0 end
 --- Chat
 --- 聊天接口 Chat
 local Chat = {}
@@ -3371,310 +3322,305 @@ function Chat:sendSystemMsg(content, targetuin) return 0 end
 local Customui = {}
 _G.Customui = Customui
 
---- 打开一个UI界面
---- objid number 玩家ID
---- uiname string 自定义界面的UIID
---- number 成功返回 ErrorCode.OK
-function Customui:openUIView(objid, uiname) return 0 end
-
---- 隐藏一个UI界面
---- objid number 玩家ID
---- uiname string 自定义界面的UIID
---- number 成功返回 ErrorCode.OK
-function Customui:hideUIView(objid, uiname) return 0 end
-
 --- 设置文本元件内容
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- text string 文本内容
---- animid? number 动画ID(缺省参数)
+--- animId? number 动画ID(缺省参数)
 --- time? number 动画时长(缺省参数)
 --- mode? number 播放模式(缺省参数)
 --- number 成功返回 ErrorCode.OK
-function Customui:setText(playerid, uiid, elementid, text, animid, time, mode) return 0 end
+function Customui:setText(playerId, uiId, elementId, text, animId, time, mode) return 0 end
 
 --- 设置图片元件图案纹理
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- url string 图片ID
 --- number 成功返回 ErrorCode.OK
-function Customui:setTexture(playerid, uiid, elementid, url) return 0 end
+function Customui:setTexture(playerId, uiId, elementId, url) return 0 end
 
 --- 设置元件大小
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- width number 元件宽度
 --- height number 元件高度
 --- number 成功返回 ErrorCode.OK
-function Customui:setSize(playerid, uiid, elementid, width, height) return 0 end
+function Customui:setSize(playerId, uiId, elementId, width, height) return 0 end
 
 --- 设置文本元件字体大小
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- size number 字体大小
 --- number 成功返回 ErrorCode.OK
-function Customui:setFontSize(playerid, uiid, elementid, size) return 0 end
+function Customui:setFontSize(playerId, uiId, elementId, size) return 0 end
 
 --- 设置文本元件颜色
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- color string 16进制颜色值
 --- number 成功返回 ErrorCode.OK
-function Customui:setColor(playerid, uiid, elementid, color) return 0 end
+function Customui:setColor(playerId, uiId, elementId, color) return 0 end
 
 --- 显示元件
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- effectid? number 动画ID(缺省参数)
 --- time? number 动画时长(缺省参数)
 --- number 成功返回 ErrorCode.OK
-function Customui:showElement(playerid, uiid, elementid, effectid, time) return 0 end
+function Customui:showElement(playerId, uiId, elementId, effectid, time) return 0 end
 
 --- 隐藏元件
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- effectid? number 动画ID(缺省参数)
 --- time? number 动画时长(缺省参数)
 --- number 成功返回 ErrorCode.OK
-function Customui:hideElement(playerid, uiid, elementid, effectid, time) return 0 end
+function Customui:hideElement(playerId, uiId, elementId, effectid, time) return 0 end
 
 --- 旋转元件
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- rotate number 旋转角度(顺时针)
 --- number 成功返回 ErrorCode.OK
-function Customui:rotateElement(playerid, uiid, elementid, rotate) return 0 end
+function Customui:rotateElement(playerId, uiId, elementId, rotate) return 0 end
 
 --- 切换页面状态
---- playerid number 玩家ID
---- uiid string 界面ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
 --- pageIndex string 状态值(页面状态)
 --- effectid? number 动作枚举(缺省参数)
 --- time? number 动画时长(缺省参数)
 --- number 成功返回 ErrorCode.OK
-function Customui:setState(playerid, uiid, pageIndex, effectid, time) return 0 end
+function Customui:setState(playerId, uiId, pageIndex, effectid, time) return 0 end
 
 --- 设置元件透明度
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- alpha number 透明度
 --- number 成功返回 ErrorCode.OK
-function Customui:setAlpha(playerid, uiid, elementid, alpha) return 0 end
+function Customui:setAlpha(playerId, uiId, elementId, alpha) return 0 end
 
 --- 设置元件位置
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- x number X坐标
 --- y number Y坐标
 --- number 成功返回 ErrorCode.OK
-function Customui:setPosition(playerid, uiid, elementid, x, y) return 0 end
+function Customui:setPosition(playerId, uiId, elementId, x, y) return 0 end
 
 --- 获取道具类型图标iconID
 --- itemid number 道具类型ID
---- number, number 成功返回 ErrorCode.OK 和道具iconID
+--- number, number 成功返回 ErrorCode.OK & 道具iconID
 function Customui:getItemIcon(itemid) return 0, 0 end
 
 --- 获取生物图标iconID
 --- objid number 生物ID
---- number, number 成功返回 ErrorCode.OK 和生物iconID
+--- number, number 成功返回 ErrorCode.OK & 生物iconID
 function Customui:getMonsterObjIcon(objid) return 0, 0 end
 
 --- 获取生物类型图标iconID
 --- actorid number 生物类型ID
---- number, number 成功返回 ErrorCode.OK 和生物iconID
+--- number, number 成功返回 ErrorCode.OK & 生物iconID
 function Customui:getMonsterIcon(actorid) return 0, 0 end
 
 --- 获取状态类型图标iconID
 --- buffid number 状态类型ID
---- number, number 成功返回 ErrorCode.OK 和状态iconID
+--- number, number 成功返回 ErrorCode.OK & 状态iconID
 function Customui:getStatusIcon(buffid) return 0, 0 end
 
 --- 获取方块类型图标iconID
 --- blockid number 方块类型ID
---- number, number 成功返回 ErrorCode.OK 和方块iconID
+--- number, number 成功返回 ErrorCode.OK & 方块iconID
 function Customui:getBlockIcon(blockid) return 0, 0 end
 
 --- 获取角色类型图标iconID
---- playerid number 玩家ID
---- number, number 成功返回 ErrorCode.OK 和角色iconID
-function Customui:getRoleIcon(playerid) return 0, 0 end
+--- playerId number 玩家ID
+--- number, number 成功返回 ErrorCode.OK & 角色iconID
+function Customui:getRoleIcon(playerId) return 0, 0 end
 
 --- 获取玩家快捷栏道具图标iconID
---- playerid number 玩家ID
+--- playerId number 玩家ID
 --- ix number 快捷栏索引(1~8)
---- number, number 成功返回 ErrorCode.OK 和道具iconID
-function Customui:getShuctIcon(playerid, ix) return 0, 0 end
+--- number, number 成功返回 ErrorCode.OK &道具iconID
+function Customui:getShuctIcon(playerId, ix) return 0, 0 end
 
 --- 元件平滑移动到指定位置
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 执行时间(需大于0)
 --- x number 横坐标值
 --- y number 竖坐标值
 --- number 成功返回 ErrorCode.OK
-function Customui:SmoothMoveTo(playerid, uiid, elementid, time, x, y) return 0 end
+function Customui:SmoothMoveTo(playerId, uiId, elementId, time, x, y) return 0 end
 
 --- 元件平滑移动相对距离
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 执行时间(需大于0)
 --- x number 横向距离
 --- y number 竖向距离
 --- number 成功返回 ErrorCode.OK
-function Customui:SmoothMoveBy(playerid, uiid, elementid, time, x, y) return 0 end
+function Customui:SmoothMoveBy(playerId, uiId, elementId, time, x, y) return 0 end
 
---- 元件平滑改变到指定宽度和高度
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- 元件平滑改变到指定 宽度 & 高度
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 执行时间(需大于0)
 --- w number 宽度
 --- h number 高度
 --- number 成功返回 ErrorCode.OK
-function Customui:SmoothScaleTo(playerid, uiid, elementid, time, w, h) return 0 end
+function Customui:SmoothScaleTo(playerId, uiId, elementId, time, w, h) return 0 end
 
---- 元件平滑改变相对宽度和高度
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- 元件平滑改变相对 宽度 & 高度
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 执行时间(需大于0)
 --- w number 宽度
 --- h number 高度
 --- number 成功返回 ErrorCode.OK
-function Customui:SmoothScaleBy(playerid, uiid, elementid, time, w, h) return 0 end
+function Customui:SmoothScaleBy(playerId, uiId, elementId, time, w, h) return 0 end
 
 --- 元件平滑旋转到指定角度
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 执行时间(需大于0)
 --- angle number 角度值
 --- number 成功返回 ErrorCode.OK
-function Customui:SmoothRotateTo(playerid, uiid, elementid, time, angle) return 0 end
+function Customui:SmoothRotateTo(playerId, uiId, elementId, time, angle) return 0 end
 
 --- 元件平滑旋转到相对角度
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 执行时间(需大于0)
 --- angle number 角度值
 --- number 成功返回 ErrorCode.OK
-function Customui:SmoothRotateBy(playerid, uiid, elementid, time, angle) return 0 end
+function Customui:SmoothRotateBy(playerId, uiId, elementId, time, angle) return 0 end
 
 --- 元件播放动画
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
---- animid number 动画ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- animId number 动画ID
 --- time number 单次时长(需大于0)
 --- mode number 播放模式(1循环 2单次)
 --- number 成功返回 ErrorCode.OK
-function Customui:PlayElementAnim(playerid, uiid, elementid, animid, time, mode) return 0 end
+function Customui:PlayElementAnim(playerId, uiId, elementId, animId, time, mode) return 0 end
 
 --- 元件停止动画
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- number 成功返回 ErrorCode.OK
-function Customui:StopAnim(playerid, uiid, elementid) return 0 end
+function Customui:StopAnim(playerId, uiId, elementId) return 0 end
 
 --- 设置装载器的模型
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- modleid string 模型ID
 --- number 成功返回 ErrorCode.OK
-function Customui:SetLoaderModel(playerid, uiid, elementid, modleid) return 0 end
+function Customui:SetLoaderModel(playerId, uiId, elementId, modleid) return 0 end
 
 --- 设置装载器的模型缩放
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- modlescale number 缩放大小
 --- number 成功返回 ErrorCode.OK
-function Customui:SetLoaderModelScale(playerid, uiid, elementid, modlescale) return 0 end
+function Customui:SetLoaderModelScale(playerId, uiId, elementId, modlescale) return 0 end
 
 --- 设置装载器的模型方向
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- yaw number 水平角度(角度制)
 --- number 成功返回 ErrorCode.OK
-function Customui:SetLoaderModelDir(playerid, uiid, elementid, yaw) return 0 end
+function Customui:SetLoaderModelDir(playerId, uiId, elementId, yaw) return 0 end
 
 --- 设置装载器的模型动画
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
---- animid number 动画ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
+--- animId number 动画ID
 --- playmode number 播放模式(ANIMMODE)
 --- number 成功返回 ErrorCode.OK
-function Customui:SetLoaderModelAct(playerid, uiid, elementid, animid, playmode) return 0 end
+function Customui:SetLoaderModelAct(playerId, uiId, elementId, animId, playmode) return 0 end
 
 --- 滑动列表跳转到某位置
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- x number X坐标值
 --- y number Y坐标值
 --- number 成功返回 ErrorCode.OK
-function Customui:TurnSliderToPos(playerid, uiid, elementid, x, y) return 0 end
+function Customui:TurnSliderToPos(playerId, uiId, elementId, x, y) return 0 end
 
 --- 设置滑动列表的滑动方式
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- dir number 滑动方式(0仅左右 1仅上下 2自由滑动)
 --- number 成功返回 ErrorCode.OK
-function Customui:SetSliderDir(playerid, uiid, elementid, dir) return 0 end
+function Customui:SetSliderDir(playerId, uiId, elementId, dir) return 0 end
 
 --- 设置滑动条的图案
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- url string 图片库链接
 --- number 成功返回 ErrorCode.OK
-function Customui:SetSliderBarImg(playerid, uiid, elementid, url) return 0 end
+function Customui:SetSliderBarImg(playerId, uiId, elementId, url) return 0 end
 
 --- 设置玩家界面进度条的值
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- itype number 类型枚举(1最小值 2最大值 3当前值)
 --- value number 值
 --- boolean 是否成功
-function Customui:SetProgressBarValue(playerid, uiid, elementid, itype, value) return true end
+function Customui:SetProgressBarValue(playerId, uiId, elementId, itype, value) return true end
 
 --- 设置玩家界面进度条的纹理
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- itype number 类型枚举(1背景 2进度条)
 --- url string 图片ID
 --- boolean 是否成功
-function Customui:SetProgressBarResId(playerid, uiid, elementid, itype, url) return true end
+function Customui:SetProgressBarResId(playerId, uiId, elementId, itype, url) return true end
 
 --- 进度条文本平滑计时
---- playerid number 玩家ID
---- uiid string 界面ID
---- elementid string 元件ID
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementId string 元件ID
 --- time number 时长
 --- ptype number 类型枚举(1增加 2减小 3变化至)
 --- value number 变化的值
 --- boolean 是否成功
-function Customui:SmoothIncreaseProgress(playerid, uiid, elementid, time, ptype, value) return true end
+function Customui:SmoothIncreaseProgress(playerId, uiId, elementId, time, ptype, value) return true end
+
+--- 克隆玩家界面元件
+--- playerId number 玩家ID
+--- uiId string 界面ID
+--- elementid string 元件ID
+--- number, string 状态码, 元件ID
+function Customui:CloneElement(playerId, uiId, elementid) return 0, "" end
 --- UI
 --- 游戏UI管理接口 UI
 local UI = {}
@@ -9384,3 +9330,585 @@ function MapMark:updateRectangle(shapeid, sx, sz, w, h) return 0 end
 --- r number 半径
 --- number 成功返回 ErrorCode.OK
 function MapMark:updateCircle(shapeid, cx, cz, r) return 0 end
+--- MiniWorld UGC 2.0 事件回调参数表（由 MNEvent.d.json 生成）
+--- 事件名中的点号在类名里用下划线表示，如 Player.ClickBlock → EventInfo.Player_ClickBlock。
+
+--- EventInfo.Backpack_ItemChange 容器内道具变化
+--- blockid any 方块类型
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Backpack_ItemPutIn 容器内有道具放入
+--- blockid any 方块类型
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Backpack_ItemTakeOut 容器内有道具取出
+--- blockid any 方块类型
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Game_Hour 世界小时时间变化
+--- hour any 游戏小时时间
+
+--- EventInfo.Game_RunTime 世界Tick变化
+--- second any 游戏分钟
+--- ticks any 游戏秒
+
+--- EventInfo.Game_AnyPlayer_Defeat 任一玩家失败
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Game_AnyPlayer_EnterGame 任一玩家进入
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Game_AnyPlayer_LeaveGame 任一玩家离开
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Game_AnyPlayer_Victory 任一玩家胜利
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Player_AddBuff 玩家获得状态效果
+--- eventobjid any 事件玩家
+--- buffid any 状态ID
+--- bufflvl any 状态等级
+
+--- EventInfo.Player_AddItem 玩家获得道具
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+
+--- EventInfo.Player_AreaIn 玩家进入区域
+--- eventobjid any 事件玩家
+--- areaid any 区域ID
+
+--- EventInfo.Player_AreaOut 玩家离开区域
+--- eventobjid any 事件玩家
+--- areaid any 区域ID
+
+--- EventInfo.Player_AttackHit 玩家击中目标
+--- eventobjid any 事件玩家
+--- targetactorid any 被攻击的对象
+
+--- EventInfo.Player_Attack 玩家攻击
+--- eventobjid any 玩家攻击
+--- shortix any 事件中的快捷栏
+--- x any 事件中位置X
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Player_BackPackChange 背包栏变化
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- itemix any 道具所在格子索引
+
+--- EventInfo.Player_BeHurt 玩家受到伤害
+--- eventobjid any 事件玩家
+--- hurtlv any 伤害值
+
+--- EventInfo.Player_ChangeAttr 玩家属性变化
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- playerattr any 改变的属性
+--- playerattrval any 改变的值
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Player_ClickActor 点击生物
+--- eventobjid any 事件玩家
+--- targetactorid any 被点击的对象
+
+--- EventInfo.Player_ClickBlock 点击方块
+--- eventobjid any 事件玩家
+--- blockid any 点击的方块类型
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.Player_Collide 玩家跟玩家/生物碰撞
+--- eventobjid any 事件玩家
+--- toobjid any 目标对象
+
+--- EventInfo.Player_ConsumeItem 玩家消耗道具
+--- eventobjid any 玩家消耗道具
+--- itemid any 事件中的道具类型
+--- itemnum any 事件中的道具数量
+
+--- EventInfo.Player_DamageActor 玩家造成伤害
+--- eventobjid any 事件玩家
+--- toobjid any 事件目标对象
+--- targetactorid any 目标玩家
+--- hurtlv any 伤害值
+
+--- EventInfo.Player_DefeatActor 玩家击败目标
+--- eventobjid any 事件玩家
+--- toobjid any 事件目标对象
+--- targetactorid any 被攻击的对象
+
+--- EventInfo.Player_Die 玩家死亡
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Player_DiscardItem 丢弃道具
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- toobjid any 掉落物objid
+
+--- EventInfo.Player_DismountActor 玩家骑乘下
+--- eventobjid any 事件玩家
+--- targetactorid any 被攻击的对象
+
+--- EventInfo.Player_EquipChange 装备栏变化
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- itemix any 道具所在格子索引
+
+--- EventInfo.Player_EquipOff 脱下装备
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- itemix any 道具所在格子索引
+
+--- EventInfo.Player_EquipOn 穿上装备
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- itemix any 道具所在格子索引
+
+--- EventInfo.Player_InputContent 输入字符串
+--- eventobjid any 事件玩家
+--- content any 事件中的字符串
+
+--- EventInfo.Player_InputKeyDown 玩家按下按键
+--- eventobjid any 事件玩家
+--- vkey any 按下的键值
+
+--- EventInfo.Player_InputKeyOnPress 玩家长按按键
+--- eventobjid any 事件玩家
+--- vkey any 按下的键值
+
+--- EventInfo.Player_InputKeyUp 玩家松开按键
+--- eventobjid any 事件玩家
+--- vkey any 按下的键值
+
+--- EventInfo.Player_InvateFriend 邀请好友
+--- eventobjid any 事件玩家
+--- toobjid any 事件目标玩家
+
+--- EventInfo.Player_LevelModelUpgrade 玩家等级发生改变
+--- eventobjid any 事件玩家
+
+--- EventInfo.Player_MotionStateChange 玩家行为状态变更
+--- eventobjid any 事件玩家
+--- playermotion any 行为状态枚举
+
+--- EventInfo.Player_MountActor 玩家骑乘上
+--- eventobjid any 事件玩家
+--- targetactorid any 被攻击的对象
+
+--- EventInfo.Player_MoveOneBlockSize 玩家移动(移动一格)
+--- eventobjid any 事件玩家
+--- shortix any 事件中的快捷栏
+--- x any 事件中位置X
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Player_NewInputContent 从聊天框输入
+--- eventobjid any 事件玩家
+--- content any 事件中的字符串
+
+--- EventInfo.Player_PickUpItem 玩家拾取
+--- eventobjid any 事件玩家
+--- toobjid any 掉落物objid
+--- itemid any 道具类型ID
+--- itemnum any 道具数量
+
+--- EventInfo.Player_PlayAction 玩家使用表情动作
+--- eventobjid any 事件玩家
+--- act any 动作ID
+
+--- EventInfo.Player_RemoveBuff 玩家失去指定状态效果
+--- eventobjid any 事件玩家
+--- buffid any 状态ID
+--- bufflvl any 状态等级
+
+--- EventInfo.Player_Revive 玩家复活
+--- eventobjid any 事件玩家
+--- shortix any 快捷栏索引
+--- x any 坐标位置
+--- y any 坐标位置
+--- z any 坐标位置
+
+--- EventInfo.Player_SelectShortcut 快捷栏选择
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+
+--- EventInfo.Player_ShortcutChange 快捷栏变化
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- itemix any 道具所在格子索引
+
+--- EventInfo.Player_UseGiftPack 局部此类包裹道具被使用[]
+--- eventobjid any 事件对象
+--- itemid any 道具类型
+--- itemnum any 道具数量
+
+--- EventInfo.Player_UseItem 玩家使用道具
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- itemix any 道具所在格子索引
+
+--- EventInfo.Actor_AddBuff 生物获得状态效果
+--- eventobjid any 事件生物
+--- actorid any 事件生物类型
+--- buffid any 状态ID
+--- bufflvl any 状态等级
+
+--- EventInfo.Actor_AreaIn 生物进入区域
+--- eventobjid any 事件生物
+--- areaid any 区域ID
+
+--- EventInfo.Actor_AreaOut 生物离开区域
+--- eventobjid any 事件生物
+--- areaid any 区域ID
+
+--- EventInfo.Actor_AttackHit 攻击命中
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- actorid any 事件生物类型
+--- targetactorid any 攻击对象生物类型
+
+--- EventInfo.Actor_Attack 攻击
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- actorid any 事件生物类型
+--- targetactorid any 攻击对象生物类型
+
+--- EventInfo.Actor_BeHurt 受到伤害
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- hurtlv any 伤害值
+--- actorid any 事件生物类型
+
+--- EventInfo.Actor_Beat 生物击败玩家/生物
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- actorid any 事件生物类型
+--- targetactorid any 攻击对象生物类型
+
+--- EventInfo.Actor_ChangeAttr 属性变化
+--- eventobjid any 事件生物
+--- actorid any 事件生物类型
+--- actorattr any 属性枚举值
+--- actorattrval any 改变的值
+
+--- EventInfo.Actor_ChangeMotion 生物行为状态变更到[n]
+--- eventobjid any 事件生物
+--- actorid any 事件生物类型
+--- actormotion any 动作枚举值
+
+--- EventInfo.Actor_Collide 碰撞到玩家/生物
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- actorid any 事件生物类型
+--- targetactorid any 攻击对象生物类型
+
+--- EventInfo.Actor_Create 被创建
+--- eventobjid any 事件生物
+--- actorid any 事件生物类型
+
+--- EventInfo.Actor_Damage 造成伤害
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- hurtlv any 伤害值
+--- actorid any 事件生物类型
+--- targetactorid any 攻击对象生物类型
+
+--- EventInfo.Actor_Die 死亡
+--- eventobjid any 事件生物
+--- toobjid any 攻击对象
+--- actorid any 事件生物类型
+
+--- EventInfo.Actor_Projectile_Hit 投掷物击中
+--- eventobjid any 事件投掷物对象
+--- toobjid any 被击中的对象
+--- itemid any 道具类型
+--- targetactorid any 被击中的生物类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+--- helperobjid any 辅助对象ID
+
+--- EventInfo.Actor_RemoveBuff 生物失去状态效果
+--- eventobjid any 事件生物
+--- actorid any 事件生物类型
+--- buffid any 状态ID
+--- bufflvl any 状态等级
+
+--- EventInfo.Block_Add 被创建
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Block_DestroyBy 局部此类方块被破坏时
+--- eventobjid any 事件玩家
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Block_Dig_Begin 任意方块被挖掘时
+--- eventobjid any 事件玩家
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Block_Dig_Cancel 任意方块被挖掘取消
+--- eventobjid any 事件玩家
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Block_Dig_End 方块被挖
+--- eventobjid any 事件玩家
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Block_Remove 方块移除
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Block_Trigger 活跃/通电
+--- eventobjid any 事件玩家
+--- blockid any 方块类型
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.DropItem_AreaIn 掉落物进入区域
+--- eventobjid any 事件掉落物
+--- areaid any 区域ID
+--- itemid any 道具类型
+
+--- EventInfo.DropItem_AreaOut 掉落物离开区域
+--- eventobjid any 事件掉落物
+--- areaid any 区域ID
+--- itemid any 道具类型
+
+--- EventInfo.Item_Create 掉落物被创建
+--- eventobjid any 事件掉落物
+--- itemid any 道具类型
+--- defaultvalue any 掉落方式
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Item_Destroy 局部此类装备被破坏时
+--- eventobjid any 事件对象
+--- itemid any 道具类型
+--- itemnum any 道具数量
+
+--- EventInfo.Item_Disappear 掉落物消失
+--- eventobjid any 事件掉落物
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Item_Pickup 掉落物被拾取
+--- eventobjid any 事件玩家
+--- toobjid any 被拾取的对象
+--- itemid any 道具类型
+--- itemnum any 道具数量
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Item_expend 局部此类食物道具被消耗
+--- eventobjid any 事件对象
+--- itemid any 道具类型
+--- itemnum any 道具数量
+
+--- EventInfo.Missile_AreaIn 投掷物进入区域
+--- eventobjid any 事件投掷物
+--- areaid any 区域ID
+--- itemid any 道具类型
+--- helperobjid any 投掷物所属对象
+
+--- EventInfo.Missile_AreaOut 投掷物离开区域
+--- eventobjid any 事件投掷物
+--- areaid any 区域ID
+--- itemid any 道具类型
+--- helperobjid any 投掷物所属对象
+
+--- EventInfo.Missile_Create 投掷物被创建
+--- eventobjid any 事件玩家
+--- itemid any 道具类型
+--- toobjid any 事件投掷物
+--- x any 方块坐标
+--- y any 方块坐标
+--- z any 方块坐标
+
+--- EventInfo.Particle_Item_OnCreate 当特效在掉落物上创建
+--- eventobjid any 事件掉落物
+--- effectid any 特效类型
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.Particle_Mob_OnCreate 任意生物身上特效被创建
+--- eventobjid any 事件生物
+--- effectid any 特效类型
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.Particle_Player_OnCreate 任意玩家身上特效被创建
+--- eventobjid any 事件玩家
+--- effectid any 特效类型
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.Particle_Pos_OnCreate 任意位置上特效被创建
+--- effectid any 特效类型
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.Particle_Projectile_OnCreate 任意投掷物特效被创建
+--- eventobjid any 事件投掷物
+--- effectid any 特效类型
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.UI_Button_Click 按钮点击
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+--- uielement any 事件元件
+
+--- EventInfo.UI_Button_TouchBegin 按钮按下
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+--- uielement any 事件元件
+
+--- EventInfo.UI_GLoader3D_Click 当前界面的模型被松开
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+--- uielement any 事件元件
+
+--- EventInfo.UI_GLoader3D_TouchBegin 当前界面的模型被按下
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+--- uielement any 事件元件
+
+--- EventInfo.UI_Hide 界面被关闭
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+
+--- EventInfo.UI_LostFocus 自定义ui输入框失去焦点
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+--- uielement any 事件元件
+--- content any 输入的内容
+
+--- EventInfo.UI_Show 界面被打开
+--- eventobjid any 事件玩家
+--- CustomUI any 事件UI
+
+--- EventInfo.BluePrint_BuildBegin 蓝图开始创建
+--- areaid any 区域ID
+
+--- EventInfo.Craft_end 任意配方合成完成
+--- eventobjid any 事件对象
+--- craftid any 配方ID
+--- itemid any 道具类型
+--- itemnum any 道具数量
+
+--- EventInfo.Developer_BuyItem 任意玩家购买或提取 商品道具
+--- eventobjid any 事件对象
+--- itemid any 道具类型
+
+--- EventInfo.Furnace_begin 任意熔炼开始
+--- furanceid any 熔炼ID
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.Furnace_end 任意熔炼结束
+--- furanceid any 熔炼ID
+--- x any 方块位置
+--- y any 方块位置
+--- z any 方块位置
+
+--- EventInfo.MiNiVip_1 购买迷你大会员1个月
+--- eventobjid any 事件玩家
+
+--- EventInfo.MiNiVip_3 购买迷你大会员3个月
+--- eventobjid any 事件玩家
+
+--- EventInfo.Plot_begin 任意剧情开始
+--- eventobjid any 事件对象
+--- toobjid any 目标对象
+--- plotid any 剧情类型
+--- targetactorid any 目标生物类型
+
+--- EventInfo.Plot_end 任意剧情结束
+--- eventobjid any 事件对象
+--- toobjid any 目标对象
+--- plotid any 剧情类型
+--- targetactorid any 目标生物类型
+
+--- EventInfo.QQMusic_PlayBegin QQ音乐开始播放
+--- eventobjid any 事件玩家
+--- qqMusicId any 音乐ID
+
+--- EventInfo.minitimer_change 指定计时器变化
+--- timerid any 计时器ID
+--- timername any 计时器名称
+--- timertime any 计时器时间
+
+-- 103 events, 372 fields

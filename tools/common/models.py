@@ -38,6 +38,7 @@ class MergeResult:
     total_lines: int = 0
     output_file: str = ""
     error: Optional[str] = None
+    skipped_files: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -61,3 +62,24 @@ class UploadResult:
     status_code: int = 0
     message: str = ""
     error: Optional[str] = None
+
+
+@dataclass
+class VerifyItem:
+    """单项校验结果"""
+
+    name: str
+    ok: bool
+    detail: str = ""
+
+
+@dataclass
+class VerifyResult:
+    """生成产物一致性校验结果"""
+
+    success: bool
+    items: list[VerifyItem] = field(default_factory=list)
+
+    @property
+    def failed(self) -> list[VerifyItem]:
+        return [item for item in self.items if not item.ok]

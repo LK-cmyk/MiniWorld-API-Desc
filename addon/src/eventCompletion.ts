@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 import { COMPLETION_MODE_SETTING, getCompletionMode, type CompletionMode } from './completionMode';
+import { cached, linesOf, sourceOf } from './documentCache';
 
 /** 事件定义文件 */
 const EVENT_DEFINITIONS_FILE_20 = path.join('declarations', '2.0', 'MNEvent.d.json');
@@ -359,18 +360,21 @@ function getCompletionContext(
     return { kind: '2.0' };
 }
 
-/** 汇总某个函数参数可能对应的事件键（注册语句 + LuaDoc 注解） */
+/** 汇总某个函数参数可能对应的事件键（注册语句 + LuaDoc 注解）。
+ * 结果按文档版本 + 函数 + 参数名缓存，避免 completion/hover/codeAction 三处重复全量扫描。 */
 function resolveEventKeysForParam(
     document: vscode.TextDocument,
     fn: { name: string; line: number },
     paramName: string,
 ): string[] {
-    const source = document.getText();
-    const keys = new Set([
-        ...findEventKeysForFunction(source, fn.name),
-        ...findAnnotatedEventKeysForParam(source.split(/\r?\n/), fn.line, paramName),
-    ]);
-    return Array.from(keys);
+    const key = `eventKeys:${fn.name}:${fn.line}:${paramName}`;
+    return cached(document, key, snapshot => {
+        const keys = new Set([
+            ...findEventKeysForFunction(snapshot.source, fn.name),
+            ...findAnnotatedEventKeysForParam(snapshot.lines, fn.line, paramName),
+        ]);
+        return Array.from(keys);
+    });
 }
 
 /**
@@ -506,7 +510,7 @@ export function registerEventCompletion(context: vscode.ExtensionContext): vscod
                     }
 
                     const paramName = memberMatch[1];
-                    const lines = document.getText().split(/\r?\n/);
+                    const lines = linesOf(document);
                     if (findAnnotatedEventKeysForParam(lines, fn.line, paramName).length > 0) {
                         return [];
                     }

@@ -69,27 +69,37 @@ def func_analyze_web(url: str) -> set[str]:
     return out_funcs
 
 
+def func_local_file_for_module_name(module_name: str) -> str | None:
+    """按模块名（大小写不敏感）在本地声明目录中解析真实文件名。
+
+    磁盘上的文件名大小写并不统一（如 MNGameObject / MNTimeline / MNCustomUI），
+    用 base.capitalize() 猜测会在大小写敏感的文件系统（Linux/CI）上误判为文件不存在。
+    这里直接扫描目录、按小写匹配，返回真实路径；找不到返回 None。
+    """
+    target = f"mn{module_name.lower()}.d.lua"
+    try:
+        for filename in os.listdir(FUNC_FILES_PATH):
+            if filename.lower() == target:
+                return os.path.join(FUNC_FILES_PATH, filename)
+    except OSError:
+        return None
+    return None
+
+
 def func_module_name_from_url(url: str) -> str:
     """从文档 URL 推断模块名称
     Args:
         url: 文档 URL 的相对路径
     Returns:
-        模块名称
+        模块名称（用于展示），文件名解析请用 func_local_file_for_module_name
     """
-    base = os.path.splitext(os.path.basename(url))[0]
-    if base.lower() == "timeline":
-        return "TimeLine"
-    return base.capitalize()
+    return os.path.splitext(os.path.basename(url))[0].capitalize()
 
 
 def func_local_file_for_module(module_name: str) -> str:
-    """从模块名生成本地声明文件路径
-    Args:
-        module_name: 模块名称
-    Returns:
-        本地声明文件路径
-    """
-    return os.path.join(FUNC_FILES_PATH, f"MN{module_name}.d.lua")
+    """从模块名生成本地声明文件路径（兼容旧调用）"""
+    resolved = func_local_file_for_module_name(module_name)
+    return resolved if resolved is not None else os.path.join(FUNC_FILES_PATH, f"MN{module_name}.d.lua")
 
 
 # EnumLibCompare
